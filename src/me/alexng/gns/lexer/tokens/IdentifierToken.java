@@ -21,7 +21,7 @@ public class IdentifierToken extends Token {
 		@Override
 		public int accepts(String input) {
 			int endIndex = 0;
-			while (Character.isLetterOrDigit(input.charAt(endIndex))) {
+			while (endIndex < input.length() && Character.isLetterOrDigit(input.charAt(endIndex))) {
 				endIndex++;
 			}
 			return endIndex;

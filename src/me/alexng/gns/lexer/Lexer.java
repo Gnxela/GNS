@@ -37,8 +37,8 @@ public class Lexer {
 
 	private static LinkedList<Token> tokenizeLine(String line) throws AmbiguousParsingException {
 		LinkedList<Token> tokens = new LinkedList<>();
+		line = trimWhitespace(line);
 		while (!line.isEmpty()) {
-			line = trimWhitespace(line);
 			boolean generated = false;
 			for (TokenGenerator generator : generators) {
 				int index = generator.accepts(line);
@@ -52,16 +52,16 @@ public class Lexer {
 				break;
 			}
 			if (!generated) {
-				// TODO: Create an exception
 				throw new AmbiguousParsingException("Did not generate");
 			}
+			line = trimWhitespace(line);
 		}
 		return tokens;
 	}
 
 	private static String trimWhitespace(String string) {
 		int i = 0;
-		while (ArrayUtil.arrayContains(WHITESPACE_CHARS, string.charAt(i))) {
+		while (i < string.length() && ArrayUtil.arrayContains(WHITESPACE_CHARS, string.charAt(i))) {
 			i++;
 		}
 		return string.substring(i);

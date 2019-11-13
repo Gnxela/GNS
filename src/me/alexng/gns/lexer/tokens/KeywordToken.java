@@ -36,7 +36,6 @@ public class KeywordToken extends Token {
 					return new KeywordToken(keyword);
 				}
 			}
-			// TODO: Create a exception.
 			throw new AmbiguousParsingException("Invalid");
 		}
 	}
