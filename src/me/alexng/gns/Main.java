@@ -3,14 +3,19 @@ package me.alexng.gns;
 import me.alexng.gns.lexer.Lexer;
 import me.alexng.gns.lexer.Token;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 public class Main {
 
 	public static void main(String[] args) throws Exception {
-		LinkedList<Token> tokens = Lexer.tokenizeLine("   test_keyword    			test_keywordtest_keyword2");
-		for (Token token : tokens) {
-			System.out.println(token);
+		ArrayList<LinkedList<Token>> tokenizedLines = Lexer.tokenize("func test(i j k) {\n\tprint(i)\n}");
+		for (int i = 0; i < tokenizedLines.size(); i++) {
+			LinkedList<Token> tokens = tokenizedLines.get(i);
+			System.out.print(i + ":");
+			for (Token token : tokens) {
+				System.out.println("\t" + token);
+			}
 		}
 	}
 }
