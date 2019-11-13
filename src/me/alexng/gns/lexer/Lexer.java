@@ -1,5 +1,7 @@
 package me.alexng.gns.lexer;
 
+import me.alexng.gns.AmbiguousParsingException;
+import me.alexng.gns.ParsingException;
 import me.alexng.gns.lexer.tokens.BracketToken;
 import me.alexng.gns.lexer.tokens.IdentifierToken;
 import me.alexng.gns.lexer.tokens.KeywordToken;
@@ -7,6 +9,7 @@ import me.alexng.gns.util.ArrayUtil;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 
 public class Lexer {
 
@@ -18,15 +21,21 @@ public class Lexer {
 			new IdentifierToken.IdentifierGenerator()
 	};
 
-	public static ArrayList<LinkedList<Token>> tokenize(String input) throws Exception {
+	public static ArrayList<LinkedList<Token>> tokenize(String input) throws ParsingException {
 		ArrayList<LinkedList<Token>> tokenizedLines = new ArrayList<>();
-		for (String line : input.split(NEW_LINE)) {
-			tokenizedLines.add(tokenizeLine(line));
+		String[] lines = input.split(NEW_LINE);
+		for (int index = 0; index < lines.length; index++) {
+			String line = lines[index];
+			try {
+				tokenizedLines.add(tokenizeLine(line));
+			} catch (AmbiguousParsingException e) {
+				throw new ParsingException(index + 1, e.getMessage());
+			}
 		}
 		return tokenizedLines;
 	}
 
-	private static LinkedList<Token> tokenizeLine(String line) throws Exception {
+	private static LinkedList<Token> tokenizeLine(String line) throws AmbiguousParsingException {
 		LinkedList<Token> tokens = new LinkedList<>();
 		while (!line.isEmpty()) {
 			line = trimWhitespace(line);
@@ -44,7 +53,7 @@ public class Lexer {
 			}
 			if (!generated) {
 				// TODO: Create an exception
-				throw new Exception("Did not generate");
+				throw new AmbiguousParsingException("Did not generate");
 			}
 		}
 		return tokens;

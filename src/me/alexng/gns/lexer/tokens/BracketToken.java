@@ -1,5 +1,6 @@
 package me.alexng.gns.lexer.tokens;
 
+import me.alexng.gns.AmbiguousParsingException;
 import me.alexng.gns.lexer.Token;
 import me.alexng.gns.lexer.TokenGenerator;
 
@@ -42,7 +43,7 @@ public class BracketToken extends Token {
 		}
 
 		@Override
-		public Token generate(String input) throws Exception {
+		public Token generate(String input) throws AmbiguousParsingException {
 			switch (input) {
 				case "(":
 					return new BracketToken(Bracket.ROUND, Type.OPEN);
@@ -57,8 +58,7 @@ public class BracketToken extends Token {
 				case "}":
 					return new BracketToken(Bracket.CURLY, Type.CLOSED);
 				default:
-					// TODO: Create a exception.
-					throw new Exception("Invalid");
+					throw new AmbiguousParsingException("Invalid");
 			}
 		}
 	}

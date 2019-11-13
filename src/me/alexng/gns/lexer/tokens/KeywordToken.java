@@ -1,5 +1,6 @@
 package me.alexng.gns.lexer.tokens;
 
+import me.alexng.gns.AmbiguousParsingException;
 import me.alexng.gns.Keyword;
 import me.alexng.gns.lexer.Token;
 import me.alexng.gns.lexer.TokenGenerator;
@@ -29,14 +30,14 @@ public class KeywordToken extends Token {
 		}
 
 		@Override
-		public Token generate(String input) throws Exception {
+		public Token generate(String input) throws AmbiguousParsingException {
 			for (Keyword keyword : Keyword.values()) {
 				if (input.startsWith(keyword.getKeyword())) {
 					return new KeywordToken(keyword);
 				}
 			}
 			// TODO: Create a exception.
-			throw new Exception("Invalid");
+			throw new AmbiguousParsingException("Invalid");
 		}
 	}
 }

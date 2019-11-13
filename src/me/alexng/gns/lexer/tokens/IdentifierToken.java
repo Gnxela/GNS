@@ -1,5 +1,6 @@
 package me.alexng.gns.lexer.tokens;
 
+import me.alexng.gns.AmbiguousParsingException;
 import me.alexng.gns.lexer.Token;
 import me.alexng.gns.lexer.TokenGenerator;
 
@@ -27,7 +28,7 @@ public class IdentifierToken extends Token {
 		}
 
 		@Override
-		public Token generate(String input) throws Exception {
+		public Token generate(String input) throws AmbiguousParsingException {
 			return new IdentifierToken(input);
 		}
 	}

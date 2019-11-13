@@ -1,5 +1,7 @@
 package me.alexng.gns.lexer;
 
+import me.alexng.gns.AmbiguousParsingException;
+
 public interface TokenGenerator {
 
 	/**
@@ -14,6 +16,6 @@ public interface TokenGenerator {
 	 * @param input A string contain exactly the text that the token will consume.
 	 * @return The generated token.
 	 */
-	Token generate(String input) throws Exception;
+	Token generate(String input) throws AmbiguousParsingException;
 
 }
