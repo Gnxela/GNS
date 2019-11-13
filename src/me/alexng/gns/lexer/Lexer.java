@@ -3,6 +3,7 @@ package me.alexng.gns.lexer;
 import me.alexng.gns.AmbiguousParsingException;
 import me.alexng.gns.ParsingException;
 import me.alexng.gns.lexer.tokens.BracketToken;
+import me.alexng.gns.lexer.tokens.CommaToken;
 import me.alexng.gns.lexer.tokens.IdentifierToken;
 import me.alexng.gns.lexer.tokens.KeywordToken;
 import me.alexng.gns.util.ArrayUtil;
@@ -15,7 +16,8 @@ public class Lexer {
 
 	private static final String NEW_LINE = "\n";
 	private static final Character[] WHITESPACE_CHARS = new Character[]{' ', '\t'};
-	private static final TokenGenerator[] generators = new TokenGenerator[]{
+	private static final TokenGenerator[] generators = new TokenGenerator[] {
+			new CommaToken.CommaGenerator(),
 			new BracketToken.BracketGenerator(),
 			new KeywordToken.KeywordGenerator(),
 			new IdentifierToken.IdentifierGenerator()
