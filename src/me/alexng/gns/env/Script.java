@@ -24,6 +24,7 @@ public class Script {
 				System.out.println("\t" + token);
 			}
 		}
+
 	}
 
 	public void run() {
