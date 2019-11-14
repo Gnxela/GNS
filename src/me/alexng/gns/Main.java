@@ -9,7 +9,7 @@ import java.util.LinkedList;
 public class Main {
 
 	public static void main(String[] args) throws Exception {
-		ArrayList<LinkedList<Token>> tokenizedLines = Lexer.tokenize("func test(i, j, k) {\n\tprint(i)\n}");
+		ArrayList<LinkedList<Token>> tokenizedLines = Lexer.tokenize("i = 0\nif (i == 0) {\n\ti = 1\n}\n");
 		for (int i = 0; i < tokenizedLines.size(); i++) {
 			LinkedList<Token> tokens = tokenizedLines.get(i);
 			System.out.print(i + ":");

@@ -4,16 +4,16 @@ import me.alexng.gns.AmbiguousParsingException;
 import me.alexng.gns.lexer.Token;
 import me.alexng.gns.lexer.TokenGenerator;
 
-public class CommaToken extends Token {
+public class AssignToken extends Token {
 
 	@Override
 	public String toString() {
-		return "<Comma >";
+		return "<Assign >";
 	}
 
-	public static class CommaGenerator implements TokenGenerator {
+	public static class AssignGenerator implements TokenGenerator {
 
-		private final char CHAR = ',';
+		private final char CHAR = '=';
 
 		@Override
 		public int accepts(String input) {
@@ -22,7 +22,7 @@ public class CommaToken extends Token {
 
 		@Override
 		public Token generate(String input) throws AmbiguousParsingException {
-			return new CommaToken();
+			return new AssignToken();
 		}
 	}
 }

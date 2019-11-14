@@ -2,15 +2,11 @@ package me.alexng.gns.lexer;
 
 import me.alexng.gns.AmbiguousParsingException;
 import me.alexng.gns.ParsingException;
-import me.alexng.gns.lexer.tokens.BracketToken;
-import me.alexng.gns.lexer.tokens.CommaToken;
-import me.alexng.gns.lexer.tokens.IdentifierToken;
-import me.alexng.gns.lexer.tokens.KeywordToken;
+import me.alexng.gns.lexer.tokens.*;
 import me.alexng.gns.util.ArrayUtil;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
-import java.util.List;
 
 public class Lexer {
 
@@ -19,6 +15,8 @@ public class Lexer {
 	private static final TokenGenerator[] generators = new TokenGenerator[] {
 			new CommaToken.CommaGenerator(),
 			new BracketToken.BracketGenerator(),
+			new AssignToken.AssignGenerator(),
+			new EqualToken.EqualGenerator(),
 			new KeywordToken.KeywordGenerator(),
 			new IdentifierToken.IdentifierGenerator()
 	};

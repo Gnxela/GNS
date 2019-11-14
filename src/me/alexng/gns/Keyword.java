@@ -2,7 +2,8 @@ package me.alexng.gns;
 
 public enum Keyword {
 
-	FUNC("func");
+	FUNC("func"),
+	IF("if");
 
 	private String keyword;
 
