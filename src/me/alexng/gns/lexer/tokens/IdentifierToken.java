@@ -17,7 +17,7 @@ public class IdentifierToken extends Token {
 		return "<Identifier " + identifier + ">";
 	}
 
-	public static class IdentifierGenerator implements TokenGenerator {
+	public static class Generator implements TokenGenerator {
 		@Override
 		public int accepts(String input) {
 			int endIndex = 0;

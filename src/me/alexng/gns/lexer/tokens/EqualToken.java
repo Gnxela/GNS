@@ -11,7 +11,7 @@ public class EqualToken extends Token {
 		return "<Assign >";
 	}
 
-	public static class EqualGenerator implements TokenGenerator {
+	public static class Generator implements TokenGenerator {
 
 		private final char CHAR = '=';
 

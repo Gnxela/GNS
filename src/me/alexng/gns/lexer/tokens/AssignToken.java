@@ -11,7 +11,7 @@ public class AssignToken extends Token {
 		return "<Assign >";
 	}
 
-	public static class AssignGenerator implements TokenGenerator {
+	public static class Generator implements TokenGenerator {
 
 		private final char CHAR = '=';
 

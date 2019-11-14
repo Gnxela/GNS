@@ -13,12 +13,12 @@ public class Lexer {
 	private static final String NEW_LINE = "\n";
 	private static final Character[] WHITESPACE_CHARS = new Character[]{' ', '\t'};
 	private static final TokenGenerator[] generators = new TokenGenerator[] {
-			new CommaToken.CommaGenerator(),
-			new BracketToken.BracketGenerator(),
-			new AssignToken.AssignGenerator(),
-			new EqualToken.EqualGenerator(),
-			new KeywordToken.KeywordGenerator(),
-			new IdentifierToken.IdentifierGenerator()
+			new CommaToken.Generator(),
+			new BracketToken.Generator(),
+			new AssignToken.Generator(),
+			new EqualToken.Generator(),
+			new KeywordToken.Generator(),
+			new IdentifierToken.Generator()
 	};
 
 	public static ArrayList<LinkedList<Token>> tokenize(String input) throws ParsingException {

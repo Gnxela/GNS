@@ -18,7 +18,7 @@ public class KeywordToken extends Token {
 		return "<Keyword " + keyword.getKeyword() + ">";
 	}
 
-	public static class KeywordGenerator implements TokenGenerator {
+	public static class Generator implements TokenGenerator {
 		@Override
 		public int accepts(String input) {
 			for (Keyword keyword : Keyword.values()) {

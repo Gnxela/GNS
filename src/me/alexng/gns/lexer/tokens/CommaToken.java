@@ -11,7 +11,7 @@ public class CommaToken extends Token {
 		return "<Comma >";
 	}
 
-	public static class CommaGenerator implements TokenGenerator {
+	public static class Generator implements TokenGenerator {
 
 		private final char CHAR = ',';
 

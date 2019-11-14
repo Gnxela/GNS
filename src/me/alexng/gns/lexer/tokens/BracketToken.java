@@ -27,7 +27,7 @@ public class BracketToken extends Token {
 		ROUND, SQUARE, CURLY
 	}
 
-	public static class BracketGenerator implements TokenGenerator {
+	public static class Generator implements TokenGenerator {
 
 		private static final Character[] BRACKETS = new Character[]{'(', ')', '{', '}', '[', ']'};
 
