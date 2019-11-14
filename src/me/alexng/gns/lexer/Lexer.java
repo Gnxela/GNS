@@ -18,6 +18,7 @@ public class Lexer {
 			new AssignToken.Generator(),
 			new EqualToken.Generator(),
 			new KeywordToken.Generator(),
+			new NumberToken.Generator(),
 			new IdentifierToken.Generator()
 	};
 

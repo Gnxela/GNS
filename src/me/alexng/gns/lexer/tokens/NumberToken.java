@@ -4,27 +4,25 @@ import me.alexng.gns.AmbiguousParsingException;
 import me.alexng.gns.lexer.Token;
 import me.alexng.gns.lexer.TokenGenerator;
 
-public class IdentifierToken extends Token {
+public class NumberToken extends Token {
 
-	private String identifier;
+	// TODO: I'm storing the value as a string here. Eventually we should change this (or keep it and just deal with it when we transform to Symbols)
+	private String value;
 
-	IdentifierToken(String identifier) {
-		this.identifier = identifier;
+	NumberToken(String value) {
+		this.value = value;
 	}
 
 	@Override
 	public String toString() {
-		return "<Identifier " + identifier + ">";
+		return "<Number " + value + ">";
 	}
 
 	public static class Generator implements TokenGenerator {
 		@Override
 		public int accepts(String input) {
-			if (!Character.isLetter(input.charAt(0))) {
-				return 0;
-			}
-			int endIndex = 1;
-			while (endIndex < input.length() && Character.isLetterOrDigit(input.charAt(endIndex))) {
+			int endIndex = 0;
+			while (endIndex < input.length() && Character.isDigit(input.charAt(endIndex))) {
 				endIndex++;
 			}
 			return endIndex;
@@ -32,7 +30,7 @@ public class IdentifierToken extends Token {
 
 		@Override
 		public Token generate(String input) throws AmbiguousParsingException {
-			return new IdentifierToken(input);
+			return new NumberToken(input);
 		}
 	}
 }
