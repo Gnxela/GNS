@@ -8,7 +8,7 @@ public class EqualToken extends Token {
 
 	@Override
 	public String toString() {
-		return "<Assign >";
+		return "<Equal >";
 	}
 
 	public static class Generator implements TokenGenerator {

@@ -15,8 +15,8 @@ public class Lexer {
 	private static final TokenGenerator[] generators = new TokenGenerator[] {
 			new CommaToken.Generator(),
 			new BracketToken.Generator(),
-			new AssignToken.Generator(),
 			new EqualToken.Generator(),
+			new AssignToken.Generator(),
 			new KeywordToken.Generator(),
 			new NumberToken.Generator(),
 			new IdentifierToken.Generator()
