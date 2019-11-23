@@ -1,4 +1,4 @@
-package me.alexng.gns.env;
+package me.alexng.gns.gen;
 
 /**
  * Takes tokenized input and assembles it into symbols which can be run.

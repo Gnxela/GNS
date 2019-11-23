@@ -1,4 +1,4 @@
-package me.alexng.gns.env;
+package me.alexng.gns.gen;
 
 /**
  * An action taken by the script.
