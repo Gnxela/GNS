@@ -13,6 +13,10 @@ public class KeywordToken extends Token {
 		this.keyword = keyword;
 	}
 
+	public Keyword getKeyword() {
+		return keyword;
+	}
+
 	@Override
 	public String toString() {
 		return "<Keyword " + keyword.getKeyword() + ">";

@@ -18,7 +18,9 @@ public class Script {
 
 	public void parse() throws ParsingException {
 		LinkedList<Token> tokens = Lexer.tokenize(source);
+		System.out.println(tokens.toString());
 		Assembler.assemble(tokens);
+		System.out.println(tokens.toString());
 	}
 
 	public void run() {

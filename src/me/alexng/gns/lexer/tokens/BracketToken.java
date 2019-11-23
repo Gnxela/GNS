@@ -6,12 +6,36 @@ import me.alexng.gns.lexer.TokenGenerator;
 
 public class BracketToken extends Token {
 
+	public static final BracketToken ROUND_OPEN = new BracketToken(Bracket.ROUND, Type.OPEN);
+	public static final BracketToken ROUND_CLOSED = new BracketToken(Bracket.ROUND, Type.CLOSED);
+	public static final BracketToken CURLEY_OPEN = new BracketToken(Bracket.CURLY, Type.OPEN);
+	public static final BracketToken CURLEY_CLOSED = new BracketToken(Bracket.CURLY, Type.CLOSED);
+	public static final BracketToken SQUARE_OPEN = new BracketToken(Bracket.SQUARE, Type.OPEN);
+	public static final BracketToken SQUARE_CLOSED = new BracketToken(Bracket.SQUARE, Type.CLOSED);
+
 	private Bracket bracket;
 	private Type type;
 
 	BracketToken(Bracket bracket, Type type) {
 		this.bracket = bracket;
 		this.type = type;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (obj instanceof BracketToken) {
+			BracketToken b = (BracketToken) obj;
+			return getType() == b.getType() && getBracket() == b.getBracket();
+		}
+		return super.equals(obj);
+	}
+
+	public Bracket getBracket() {
+		return bracket;
+	}
+
+	public Type getType() {
+		return type;
 	}
 
 	@Override
