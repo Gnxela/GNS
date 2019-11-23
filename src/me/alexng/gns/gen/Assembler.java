@@ -40,7 +40,8 @@ public class Assembler {
 	private static void assembleBlock(ListIterator<Token> tokens) throws ParsingException {
 		tokens.remove();
 
-		List<Token> blockTokens = matchTokens(tokens, BracketToken.CURLEY_OPEN, BracketToken.CURLEY_CLOSED);
+		LinkedList<Token> blockTokens = matchTokens(tokens, BracketToken.CURLEY_OPEN, BracketToken.CURLEY_CLOSED);
+		// TODO: We need to run the assembler on these newly created blocks as well.
 		tokens.add(new BlockToken(blockTokens));
 	}
 
