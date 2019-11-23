@@ -5,7 +5,6 @@ import me.alexng.gns.ParsingException;
 import me.alexng.gns.lexer.tokens.*;
 import me.alexng.gns.util.ArrayUtil;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 
 public class Lexer {
@@ -32,6 +31,7 @@ public class Lexer {
 			} catch (AmbiguousParsingException e) {
 				throw new ParsingException(index + 1, e.getMessage());
 			}
+			tokenizedLines.add(new EOLToken());
 		}
 		return tokenizedLines;
 	}
