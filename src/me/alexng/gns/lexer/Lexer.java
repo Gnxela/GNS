@@ -22,13 +22,13 @@ public class Lexer {
 			new IdentifierToken.Generator()
 	};
 
-	public static ArrayList<LinkedList<Token>> tokenize(String input) throws ParsingException {
-		ArrayList<LinkedList<Token>> tokenizedLines = new ArrayList<>();
+	public static LinkedList<Token> tokenize(String input) throws ParsingException {
+		LinkedList<Token> tokenizedLines = new LinkedList<>();
 		String[] lines = input.split(NEW_LINE);
 		for (int index = 0; index < lines.length; index++) {
 			String line = lines[index];
 			try {
-				tokenizedLines.add(tokenizeLine(line));
+				tokenizedLines.addAll(tokenizeLine(line));
 			} catch (AmbiguousParsingException e) {
 				throw new ParsingException(index + 1, e.getMessage());
 			}

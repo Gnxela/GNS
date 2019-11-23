@@ -16,15 +16,10 @@ public class Script {
 	}
 
 	public void parse() throws ParsingException {
-		ArrayList<LinkedList<Token>> tokenizedLines = Lexer.tokenize(source);
-		for (int i = 0; i < tokenizedLines.size(); i++) {
-			LinkedList<Token> tokens = tokenizedLines.get(i);
-			System.out.print(i + ":");
-			for (Token token : tokens) {
-				System.out.println("\t" + token);
-			}
+		LinkedList<Token> tokens = Lexer.tokenize(source);
+		for (Token token : tokens) {
+			System.out.println(token);
 		}
-
 	}
 
 	public void run() {
