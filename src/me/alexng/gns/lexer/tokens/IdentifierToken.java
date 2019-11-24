@@ -1,6 +1,6 @@
 package me.alexng.gns.lexer.tokens;
 
-import me.alexng.gns.AmbiguousParsingException;
+import me.alexng.gns.ParsingException;
 import me.alexng.gns.lexer.Token;
 import me.alexng.gns.lexer.TokenGenerator;
 
@@ -19,11 +19,11 @@ public class IdentifierToken extends Token {
 
 	public static class Generator implements TokenGenerator {
 		@Override
-		public int accepts(String input) {
-			if (!Character.isLetter(input.charAt(0))) {
+		public int accepts(String input, int index) {
+			if (!Character.isLetter(input.charAt(index))) {
 				return 0;
 			}
-			int endIndex = 1;
+			int endIndex = index + 1;
 			while (endIndex < input.length() && Character.isLetterOrDigit(input.charAt(endIndex))) {
 				endIndex++;
 			}
@@ -31,8 +31,8 @@ public class IdentifierToken extends Token {
 		}
 
 		@Override
-		public Token generate(String input) throws AmbiguousParsingException {
-			return new IdentifierToken(input);
+		public Token generate(String input, int startIndex, int endIndex) throws ParsingException {
+			return new IdentifierToken(input.substring(startIndex, endIndex));
 		}
 	}
 }

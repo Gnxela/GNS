@@ -1,6 +1,6 @@
 package me.alexng.gns.lexer.tokens;
 
-import me.alexng.gns.AmbiguousParsingException;
+import me.alexng.gns.ParsingException;
 import me.alexng.gns.lexer.Token;
 import me.alexng.gns.lexer.TokenGenerator;
 
@@ -16,12 +16,12 @@ public class AssignToken extends Token {
 		private final char CHAR = '=';
 
 		@Override
-		public int accepts(String input) {
-			return input.length() > 0 && input.charAt(0) == CHAR ? 1 : 0;
+		public int accepts(String input, int index) {
+			return index + (input.charAt(index) == CHAR ? 1 : 0);
 		}
 
 		@Override
-		public Token generate(String input) throws AmbiguousParsingException {
+		public Token generate(String input, int startIndex, int endIndex) throws ParsingException {
 			return new AssignToken();
 		}
 	}

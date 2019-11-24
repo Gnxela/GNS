@@ -1,21 +1,21 @@
 package me.alexng.gns.lexer;
 
-import me.alexng.gns.AmbiguousParsingException;
+import me.alexng.gns.ParsingException;
 
 public interface TokenGenerator {
 
 	/**
-	 * TODO: Docs
-	 * @param input The input string. All preceding whitespace should be trimmed.
-	 * @return The length of the accepted string. Or zero if the string is not accepting.
+	 * Decides whether the generator accepts the input string (from the index). 
+	 * @param input The input string.
+	 * @param index The index to start parsing from.
+	 * @return If accepted, returns the start index of the next token. If rejected, returns the original index (or anything less than it).
 	 */
-	int accepts(String input);
+	int accepts(String input, int index);
 
 	/**
-	 *
-	 * @param input A string contain exactly the text that the token will consume.
-	 * @return The generated token.
+	 * Takes the accepted string and converts it into a token.
+	 * @return A token generated from {@code input}[{@code index}:{@code endIndex})
 	 */
-	Token generate(String input) throws AmbiguousParsingException;
+	Token generate(String input, int startIndex, int endIndex) throws ParsingException;
 
 }

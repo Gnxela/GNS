@@ -22,7 +22,6 @@ public class Assembler {
 		ListIterator<Token> iterator = tokens.listIterator();
 		while (iterator.hasNext()) {
 			Token token = iterator.next();
-			System.out.println(":" + token);
 			if (token.equals(BracketToken.CURLEY_OPEN)) {
 				assembleBlock(iterator);
 			}

@@ -1,6 +1,6 @@
 package me.alexng.gns.lexer.tokens;
 
-import me.alexng.gns.AmbiguousParsingException;
+import me.alexng.gns.ParsingException;
 import me.alexng.gns.lexer.Token;
 import me.alexng.gns.lexer.TokenGenerator;
 
@@ -20,8 +20,9 @@ public class NumberToken extends Token {
 
 	public static class Generator implements TokenGenerator {
 		@Override
-		public int accepts(String input) {
-			int endIndex = 0;
+		public int accepts(String input, int index) {
+			// TODO: Floats/doubles
+			int endIndex = index;
 			while (endIndex < input.length() && Character.isDigit(input.charAt(endIndex))) {
 				endIndex++;
 			}
@@ -29,8 +30,8 @@ public class NumberToken extends Token {
 		}
 
 		@Override
-		public Token generate(String input) throws AmbiguousParsingException {
-			return new NumberToken(input);
+		public Token generate(String input, int startIndex, int endIndex) throws ParsingException {
+			return new NumberToken(input.substring(startIndex, endIndex));
 		}
 	}
 }

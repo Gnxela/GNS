@@ -1,6 +1,6 @@
 package me.alexng.gns.lexer.tokens;
 
-import me.alexng.gns.AmbiguousParsingException;
+import me.alexng.gns.ParsingException;
 import me.alexng.gns.lexer.Token;
 import me.alexng.gns.lexer.TokenGenerator;
 
@@ -56,33 +56,34 @@ public class BracketToken extends Token {
 		private static final Character[] BRACKETS = new Character[]{'(', ')', '{', '}', '[', ']'};
 
 		@Override
-		public int accepts(String input) {
-			char firstCharacter = input.charAt(0);
+		public int accepts(String input, int index) {
+			char firstCharacter = input.charAt(index);
 			for (Character bracket : BRACKETS) {
 				if (firstCharacter == bracket) {
-					return 1;
+					return index + 1;
 				}
 			}
-			return 0;
+			return index;
 		}
 
 		@Override
-		public Token generate(String input) throws AmbiguousParsingException {
-			switch (input) {
-				case "(":
+		public Token generate(String input, int startIndex, int endIndex) throws ParsingException {
+			switch (input.charAt(startIndex)) {
+				case '(':
 					return new BracketToken(Bracket.ROUND, Type.OPEN);
-				case ")":
+				case ')':
 					return new BracketToken(Bracket.ROUND, Type.CLOSED);
-				case "[":
+				case '[':
 					return new BracketToken(Bracket.SQUARE, Type.OPEN);
-				case "]":
+				case ']':
 					return new BracketToken(Bracket.SQUARE, Type.CLOSED);
-				case "{":
+				case '{':
 					return new BracketToken(Bracket.CURLY, Type.OPEN);
-				case "}":
+				case '}':
 					return new BracketToken(Bracket.CURLY, Type.CLOSED);
 				default:
-					throw new AmbiguousParsingException("Invalid");
+					// TODO: Better exception.
+					throw new ParsingException(0, "Invalid");
 			}
 		}
 	}
