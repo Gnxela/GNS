@@ -22,10 +22,10 @@ public class Assembler {
 		ListIterator<Token> iterator = tokens.listIterator();
 		while (iterator.hasNext()) {
 			Token token = iterator.next();
+			System.out.println(":" + token);
 			if (token.equals(BracketToken.CURLEY_OPEN)) {
 				assembleBlock(iterator);
 			}
-			iterator.next();
 		}
 		iterator = tokens.listIterator();
 		while (iterator.hasNext()) {
@@ -33,7 +33,6 @@ public class Assembler {
 			if (token instanceof KeywordToken && ((KeywordToken) token).getKeyword() == Keyword.IF) {
 				assembleIfStatement(iterator);
 			}
-			iterator.next();
 		}
 	}
 
