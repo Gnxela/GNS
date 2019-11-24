@@ -6,6 +6,10 @@ import me.alexng.gns.lexer.TokenGenerator;
 
 public class AssignToken extends Token {
 
+	public AssignToken(int startIndex, int endIndex) {
+		super(startIndex, endIndex);
+	}
+	
 	@Override
 	public String toString() {
 		return "<Assign >";
@@ -22,7 +26,7 @@ public class AssignToken extends Token {
 
 		@Override
 		public Token generate(String input, int startIndex, int endIndex) throws ParsingException {
-			return new AssignToken();
+			return new AssignToken(startIndex, endIndex);
 		}
 	}
 }

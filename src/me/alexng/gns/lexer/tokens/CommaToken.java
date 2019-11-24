@@ -6,6 +6,10 @@ import me.alexng.gns.lexer.TokenGenerator;
 
 public class CommaToken extends Token {
 
+	public CommaToken(int startIndex, int endIndex) {
+		super(startIndex, endIndex);
+	}
+	
 	@Override
 	public String toString() {
 		return "<Comma >";
@@ -22,7 +26,7 @@ public class CommaToken extends Token {
 
 		@Override
 		public Token generate(String input, int startIndex, int endIndex) throws ParsingException {
-			return new CommaToken();
+			return new CommaToken(startIndex, endIndex);
 		}
 	}
 }

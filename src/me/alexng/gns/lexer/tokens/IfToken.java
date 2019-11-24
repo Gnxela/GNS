@@ -9,7 +9,8 @@ public class IfToken extends Token {
 	private List<Token> condition;
 	private BlockToken block;
 
-	public IfToken(List<Token> condition, BlockToken block) {
+	public IfToken(List<Token> condition, BlockToken block, int startIndex, int endIndex) {
+		super(startIndex, endIndex);
 		this.condition = condition;
 		this.block = block;
 	}

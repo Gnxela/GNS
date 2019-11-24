@@ -6,6 +6,10 @@ import me.alexng.gns.lexer.TokenGenerator;
 
 public class EqualToken extends Token {
 
+	public EqualToken(int startIndex, int endIndex) {
+		super(startIndex, endIndex);
+	}
+	
 	@Override
 	public String toString() {
 		return "<Equal >";
@@ -22,7 +26,7 @@ public class EqualToken extends Token {
 
 		@Override
 		public Token generate(String input, int startIndex, int endIndex) throws ParsingException {
-			return new EqualToken();
+			return new EqualToken(startIndex, endIndex);
 		}
 	}
 }

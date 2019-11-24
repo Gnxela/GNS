@@ -40,7 +40,8 @@ public class Assembler {
 
 		LinkedList<Token> blockTokens = matchTokens(tokens, BracketToken.CURLEY_OPEN, BracketToken.CURLEY_CLOSED);
 		// TODO: We need to run the assembler on these newly created blocks as well.
-		tokens.add(new BlockToken(blockTokens));
+		// TODO: Fill in start and end index
+		tokens.add(new BlockToken(blockTokens, 0, 0));
 	}
 
 	private static void assembleIfStatement(ListIterator<Token> tokens) throws ParsingException {
@@ -67,7 +68,8 @@ public class Assembler {
 		tokens.remove();
 
 		BlockToken block = (BlockToken) expectedBlock;
-		tokens.add(new IfToken(condition, block));
+		// TODO: Fill in start and end index
+		tokens.add(new IfToken(condition, block, 0, 0));
 	}
 
 	/**

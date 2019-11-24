@@ -9,7 +9,8 @@ public class KeywordToken extends Token {
 
 	private Keyword keyword;
 
-	KeywordToken(Keyword keyword) {
+	KeywordToken(Keyword keyword, int startIndex, int endIndex) {
+		super(startIndex, endIndex);
 		this.keyword = keyword;
 	}
 
@@ -39,7 +40,7 @@ public class KeywordToken extends Token {
 			String key = input.substring(startIndex, endIndex);
 			for (Keyword keyword : Keyword.values()) {
 				if (keyword.getKeyword().equals(key)) {
-					return new KeywordToken(keyword);
+					return new KeywordToken(keyword, startIndex, endIndex);
 				}
 			}
 			throw new ParsingException(startIndex, "Keyword unrecognised");

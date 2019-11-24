@@ -6,7 +6,8 @@ public class FunctionToken extends Token {
 
 	private String name;
 
-	public FunctionToken(String name) {
+	public FunctionToken(String name, int startIndex, int endIndex) {
+		super(startIndex, endIndex);
 		this.name = name;
 	}
 

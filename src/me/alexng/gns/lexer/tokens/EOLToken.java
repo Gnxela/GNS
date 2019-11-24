@@ -6,6 +6,10 @@ import me.alexng.gns.lexer.TokenGenerator;
 
 public class EOLToken extends Token {
 
+	public EOLToken(int startIndex, int endIndex) {
+		super(startIndex, endIndex);
+	}
+	
 	@Override
 	public String toString() {
 		return "<EOL >";
@@ -23,7 +27,7 @@ public class EOLToken extends Token {
 
 		@Override
 		public Token generate(String input, int startIndex, int endIndex) throws ParsingException {
-			return new EOLToken();
+			return new EOLToken(startIndex, endIndex);
 		}
 	}
 }
