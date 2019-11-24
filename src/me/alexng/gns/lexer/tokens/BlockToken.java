@@ -16,7 +16,6 @@ public class BlockToken extends Token{
 
 	@Override
 	public String toString() {
-		// TODO: Include block contents
 		return "<Block " + tokens.toString() + ">";
 	}
 }

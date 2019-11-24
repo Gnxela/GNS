@@ -17,7 +17,6 @@ public class IfToken extends Token {
 
 	@Override
 	public String toString() {
-		// TODO: Include condition, block etc.
 		return "<If " + condition.toString() + ", " + block.toString() + ">";
 	}
 }
