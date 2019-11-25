@@ -23,6 +23,7 @@ public class Assembler {
 		while (iterator.hasNext()) {
 			Token token = iterator.next();
 			if (token.equals(BracketToken.CURLEY_OPEN)) {
+				iterator.previous();
 				assembleBlock(iterator);
 			}
 		}
@@ -30,21 +31,30 @@ public class Assembler {
 		while (iterator.hasNext()) {
 			Token token = iterator.next();
 			if (token instanceof KeywordToken && ((KeywordToken) token).getKeyword() == Keyword.IF) {
+				iterator.previous();
 				assembleIfStatement(iterator);
 			}
 		}
 	}
 
+	/**
+	 * @param tokens Requires the initial open curley bracket to be the the next token in the iterator.
+	 */
 	private static void assembleBlock(ListIterator<Token> tokens) throws ParsingException {
+		BracketToken openBracket = (BracketToken) tokens.next();
 		tokens.remove();
 
 		LinkedList<Token> blockTokens = matchTokens(tokens, BracketToken.CURLEY_OPEN, BracketToken.CURLEY_CLOSED);
 		// TODO: We need to run the assembler on these newly created blocks as well.
 		// TODO: Fill in start and end index
-		tokens.add(new BlockToken(blockTokens, 0, 0));
+		tokens.add(new BlockToken(blockTokens, openBracket.getStartIndex(), 0));
 	}
 
+	/**
+	 * @param tokens Requires the initial if keyword to be the the next token in the iterator.
+	 */
 	private static void assembleIfStatement(ListIterator<Token> tokens) throws ParsingException {
+		KeywordToken keyword = (KeywordToken) tokens.next();
 		tokens.remove();
 
 		if (!tokens.next().equals(BracketToken.ROUND_OPEN)) {
@@ -64,7 +74,7 @@ public class Assembler {
 
 		BlockToken block = (BlockToken) expectedBlock;
 		// TODO: Fill in start and end index
-		tokens.add(new IfToken(condition, block, 0, 0));
+		tokens.add(new IfToken(condition, block, keyword.getStartIndex(), 0));
 	}
 
 	/**
