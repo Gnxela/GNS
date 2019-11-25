@@ -10,7 +10,7 @@ public class Lexer {
 
 	private static final String NEW_LINE = "\n";
 	private static final Character[] WHITESPACE_CHARS = new Character[]{' ', '\t'};
-	private static final TokenGenerator[] generators = new TokenGenerator[] {
+	private static final TokenGenerator[] generators = new TokenGenerator[]{
 			new EOLToken.Generator(),
 			new CommaToken.Generator(),
 			new BracketToken.Generator(),

@@ -9,7 +9,7 @@ public class AssignToken extends Token {
 	public AssignToken(int startIndex, int endIndex) {
 		super(startIndex, endIndex);
 	}
-	
+
 	@Override
 	public String toString() {
 		return "<Assign >";

@@ -9,7 +9,6 @@ import me.alexng.gns.lexer.tokens.IfToken;
 import me.alexng.gns.lexer.tokens.KeywordToken;
 
 import java.util.LinkedList;
-import java.util.List;
 import java.util.ListIterator;
 
 /**
@@ -79,6 +78,7 @@ public class Assembler {
 
 	/**
 	 * Collects all tokens in between two tokens, matching opening and closing tokens to each other.
+	 *
 	 * @return A list of tokens in between the matched tokens. Not including the open and close tokens (middle open and close tokens are included)
 	 * @throws ParsingException
 	 */

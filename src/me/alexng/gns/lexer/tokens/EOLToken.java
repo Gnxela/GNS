@@ -9,12 +9,12 @@ public class EOLToken extends Token {
 	public EOLToken(int startIndex, int endIndex) {
 		super(startIndex, endIndex);
 	}
-	
+
 	@Override
 	public String toString() {
 		return "<EOL >";
 	}
-	
+
 	public static class Generator implements TokenGenerator {
 
 		// TODO: Extend this to accept different EOL types ["\r\n", "\n\r", etc.].

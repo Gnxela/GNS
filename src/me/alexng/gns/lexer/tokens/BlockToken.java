@@ -4,7 +4,7 @@ import me.alexng.gns.lexer.Token;
 
 import java.util.List;
 
-public class BlockToken extends Token{
+public class BlockToken extends Token {
 
 	private List<Token> tokens;
 
