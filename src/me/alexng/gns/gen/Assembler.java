@@ -53,12 +53,7 @@ public class Assembler {
 		}
 		tokens.remove();
 
-		List<Token> condition = collectUntil(tokens, BracketToken.ROUND_CLOSED);
-		if (!tokens.next().equals(BracketToken.ROUND_CLOSED)) {
-			// TODO: Better exception
-			throw new ParsingException(0, "Expected closed bracket");
-		}
-		tokens.remove();
+		LinkedList<Token> condition = matchTokens(tokens, BracketToken.ROUND_OPEN, BracketToken.ROUND_CLOSED);
 
 		Token expectedBlock = tokens.next();
 		if (!(expectedBlock instanceof BlockToken)) {
@@ -91,30 +86,10 @@ public class Assembler {
 				} else {
 					depth--;
 				}
-			} else {
-				bucket.add(token);
 			}
+			bucket.add(token);
 		}
 		// TODO: Better exception
 		throw new ParsingException(0, "Matching not found");
-	}
-
-	/**
-	 * Collects all tokens until {@code end} is met (end is not included, and not consumed) and removes them from {@code tokens}.
-	 * @return All collected tokens.
-	 */
-	private static LinkedList<Token> collectUntil(ListIterator<Token> tokens, Token end) throws ParsingException {
-		LinkedList<Token> bucket = new LinkedList<>();
-		while (tokens.hasNext()) {
-			Token token = tokens.next();
-			if (token.equals(end)) {
-				tokens.previous();
-				return bucket;
-			}
-			tokens.remove();
-			bucket.add(token);
-		}
-		// TODO: Better message
-		throw new ParsingException(0, "Didn't see end");
 	}
 }
