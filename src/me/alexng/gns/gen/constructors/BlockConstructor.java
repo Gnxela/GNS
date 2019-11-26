@@ -23,6 +23,7 @@ public class BlockConstructor implements Constructor {
 		tokens.remove();
 
 		LinkedList<Token> blockTokens = Assembler.matchTokens(tokens, BracketToken.CURLEY_OPEN, BracketToken.CURLEY_CLOSED);
+		Assembler.assemble(blockTokens);
 		// TODO: We need to run the assembler on these newly created blocks as well.
 		// TODO: Fill in start and end index
 		tokens.add(new BlockToken(blockTokens, openBracket.getStartIndex(), 0));
