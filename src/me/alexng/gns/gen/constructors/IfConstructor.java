@@ -32,6 +32,7 @@ public class IfConstructor implements Constructor {
 		tokens.remove();
 
 		LinkedList<Token> condition = Assembler.matchTokens(tokens, BracketToken.ROUND_OPEN, BracketToken.ROUND_CLOSED);
+		Assembler.assemble(condition);
 
 		Token expectedBlock = tokens.next();
 		if (!(expectedBlock instanceof BlockToken)) {
