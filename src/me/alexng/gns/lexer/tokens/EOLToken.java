@@ -1,6 +1,5 @@
 package me.alexng.gns.lexer.tokens;
 
-import me.alexng.gns.ParsingException;
 import me.alexng.gns.lexer.Token;
 import me.alexng.gns.lexer.TokenGenerator;
 

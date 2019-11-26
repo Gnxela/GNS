@@ -21,6 +21,7 @@ public class Script {
 
 	/**
 	 * Parses {@link #source}. Must be run before {@link #run()}.
+	 *
 	 * @throws ParsingException thrown if {@link #source} is invalid.
 	 */
 	public void parse() throws ParsingException {

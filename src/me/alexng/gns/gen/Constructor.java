@@ -9,12 +9,14 @@ public interface Constructor {
 
 	/**
 	 * Decides whether this constructor accepts {@code token}.
+	 *
 	 * @return True if this constructor accepts.
 	 */
 	boolean accepts(Token token);
 
 	/**
 	 * Constructs the new token(s) and modifies {@code tokens} in place.
+	 *
 	 * @param tokens an iterator of tokens, with {@link ListIterator#next()} as the tokens that was passed to {@link #accepts(Token)}.
 	 * @throws ParsingException thrown when the input is invalid.
 	 */
