@@ -1,6 +1,7 @@
 package me.alexng.gns.lexer.tokens;
 
 import me.alexng.gns.lexer.Token;
+import me.alexng.gns.util.StringUtil;
 
 import java.util.List;
 
@@ -17,6 +18,6 @@ public class IfToken extends Token {
 
 	@Override
 	public String toString() {
-		return "<If " + condition.toString() + ", " + block.toString() + ">";
+		return "<If \n" + StringUtil.indent(condition.toString()) + ", \n" + StringUtil.indent(block.toString()) + ">";
 	}
 }

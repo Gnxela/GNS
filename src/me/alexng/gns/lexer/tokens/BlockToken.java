@@ -1,6 +1,7 @@
 package me.alexng.gns.lexer.tokens;
 
 import me.alexng.gns.lexer.Token;
+import me.alexng.gns.util.StringUtil;
 
 import java.util.List;
 
@@ -16,6 +17,6 @@ public class BlockToken extends Token {
 
 	@Override
 	public String toString() {
-		return "<Block " + tokens.toString() + ">";
+		return "<Block \n" + StringUtil.indent(StringUtil.unrollList(tokens)) + ">";
 	}
 }
