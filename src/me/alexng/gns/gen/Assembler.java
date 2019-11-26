@@ -17,6 +17,7 @@ public class Assembler {
 
 	private static final Constructor[] CONSTRUCTORS = new Constructor[]{
 			// This is essentially the "order of operations".
+			// TODO: Some operations will need to be processed right to left.
 			new AssignConstructor(),
 			new BlockConstructor(),
 			new IfConstructor()
