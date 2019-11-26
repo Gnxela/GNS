@@ -25,7 +25,7 @@ public class CommaToken extends Token {
 		}
 
 		@Override
-		public Token generate(String input, int startIndex, int endIndex) throws ParsingException {
+		public Token generate(String input, int startIndex, int endIndex) {
 			return new CommaToken(startIndex, endIndex);
 		}
 	}

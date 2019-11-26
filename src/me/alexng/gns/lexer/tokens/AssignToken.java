@@ -1,22 +1,33 @@
 package me.alexng.gns.lexer.tokens;
 
 import me.alexng.gns.ParsingException;
+import me.alexng.gns.RuntimeException;
+import me.alexng.gns.env.Scope;
+import me.alexng.gns.env.Value;
 import me.alexng.gns.lexer.BindableToken;
 import me.alexng.gns.lexer.Token;
 import me.alexng.gns.lexer.TokenGenerator;
 
 public class AssignToken extends BindableToken {
 
-	private Token variable, value;
+	private IdentifierToken variable;
+	private Token value;
 
 	AssignToken(int startIndex, int endIndex) {
 		super(startIndex, endIndex);
 	}
 
-	public void bind(Token variable, Token value) {
+	public void bind(IdentifierToken variable, Token value) {
 		this.bind();
 		this.variable = variable;
 		this.value = value;
+	}
+
+	@Override
+	public Value execute(Scope scope) throws RuntimeException {
+		Value returnedValue = value.execute(scope);
+		scope.setVariable(variable.getName(), returnedValue);
+		return returnedValue;
 	}
 
 	@Override
@@ -34,7 +45,7 @@ public class AssignToken extends BindableToken {
 		}
 
 		@Override
-		public Token generate(String input, int startIndex, int endIndex) throws ParsingException {
+		public Token generate(String input, int startIndex, int endIndex) {
 			return new AssignToken(startIndex, endIndex);
 		}
 	}

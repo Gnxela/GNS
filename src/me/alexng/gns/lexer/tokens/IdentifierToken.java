@@ -6,16 +6,20 @@ import me.alexng.gns.lexer.TokenGenerator;
 
 public class IdentifierToken extends Token {
 
-	private String identifier;
+	private String name;
 
-	IdentifierToken(String identifier, int startIndex, int endIndex) {
+	IdentifierToken(String name, int startIndex, int endIndex) {
 		super(startIndex, endIndex);
-		this.identifier = identifier;
+		this.name = name;
+	}
+
+	public String getName() {
+		return name;
 	}
 
 	@Override
 	public String toString() {
-		return "<Identifier " + identifier + ">";
+		return "<Identifier " + name + ">";
 	}
 
 	public static class Generator implements TokenGenerator {
@@ -32,7 +36,7 @@ public class IdentifierToken extends Token {
 		}
 
 		@Override
-		public Token generate(String input, int startIndex, int endIndex) throws ParsingException {
+		public Token generate(String input, int startIndex, int endIndex) {
 			return new IdentifierToken(input.substring(startIndex, endIndex), startIndex, endIndex);
 		}
 	}

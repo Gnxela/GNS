@@ -1,6 +1,9 @@
 package me.alexng.gns.lexer.tokens;
 
 import me.alexng.gns.ParsingException;
+import me.alexng.gns.RuntimeException;
+import me.alexng.gns.env.Scope;
+import me.alexng.gns.env.Value;
 import me.alexng.gns.lexer.Token;
 import me.alexng.gns.lexer.TokenGenerator;
 
@@ -12,6 +15,12 @@ public class NumberToken extends Token {
 	NumberToken(String value, int startIndex, int endIndex) {
 		super(startIndex, endIndex);
 		this.value = value;
+	}
+
+	@Override
+	public Value execute(Scope scope) {
+		// TODO: Input data
+		return new Value();
 	}
 
 	@Override
@@ -31,7 +40,7 @@ public class NumberToken extends Token {
 		}
 
 		@Override
-		public Token generate(String input, int startIndex, int endIndex) throws ParsingException {
+		public Token generate(String input, int startIndex, int endIndex) {
 			return new NumberToken(input.substring(startIndex, endIndex), startIndex, endIndex);
 		}
 	}

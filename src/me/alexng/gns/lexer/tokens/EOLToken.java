@@ -26,7 +26,7 @@ public class EOLToken extends Token {
 		}
 
 		@Override
-		public Token generate(String input, int startIndex, int endIndex) throws ParsingException {
+		public Token generate(String input, int startIndex, int endIndex) {
 			return new EOLToken(startIndex, endIndex);
 		}
 	}
