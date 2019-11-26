@@ -1,18 +1,27 @@
 package me.alexng.gns.lexer.tokens;
 
 import me.alexng.gns.ParsingException;
+import me.alexng.gns.lexer.BindableToken;
 import me.alexng.gns.lexer.Token;
 import me.alexng.gns.lexer.TokenGenerator;
 
-public class AssignToken extends Token {
+public class AssignToken extends BindableToken {
+
+	private Token variable, value;
 
 	AssignToken(int startIndex, int endIndex) {
 		super(startIndex, endIndex);
 	}
 
+	public void bind(Token variable, Token value) {
+		this.bind();
+		this.variable = variable;
+		this.value = value;
+	}
+
 	@Override
 	public String toString() {
-		return "<Assign >";
+		return isBound() ? "<Assign " + variable.toString() + " = " + value.toString() + ">" : "<Assign UNBOUND>";
 	}
 
 	public static class Generator implements TokenGenerator {

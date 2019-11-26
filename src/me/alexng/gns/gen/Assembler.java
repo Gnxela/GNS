@@ -1,6 +1,7 @@
 package me.alexng.gns.gen;
 
 import me.alexng.gns.ParsingException;
+import me.alexng.gns.gen.constructors.AssignConstructor;
 import me.alexng.gns.gen.constructors.BlockConstructor;
 import me.alexng.gns.gen.constructors.IfConstructor;
 import me.alexng.gns.lexer.Token;
@@ -15,6 +16,8 @@ import java.util.ListIterator;
 public class Assembler {
 
 	private static final Constructor[] CONSTRUCTORS = new Constructor[]{
+			// This is essentially the "order of operations".
+			new AssignConstructor(),
 			new BlockConstructor(),
 			new IfConstructor()
 	};

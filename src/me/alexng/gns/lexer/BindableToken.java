@@ -1,0 +1,18 @@
+package me.alexng.gns.lexer;
+
+public abstract class BindableToken extends Token {
+
+	private boolean bound = false;
+
+	public BindableToken(int startIndex, int endIndex) {
+		super(startIndex, endIndex);
+	}
+
+	public void bind() {
+		this.bound = true;
+	}
+
+	public boolean isBound() {
+		return bound;
+	}
+}
