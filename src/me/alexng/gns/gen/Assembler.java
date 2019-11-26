@@ -37,18 +37,18 @@ public class Assembler {
 	 * Collects all tokens in between two tokens, matching opening and closing tokens to each other.
 	 *
 	 * @return A list of tokens in between the matched tokens. Not including the open and close tokens (middle open and close tokens are included)
-	 * @throws ParsingException
+	 * @throws ParsingException Thrown when a matching end close token is not met.
 	 */
-	// TODO: This should not be public. Maybe make a util class.
-	public static LinkedList<Token> matchTokens(ListIterator<Token> tokens, Token increment, Token decrement) throws ParsingException {
+	// TODO: Maybe make a util class.
+	public static LinkedList<Token> matchTokens(ListIterator<Token> tokens, Token open, Token close) throws ParsingException {
 		int depth = 1;
 		LinkedList<Token> bucket = new LinkedList<>();
 		while (tokens.hasNext()) {
 			Token token = tokens.next();
 			tokens.remove();
-			if (token.equals(increment)) {
+			if (token.equals(open)) {
 				depth++;
-			} else if (token.equals(decrement)) {
+			} else if (token.equals(close)) {
 				if (depth == 1) {
 					return bucket;
 				} else {

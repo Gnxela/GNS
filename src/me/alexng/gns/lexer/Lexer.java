@@ -8,7 +8,6 @@ import java.util.LinkedList;
 
 public class Lexer {
 
-	private static final String NEW_LINE = "\n";
 	private static final Character[] WHITESPACE_CHARS = new Character[]{' ', '\t'};
 	private static final TokenGenerator[] generators = new TokenGenerator[]{
 			new EOLToken.Generator(),
@@ -21,6 +20,12 @@ public class Lexer {
 			new IdentifierToken.Generator()
 	};
 
+	/**
+	 * Takes an input string and returns a list of tokens that represent that string.
+	 * Output from this function must be sent to {@link me.alexng.gns.gen.Assembler#assemble(LinkedList)} before being executed.
+	 *
+	 * @throws ParsingException Thrown when the input is invalid.
+	 */
 	public static LinkedList<Token> tokenize(String input) throws ParsingException {
 		LinkedList<Token> tokens = new LinkedList<>();
 		int index = trimWhitespace(input, 0);
@@ -44,6 +49,11 @@ public class Lexer {
 		return tokens;
 	}
 
+	/**
+	 * Skips all whitespace as defined in {@link #WHITESPACE_CHARS}
+	 *
+	 * @return A new index that has skipped all whitespace.
+	 */
 	private static int trimWhitespace(String string, int index) {
 		while (index < string.length() && ArrayUtil.arrayContains(WHITESPACE_CHARS, string.charAt(index))) {
 			index++;

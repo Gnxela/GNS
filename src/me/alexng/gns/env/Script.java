@@ -15,6 +15,10 @@ public class Script {
 		this.source = source;
 	}
 
+	/**
+	 * Parses {@link #source}. Must be run before {@link #run()}.
+	 * @throws ParsingException thrown if {@link #source} is invalid.
+	 */
 	public void parse() throws ParsingException {
 		LinkedList<Token> tokens = Lexer.tokenize(source);
 		for (Token token : tokens) {
@@ -27,6 +31,9 @@ public class Script {
 		}
 	}
 
+	/**
+	 * Runs the script. {@link #parse()} must be called before this.
+	 */
 	public void run() {
 
 	}
