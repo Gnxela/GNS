@@ -6,7 +6,7 @@ import me.alexng.gns.lexer.TokenGenerator;
 
 public class EOLToken extends Token {
 
-	public EOLToken(int startIndex, int endIndex) {
+	EOLToken(int startIndex, int endIndex) {
 		super(startIndex, endIndex);
 	}
 

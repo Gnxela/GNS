@@ -6,7 +6,7 @@ import me.alexng.gns.lexer.TokenGenerator;
 
 public class EqualToken extends Token {
 
-	public EqualToken(int startIndex, int endIndex) {
+	EqualToken(int startIndex, int endIndex) {
 		super(startIndex, endIndex);
 	}
 

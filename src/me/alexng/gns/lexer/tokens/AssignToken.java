@@ -6,7 +6,7 @@ import me.alexng.gns.lexer.TokenGenerator;
 
 public class AssignToken extends Token {
 
-	public AssignToken(int startIndex, int endIndex) {
+	AssignToken(int startIndex, int endIndex) {
 		super(startIndex, endIndex);
 	}
 
