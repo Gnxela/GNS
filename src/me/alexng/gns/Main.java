@@ -5,7 +5,16 @@ import me.alexng.gns.env.Script;
 public class Main {
 
 	public static void main(String[] args) throws Exception {
-		Script script = new Script("i = 0\nif (i == (0 = 2)) {\n\ti = 1\n}\n");
+		Script script = new Script(String.join("\n", new String[]{
+				"i = 0",
+				"if (i = (1 = 0)) {",
+				"	if (i = 0) {",
+				"		i = 1",
+				"	}",
+				"	i = 2",
+				"}",
+				"i = 1"
+		}));
 		script.parse();
 		script.run();
 	}

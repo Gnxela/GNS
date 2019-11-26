@@ -1,12 +1,9 @@
 package me.alexng.gns.gen;
 
-import me.alexng.gns.Keyword;
 import me.alexng.gns.ParsingException;
+import me.alexng.gns.gen.constructors.BlockConstructor;
+import me.alexng.gns.gen.constructors.IfConstructor;
 import me.alexng.gns.lexer.Token;
-import me.alexng.gns.lexer.tokens.BlockToken;
-import me.alexng.gns.lexer.tokens.BracketToken;
-import me.alexng.gns.lexer.tokens.IfToken;
-import me.alexng.gns.lexer.tokens.KeywordToken;
 
 import java.util.LinkedList;
 import java.util.ListIterator;
@@ -17,63 +14,23 @@ import java.util.ListIterator;
  */
 public class Assembler {
 
+	private static final Constructor[] CONSTRUCTORS = new Constructor[]{
+			new BlockConstructor(),
+			new IfConstructor()
+	};
+
 	public static void assemble(LinkedList<Token> tokens) throws ParsingException {
-		ListIterator<Token> iterator = tokens.listIterator();
-		while (iterator.hasNext()) {
-			Token token = iterator.next();
-			if (token.equals(BracketToken.CURLEY_OPEN)) {
-				iterator.previous();
-				assembleBlock(iterator);
+		for (Constructor constructor : CONSTRUCTORS) {
+			ListIterator<Token> iterator = tokens.listIterator();
+			while (iterator.hasNext()) {
+				Token token = iterator.next();
+				if (constructor.accepts(token)) {
+					iterator.previous();
+					constructor.construct(iterator);
+					break;
+				}
 			}
 		}
-		iterator = tokens.listIterator();
-		while (iterator.hasNext()) {
-			Token token = iterator.next();
-			if (token instanceof KeywordToken && ((KeywordToken) token).getKeyword() == Keyword.IF) {
-				iterator.previous();
-				assembleIfStatement(iterator);
-			}
-		}
-	}
-
-	/**
-	 * @param tokens Requires the initial open curley bracket to be the the next token in the iterator.
-	 */
-	private static void assembleBlock(ListIterator<Token> tokens) throws ParsingException {
-		BracketToken openBracket = (BracketToken) tokens.next();
-		tokens.remove();
-
-		LinkedList<Token> blockTokens = matchTokens(tokens, BracketToken.CURLEY_OPEN, BracketToken.CURLEY_CLOSED);
-		// TODO: We need to run the assembler on these newly created blocks as well.
-		// TODO: Fill in start and end index
-		tokens.add(new BlockToken(blockTokens, openBracket.getStartIndex(), 0));
-	}
-
-	/**
-	 * @param tokens Requires the initial if keyword to be the the next token in the iterator.
-	 */
-	private static void assembleIfStatement(ListIterator<Token> tokens) throws ParsingException {
-		KeywordToken keyword = (KeywordToken) tokens.next();
-		tokens.remove();
-
-		if (!tokens.next().equals(BracketToken.ROUND_OPEN)) {
-			// TODO: Better exception
-			throw new ParsingException(0, "Expected open bracket");
-		}
-		tokens.remove();
-
-		LinkedList<Token> condition = matchTokens(tokens, BracketToken.ROUND_OPEN, BracketToken.ROUND_CLOSED);
-
-		Token expectedBlock = tokens.next();
-		if (!(expectedBlock instanceof BlockToken)) {
-			// TODO: Better exception
-			throw new ParsingException(0, "Expected block");
-		}
-		tokens.remove();
-
-		BlockToken block = (BlockToken) expectedBlock;
-		// TODO: Fill in start and end index
-		tokens.add(new IfToken(condition, block, keyword.getStartIndex(), 0));
 	}
 
 	/**
@@ -82,7 +39,8 @@ public class Assembler {
 	 * @return A list of tokens in between the matched tokens. Not including the open and close tokens (middle open and close tokens are included)
 	 * @throws ParsingException
 	 */
-	private static LinkedList<Token> matchTokens(ListIterator<Token> tokens, Token increment, Token decrement) throws ParsingException {
+	// TODO: This should not be public. Maybe make a util class.
+	public static LinkedList<Token> matchTokens(ListIterator<Token> tokens, Token increment, Token decrement) throws ParsingException {
 		int depth = 1;
 		LinkedList<Token> bucket = new LinkedList<>();
 		while (tokens.hasNext()) {
