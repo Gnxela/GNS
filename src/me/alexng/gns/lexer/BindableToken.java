@@ -4,7 +4,7 @@ public abstract class BindableToken extends Token {
 
 	private boolean bound = false;
 
-	public BindableToken(int startIndex, int endIndex) {
+	protected BindableToken(int startIndex, int endIndex) {
 		super(startIndex, endIndex);
 	}
 

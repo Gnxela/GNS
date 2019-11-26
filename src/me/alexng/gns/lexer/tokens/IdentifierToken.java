@@ -7,7 +7,7 @@ public class IdentifierToken extends Token {
 
 	private String name;
 
-	IdentifierToken(String name, int startIndex, int endIndex) {
+	private IdentifierToken(String name, int startIndex, int endIndex) {
 		super(startIndex, endIndex);
 		this.name = name;
 	}

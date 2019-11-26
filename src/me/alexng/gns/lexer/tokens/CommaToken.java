@@ -5,7 +5,7 @@ import me.alexng.gns.lexer.TokenGenerator;
 
 public class CommaToken extends Token {
 
-	CommaToken(int startIndex, int endIndex) {
+	private CommaToken(int startIndex, int endIndex) {
 		super(startIndex, endIndex);
 	}
 

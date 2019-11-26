@@ -8,7 +8,7 @@ public class EqualToken extends BindableToken {
 
 	private Token left, right;
 
-	EqualToken(int startIndex, int endIndex) {
+	private EqualToken(int startIndex, int endIndex) {
 		super(startIndex, endIndex);
 	}
 

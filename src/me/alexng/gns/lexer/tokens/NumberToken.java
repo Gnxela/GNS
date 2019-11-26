@@ -10,7 +10,7 @@ public class NumberToken extends Token {
 	// TODO: I'm storing the value as a string here. Eventually we should change this (or keep it and just deal with it when we transform to Symbols)
 	private String value;
 
-	NumberToken(String value, int startIndex, int endIndex) {
+	private NumberToken(String value, int startIndex, int endIndex) {
 		super(startIndex, endIndex);
 		this.value = value;
 	}

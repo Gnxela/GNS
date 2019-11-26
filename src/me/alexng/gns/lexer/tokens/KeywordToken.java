@@ -9,7 +9,7 @@ public class KeywordToken extends Token {
 
 	private Keyword keyword;
 
-	KeywordToken(Keyword keyword, int startIndex, int endIndex) {
+	private KeywordToken(Keyword keyword, int startIndex, int endIndex) {
 		super(startIndex, endIndex);
 		this.keyword = keyword;
 	}

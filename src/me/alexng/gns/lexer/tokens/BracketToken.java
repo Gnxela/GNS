@@ -16,7 +16,7 @@ public class BracketToken extends Token {
 	private Bracket bracket;
 	private Type type;
 
-	BracketToken(Bracket bracket, Type type, int startIndex, int endIndex) {
+	private BracketToken(Bracket bracket, Type type, int startIndex, int endIndex) {
 		super(startIndex, endIndex);
 		this.bracket = bracket;
 		this.type = type;
@@ -32,11 +32,11 @@ public class BracketToken extends Token {
 		return super.equals(obj);
 	}
 
-	public Bracket getBracket() {
+	private Bracket getBracket() {
 		return bracket;
 	}
 
-	public Type getType() {
+	private Type getType() {
 		return type;
 	}
 

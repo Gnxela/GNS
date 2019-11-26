@@ -12,7 +12,7 @@ public class AssignToken extends BindableToken {
 	private IdentifierToken variable;
 	private Token value;
 
-	AssignToken(int startIndex, int endIndex) {
+	private AssignToken(int startIndex, int endIndex) {
 		super(startIndex, endIndex);
 	}
 

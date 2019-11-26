@@ -8,7 +8,7 @@ public abstract class Token {
 
 	private int startIndex, endIndex;
 
-	public Token(int startIndex, int endIndex) {
+	protected Token(int startIndex, int endIndex) {
 		this.startIndex = startIndex;
 		this.endIndex = endIndex;
 	}
