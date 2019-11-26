@@ -31,7 +31,6 @@ public class Assembler {
 				if (constructor.accepts(token)) {
 					iterator.previous();
 					constructor.construct(iterator);
-					break;
 				}
 			}
 		}
