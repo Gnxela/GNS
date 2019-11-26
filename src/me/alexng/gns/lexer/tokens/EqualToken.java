@@ -1,18 +1,27 @@
 package me.alexng.gns.lexer.tokens;
 
 import me.alexng.gns.ParsingException;
+import me.alexng.gns.lexer.BindableToken;
 import me.alexng.gns.lexer.Token;
 import me.alexng.gns.lexer.TokenGenerator;
 
-public class EqualToken extends Token {
+public class EqualToken extends BindableToken {
+
+	private Token left, right;
 
 	EqualToken(int startIndex, int endIndex) {
 		super(startIndex, endIndex);
 	}
 
+	public void bind(Token left, Token right) {
+		super.bind();
+		this.left = left;
+		this.right = right;
+	}
+
 	@Override
 	public String toString() {
-		return "<Equal >";
+		return isBound() ? "<Equal " + left.toString() + " == " + right.toString() + ">" : "<Equal UNBOUND>";
 	}
 
 	public static class Generator implements TokenGenerator {
@@ -25,7 +34,7 @@ public class EqualToken extends Token {
 		}
 
 		@Override
-		public Token generate(String input, int startIndex, int endIndex) throws ParsingException {
+		public Token generate(String input, int startIndex, int endIndex) {
 			return new EqualToken(startIndex, endIndex);
 		}
 	}
