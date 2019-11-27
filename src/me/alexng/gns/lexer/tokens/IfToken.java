@@ -6,8 +6,6 @@ import me.alexng.gns.env.Value;
 import me.alexng.gns.lexer.Token;
 import me.alexng.gns.util.StringUtil;
 
-import java.util.List;
-
 public class IfToken extends Token {
 
 	private Token condition;

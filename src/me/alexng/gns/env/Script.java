@@ -6,9 +6,7 @@ import me.alexng.gns.gen.Assembler;
 import me.alexng.gns.lexer.Lexer;
 import me.alexng.gns.lexer.Token;
 import me.alexng.gns.lexer.tokens.BlockToken;
-import me.alexng.gns.lexer.tokens.EOLToken;
 
-import java.util.Iterator;
 import java.util.LinkedList;
 
 public class Script {
