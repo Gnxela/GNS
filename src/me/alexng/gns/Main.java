@@ -5,6 +5,9 @@ import me.alexng.gns.env.Script;
 public class Main {
 
 	public static void main(String[] args) throws Exception {
+
+		// TODO: Create BinaryOperationToken etc. to generalise operators.
+
 		Script script = new Script(String.join("\n", new String[]{
 				"i = 0",
 				"if (i == 1) {",
