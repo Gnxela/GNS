@@ -16,4 +16,8 @@ public class Scope {
 		variables.put(name, value);
 	}
 
+	@Override
+	public String toString() {
+		return variables.toString();
+	}
 }

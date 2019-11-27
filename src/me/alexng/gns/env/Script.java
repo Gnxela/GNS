@@ -51,6 +51,7 @@ public class Script {
 			}
 			token.execute(globalScope);
 		}
+		System.out.println(globalScope);
 	}
 
 	public String getSource() {
