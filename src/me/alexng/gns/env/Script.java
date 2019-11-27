@@ -5,6 +5,7 @@ import me.alexng.gns.RuntimeException;
 import me.alexng.gns.gen.Assembler;
 import me.alexng.gns.lexer.Lexer;
 import me.alexng.gns.lexer.Token;
+import me.alexng.gns.lexer.tokens.BlockToken;
 import me.alexng.gns.lexer.tokens.EOLToken;
 
 import java.util.Iterator;
@@ -43,14 +44,8 @@ public class Script {
 	 */
 	public void run() throws RuntimeException {
 		Scope globalScope = new Scope();
-		Iterator<Token> iterator = tokens.iterator();
-		while (iterator.hasNext()) {
-			Token token = iterator.next();
-			if (token instanceof EOLToken) {
-				continue;
-			}
-			token.execute(globalScope);
-		}
+		BlockToken globalBlock = new BlockToken(tokens, tokens.getFirst().getStartIndex(), tokens.getLast().getEndIndex());
+		globalBlock.execute(globalScope);
 		System.out.println(globalScope);
 	}
 

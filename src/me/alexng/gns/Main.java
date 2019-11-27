@@ -9,11 +9,11 @@ public class Main {
 				"i = 0",
 				"if (i == 1) {",
 				"	if (i == 0) {",
-				"		i = 1",
+				"		j = 1",
 				"	}",
-				"	i = 2",
+				"	k = 2",
 				"}",
-				"i = 1"
+				"m = 1"
 		}));
 		script.parse();
 		script.run();

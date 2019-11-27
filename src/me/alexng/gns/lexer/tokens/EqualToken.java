@@ -1,5 +1,8 @@
 package me.alexng.gns.lexer.tokens;
 
+import me.alexng.gns.RuntimeException;
+import me.alexng.gns.env.Scope;
+import me.alexng.gns.env.Value;
 import me.alexng.gns.lexer.BindableToken;
 import me.alexng.gns.lexer.Token;
 import me.alexng.gns.lexer.TokenGenerator;
@@ -10,6 +13,12 @@ public class EqualToken extends BindableToken {
 
 	private EqualToken(int startIndex, int endIndex) {
 		super(startIndex, endIndex);
+	}
+
+	@Override
+	public Value execute(Scope scope) throws RuntimeException {
+		// TODO: Implement when we do values
+		return new Value();
 	}
 
 	public void bind(Token left, Token right) {

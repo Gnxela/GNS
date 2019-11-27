@@ -31,8 +31,15 @@ public class IfConstructor implements Constructor {
 		}
 		tokens.remove();
 
-		LinkedList<Token> condition = Assembler.matchTokens(tokens, BracketToken.ROUND_OPEN, BracketToken.ROUND_CLOSED);
-		Assembler.assemble(condition);
+		LinkedList<Token> conditions = Assembler.matchTokens(tokens, BracketToken.ROUND_OPEN, BracketToken.ROUND_CLOSED);
+		Assembler.assemble(conditions);
+		if (conditions.size() != 1) {
+			if (conditions.size() == 0) {
+				throw new ParsingException(keyword.getStartIndex(), "Missing condition");
+			}
+			throw new ParsingException(conditions.get(1).getStartIndex(), "Invalid syntax");
+		}
+		Token condition = conditions.getFirst();
 
 		Token expectedBlock = tokens.next();
 		if (!(expectedBlock instanceof BlockToken)) {
