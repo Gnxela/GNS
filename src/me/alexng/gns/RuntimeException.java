@@ -1,5 +1,7 @@
 package me.alexng.gns;
 
+import me.alexng.gns.lexer.Token;
+
 public class RuntimeException extends Exception {
 
 	private int startIndex, endIndex;
@@ -8,6 +10,10 @@ public class RuntimeException extends Exception {
 		super("Runtime error at index " + startIndex + ". Message: " + message);
 		this.startIndex = startIndex;
 		this.endIndex = endIndex;
+	}
+
+	public RuntimeException(Token token, String message) {
+		this(token.getStartIndex(), token.getEndIndex(), message);
 	}
 
 	public RuntimeException(int index, String message) {
