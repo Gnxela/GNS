@@ -16,11 +16,9 @@ import java.util.ListIterator;
 public class Assembler {
 
 	private static final Constructor[] CONSTRUCTORS = new Constructor[]{
-			// This is essentially the "order of operations".
 			// TODO: Some operations will need to be processed right to left.
 			// TODO: Need an order in which binary operations are resolved.
 			new BinaryOperationConstructor(),
-			// new AssignConstructor(),
 			new BlockConstructor(),
 			new IfConstructor()
 	};
