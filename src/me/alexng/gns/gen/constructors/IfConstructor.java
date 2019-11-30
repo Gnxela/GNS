@@ -26,8 +26,7 @@ public class IfConstructor implements Constructor {
 		tokens.remove();
 
 		if (!tokens.next().matches(BracketToken.ROUND_OPEN)) {
-			// TODO: Better exception
-			throw new ParsingException(0, "Expected open bracket");
+			throw new ParsingException(keyword, "Expected open bracket");
 		}
 		tokens.remove();
 
@@ -43,14 +42,13 @@ public class IfConstructor implements Constructor {
 
 		Token expectedBlock = tokens.next();
 		if (!(expectedBlock instanceof BlockToken)) {
-			// TODO: Better exception
-			throw new ParsingException(0, "Expected block");
+			// TODO: Create expected, found exceptions
+			throw new ParsingException(0, "Expected block. Found ");
 		}
 		tokens.remove();
 
 		BlockToken block = (BlockToken) expectedBlock;
-		// TODO: Fill in start and end index
-		tokens.add(new IfToken(condition, block, keyword.getStartIndex(), 0));
+		tokens.add(new IfToken(condition, block, keyword.getStartIndex(), block.getEndIndex()));
 
 	}
 }

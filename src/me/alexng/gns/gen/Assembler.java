@@ -60,7 +60,7 @@ public class Assembler {
 			}
 			bucket.add(token);
 		}
-		// TODO: Better exception
-		throw new ParsingException(0, "Matching not found");
+		// TODO: Need to fix this index.
+		throw new ParsingException(0, "Matching token not found");
 	}
 }

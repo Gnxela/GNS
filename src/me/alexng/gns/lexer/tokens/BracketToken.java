@@ -83,8 +83,7 @@ public class BracketToken extends Token {
 				case '}':
 					return new BracketToken(Bracket.CURLY, Type.CLOSED, startIndex, endIndex);
 				default:
-					// TODO: Better exception.
-					throw new GNSException(0, "Invalid");
+					throw new GNSException(startIndex, endIndex, "Bracket generation failed");
 			}
 		}
 	}
