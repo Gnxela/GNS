@@ -49,9 +49,9 @@ public class Assembler {
 		while (tokens.hasNext()) {
 			Token token = tokens.next();
 			tokens.remove();
-			if (token.equals(open)) {
+			if (token.matches(open)) {
 				depth++;
-			} else if (token.equals(close)) {
+			} else if (token.matches(close)) {
 				if (depth == 1) {
 					return bucket;
 				} else {
