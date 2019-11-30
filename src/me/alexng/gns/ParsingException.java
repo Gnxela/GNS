@@ -2,29 +2,18 @@ package me.alexng.gns;
 
 import me.alexng.gns.lexer.Token;
 
-public class ParsingException extends Exception {
-
-	private int startIndex, endIndex;
+public class ParsingException extends GNSException {
 
 	public ParsingException(int startIndex, int endIndex, String message) {
-		super("Parsing error at index " + startIndex + ". Message: " + message);
-		this.startIndex = startIndex;
-		this.endIndex = endIndex;
+		super(startIndex, endIndex, message);
 	}
 
 	public ParsingException(Token token, String message) {
-		this(token.getStartIndex(), token.getEndIndex(), message);
+		super(token, message);
 	}
 
 	public ParsingException(int index, String message) {
-		this(index, index + 1, message);
+		super(index, message);
 	}
 
-	public int getStartIndex() {
-		return startIndex;
-	}
-
-	public int getEndIndex() {
-		return endIndex;
-	}
 }

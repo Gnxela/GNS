@@ -1,6 +1,6 @@
 package me.alexng.gns.lexer.tokens;
 
-import me.alexng.gns.RuntimeException;
+import me.alexng.gns.GNSException;
 import me.alexng.gns.env.Scope;
 import me.alexng.gns.env.Value;
 import me.alexng.gns.lexer.Token;
@@ -18,7 +18,7 @@ public class IfToken extends Token {
 	}
 
 	@Override
-	public Value execute(Scope scope) throws RuntimeException {
+	public Value execute(Scope scope) throws GNSException {
 		Value conditionValue = condition.execute(scope);
 		// TODO: Check condition value
 		block.execute(scope);

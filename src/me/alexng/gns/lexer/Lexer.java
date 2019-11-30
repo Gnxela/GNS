@@ -1,5 +1,6 @@
 package me.alexng.gns.lexer;
 
+import me.alexng.gns.GNSException;
 import me.alexng.gns.ParsingException;
 import me.alexng.gns.lexer.tokens.*;
 import me.alexng.gns.util.ArrayUtil;
@@ -26,7 +27,7 @@ public class Lexer {
 	 *
 	 * @throws ParsingException Thrown when the input is invalid.
 	 */
-	public static LinkedList<Token> tokenize(String input) throws ParsingException {
+	public static LinkedList<Token> tokenize(String input) throws GNSException {
 		LinkedList<Token> tokens = new LinkedList<>();
 		int index = trimWhitespace(input, 0);
 		while (index < input.length()) {

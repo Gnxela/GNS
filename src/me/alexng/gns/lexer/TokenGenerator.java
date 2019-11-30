@@ -1,6 +1,6 @@
 package me.alexng.gns.lexer;
 
-import me.alexng.gns.ParsingException;
+import me.alexng.gns.GNSException;
 
 public interface TokenGenerator {
 
@@ -18,6 +18,6 @@ public interface TokenGenerator {
 	 *
 	 * @return A token generated from {@code input}[{@code index}:{@code endIndex})
 	 */
-	Token generate(String input, int startIndex, int endIndex) throws ParsingException;
+	Token generate(String input, int startIndex, int endIndex) throws GNSException;
 
 }

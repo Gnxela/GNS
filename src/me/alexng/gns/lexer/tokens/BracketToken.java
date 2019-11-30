@@ -1,6 +1,6 @@
 package me.alexng.gns.lexer.tokens;
 
-import me.alexng.gns.ParsingException;
+import me.alexng.gns.GNSException;
 import me.alexng.gns.lexer.Token;
 import me.alexng.gns.lexer.TokenGenerator;
 
@@ -68,7 +68,7 @@ public class BracketToken extends Token {
 		}
 
 		@Override
-		public Token generate(String input, int startIndex, int endIndex) throws ParsingException {
+		public Token generate(String input, int startIndex, int endIndex) throws GNSException {
 			switch (input.charAt(startIndex)) {
 				case '(':
 					return new BracketToken(Bracket.ROUND, Type.OPEN, startIndex, endIndex);
@@ -84,7 +84,7 @@ public class BracketToken extends Token {
 					return new BracketToken(Bracket.CURLY, Type.CLOSED, startIndex, endIndex);
 				default:
 					// TODO: Better exception.
-					throw new ParsingException(0, "Invalid");
+					throw new GNSException(0, "Invalid");
 			}
 		}
 	}

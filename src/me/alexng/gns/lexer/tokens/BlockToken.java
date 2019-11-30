@@ -1,6 +1,6 @@
 package me.alexng.gns.lexer.tokens;
 
-import me.alexng.gns.RuntimeException;
+import me.alexng.gns.GNSException;
 import me.alexng.gns.env.Scope;
 import me.alexng.gns.env.Value;
 import me.alexng.gns.lexer.Token;
@@ -20,7 +20,7 @@ public class BlockToken extends Token {
 	}
 
 	@Override
-	public Value execute(Scope scope) throws RuntimeException {
+	public Value execute(Scope scope) throws GNSException {
 		Iterator<Token> iterator = tokens.iterator();
 		while (iterator.hasNext()) {
 			Token token = iterator.next();
