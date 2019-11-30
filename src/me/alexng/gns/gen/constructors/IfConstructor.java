@@ -25,7 +25,7 @@ public class IfConstructor implements Constructor {
 		KeywordToken keyword = (KeywordToken) tokens.next();
 		tokens.remove();
 
-		if (!tokens.next().equals(BracketToken.ROUND_OPEN)) {
+		if (!tokens.next().matches(BracketToken.ROUND_OPEN)) {
 			// TODO: Better exception
 			throw new ParsingException(0, "Expected open bracket");
 		}

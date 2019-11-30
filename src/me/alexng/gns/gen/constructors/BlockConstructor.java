@@ -14,7 +14,7 @@ public class BlockConstructor implements Constructor {
 
 	@Override
 	public boolean accepts(Token token) {
-		return BracketToken.CURLEY_OPEN.equals(token);
+		return BracketToken.CURLEY_OPEN.matches(token);
 	}
 
 	@Override

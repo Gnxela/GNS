@@ -17,6 +17,10 @@ public abstract class Token {
 		throw new RuntimeException(getStartIndex(), "This token (" + getClass().getSimpleName() + ") can not be run");
 	}
 
+	public boolean matches(Token token) {
+		return false;
+	}
+
 	public int getStartIndex() {
 		return startIndex;
 	}

@@ -23,13 +23,12 @@ public class BracketToken extends Token {
 	}
 
 	@Override
-	// TODO: Keep the equal function as object equals, and create a new function that checks for shallow equals
-	public boolean equals(Object obj) {
-		if (obj instanceof BracketToken) {
-			BracketToken b = (BracketToken) obj;
+	public boolean matches(Token token) {
+		if (token instanceof BracketToken) {
+			BracketToken b = (BracketToken) token;
 			return getType() == b.getType() && getBracket() == b.getBracket();
 		}
-		return super.equals(obj);
+		return super.equals(token);
 	}
 
 	private Bracket getBracket() {
