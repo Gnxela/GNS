@@ -1,6 +1,7 @@
 package me.alexng.gns.lexer.tokens;
 
-import me.alexng.gns.RuntimeException;
+import me.alexng.gns.GNSException;
+import me.alexng.gns.env.BooleanValue;
 import me.alexng.gns.env.Scope;
 import me.alexng.gns.env.Value;
 import me.alexng.gns.lexer.BinaryOperationToken;
@@ -14,9 +15,28 @@ public class EqualToken extends BinaryOperationToken {
 	}
 
 	@Override
-	public Value execute(Scope scope) throws RuntimeException {
-		// TODO: Implement when we do values
-		return new Value();
+	public Value execute(Scope scope) throws GNSException {
+		Value leftValue = getValue(getLeft(), scope);
+		Value rightValue = getValue(getRight(), scope);
+		if (leftValue.getType() != rightValue.getType()) {
+			return BooleanValue.FALSE;
+		}
+
+		switch (leftValue.getType()) {
+			case NULL:
+				return BooleanValue.TRUE;
+			case OBJECT:
+				// TODO: Check references
+			default:
+				return BooleanValue.valueOf(leftValue.getValue() == rightValue.getValue());
+		}
+	}
+
+	private Value getValue(Token token, Scope scope) throws GNSException {
+		if (token instanceof IdentifierToken) {
+			return scope.getVariable(((IdentifierToken) token).getName());
+		}
+		return token.execute(scope);
 	}
 
 	@Override

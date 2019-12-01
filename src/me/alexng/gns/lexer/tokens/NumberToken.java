@@ -1,5 +1,6 @@
 package me.alexng.gns.lexer.tokens;
 
+import me.alexng.gns.env.NumberValue;
 import me.alexng.gns.env.Scope;
 import me.alexng.gns.env.Value;
 import me.alexng.gns.lexer.Token;
@@ -7,18 +8,16 @@ import me.alexng.gns.lexer.TokenGenerator;
 
 public class NumberToken extends Token {
 
-	// TODO: I'm storing the value as a string here. Eventually we should change this (or keep it and just deal with it when we transform to Symbols)
-	private String value;
+	private NumberValue value;
 
 	private NumberToken(String value, int startIndex, int endIndex) {
 		super(startIndex, endIndex);
-		this.value = value;
+		this.value = new NumberValue(value);
 	}
 
 	@Override
 	public Value execute(Scope scope) {
-		// TODO: Input data
-		return new Value();
+		return value;
 	}
 
 	@Override

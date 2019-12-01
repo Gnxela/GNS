@@ -16,6 +16,10 @@ public class Scope {
 		variables.put(name, value);
 	}
 
+	public Value getVariable(String name) {
+		return variables.get(name);
+	}
+
 	@Override
 	public String toString() {
 		return variables.toString();

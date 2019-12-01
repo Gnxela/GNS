@@ -1,8 +1,30 @@
 package me.alexng.gns.env;
 
-public class Value {
+public abstract class Value {
 
-	public static final Value NULL = new Value();
+	public static final Value NULL = new Value(Type.NULL) {
+		@Override
+		public Object getValue() {
+			return null;
+		}
+	};
+	private Type type;
 
-	// TODO: Figure out how we want to store and work with values
+	public Value(Type type) {
+		this.type = type;
+	}
+
+	public abstract Object getValue();
+
+	public Type getType() {
+		return type;
+	}
+
+	public enum Type {
+		NULL,
+		BOOLEAN,
+		STRING,
+		NUMBER,
+		OBJECT;
+	}
 }
