@@ -9,10 +9,10 @@ import me.alexng.gns.util.StringUtil;
 
 public class IfToken extends Token {
 
-	private Token condition;
+	private ExpressionToken condition;
 	private BlockToken block;
 
-	public IfToken(Token condition, BlockToken block, int startIndex, int endIndex) {
+	public IfToken(ExpressionToken condition, BlockToken block, int startIndex, int endIndex) {
 		super(startIndex, endIndex);
 		this.condition = condition;
 		this.block = block;

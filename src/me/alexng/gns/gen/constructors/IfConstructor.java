@@ -2,15 +2,13 @@ package me.alexng.gns.gen.constructors;
 
 import me.alexng.gns.Keyword;
 import me.alexng.gns.ParsingException;
-import me.alexng.gns.gen.Assembler;
 import me.alexng.gns.gen.Constructor;
 import me.alexng.gns.lexer.Token;
 import me.alexng.gns.lexer.tokens.BlockToken;
-import me.alexng.gns.lexer.tokens.BracketToken;
+import me.alexng.gns.lexer.tokens.ExpressionToken;
 import me.alexng.gns.lexer.tokens.IfToken;
 import me.alexng.gns.lexer.tokens.KeywordToken;
 
-import java.util.LinkedList;
 import java.util.ListIterator;
 
 public class IfConstructor implements Constructor {
@@ -25,20 +23,8 @@ public class IfConstructor implements Constructor {
 		KeywordToken keyword = (KeywordToken) tokens.next();
 		tokens.remove();
 
-		if (!tokens.next().matches(BracketToken.ROUND_OPEN)) {
-			throw new ParsingException(keyword, "Expected open bracket");
-		}
+		ExpressionToken expression = (ExpressionToken) tokens.next();
 		tokens.remove();
-
-		LinkedList<Token> conditions = Assembler.matchTokens(tokens, BracketToken.ROUND_OPEN, BracketToken.ROUND_CLOSED);
-		Assembler.assemble(conditions);
-		if (conditions.size() != 1) {
-			if (conditions.size() == 0) {
-				throw new ParsingException(keyword.getStartIndex(), "Missing condition");
-			}
-			throw new ParsingException(conditions.get(1).getStartIndex(), "Invalid syntax");
-		}
-		Token condition = conditions.getFirst();
 
 		Token expectedBlock = tokens.next();
 		if (!(expectedBlock instanceof BlockToken)) {
@@ -48,7 +34,7 @@ public class IfConstructor implements Constructor {
 		tokens.remove();
 
 		BlockToken block = (BlockToken) expectedBlock;
-		tokens.add(new IfToken(condition, block, keyword.getStartIndex(), block.getEndIndex()));
+		tokens.add(new IfToken(expression, block, keyword.getStartIndex(), block.getEndIndex()));
 
 	}
 }

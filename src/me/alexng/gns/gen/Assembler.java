@@ -3,6 +3,7 @@ package me.alexng.gns.gen;
 import me.alexng.gns.ParsingException;
 import me.alexng.gns.gen.constructors.BinaryOperationConstructor;
 import me.alexng.gns.gen.constructors.BlockConstructor;
+import me.alexng.gns.gen.constructors.ExpressionConstructor;
 import me.alexng.gns.gen.constructors.IfConstructor;
 import me.alexng.gns.lexer.Token;
 
@@ -18,6 +19,7 @@ public class Assembler {
 	private static final Constructor[] CONSTRUCTORS = new Constructor[]{
 			// TODO: Some operations will need to be processed right to left.
 			// TODO: Need an order in which binary operations are resolved.
+			new ExpressionConstructor(),
 			new BinaryOperationConstructor(),
 			new BlockConstructor(),
 			new IfConstructor()

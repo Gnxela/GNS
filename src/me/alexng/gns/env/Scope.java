@@ -1,5 +1,8 @@
 package me.alexng.gns.env;
 
+import me.alexng.gns.RuntimeException;
+import me.alexng.gns.lexer.tokens.IdentifierToken;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -12,12 +15,16 @@ public class Scope {
 		variables = new HashMap<>();
 	}
 
-	public void setVariable(String name, Value value) {
-		variables.put(name, value);
+	public void setVariable(IdentifierToken identifierToken, Value value) {
+		variables.put(identifierToken.getName(), value);
 	}
 
-	public Value getVariable(String name) {
-		return variables.get(name);
+	public Value getVariable(IdentifierToken identifierToken) throws RuntimeException {
+		Value value = variables.get(identifierToken.getName());
+		if (value == null) {
+			throw new RuntimeException(identifierToken, "Undefined variable: " + identifierToken.getName());
+		}
+		return value;
 	}
 
 	@Override

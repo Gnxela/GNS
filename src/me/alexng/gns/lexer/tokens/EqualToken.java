@@ -34,7 +34,7 @@ public class EqualToken extends BinaryOperationToken {
 
 	private Value getValue(Token token, Scope scope) throws GNSException {
 		if (token instanceof IdentifierToken) {
-			return scope.getVariable(((IdentifierToken) token).getName());
+			return scope.getVariable(((IdentifierToken) token));
 		}
 		return token.execute(scope);
 	}

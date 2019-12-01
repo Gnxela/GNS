@@ -24,7 +24,7 @@ public class AssignToken extends BinaryOperationToken<IdentifierToken, Token> {
 	@Override
 	public Value execute(Scope scope) throws GNSException {
 		Value returnedValue = getRight().execute(scope);
-		scope.setVariable(getLeft().getName(), returnedValue);
+		scope.setVariable(getLeft(), returnedValue);
 		return returnedValue;
 	}
 
