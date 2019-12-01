@@ -23,7 +23,15 @@ public class NumberValue extends Value {
 
 	@Override
 	public Number getValue() {
-		return isInt ? intValue : doubleValue;
+		if (isInt) {
+			return intValue;
+		}
+		return doubleValue;
+	}
+
+	@Override
+	public String toString() {
+		return "<NumberValue " + getValue() + " >";
 	}
 
 	public boolean isInt() {

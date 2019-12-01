@@ -7,6 +7,11 @@ public abstract class Value {
 		public Object getValue() {
 			return null;
 		}
+
+		@Override
+		public String toString() {
+			return "<NullValue >";
+		}
 	};
 	private Type type;
 
@@ -15,6 +20,8 @@ public abstract class Value {
 	}
 
 	public abstract Object getValue();
+
+	public abstract String toString();
 
 	public Type getType() {
 		return type;
