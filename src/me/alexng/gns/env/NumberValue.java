@@ -29,11 +29,6 @@ public class NumberValue extends Value {
 		return doubleValue;
 	}
 
-	@Override
-	public String toString() {
-		return "<NumberValue " + getValue() + " >";
-	}
-
 	public boolean isInt() {
 		return isInt;
 	}

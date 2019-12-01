@@ -21,7 +21,9 @@ public abstract class Value {
 
 	public abstract Object getValue();
 
-	public abstract String toString();
+	public String toString() {
+		return getValue().toString();
+	}
 
 	public Type getType() {
 		return type;
