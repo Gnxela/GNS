@@ -35,6 +35,5 @@ public class IfConstructor implements Constructor {
 
 		BlockToken block = (BlockToken) expectedBlock;
 		tokens.add(new IfToken(expression, block, keyword.getStartIndex(), block.getEndIndex()));
-
 	}
 }
