@@ -10,9 +10,15 @@ public class Scope {
 
 	// TODO: Think about how we're storing this data. A map is a lot of overhead
 	private Map<String, Value> variables;
+	private Scope parent;
+
+	public Scope(Scope parent) {
+		this.variables = new HashMap<>();
+		this.parent = parent;
+	}
 
 	Scope() {
-		variables = new HashMap<>();
+		this(null);
 	}
 
 	public void setVariable(IdentifierToken identifierToken, Value value) {
@@ -22,7 +28,10 @@ public class Scope {
 	public Value getVariable(IdentifierToken identifierToken) throws RuntimeException {
 		Value value = variables.get(identifierToken.getName());
 		if (value == null) {
-			throw new RuntimeException(identifierToken, "Undefined variable: " + identifierToken.getName());
+			if (parent == null) {
+				throw new RuntimeException(identifierToken, "Undefined variable: " + identifierToken.getName());
+			}
+			return parent.getVariable(identifierToken);
 		}
 		return value;
 	}

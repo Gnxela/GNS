@@ -41,9 +41,8 @@ public class Script {
 	 * Runs the script. {@link #parse()} must be called before this.
 	 */
 	public void run() throws GNSException {
-		Scope globalScope = new Scope();
 		BlockToken globalBlock = new BlockToken(tokens, tokens.getFirst().getStartIndex(), tokens.getLast().getEndIndex());
-		globalBlock.executeBlock(globalScope);
+		Scope globalScope = globalBlock.executeBlock(null);
 		System.out.println(globalScope);
 	}
 
