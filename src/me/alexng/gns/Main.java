@@ -8,8 +8,9 @@ public class Main {
 		Script script = new Script(String.join("\n", new String[]{
 				"i = 0",
 				"if ((i == 0) == true) {",
-				"	if (i == 1) {",
+				"	if (i == 0) {",
 				"		j = 1",
+				"		i = 4",
 				"	}",
 				"	k = 2",
 				"}",

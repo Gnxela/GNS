@@ -22,7 +22,11 @@ public class Scope {
 	}
 
 	public void setVariable(IdentifierToken identifierToken, Value value) {
-		variables.put(identifierToken.getName(), value);
+		Scope scope = findScopeWithVariable(identifierToken);
+		if (scope == null) {
+			scope = this;
+		}
+		scope.setLocalVariable(identifierToken, value);
 	}
 
 	public Value getVariable(IdentifierToken identifierToken) throws RuntimeException {
@@ -34,6 +38,20 @@ public class Scope {
 			return parent.getVariable(identifierToken);
 		}
 		return value;
+	}
+
+	private void setLocalVariable(IdentifierToken identifierToken, Value value) {
+		variables.put(identifierToken.getName(), value);
+	}
+
+	private Scope findScopeWithVariable(IdentifierToken identifierToken) {
+		if (variables.containsKey(identifierToken.getName())) {
+			return this;
+		}
+		if (parent == null) {
+			return null;
+		}
+		return parent.findScopeWithVariable(identifierToken);
 	}
 
 	@Override
