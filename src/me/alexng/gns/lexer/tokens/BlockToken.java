@@ -18,6 +18,11 @@ public class BlockToken extends Token {
 		this.tokens = tokens;
 	}
 
+	/**
+	 * Executes the block.
+	 *
+	 * @return The local scope of the block after it has finished executing.
+	 */
 	public Scope executeBlock(Scope parentScope) throws GNSException {
 		Scope localScope = new Scope(parentScope);
 		Iterator<Token> iterator = tokens.iterator();
