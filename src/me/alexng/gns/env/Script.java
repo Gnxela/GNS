@@ -43,7 +43,7 @@ public class Script {
 	public void run() throws GNSException {
 		Scope globalScope = new Scope();
 		BlockToken globalBlock = new BlockToken(tokens, tokens.getFirst().getStartIndex(), tokens.getLast().getEndIndex());
-		globalBlock.execute(globalScope);
+		globalBlock.executeBlock(globalScope);
 		System.out.println(globalScope);
 	}
 

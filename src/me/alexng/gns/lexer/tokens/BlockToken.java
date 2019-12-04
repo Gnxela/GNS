@@ -19,8 +19,7 @@ public class BlockToken extends Token {
 		this.tokens = tokens;
 	}
 
-	@Override
-	public Value execute(Scope scope) throws GNSException {
+	public Value executeBlock(Scope scope) throws GNSException {
 		Iterator<Token> iterator = tokens.iterator();
 		while (iterator.hasNext()) {
 			Token token = iterator.next();

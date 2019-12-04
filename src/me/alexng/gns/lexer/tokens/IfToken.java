@@ -25,7 +25,7 @@ public class IfToken extends Token {
 			throw new RuntimeException(this, "If condition expected to be of type BOOLEAN, was type" + conditionValue.getType().toString());
 		}
 		if ((Boolean) conditionValue.getValue()) {
-			block.execute(scope);
+			block.executeBlock(scope);
 		}
 		return Value.NULL;
 	}
