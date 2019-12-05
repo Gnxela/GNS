@@ -8,11 +8,13 @@ import me.alexng.gns.lexer.Token;
 public class FunctionToken extends Token {
 
 	private IdentifierToken identifier;
+	private ParametersToken parameters;
 	private BlockToken block;
 
-	public FunctionToken(IdentifierToken identifier, BlockToken block, int startIndex, int endIndex) {
+	public FunctionToken(IdentifierToken identifier, ParametersToken parametersToken, BlockToken block, int startIndex, int endIndex) {
 		super(startIndex, endIndex);
 		this.identifier = identifier;
+		this.parameters = parametersToken;
 		this.block = block;
 	}
 

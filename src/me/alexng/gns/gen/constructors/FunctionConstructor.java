@@ -25,11 +25,12 @@ public class FunctionConstructor implements Constructor {
 
 		Token expectedParameters = tokens.next();
 		// TODO: Create parameter token
-		if (!(expectedParameters instanceof ExpressionToken)) {
+		if (!(expectedParameters instanceof ParametersToken)) {
 			// TODO: Create generic function for this.
 			throw new ParsingException(0, "Expected block. Found " + expectedParameters.getClass().getSimpleName());
 		}
 		tokens.remove();
+		ParametersToken parameters = (ParametersToken) expectedParameters;
 
 
 		Token expectedBlock = tokens.next();
@@ -40,6 +41,6 @@ public class FunctionConstructor implements Constructor {
 		tokens.remove();
 		BlockToken block = (BlockToken) expectedBlock;
 
-		tokens.add(new FunctionToken(identifier, block, keyword.getStartIndex(), block.getEndIndex()));
+		tokens.add(new FunctionToken(identifier, parameters, block, keyword.getStartIndex(), block.getEndIndex()));
 	}
 }
