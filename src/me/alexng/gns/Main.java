@@ -7,7 +7,7 @@ public class Main {
 	public static void main(String[] args) throws Exception {
 		Script script = new Script(String.join("\n", new String[]{
 				"i = 0",
-				"func test(i) {",
+				"func test(i, j, k) {",
 				"	if (i == 0) {",
 				"		j = 1",
 				"		i = 4",
