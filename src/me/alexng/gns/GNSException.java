@@ -20,6 +20,10 @@ public class GNSException extends Exception {
 		this(index, index + 1, message);
 	}
 
+	public void printErrorSource(String source) {
+		System.out.println(source.substring(startIndex, endIndex));
+	}
+
 	public int getStartIndex() {
 		return startIndex;
 	}
