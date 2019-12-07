@@ -14,6 +14,8 @@ public class Main {
 				"	}",
 				"	k = 2",
 				"}",
+				"test(0, 1, 2)",
+				"test(1, 2, 3)",
 				"m = 1"
 		}));
 		try {
