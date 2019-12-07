@@ -25,12 +25,12 @@ public class FunctionToken extends Token {
     }
 
     public Value executeFunction(Value[] values) throws RuntimeException {
-        // TODO: We should pass the global scope here instead of null.
         IdentifierToken[] identifiers = parameters.getParameters();
         if (identifiers.length != values.length) {
             throw new RuntimeException(this, "Invalid number of arguments. Expected: " + identifiers.length + ". Got: " + values.length);
         }
 
+        // TODO: We should pass the global scope here instead of null.
         Scope functionScope = new Scope(null);
         for (int i = 0; i < identifiers.length; i++) {
             functionScope.setVariable(identifiers[i], values[i]);

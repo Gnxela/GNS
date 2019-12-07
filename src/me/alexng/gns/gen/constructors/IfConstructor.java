@@ -8,6 +8,7 @@ import me.alexng.gns.lexer.tokens.BlockToken;
 import me.alexng.gns.lexer.tokens.ExpressionToken;
 import me.alexng.gns.lexer.tokens.IfToken;
 import me.alexng.gns.lexer.tokens.KeywordToken;
+import me.alexng.gns.util.ExceptionUtil;
 
 import java.util.ListIterator;
 
@@ -28,8 +29,7 @@ public class IfConstructor implements Constructor {
 
 		Token expectedBlock = tokens.next();
 		if (!(expectedBlock instanceof BlockToken)) {
-			// TODO: Create expected, found exceptions
-			throw new ParsingException(0, "Expected block. Found ");
+			throw ExceptionUtil.createParsingExpected("Invalid syntax", BlockToken.class, expectedBlock);
 		}
 		tokens.remove();
 

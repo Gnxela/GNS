@@ -44,7 +44,7 @@ public class Lexer {
 			}
 			index = trimWhitespace(input, index);
 			if (!generated) {
-				throw new ParsingException(index, "Did not generate"); // TODO: Count the lines.
+				throw new ParsingException(index, "Unexpected character");
 			}
 		}
 		return tokens;

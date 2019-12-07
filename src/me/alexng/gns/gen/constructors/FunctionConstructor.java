@@ -5,6 +5,7 @@ import me.alexng.gns.ParsingException;
 import me.alexng.gns.gen.Constructor;
 import me.alexng.gns.lexer.Token;
 import me.alexng.gns.lexer.tokens.*;
+import me.alexng.gns.util.ExceptionUtil;
 
 import java.util.ListIterator;
 
@@ -24,10 +25,8 @@ public class FunctionConstructor implements Constructor {
 		tokens.remove();
 
 		Token expectedParameters = tokens.next();
-		// TODO: Create parameter token
 		if (!(expectedParameters instanceof ParametersToken)) {
-			// TODO: Create generic function for this.
-			throw new ParsingException(0, "Expected block. Found " + expectedParameters.getClass().getSimpleName());
+			throw ExceptionUtil.createParsingExpected("Invalid syntax", ParametersToken.class, expectedParameters);
 		}
 		tokens.remove();
 		ParametersToken parameters = (ParametersToken) expectedParameters;
@@ -35,8 +34,7 @@ public class FunctionConstructor implements Constructor {
 
 		Token expectedBlock = tokens.next();
 		if (!(expectedBlock instanceof BlockToken)) {
-			// TODO: Create generic function for this.
-			throw new ParsingException(0, "Expected block. Found " + expectedBlock.getClass().getSimpleName());
+			throw ExceptionUtil.createParsingExpected("Invalid syntax", BlockToken.class, expectedBlock);
 		}
 		tokens.remove();
 		BlockToken block = (BlockToken) expectedBlock;
