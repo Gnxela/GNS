@@ -13,10 +13,10 @@ public class ExpressionToken extends Token {
 		this.expression = expression;
 	}
 
-    @Override
-    public Value execute(Scope scope) throws RuntimeException {
-        return expression.execute(scope);
-    }
+	@Override
+	public Value execute(Scope scope) throws RuntimeException {
+		return expression.execute(scope);
+	}
 
 	@Override
 	public String toString() {

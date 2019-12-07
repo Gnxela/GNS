@@ -17,16 +17,16 @@ public class IfToken extends Token {
 	}
 
 	@Override
-    public Value execute(Scope scope) throws RuntimeException {
-        Value conditionValue = condition.execute(scope);
-        if (conditionValue.getType() != Value.Type.BOOLEAN) {
-            throw new RuntimeException(this, "If condition expected to be of type BOOLEAN, was type" + conditionValue.getType().toString());
-        }
-        if ((Boolean) conditionValue.getValue()) {
-            block.executeBlock(scope);
-        }
-        return Value.NULL;
-    }
+	public Value execute(Scope scope) throws RuntimeException {
+		Value conditionValue = condition.execute(scope);
+		if (conditionValue.getType() != Value.Type.BOOLEAN) {
+			throw new RuntimeException(this, "If condition expected to be of type BOOLEAN, was type" + conditionValue.getType().toString());
+		}
+		if ((Boolean) conditionValue.getValue()) {
+			block.executeBlock(scope);
+		}
+		return Value.NULL;
+	}
 
 	@Override
 	public String toString() {

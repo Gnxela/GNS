@@ -25,8 +25,8 @@ public class AssignToken extends BinaryOperationToken<IdentifierToken, Token> {
         return returnedValue;
     }
 
-	@Override
-	public String toString() {
-		return isBound() ? "<Assign " + getLeft().toString() + " = " + getRight().toString() + ">" : "<Assign UNBOUND>";
-	}
+    @Override
+    public String toString() {
+        return isBound() ? "<Assign " + getLeft().toString() + " = " + getRight().toString() + ">" : "<Assign UNBOUND>";
+    }
 }
