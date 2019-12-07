@@ -33,6 +33,7 @@ public class FunctionCallConstructor implements Constructor {
 		LinkedList<Token> parameterTokens = Assembler.matchTokens(tokens, BracketToken.ROUND_OPEN, BracketToken.ROUND_CLOSED);
 		BracketToken openBracket = (BracketToken) parameterTokens.removeFirst();
 		BracketToken closeBracket = (BracketToken) parameterTokens.removeLast();
+		Assembler.assemble(parameterTokens);
 		checkFormat(parameterTokens);
 		Token[] parameters = grabValues(parameterTokens);
 

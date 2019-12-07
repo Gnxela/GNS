@@ -21,7 +21,7 @@ public class GNSException extends Exception {
 	}
 
 	public void printErrorSource(String source) {
-		System.out.println(source.substring(startIndex, endIndex));
+		System.err.println("Error at: " + source.substring(startIndex, endIndex));
 	}
 
 	public int getStartIndex() {

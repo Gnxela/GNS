@@ -7,16 +7,13 @@ public class Main {
 	public static void main(String[] args) throws Exception {
 		Script script = new Script(String.join("\n", new String[]{
 				"i = 0",
-				"func test(i, j, k) {",
-				"	if (i == 0) {",
-				"		j = 1",
-				"		i = 4",
+				"func test(i) {",
+				"	test(i + 1)",
+				"	if (i == 5) {",
+				"		i = 10",
 				"	}",
-				"	k = 2",
 				"}",
-				"test(10, 1, 2)",
-				"test(1, 2, 3)",
-				"m = (1 + 1)"
+				"test(0)",
 		}));
 		try {
 			script.parse();
