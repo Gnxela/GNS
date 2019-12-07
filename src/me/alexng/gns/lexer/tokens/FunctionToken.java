@@ -37,6 +37,7 @@ public class FunctionToken extends Token {
         }
 
         block.executeBlock(functionScope);
+        // TODO: Function return values
         return Value.NULL;
     }
 
