@@ -5,7 +5,7 @@ import me.alexng.gns.env.BooleanValue;
 import me.alexng.gns.env.Scope;
 import me.alexng.gns.env.Value;
 
-public class EqualToken extends BinaryOperationToken {
+public class EqualToken extends BinaryOperationToken<Token, Token> {
 
 	public EqualToken(int startIndex, int endIndex) {
 		super(startIndex, endIndex);
