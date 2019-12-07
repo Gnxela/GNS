@@ -5,7 +5,7 @@ import me.alexng.gns.ParsingException;
 import me.alexng.gns.gen.Assembler;
 import me.alexng.gns.lexer.Lexer;
 import me.alexng.gns.lexer.Token;
-import me.alexng.gns.lexer.tokens.BlockToken;
+import me.alexng.gns.tokens.BlockToken;
 
 import java.util.LinkedList;
 

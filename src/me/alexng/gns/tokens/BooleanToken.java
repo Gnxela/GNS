@@ -1,4 +1,4 @@
-package me.alexng.gns.lexer.tokens;
+package me.alexng.gns.tokens;
 
 import me.alexng.gns.RuntimeException;
 import me.alexng.gns.env.BooleanValue;

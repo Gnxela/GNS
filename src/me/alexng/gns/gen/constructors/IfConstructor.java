@@ -4,10 +4,10 @@ import me.alexng.gns.Keyword;
 import me.alexng.gns.ParsingException;
 import me.alexng.gns.gen.Constructor;
 import me.alexng.gns.lexer.Token;
-import me.alexng.gns.lexer.tokens.BlockToken;
-import me.alexng.gns.lexer.tokens.ExpressionToken;
-import me.alexng.gns.lexer.tokens.IfToken;
-import me.alexng.gns.lexer.tokens.KeywordToken;
+import me.alexng.gns.tokens.BlockToken;
+import me.alexng.gns.tokens.ExpressionToken;
+import me.alexng.gns.tokens.IfToken;
+import me.alexng.gns.tokens.KeywordToken;
 import me.alexng.gns.util.ExceptionUtil;
 
 import java.util.ListIterator;

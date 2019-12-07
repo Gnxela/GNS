@@ -1,4 +1,4 @@
-package me.alexng.gns.lexer.tokens;
+package me.alexng.gns.tokens;
 
 import me.alexng.gns.lexer.Token;
 

@@ -4,10 +4,10 @@ import me.alexng.gns.ParsingException;
 import me.alexng.gns.gen.Assembler;
 import me.alexng.gns.gen.Constructor;
 import me.alexng.gns.lexer.Token;
-import me.alexng.gns.lexer.tokens.BracketToken;
-import me.alexng.gns.lexer.tokens.CommaToken;
-import me.alexng.gns.lexer.tokens.FunctionCallToken;
-import me.alexng.gns.lexer.tokens.IdentifierToken;
+import me.alexng.gns.tokens.BracketToken;
+import me.alexng.gns.tokens.CommaToken;
+import me.alexng.gns.tokens.FunctionCallToken;
+import me.alexng.gns.tokens.IdentifierToken;
 
 import java.util.LinkedList;
 import java.util.List;

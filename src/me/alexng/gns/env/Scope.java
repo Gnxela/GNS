@@ -1,8 +1,8 @@
 package me.alexng.gns.env;
 
 import me.alexng.gns.RuntimeException;
-import me.alexng.gns.lexer.tokens.FunctionToken;
-import me.alexng.gns.lexer.tokens.IdentifierToken;
+import me.alexng.gns.tokens.FunctionToken;
+import me.alexng.gns.tokens.IdentifierToken;
 
 import java.util.HashMap;
 import java.util.LinkedList;

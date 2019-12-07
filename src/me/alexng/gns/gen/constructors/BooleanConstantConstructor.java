@@ -3,8 +3,8 @@ package me.alexng.gns.gen.constructors;
 import me.alexng.gns.Keyword;
 import me.alexng.gns.gen.Constructor;
 import me.alexng.gns.lexer.Token;
-import me.alexng.gns.lexer.tokens.BooleanToken;
-import me.alexng.gns.lexer.tokens.KeywordToken;
+import me.alexng.gns.tokens.BooleanToken;
+import me.alexng.gns.tokens.KeywordToken;
 
 import java.util.ListIterator;
 

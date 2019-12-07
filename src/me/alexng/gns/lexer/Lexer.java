@@ -2,7 +2,7 @@ package me.alexng.gns.lexer;
 
 import me.alexng.gns.GNSException;
 import me.alexng.gns.ParsingException;
-import me.alexng.gns.lexer.tokens.*;
+import me.alexng.gns.tokens.*;
 import me.alexng.gns.util.ArrayUtil;
 
 import java.util.LinkedList;

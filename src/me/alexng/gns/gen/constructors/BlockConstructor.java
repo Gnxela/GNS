@@ -4,8 +4,8 @@ import me.alexng.gns.ParsingException;
 import me.alexng.gns.gen.Assembler;
 import me.alexng.gns.gen.Constructor;
 import me.alexng.gns.lexer.Token;
-import me.alexng.gns.lexer.tokens.BlockToken;
-import me.alexng.gns.lexer.tokens.BracketToken;
+import me.alexng.gns.tokens.BlockToken;
+import me.alexng.gns.tokens.BracketToken;
 
 import java.util.LinkedList;
 import java.util.ListIterator;
