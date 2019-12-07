@@ -3,7 +3,6 @@ package me.alexng.gns.gen.constructors;
 import me.alexng.gns.Keyword;
 import me.alexng.gns.ParsingException;
 import me.alexng.gns.gen.Constructor;
-import me.alexng.gns.lexer.Token;
 import me.alexng.gns.tokens.*;
 import me.alexng.gns.util.ExceptionUtil;
 

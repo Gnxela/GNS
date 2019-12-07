@@ -1,7 +1,7 @@
 package me.alexng.gns.util;
 
 import me.alexng.gns.ParsingException;
-import me.alexng.gns.lexer.Token;
+import me.alexng.gns.tokens.Token;
 
 public class ExceptionUtil {
 

@@ -2,7 +2,7 @@ package me.alexng.gns.gen;
 
 import me.alexng.gns.ParsingException;
 import me.alexng.gns.gen.constructors.*;
-import me.alexng.gns.lexer.Token;
+import me.alexng.gns.tokens.Token;
 import me.alexng.gns.util.ExceptionUtil;
 
 import java.util.LinkedList;

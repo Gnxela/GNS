@@ -1,9 +1,5 @@
 package me.alexng.gns.tokens;
 
-import me.alexng.gns.GNSException;
-import me.alexng.gns.lexer.Token;
-import me.alexng.gns.lexer.TokenGenerator;
-
 public class BracketToken extends Token {
 
 	public static final BracketToken ROUND_OPEN = new BracketToken(Bracket.ROUND, Type.OPEN, 0, 0);
@@ -16,7 +12,7 @@ public class BracketToken extends Token {
 	private Bracket bracket;
 	private Type type;
 
-	private BracketToken(Bracket bracket, Type type, int startIndex, int endIndex) {
+	public BracketToken(Bracket bracket, Type type, int startIndex, int endIndex) {
 		super(startIndex, endIndex);
 		this.bracket = bracket;
 		this.type = type;
@@ -50,41 +46,5 @@ public class BracketToken extends Token {
 
 	public enum Bracket {
 		ROUND, SQUARE, CURLY
-	}
-
-	public static class Generator implements TokenGenerator {
-
-		private static final Character[] BRACKETS = new Character[]{'(', ')', '{', '}', '[', ']'};
-
-		@Override
-		public int accepts(String input, int index) {
-			char firstCharacter = input.charAt(index);
-			for (Character bracket : BRACKETS) {
-				if (firstCharacter == bracket) {
-					return index + 1;
-				}
-			}
-			return index;
-		}
-
-		@Override
-		public Token generate(String input, int startIndex, int endIndex) throws GNSException {
-			switch (input.charAt(startIndex)) {
-				case '(':
-					return new BracketToken(Bracket.ROUND, Type.OPEN, startIndex, endIndex);
-				case ')':
-					return new BracketToken(Bracket.ROUND, Type.CLOSED, startIndex, endIndex);
-				case '[':
-					return new BracketToken(Bracket.SQUARE, Type.OPEN, startIndex, endIndex);
-				case ']':
-					return new BracketToken(Bracket.SQUARE, Type.CLOSED, startIndex, endIndex);
-				case '{':
-					return new BracketToken(Bracket.CURLY, Type.OPEN, startIndex, endIndex);
-				case '}':
-					return new BracketToken(Bracket.CURLY, Type.CLOSED, startIndex, endIndex);
-				default:
-					throw new GNSException(startIndex, endIndex, "Bracket generation failed");
-			}
-		}
 	}
 }

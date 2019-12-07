@@ -2,8 +2,8 @@ package me.alexng.gns.gen.constructors;
 
 import me.alexng.gns.ParsingException;
 import me.alexng.gns.gen.Constructor;
-import me.alexng.gns.lexer.BinaryOperationToken;
-import me.alexng.gns.lexer.Token;
+import me.alexng.gns.tokens.BinaryOperationToken;
+import me.alexng.gns.tokens.Token;
 
 import java.util.ListIterator;
 

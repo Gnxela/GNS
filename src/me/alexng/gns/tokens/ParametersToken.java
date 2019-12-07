@@ -1,7 +1,5 @@
 package me.alexng.gns.tokens;
 
-import me.alexng.gns.lexer.Token;
-
 import java.util.Arrays;
 
 public class ParametersToken extends Token {

@@ -1,7 +1,7 @@
 package me.alexng.gns;
 
-import me.alexng.gns.lexer.Token;
 import me.alexng.gns.tokens.KeywordToken;
+import me.alexng.gns.tokens.Token;
 
 public enum Keyword {
 

@@ -2,7 +2,8 @@ package me.alexng.gns.lexer;
 
 import me.alexng.gns.GNSException;
 import me.alexng.gns.ParsingException;
-import me.alexng.gns.tokens.*;
+import me.alexng.gns.lexer.generators.*;
+import me.alexng.gns.tokens.Token;
 import me.alexng.gns.util.ArrayUtil;
 
 import java.util.LinkedList;
@@ -11,14 +12,14 @@ public class Lexer {
 
 	private static final Character[] WHITESPACE_CHARS = new Character[]{' ', '\t'};
 	private static final TokenGenerator[] generators = new TokenGenerator[]{
-			new EOLToken.Generator(),
-			new CommaToken.Generator(),
-			new BracketToken.Generator(),
-			new EqualToken.Generator(),
-			new AssignToken.Generator(),
-			new KeywordToken.Generator(),
-			new NumberToken.Generator(),
-			new IdentifierToken.Generator()
+			new EOLGenerator(),
+			new CommaGenerator(),
+			new BracketGenerator(),
+			new EqualGenerator(),
+			new AssignGenerator(),
+			new KeywordGenerator(),
+			new NumberGenerator(),
+			new IdentifierGenerator()
 	};
 
 	/**

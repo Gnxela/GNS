@@ -4,7 +4,6 @@ import me.alexng.gns.RuntimeException;
 import me.alexng.gns.env.BooleanValue;
 import me.alexng.gns.env.Scope;
 import me.alexng.gns.env.Value;
-import me.alexng.gns.lexer.Token;
 
 public class BooleanToken extends Token {
 

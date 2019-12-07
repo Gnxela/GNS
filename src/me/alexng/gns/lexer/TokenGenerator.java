@@ -1,6 +1,7 @@
 package me.alexng.gns.lexer;
 
 import me.alexng.gns.GNSException;
+import me.alexng.gns.tokens.Token;
 
 public interface TokenGenerator {
 

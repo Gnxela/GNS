@@ -4,7 +4,6 @@ import me.alexng.gns.Keyword;
 import me.alexng.gns.ParsingException;
 import me.alexng.gns.gen.Assembler;
 import me.alexng.gns.gen.Constructor;
-import me.alexng.gns.lexer.Token;
 import me.alexng.gns.tokens.*;
 
 import java.util.*;
