@@ -3,6 +3,7 @@ package me.alexng.gns.gen;
 import me.alexng.gns.ParsingException;
 import me.alexng.gns.gen.constructors.*;
 import me.alexng.gns.lexer.Token;
+import me.alexng.gns.util.ExceptionUtil;
 
 import java.util.LinkedList;
 import java.util.ListIterator;
@@ -50,8 +51,15 @@ public class Assembler {
 	public static LinkedList<Token> matchTokens(ListIterator<Token> tokens, Token open, Token close) throws ParsingException {
 		int depth = 1;
 		LinkedList<Token> bucket = new LinkedList<>();
+		Token first = tokens.next();
+		if (!first.matches(open)) {
+			throw ExceptionUtil.createParsingExpected("Invalid token", open, first);
+		}
+		tokens.remove();
+		bucket.add(first);
 		while (tokens.hasNext()) {
 			Token token = tokens.next();
+			bucket.add(token);
 			tokens.remove();
 			if (token.matches(open)) {
 				depth++;
@@ -62,9 +70,7 @@ public class Assembler {
 					depth--;
 				}
 			}
-			bucket.add(token);
 		}
-		// TODO: Need to fix this index.
-		throw new ParsingException(0, "Matching token not found");
+		throw new ParsingException(first, "Matching token not found");
 	}
 }

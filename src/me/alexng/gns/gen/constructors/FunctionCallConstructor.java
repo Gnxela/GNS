@@ -32,16 +32,15 @@ public class FunctionCallConstructor implements Constructor {
         // TODO: Anything but this
         tokens.previous();
         tokens.previous();
-        tokens.remove();
-        tokens.next();
-        tokens.remove();
+        tokens.remove(); // Remove the identifier token
 
         LinkedList<Token> parameterTokens = Assembler.matchTokens(tokens, BracketToken.ROUND_OPEN, BracketToken.ROUND_CLOSED);
+        BracketToken openBracket = (BracketToken) parameterTokens.removeFirst();
+        BracketToken closeBracket = (BracketToken) parameterTokens.removeLast();
         checkFormat(parameterTokens);
         Token[] parameters = grabValues(parameterTokens);
 
-        // TODO: Get end index
-        tokens.add(new FunctionCallToken(functionIdentifier, parameters, expectedOpenBracket.getStartIndex(), 0));
+        tokens.add(new FunctionCallToken(functionIdentifier, parameters, openBracket.getStartIndex(), closeBracket.getEndIndex()));
     }
 
     private Token[] grabValues(LinkedList<Token> parameterTokens) {

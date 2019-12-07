@@ -19,12 +19,11 @@ public class BlockConstructor implements Constructor {
 
 	@Override
 	public void construct(ListIterator<Token> tokens) throws ParsingException {
-		BracketToken openBracket = (BracketToken) tokens.next();
-		tokens.remove();
-
 		LinkedList<Token> blockTokens = Assembler.matchTokens(tokens, BracketToken.CURLEY_OPEN, BracketToken.CURLEY_CLOSED);
+		BracketToken openBracket = (BracketToken) blockTokens.removeFirst();
+		BracketToken closeBracket = (BracketToken) blockTokens.removeLast();
+
 		Assembler.assemble(blockTokens);
-		// TODO: Fill in start and end index
-		tokens.add(new BlockToken(blockTokens, openBracket.getStartIndex(), 0));
+		tokens.add(new BlockToken(blockTokens, openBracket.getStartIndex(), closeBracket.getEndIndex()));
 	}
 }

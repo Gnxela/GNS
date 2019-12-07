@@ -19,18 +19,17 @@ public class ExpressionConstructor implements Constructor {
 
 	@Override
 	public void construct(ListIterator<Token> tokens) throws ParsingException {
-		BracketToken openBracket = (BracketToken) tokens.next();
-		tokens.remove();
-
 		LinkedList<Token> expressionTokens = Assembler.matchTokens(tokens, BracketToken.ROUND_OPEN, BracketToken.ROUND_CLOSED);
+		BracketToken openBracket = (BracketToken) expressionTokens.removeFirst();
+		BracketToken closeBracket = (BracketToken) expressionTokens.removeLast();
+
 		Assembler.assemble(expressionTokens);
 		if (expressionTokens.size() == 0) {
 			throw new ParsingException(openBracket, "Empty brackets");
 		}
 		if (expressionTokens.size() != 1) {
-			throw new ParsingException(expressionTokens.get(1), "Invalid syntax");
+			throw new ParsingException(expressionTokens.get(0), "Invalid syntax");
 		}
-		// TODO: Set end index
-		tokens.add(new ExpressionToken(expressionTokens.getFirst(), openBracket.getStartIndex(), 0));
+		tokens.add(new ExpressionToken(expressionTokens.getFirst(), openBracket.getStartIndex(), closeBracket.getEndIndex()));
 	}
 }

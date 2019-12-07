@@ -21,19 +21,14 @@ public class ParametersConstructor implements Constructor {
         Token functionKeyword = tokens.next(); // func token
         tokens.next(); // identifier (hopefully, checked in function constructor)
 
-        Token expectedOpenBracket = tokens.next();
-        if (!BracketToken.ROUND_OPEN.matches(expectedOpenBracket)) {
-            throw new ParsingException(functionKeyword, "Missing parameters");
-        }
-        tokens.remove();
-
         LinkedList<Token> parameterTokens = Assembler.matchTokens(tokens, BracketToken.ROUND_OPEN, BracketToken.ROUND_CLOSED);
+        BracketToken openBracket = (BracketToken) parameterTokens.removeFirst();
+        BracketToken closeBracket = (BracketToken) parameterTokens.removeLast();
         checkFormat(parameterTokens);
         IdentifierToken[] parameters = grabIdentifiers(parameterTokens);
         checkCollision(parameters);
 
-        // TODO: Get end index
-        tokens.add(new ParametersToken(parameters, expectedOpenBracket.getStartIndex(), 0));
+        tokens.add(new ParametersToken(parameters, openBracket.getStartIndex(), closeBracket.getEndIndex()));
     }
 
     private void checkCollision(IdentifierToken[] parameters) throws ParsingException {
