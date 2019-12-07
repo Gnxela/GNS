@@ -50,12 +50,23 @@ public class Scope {
 	}
 
 	public FunctionToken getFunction(IdentifierToken identifierToken) throws RuntimeException {
+		FunctionToken function = getLocalFunction(identifierToken);
+		if (function != null) {
+			return function;
+		}
+		if (parent != null) {
+			return parent.getFunction(identifierToken);
+		}
+		throw new RuntimeException(identifierToken, "Function not found");
+	}
+
+	private FunctionToken getLocalFunction(IdentifierToken identifierToken) {
 		for (FunctionToken functionToken : functions) {
 			if (functionToken.getName().equals(identifierToken.getName())) {
 				return functionToken;
 			}
 		}
-		throw new RuntimeException(identifierToken, "Function not found");
+		return null;
 	}
 
 	private void setLocalVariable(IdentifierToken identifierToken, Value value) {

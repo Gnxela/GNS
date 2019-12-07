@@ -31,6 +31,7 @@ public class FunctionToken extends Token {
 
 		// TODO: We should pass the global scope here instead of null.
 		Scope functionScope = new Scope(null);
+		functionScope.addFunction(this);
 		for (int i = 0; i < identifiers.length; i++) {
 			functionScope.setVariable(identifiers[i], values[i]);
 		}
