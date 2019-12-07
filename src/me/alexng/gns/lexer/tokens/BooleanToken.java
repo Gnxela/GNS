@@ -1,6 +1,6 @@
 package me.alexng.gns.lexer.tokens;
 
-import me.alexng.gns.GNSException;
+import me.alexng.gns.RuntimeException;
 import me.alexng.gns.env.BooleanValue;
 import me.alexng.gns.env.Scope;
 import me.alexng.gns.env.Value;
@@ -18,10 +18,10 @@ public class BooleanToken extends Token {
 		this.bool = bool ? BooleanValue.TRUE : BooleanValue.FALSE; // Calculate it once
 	}
 
-	@Override
-	public Value execute(Scope scope) throws GNSException {
-		return bool;
-	}
+    @Override
+    public Value execute(Scope scope) throws RuntimeException {
+        return bool;
+    }
 
 	@Override
 	public String toString() {

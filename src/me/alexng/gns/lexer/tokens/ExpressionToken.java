@@ -1,6 +1,6 @@
 package me.alexng.gns.lexer.tokens;
 
-import me.alexng.gns.GNSException;
+import me.alexng.gns.RuntimeException;
 import me.alexng.gns.env.Scope;
 import me.alexng.gns.env.Value;
 import me.alexng.gns.lexer.Token;
@@ -14,10 +14,10 @@ public class ExpressionToken extends Token {
 		this.expression = expression;
 	}
 
-	@Override
-	public Value execute(Scope scope) throws GNSException {
-		return expression.execute(scope);
-	}
+    @Override
+    public Value execute(Scope scope) throws RuntimeException {
+        return expression.execute(scope);
+    }
 
 	@Override
 	public String toString() {

@@ -49,6 +49,15 @@ public class Scope {
 		functions.add(functionToken);
 	}
 
+	public FunctionToken getFunction(IdentifierToken identifierToken) throws RuntimeException {
+		for (FunctionToken functionToken : functions) {
+			if (functionToken.getName().equals(identifierToken.getName())) {
+				return functionToken;
+			}
+		}
+		throw new RuntimeException(identifierToken, "Function not found");
+	}
+
 	private void setLocalVariable(IdentifierToken identifierToken, Value value) {
 		variables.put(identifierToken.getName(), value);
 	}

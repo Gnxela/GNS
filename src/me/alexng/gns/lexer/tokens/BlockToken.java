@@ -1,6 +1,6 @@
 package me.alexng.gns.lexer.tokens;
 
-import me.alexng.gns.GNSException;
+import me.alexng.gns.RuntimeException;
 import me.alexng.gns.env.Scope;
 import me.alexng.gns.lexer.Token;
 import me.alexng.gns.util.StringUtil;
@@ -23,7 +23,7 @@ public class BlockToken extends Token {
 	 *
 	 * @return The local scope of the block after it has finished executing.
 	 */
-	public Scope executeBlock(Scope parentScope) throws GNSException {
+	public Scope executeBlock(Scope parentScope) throws RuntimeException {
 		Scope localScope = new Scope(parentScope);
 		Iterator<Token> iterator = tokens.iterator();
 		while (iterator.hasNext()) {

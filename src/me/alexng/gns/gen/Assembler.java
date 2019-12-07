@@ -16,7 +16,9 @@ public class Assembler {
 	private static final Constructor[] CONSTRUCTORS = new Constructor[]{
 			// TODO: Some operations will need to be processed right to left.
 			// TODO: Need an order in which binary operations are resolved.
+			// TODO: Maybe combine ParametersConstructor, ExpressionConstructor and FunctionCallConstructor
 			new ParametersConstructor(),
+			new FunctionCallConstructor(),
 			new BooleanConstantConstructor(),
 			new ExpressionConstructor(),
 			new BinaryOperationConstructor(),

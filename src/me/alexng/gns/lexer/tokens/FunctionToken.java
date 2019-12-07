@@ -1,6 +1,6 @@
 package me.alexng.gns.lexer.tokens;
 
-import me.alexng.gns.GNSException;
+import me.alexng.gns.RuntimeException;
 import me.alexng.gns.env.Scope;
 import me.alexng.gns.env.Value;
 import me.alexng.gns.lexer.Token;
@@ -14,18 +14,38 @@ public class FunctionToken extends Token {
 	public FunctionToken(IdentifierToken identifier, ParametersToken parametersToken, BlockToken block, int startIndex, int endIndex) {
 		super(startIndex, endIndex);
 		this.identifier = identifier;
-		this.parameters = parametersToken;
-		this.block = block;
-	}
+        this.parameters = parametersToken;
+        this.block = block;
+    }
 
-	@Override
-	public Value execute(Scope scope) throws GNSException {
-		scope.addFunction(this);
-		return Value.NULL;
-	}
+    @Override
+    public Value execute(Scope scope) throws RuntimeException {
+        scope.addFunction(this);
+        return Value.NULL;
+    }
 
-	@Override
-	public String toString() {
-		return "<Function " + identifier.getName() + ">";
-	}
+    public Value executeFunction(Value[] values) throws RuntimeException {
+        // TODO: We should pass the global scope here instead of null.
+        IdentifierToken[] identifiers = parameters.getParameters();
+        if (identifiers.length != values.length) {
+            throw new RuntimeException(this, "Invalid number of arguments. Expected: " + identifiers.length + ". Got: " + values.length);
+        }
+
+        Scope functionScope = new Scope(null);
+        for (int i = 0; i < identifiers.length; i++) {
+            functionScope.setVariable(identifiers[i], values[i]);
+        }
+
+        block.executeBlock(functionScope);
+        return Value.NULL;
+    }
+
+    public String getName() {
+        return identifier.getName();
+    }
+
+    @Override
+    public String toString() {
+        return "<Function " + identifier.getName() + ">";
+    }
 }

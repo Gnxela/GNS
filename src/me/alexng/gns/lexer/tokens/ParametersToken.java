@@ -13,6 +13,10 @@ public class ParametersToken extends Token {
         this.parameters = parameters;
     }
 
+    public IdentifierToken[] getParameters() {
+        return parameters;
+    }
+
     @Override
     public String toString() {
         return "<ParametersToken " + Arrays.toString(parameters) + ">";
