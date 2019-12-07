@@ -13,8 +13,8 @@ public class EqualToken extends BinaryOperationToken<Token, Token> {
 
 	@Override
 	public Value execute(Scope scope) throws RuntimeException {
-		Value leftValue = getValue(getLeft(), scope);
-		Value rightValue = getValue(getRight(), scope);
+		Value leftValue = getLeft().execute(scope);
+		Value rightValue = getRight().execute(scope);
 		if (leftValue.getType() != rightValue.getType()) {
 			return BooleanValue.FALSE;
 		}
@@ -27,13 +27,6 @@ public class EqualToken extends BinaryOperationToken<Token, Token> {
 			default:
 				return BooleanValue.valueOf(leftValue.getValue() == rightValue.getValue());
 		}
-	}
-
-	private Value getValue(Token token, Scope scope) throws RuntimeException {
-		if (token instanceof IdentifierToken) {
-			return scope.getVariable(((IdentifierToken) token));
-		}
-		return token.execute(scope);
 	}
 
 	@Override
