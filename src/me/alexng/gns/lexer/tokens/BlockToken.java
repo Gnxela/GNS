@@ -5,7 +5,6 @@ import me.alexng.gns.env.Scope;
 import me.alexng.gns.lexer.Token;
 import me.alexng.gns.util.StringUtil;
 
-import java.util.Iterator;
 import java.util.List;
 
 public class BlockToken extends Token {
@@ -25,9 +24,7 @@ public class BlockToken extends Token {
 	 */
 	public Scope executeBlock(Scope parentScope) throws RuntimeException {
 		Scope localScope = new Scope(parentScope);
-		Iterator<Token> iterator = tokens.iterator();
-		while (iterator.hasNext()) {
-			Token token = iterator.next();
+		for (Token token : tokens) {
 			if (token instanceof EOLToken) {
 				continue;
 			}
