@@ -16,7 +16,7 @@ public class Main {
 				"}",
 				"test(10, 1, 2)",
 				"test(1, 2, 3)",
-				"m = 1"
+				"m = (1 + 1)"
 		}));
 		try {
 			script.parse();

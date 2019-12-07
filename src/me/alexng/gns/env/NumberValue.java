@@ -11,6 +11,18 @@ public class NumberValue extends Value {
 		parseValue(value);
 	}
 
+	public NumberValue(int value) {
+		super(Type.NUMBER);
+		this.isInt = true;
+		this.intValue = value;
+	}
+
+	public NumberValue(double value) {
+		super(Type.NUMBER);
+		this.isInt = false;
+		this.doubleValue = value;
+	}
+
 	private void parseValue(String value) {
 		if (value.contains(".")) {
 			doubleValue = Double.parseDouble(value);

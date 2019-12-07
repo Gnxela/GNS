@@ -15,6 +15,7 @@ public class Lexer {
 			new EOLGenerator(),
 			new CommaGenerator(),
 			new BracketGenerator(),
+			new AdditionGenerator(),
 			new EqualGenerator(),
 			new AssignGenerator(),
 			new KeywordGenerator(),
