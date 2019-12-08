@@ -23,10 +23,10 @@ public class FunctionToken extends Token {
 		return Value.NULL;
 	}
 
-	public Value executeFunction(Value[] values) throws RuntimeException {
+	public Value executeFunction(Token caller, Value[] values) throws RuntimeException {
 		IdentifierToken[] identifiers = parameters.getParameters();
 		if (identifiers.length != values.length) {
-			throw new RuntimeException(this, "Invalid number of arguments. Expected: " + identifiers.length + ". Got: " + values.length);
+			throw new RuntimeException(caller, "Invalid number of arguments. Expected: " + identifiers.length + ". Got: " + values.length);
 		}
 
 		// TODO: We should pass the global scope here instead of null.

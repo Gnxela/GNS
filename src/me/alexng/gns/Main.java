@@ -12,8 +12,13 @@ public class Main {
 				"		i = 10",
 				"	}",
 				"}",
-				"test(i)",
+				"func foo(i, j) {",
+				"	test(i)",
+				"	test(j)",
+				"}",
+				"foo(i, 0)",
 		}));
+		// TODO: This program should not fail. Need to figure out how I want to allow functions to call other functions on the same scope as them.
 		try {
 			script.parse();
 			script.run();

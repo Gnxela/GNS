@@ -18,7 +18,7 @@ public class FunctionCallToken extends Token {
     @Override
     public Value execute(Scope scope) throws RuntimeException {
         Value[] values = grabValues(scope);
-        return scope.getFunction(functionIdentifier).executeFunction(values);
+        return scope.getFunction(functionIdentifier).executeFunction(this, values);
     }
 
     private Value[] grabValues(Scope scope) throws RuntimeException {
