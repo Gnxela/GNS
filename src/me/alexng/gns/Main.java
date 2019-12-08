@@ -8,12 +8,11 @@ public class Main {
 		Script script = new Script(String.join("\n", new String[]{
 				"i = 0",
 				"func test(i) {",
-				"	test(i + 1)",
 				"	if (i == 5) {",
 				"		i = 10",
 				"	}",
 				"}",
-				"test(0)",
+				"test(i)",
 		}));
 		try {
 			script.parse();

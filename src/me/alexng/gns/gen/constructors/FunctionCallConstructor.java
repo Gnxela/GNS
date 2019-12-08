@@ -20,6 +20,9 @@ public class FunctionCallConstructor implements Constructor {
 	public void construct(ListIterator<Token> tokens) throws ParsingException {
 		IdentifierToken functionIdentifier = (IdentifierToken) tokens.next();
 
+		if (!tokens.hasNext()) {
+			return;
+		}
 		Token expectedOpenBracket = tokens.next();
 		if (!BracketToken.ROUND_OPEN.matches(expectedOpenBracket)) {
 			tokens.previous();
