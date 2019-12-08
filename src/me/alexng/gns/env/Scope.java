@@ -2,6 +2,7 @@ package me.alexng.gns.env;
 
 import me.alexng.gns.RuntimeException;
 import me.alexng.gns.tokens.FunctionToken;
+import me.alexng.gns.tokens.IdentifiedToken;
 import me.alexng.gns.tokens.IdentifierToken;
 
 import java.util.HashMap;
@@ -49,20 +50,20 @@ public class Scope {
 		functions.add(functionToken);
 	}
 
-	public FunctionToken getFunction(IdentifierToken identifierToken) throws RuntimeException {
-		FunctionToken function = getLocalFunction(identifierToken);
+	public FunctionToken getFunction(IdentifiedToken identifiedToken) throws RuntimeException {
+		FunctionToken function = getLocalFunction(identifiedToken);
 		if (function != null) {
 			return function;
 		}
 		if (parent != null) {
-			return parent.getFunction(identifierToken);
+			return parent.getFunction(identifiedToken);
 		}
-		throw new RuntimeException(identifierToken, "Function not found");
+		throw new RuntimeException(identifiedToken, "Function not found");
 	}
 
-	private FunctionToken getLocalFunction(IdentifierToken identifierToken) {
+	private FunctionToken getLocalFunction(IdentifiedToken identifierToken) {
 		for (FunctionToken functionToken : functions) {
-			if (functionToken.getName().equals(identifierToken.getName())) {
+			if (functionToken.getName().equals(identifierToken.getIdentifier().getName())) {
 				return functionToken;
 			}
 		}

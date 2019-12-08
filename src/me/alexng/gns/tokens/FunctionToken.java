@@ -4,15 +4,13 @@ import me.alexng.gns.RuntimeException;
 import me.alexng.gns.env.Scope;
 import me.alexng.gns.env.Value;
 
-public class FunctionToken extends Token {
+public class FunctionToken extends IdentifiedToken {
 
-	private IdentifierToken identifier;
 	private ParametersToken parameters;
 	private BlockToken block;
 
 	public FunctionToken(IdentifierToken identifier, ParametersToken parametersToken, BlockToken block, int startIndex, int endIndex) {
-		super(startIndex, endIndex);
-		this.identifier = identifier;
+		super(identifier, startIndex, endIndex);
 		this.parameters = parametersToken;
 		this.block = block;
 	}
@@ -42,11 +40,11 @@ public class FunctionToken extends Token {
 	}
 
 	public String getName() {
-		return identifier.getName();
+		return getIdentifier().getName();
 	}
 
 	@Override
 	public String toString() {
-		return "<Function " + identifier.getName() + ">";
+		return "<Function " + getIdentifier().getName() + ">";
 	}
 }

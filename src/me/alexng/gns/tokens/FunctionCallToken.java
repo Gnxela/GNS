@@ -4,21 +4,19 @@ import me.alexng.gns.RuntimeException;
 import me.alexng.gns.env.Scope;
 import me.alexng.gns.env.Value;
 
-public class FunctionCallToken extends Token {
+public class FunctionCallToken extends IdentifiedToken {
 
-    private IdentifierToken functionIdentifier;
     private Token[] valueTokens;
 
-    public FunctionCallToken(IdentifierToken functionIdentifier, Token[] valueTokens, int startIndex, int endIndex) {
-        super(startIndex, endIndex);
-        this.functionIdentifier = functionIdentifier;
+    public FunctionCallToken(IdentifierToken identifier, Token[] valueTokens, int startIndex, int endIndex) {
+        super(identifier, startIndex, endIndex);
         this.valueTokens = valueTokens;
     }
 
     @Override
     public Value execute(Scope scope) throws RuntimeException {
         Value[] values = grabValues(scope);
-        return scope.getFunction(functionIdentifier).executeFunction(this, values);
+        return scope.getFunction(this).executeFunction(this, values);
     }
 
     private Value[] grabValues(Scope scope) throws RuntimeException {
