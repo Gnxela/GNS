@@ -23,13 +23,7 @@ public class FunctionConstructor implements Constructor {
 		IdentifierToken identifier = (IdentifierToken) tokens.next();
 		tokens.remove();
 
-		Token expectedParameters = tokens.next();
-		if (!(expectedParameters instanceof ParametersToken)) {
-			throw ExceptionUtil.createParsingExpected("Invalid syntax", ParametersToken.class, expectedParameters);
-		}
-		tokens.remove();
-		ParametersToken parameters = (ParametersToken) expectedParameters;
-
+		ParametersToken parameters = ParametersConstructor.construct(tokens);
 
 		Token expectedBlock = tokens.next();
 		if (!(expectedBlock instanceof BlockToken)) {
