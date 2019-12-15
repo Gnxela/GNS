@@ -58,7 +58,7 @@ public class Scope {
 		if (parent != null) {
 			return parent.getFunction(identifiedToken);
 		}
-		throw new RuntimeException(identifiedToken, "Function not found");
+		throw new RuntimeException(identifiedToken, "Function not found: " + identifiedToken.getIdentifier().getName());
 	}
 
 	private FunctionToken getLocalFunction(IdentifiedToken identifierToken) {
