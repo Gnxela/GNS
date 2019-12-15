@@ -6,10 +6,10 @@ public class Main {
 
 	public static void main(String[] args) throws Exception {
 		Script script = new Script(String.join("\n", new String[]{
-				"i = 0",
-				"func test(i) {",
-				"	if (i == 5) {",
-				"		i = 10",
+				"i = 5",
+				"func test(j) {",
+				"	if (j == 5) {",
+				"		i = 2",
 				"	}",
 				"}",
 				"func foo(i, j) {",

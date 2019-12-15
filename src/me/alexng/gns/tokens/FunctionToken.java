@@ -21,17 +21,17 @@ public class FunctionToken extends IdentifiedToken {
 		return Value.NULL;
 	}
 
-	public Value executeFunction(Token caller, Value[] values) throws RuntimeException {
+	public Value executeFunction(FunctionCallToken caller, Scope callerScope, Value[] values) throws RuntimeException {
 		IdentifierToken[] identifiers = parameters.getParameters();
 		if (identifiers.length != values.length) {
 			throw new RuntimeException(caller, "Invalid number of arguments. Expected: " + identifiers.length + ". Got: " + values.length);
 		}
 
-		// TODO: We should pass the global scope here instead of null.
-		Scope functionScope = new Scope(null);
+		// TODO: We need to pass the object scope here if created inside a class (which has a parent global scope).
+		Scope functionScope = new Scope(callerScope.getGlobalScope());
 		functionScope.addFunction(this);
 		for (int i = 0; i < identifiers.length; i++) {
-			functionScope.setVariable(identifiers[i], values[i]);
+			functionScope.setLocalVariable(identifiers[i], values[i]);
 		}
 
 		block.executeBlock(functionScope);

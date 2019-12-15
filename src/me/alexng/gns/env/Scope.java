@@ -70,7 +70,7 @@ public class Scope {
 		return null;
 	}
 
-	private void setLocalVariable(IdentifierToken identifierToken, Value value) {
+	public void setLocalVariable(IdentifierToken identifierToken, Value value) {
 		variables.put(identifierToken.getName(), value);
 	}
 
@@ -82,6 +82,13 @@ public class Scope {
 			return null;
 		}
 		return parent.findScopeWithVariable(identifierToken);
+	}
+	
+	public Scope getGlobalScope() {
+		if (isGlobalScope()) {
+			return this;
+		}
+		return parent.getGlobalScope();
 	}
 	
 	private boolean isGlobalScope() {
