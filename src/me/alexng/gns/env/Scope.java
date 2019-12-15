@@ -83,6 +83,10 @@ public class Scope {
 		}
 		return parent.findScopeWithVariable(identifierToken);
 	}
+	
+	private boolean isGlobalScope() {
+		return parent == null;
+	}
 
 	@Override
 	public String toString() {
