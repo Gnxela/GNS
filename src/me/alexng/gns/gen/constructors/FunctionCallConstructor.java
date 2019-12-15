@@ -28,9 +28,8 @@ public class FunctionCallConstructor implements Constructor {
 			tokens.previous();
 			return;
 		}
-		// TODO: Anything but this
-		tokens.previous();
-		tokens.previous();
+		tokens.previous(); // Go back to the open bracket
+		tokens.previous(); // Go back to the identifier
 		tokens.remove(); // Remove the identifier token
 
 		LinkedList<Token> parameterTokens = Assembler.matchTokens(tokens, BracketToken.ROUND_OPEN, BracketToken.ROUND_CLOSED);
