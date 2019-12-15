@@ -24,7 +24,6 @@ public class Main {
 			script.run();
 		} catch (GNSException e) {
 			e.printStackTrace();
-			e.printErrorSource(script.getSource());
 		}
 	}
 }

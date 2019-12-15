@@ -7,17 +7,9 @@ public class GNSException extends Exception {
 	private int startIndex, endIndex;
 
 	public GNSException(int startIndex, int endIndex, String message) {
-		super("Parsing error at index " + startIndex + ". Message: " + message);
+		super(message);
 		this.startIndex = startIndex;
 		this.endIndex = endIndex;
-	}
-
-	public GNSException(Token token, String message) {
-		this(token.getStartIndex(), token.getEndIndex(), message);
-	}
-
-	public GNSException(int index, String message) {
-		this(index, index + 1, message);
 	}
 
 	public void printErrorSource(String source) {
@@ -31,5 +23,4 @@ public class GNSException extends Exception {
 	public int getEndIndex() {
 		return endIndex;
 	}
-
 }
