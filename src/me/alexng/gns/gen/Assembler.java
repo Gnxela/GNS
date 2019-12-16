@@ -19,11 +19,11 @@ public class Assembler {
 			// TODO: Need an order in which binary operations are resolved.
 			// TODO: Maybe combine ParametersConstructor, ExpressionConstructor and FunctionCallConstructor
 			new BooleanConstantConstructor(),
-			new BinaryOperationConstructor(),
 			new BlockConstructor(),
 			new FunctionConstructor(),
 			new FunctionCallConstructor(),
 			new ExpressionConstructor(),
+			new BinaryOperationConstructor(),
 			new IfConstructor()
 	};
 
