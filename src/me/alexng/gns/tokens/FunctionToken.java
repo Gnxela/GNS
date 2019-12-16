@@ -3,6 +3,7 @@ package me.alexng.gns.tokens;
 import me.alexng.gns.RuntimeException;
 import me.alexng.gns.env.Scope;
 import me.alexng.gns.env.Value;
+import me.alexng.gns.util.StringUtil;
 
 public class FunctionToken extends IdentifiedToken {
 
@@ -45,6 +46,8 @@ public class FunctionToken extends IdentifiedToken {
 
 	@Override
 	public String toString() {
-		return "<Function " + getIdentifier().getName() + ">";
+		return "<Function " + getIdentifier().getName()
+				+ StringUtil.indent(block.toString())
+				+ ">";
 	}
 }

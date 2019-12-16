@@ -3,6 +3,7 @@ package me.alexng.gns.tokens;
 import me.alexng.gns.RuntimeException;
 import me.alexng.gns.env.Scope;
 import me.alexng.gns.env.Value;
+import me.alexng.gns.util.StringUtil;
 
 public class FunctionCallToken extends IdentifiedToken {
 
@@ -29,6 +30,6 @@ public class FunctionCallToken extends IdentifiedToken {
 
     @Override
     public String toString() {
-        return "<FunctionCall >";
+        return "<FunctionCall " + getIdentifier().getName() + "(" + StringUtil.unrollArrayInline(valueTokens) + ")>";
     }
 }
