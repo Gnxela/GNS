@@ -21,14 +21,23 @@ public class BlockToken extends Token {
 	 * @return The local scope of the block after it has finished executing.
 	 */
 	public Scope executeBlock(Scope parentScope) throws RuntimeException {
-		Scope localScope = new Scope(parentScope);
+		Scope localScope = parentScope.createChildScope();
+		executeBlockWithScope(localScope);
+		return localScope;
+	}
+
+	/**
+	 * Executes the block with the given local scope.
+	 *
+	 * @param localScope the local scope that the block will be executed with
+	 */
+	public void executeBlockWithScope(Scope localScope) throws RuntimeException {
 		for (Token token : tokens) {
 			if (token instanceof EOLToken) {
 				continue;
 			}
 			token.execute(localScope);
 		}
-		return localScope;
 	}
 
 	@Override

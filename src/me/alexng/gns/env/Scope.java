@@ -17,14 +17,18 @@ public class Scope {
 	private List<FunctionToken> functions;
 	private Scope parent;
 
-	public Scope(Scope parent) {
+	private Scope(Scope parent) {
 		this.variables = new HashMap<>();
 		this.functions = new LinkedList<>();
 		this.parent = parent;
 	}
 
-	Scope() {
-		this(null);
+	public static Scope createGlobalScope() {
+		return new Scope(null);
+	}
+
+	public Scope createChildScope() {
+		return new Scope(this);
 	}
 
 	public void setVariable(IdentifierToken identifierToken, Value value) {
@@ -84,6 +88,7 @@ public class Scope {
 		return parent.findScopeWithVariable(identifierToken);
 	}
 
+	// TODO: We should probably just store the global scope rather than finding it each time
 	public Scope getGlobalScope() {
 		if (isGlobalScope()) {
 			return this;

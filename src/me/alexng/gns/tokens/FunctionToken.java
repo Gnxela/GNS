@@ -29,7 +29,7 @@ public class FunctionToken extends IdentifiedToken {
 		}
 
 		// TODO: We need to pass the object scope here if created inside a class (which has a parent global scope).
-		Scope functionScope = new Scope(callerScope.getGlobalScope());
+		Scope functionScope = callerScope.getGlobalScope().createChildScope();
 		functionScope.addFunction(this);
 		for (int i = 0; i < identifiers.length; i++) {
 			functionScope.setLocalVariable(identifiers[i], values[i]);
