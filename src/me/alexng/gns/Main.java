@@ -2,23 +2,13 @@ package me.alexng.gns;
 
 import me.alexng.gns.env.Script;
 
+import java.io.File;
+
 public class Main {
 
 	public static void main(String[] args) throws Exception {
-		Script script = new Script(String.join("\n", new String[]{
-				"i = 5",
-				"func test(j) {",
-				"	if (j == 5) {",
-				"		i = (i + 1)",
-				"	}",
-				"}",
-				"func foo(i, j) {",
-				"	test(i)",
-				"	test(i)",
-				"	test(j)",
-				"}",
-				"foo(i, 0)",
-		}));
+		File scriptFile = new File("scripts/testScript.gns");
+		Script script = new Script(scriptFile);
 		try {
 			script.parse();
 			script.run();

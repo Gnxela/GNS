@@ -6,16 +6,30 @@ import me.alexng.gns.gen.Assembler;
 import me.alexng.gns.lexer.Lexer;
 import me.alexng.gns.tokens.BlockToken;
 import me.alexng.gns.tokens.Token;
+import me.alexng.gns.util.FileUtil;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.LinkedList;
 
 public class Script {
 
 	private String source;
+	private String file;
 	private LinkedList<Token> tokens;
 
-	public Script(String source) {
+	private Script(String source, String file) {
 		this.source = source;
+		this.file = file;
+	}
+
+	public Script(String source) {
+		// TODO: BEtter name than null.
+		this(source, "<NULL>");
+	}
+
+	public Script(File sourceFile) throws IOException {
+		this(FileUtil.readFile(sourceFile), sourceFile.getPath());
 	}
 
 	/**

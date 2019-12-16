@@ -1,0 +1,12 @@
+i = 5
+func test(j) {
+    if (j == 5) {
+		i = (i + 1)
+	}
+}
+func foo(i, j) {
+	test(i)
+	test(i)
+	test(j)
+}
+foo(i, 0)
