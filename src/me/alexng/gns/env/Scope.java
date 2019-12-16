@@ -15,12 +15,19 @@ public class Scope {
 	// TODO: Think about how we're storing this data. A map is a lot of overhead
 	private Map<String, Value> variables;
 	private List<FunctionToken> functions;
-	private Scope parent;
+	private Scope parentScope;
+	private Scope globalScope;
 
-	private Scope(Scope parent) {
+	private Scope(Scope parentScope, Scope globalScope) {
 		this.variables = new HashMap<>();
 		this.functions = new LinkedList<>();
-		this.parent = parent;
+		this.parentScope = parentScope;
+		this.globalScope = globalScope;
+	}
+
+	private Scope(Scope parentScope) {
+		this(parentScope, null);
+		this.globalScope = this;
 	}
 
 	public static Scope createGlobalScope() {
@@ -28,7 +35,7 @@ public class Scope {
 	}
 
 	public Scope createChildScope() {
-		return new Scope(this);
+		return new Scope(this, globalScope);
 	}
 
 	public void setVariable(IdentifierToken identifierToken, Value value) {
@@ -42,10 +49,10 @@ public class Scope {
 	public Value getVariable(IdentifierToken identifierToken) throws RuntimeException {
 		Value value = variables.get(identifierToken.getName());
 		if (value == null) {
-			if (parent == null) {
+			if (parentScope == null) {
 				throw new RuntimeException(identifierToken, "Undefined variable: " + identifierToken.getName());
 			}
-			return parent.getVariable(identifierToken);
+			return parentScope.getVariable(identifierToken);
 		}
 		return value;
 	}
@@ -59,8 +66,8 @@ public class Scope {
 		if (function != null) {
 			return function;
 		}
-		if (parent != null) {
-			return parent.getFunction(identifiedToken);
+		if (parentScope != null) {
+			return parentScope.getFunction(identifiedToken);
 		}
 		throw new RuntimeException(identifiedToken, "Function not found: " + identifiedToken.getIdentifier().getName());
 	}
@@ -82,22 +89,18 @@ public class Scope {
 		if (variables.containsKey(identifierToken.getName())) {
 			return this;
 		}
-		if (parent == null) {
+		if (parentScope == null) {
 			return null;
 		}
-		return parent.findScopeWithVariable(identifierToken);
+		return parentScope.findScopeWithVariable(identifierToken);
 	}
 
-	// TODO: We should probably just store the global scope rather than finding it each time
 	public Scope getGlobalScope() {
-		if (isGlobalScope()) {
-			return this;
-		}
-		return parent.getGlobalScope();
+		return globalScope;
 	}
 
 	private boolean isGlobalScope() {
-		return parent == null;
+		return parentScope == null;
 	}
 
 	@Override
