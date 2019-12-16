@@ -7,23 +7,23 @@ import me.alexng.gns.env.Value;
 
 public class BooleanToken extends Token {
 
-    private BooleanValue bool;
+	private BooleanValue bool;
 
-    // TODO: Think about merging this class and number class into a general constant value class.
-    //  I can't think of many reasons why we wouldn't.
+	// TODO: Think about merging this class and number class into a general constant value class.
+	//  I can't think of many reasons why we wouldn't.
 
-    public BooleanToken(boolean bool, int startIndex, int endIndex) {
-        super(startIndex, endIndex);
-        this.bool = bool ? BooleanValue.TRUE : BooleanValue.FALSE; // Calculate it once
-    }
+	public BooleanToken(boolean bool, int startIndex, int endIndex) {
+		super(startIndex, endIndex);
+		this.bool = bool ? BooleanValue.TRUE : BooleanValue.FALSE; // Calculate it once
+	}
 
-    @Override
-    public Value execute(Scope scope) throws RuntimeException {
-        return bool;
-    }
+	@Override
+	public Value execute(Scope scope) throws RuntimeException {
+		return bool;
+	}
 
-    @Override
-    public String toString() {
-        return "<BooleanToken " + bool.getValue().toString() + ">";
-    }
+	@Override
+	public String toString() {
+		return "<BooleanToken " + bool.getValue().toString() + ">";
+	}
 }

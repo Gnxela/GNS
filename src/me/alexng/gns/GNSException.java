@@ -1,7 +1,5 @@
 package me.alexng.gns;
 
-import me.alexng.gns.tokens.Token;
-
 public class GNSException extends Exception {
 
 	private int startIndex, endIndex;

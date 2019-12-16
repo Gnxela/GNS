@@ -83,14 +83,14 @@ public class Scope {
 		}
 		return parent.findScopeWithVariable(identifierToken);
 	}
-	
+
 	public Scope getGlobalScope() {
 		if (isGlobalScope()) {
 			return this;
 		}
 		return parent.getGlobalScope();
 	}
-	
+
 	private boolean isGlobalScope() {
 		return parent == null;
 	}
