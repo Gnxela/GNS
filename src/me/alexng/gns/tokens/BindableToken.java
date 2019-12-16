@@ -1,11 +1,13 @@
 package me.alexng.gns.tokens;
 
+import me.alexng.gns.FileIndex;
+
 public abstract class BindableToken extends Token {
 
 	private boolean bound = false;
 
-	protected BindableToken(int startIndex, int endIndex) {
-		super(startIndex, endIndex);
+	protected BindableToken(FileIndex fileIndex) {
+		super(fileIndex);
 	}
 
 	public void bind() {

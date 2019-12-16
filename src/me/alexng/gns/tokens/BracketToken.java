@@ -1,19 +1,21 @@
 package me.alexng.gns.tokens;
 
+import me.alexng.gns.FileIndex;
+
 public class BracketToken extends Token {
 
-	public static final BracketToken ROUND_OPEN = new BracketToken(Bracket.ROUND, Type.OPEN, 0, 0);
-	public static final BracketToken ROUND_CLOSED = new BracketToken(Bracket.ROUND, Type.CLOSED, 0, 0);
-	public static final BracketToken CURLEY_OPEN = new BracketToken(Bracket.CURLY, Type.OPEN, 0, 0);
-	public static final BracketToken CURLEY_CLOSED = new BracketToken(Bracket.CURLY, Type.CLOSED, 0, 0);
-	public static final BracketToken SQUARE_OPEN = new BracketToken(Bracket.SQUARE, Type.OPEN, 0, 0);
-	public static final BracketToken SQUARE_CLOSED = new BracketToken(Bracket.SQUARE, Type.CLOSED, 0, 0);
+	public static final BracketToken ROUND_OPEN = new BracketToken(Bracket.ROUND, Type.OPEN, FileIndex.NULL_INDEX);
+	public static final BracketToken ROUND_CLOSED = new BracketToken(Bracket.ROUND, Type.CLOSED, FileIndex.NULL_INDEX);
+	public static final BracketToken CURLEY_OPEN = new BracketToken(Bracket.CURLY, Type.OPEN, FileIndex.NULL_INDEX);
+	public static final BracketToken CURLEY_CLOSED = new BracketToken(Bracket.CURLY, Type.CLOSED, FileIndex.NULL_INDEX);
+	public static final BracketToken SQUARE_OPEN = new BracketToken(Bracket.SQUARE, Type.OPEN, FileIndex.NULL_INDEX);
+	public static final BracketToken SQUARE_CLOSED = new BracketToken(Bracket.SQUARE, Type.CLOSED, FileIndex.NULL_INDEX);
 
 	private Bracket bracket;
 	private Type type;
 
-	public BracketToken(Bracket bracket, Type type, int startIndex, int endIndex) {
-		super(startIndex, endIndex);
+	public BracketToken(Bracket bracket, Type type, FileIndex fileIndex) {
+		super(fileIndex);
 		this.bracket = bracket;
 		this.type = type;
 	}

@@ -2,23 +2,22 @@ package me.alexng.gns;
 
 public class GNSException extends Exception {
 
-	private int startIndex, endIndex;
+	private FileIndex fileIndex;
 
-	public GNSException(int startIndex, int endIndex, String message) {
+	public GNSException(FileIndex fileIndex, String message) {
 		super(message);
-		this.startIndex = startIndex;
-		this.endIndex = endIndex;
+		this.fileIndex = fileIndex;
 	}
 
 	public void printErrorSource(String source) {
-		System.err.println("Error at: " + source.substring(startIndex, endIndex));
+		System.err.println("Error at: " + fileIndex.substring(source));
 	}
 
 	public int getStartIndex() {
-		return startIndex;
+		return fileIndex.getStartIndex();
 	}
 
 	public int getEndIndex() {
-		return endIndex;
+		return fileIndex.getEndIndex();
 	}
 }

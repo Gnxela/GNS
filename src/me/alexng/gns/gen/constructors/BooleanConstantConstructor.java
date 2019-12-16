@@ -19,6 +19,6 @@ public class BooleanConstantConstructor implements Constructor {
 	public void construct(ListIterator<Token> tokens) {
 		KeywordToken keywordToken = (KeywordToken) tokens.next();
 		tokens.remove();
-		tokens.add(new BooleanToken(keywordToken.getKeyword() == Keyword.TRUE, keywordToken.getStartIndex(), keywordToken.getEndIndex()));
+		tokens.add(new BooleanToken(keywordToken.getKeyword() == Keyword.TRUE, keywordToken.getFileIndex()));
 	}
 }

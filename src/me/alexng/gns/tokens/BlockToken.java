@@ -1,5 +1,6 @@
 package me.alexng.gns.tokens;
 
+import me.alexng.gns.FileIndex;
 import me.alexng.gns.RuntimeException;
 import me.alexng.gns.env.Scope;
 import me.alexng.gns.util.StringUtil;
@@ -10,8 +11,8 @@ public class BlockToken extends Token {
 
 	private List<Token> tokens;
 
-	public BlockToken(List<Token> tokens, int startIndex, int endIndex) {
-		super(startIndex, endIndex);
+	public BlockToken(List<Token> tokens, FileIndex fileIndex) {
+		super(fileIndex);
 		this.tokens = tokens;
 	}
 

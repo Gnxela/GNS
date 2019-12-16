@@ -1,5 +1,6 @@
 package me.alexng.gns.gen.constructors;
 
+import me.alexng.gns.FileIndex;
 import me.alexng.gns.Keyword;
 import me.alexng.gns.ParsingException;
 import me.alexng.gns.gen.Constructor;
@@ -30,6 +31,6 @@ public class IfConstructor implements Constructor {
 		tokens.remove();
 
 		BlockToken block = (BlockToken) expectedBlock;
-		tokens.add(new IfToken(expression, block, keyword.getStartIndex(), block.getEndIndex()));
+		tokens.add(new IfToken(expression, block, FileIndex.openClose(keyword, block)));
 	}
 }

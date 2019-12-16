@@ -1,5 +1,6 @@
 package me.alexng.gns.lexer.generators;
 
+import me.alexng.gns.FileIndex;
 import me.alexng.gns.lexer.TokenGenerator;
 import me.alexng.gns.tokens.EOLToken;
 import me.alexng.gns.tokens.Token;
@@ -15,7 +16,7 @@ public class EOLGenerator implements TokenGenerator {
 	}
 
 	@Override
-	public Token generate(String input, int startIndex, int endIndex) {
-		return new EOLToken(startIndex, endIndex);
+	public Token generate(String input, FileIndex fileIndex) {
+		return new EOLToken(fileIndex);
 	}
 }

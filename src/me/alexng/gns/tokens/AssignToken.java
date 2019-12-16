@@ -1,5 +1,6 @@
 package me.alexng.gns.tokens;
 
+import me.alexng.gns.FileIndex;
 import me.alexng.gns.ParsingException;
 import me.alexng.gns.RuntimeException;
 import me.alexng.gns.env.Scope;
@@ -7,8 +8,8 @@ import me.alexng.gns.env.Value;
 
 public class AssignToken extends BinaryOperationToken<IdentifierToken, Token> {
 
-	public AssignToken(int startIndex, int endIndex) {
-		super(startIndex, endIndex);
+	public AssignToken(FileIndex fileIndex) {
+		super(fileIndex);
 	}
 
 	@Override

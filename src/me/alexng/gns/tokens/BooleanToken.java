@@ -1,5 +1,6 @@
 package me.alexng.gns.tokens;
 
+import me.alexng.gns.FileIndex;
 import me.alexng.gns.RuntimeException;
 import me.alexng.gns.env.BooleanValue;
 import me.alexng.gns.env.Scope;
@@ -12,8 +13,8 @@ public class BooleanToken extends Token {
 	// TODO: Think about merging this class and number class into a general constant value class.
 	//  I can't think of many reasons why we wouldn't.
 
-	public BooleanToken(boolean bool, int startIndex, int endIndex) {
-		super(startIndex, endIndex);
+	public BooleanToken(boolean bool, FileIndex fileIndex) {
+		super(fileIndex);
 		this.bool = bool ? BooleanValue.TRUE : BooleanValue.FALSE; // Calculate it once
 	}
 

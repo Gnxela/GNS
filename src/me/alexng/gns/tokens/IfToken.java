@@ -1,5 +1,6 @@
 package me.alexng.gns.tokens;
 
+import me.alexng.gns.FileIndex;
 import me.alexng.gns.RuntimeException;
 import me.alexng.gns.env.Scope;
 import me.alexng.gns.env.Value;
@@ -10,8 +11,8 @@ public class IfToken extends Token {
 	private ExpressionToken condition;
 	private BlockToken block;
 
-	public IfToken(ExpressionToken condition, BlockToken block, int startIndex, int endIndex) {
-		super(startIndex, endIndex);
+	public IfToken(ExpressionToken condition, BlockToken block, FileIndex fileIndex) {
+		super(fileIndex);
 		this.condition = condition;
 		this.block = block;
 	}

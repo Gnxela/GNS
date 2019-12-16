@@ -1,16 +1,16 @@
 package me.alexng.gns.tokens;
 
+import me.alexng.gns.FileIndex;
 import me.alexng.gns.RuntimeException;
 import me.alexng.gns.env.Scope;
 import me.alexng.gns.env.Value;
 
 public abstract class Token {
 
-	private int startIndex, endIndex;
+	private FileIndex fileIndex;
 
-	protected Token(int startIndex, int endIndex) {
-		this.startIndex = startIndex;
-		this.endIndex = endIndex;
+	protected Token(FileIndex fileIndex) {
+		this.fileIndex = fileIndex;
 	}
 
 	public Value execute(Scope scope) throws RuntimeException {
@@ -21,12 +21,8 @@ public abstract class Token {
 		return false;
 	}
 
-	public int getStartIndex() {
-		return startIndex;
-	}
-
-	public int getEndIndex() {
-		return endIndex;
+	public FileIndex getFileIndex() {
+		return fileIndex;
 	}
 
 	@Override

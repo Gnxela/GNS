@@ -1,5 +1,6 @@
 package me.alexng.gns.lexer;
 
+import me.alexng.gns.FileIndex;
 import me.alexng.gns.GNSException;
 import me.alexng.gns.ParsingException;
 import me.alexng.gns.lexer.generators.*;
@@ -27,9 +28,10 @@ public class Lexer {
 	 * Takes an input string and returns a list of tokens that represent that string.
 	 * Output from this function must be sent to {@link me.alexng.gns.gen.Assembler#assemble(LinkedList)} before being executed.
 	 *
+	 * @param file the file from which the input was loaded
 	 * @throws ParsingException Thrown when the input is invalid.
 	 */
-	public static LinkedList<Token> tokenize(String input) throws GNSException {
+	public static LinkedList<Token> tokenize(String input, String file) throws GNSException {
 		LinkedList<Token> tokens = new LinkedList<>();
 		int index = trimWhitespace(input, 0);
 		while (index < input.length()) {
@@ -39,14 +41,14 @@ public class Lexer {
 				if (newIndex <= index) {
 					continue;
 				}
-				tokens.add(generator.generate(input, index, newIndex));
+				tokens.add(generator.generate(input, new FileIndex(file, index, newIndex)));
 				index = newIndex;
 				generated = true;
 				break;
 			}
 			index = trimWhitespace(input, index);
 			if (!generated) {
-				throw new ParsingException(index, "Unexpected character");
+				throw new ParsingException(new FileIndex(file, index, index + 1), "Unexpected character");
 			}
 		}
 		return tokens;

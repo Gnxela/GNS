@@ -1,13 +1,14 @@
 package me.alexng.gns.tokens;
 
+import me.alexng.gns.FileIndex;
 import me.alexng.gns.Keyword;
 
 public class KeywordToken extends Token {
 
 	private Keyword keyword;
 
-	public KeywordToken(Keyword keyword, int startIndex, int endIndex) {
-		super(startIndex, endIndex);
+	public KeywordToken(Keyword keyword, FileIndex fileIndex) {
+		super(fileIndex);
 		this.keyword = keyword;
 	}
 

@@ -1,5 +1,6 @@
 package me.alexng.gns.gen.constructors;
 
+import me.alexng.gns.FileIndex;
 import me.alexng.gns.Keyword;
 import me.alexng.gns.ParsingException;
 import me.alexng.gns.gen.Constructor;
@@ -32,6 +33,6 @@ public class FunctionConstructor implements Constructor {
 		tokens.remove();
 		BlockToken block = (BlockToken) expectedBlock;
 
-		tokens.add(new FunctionToken(identifier, parameters, block, keyword.getStartIndex(), block.getEndIndex()));
+		tokens.add(new FunctionToken(identifier, parameters, block, FileIndex.openClose(keyword, block)));
 	}
 }

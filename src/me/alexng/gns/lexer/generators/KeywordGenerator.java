@@ -1,5 +1,6 @@
 package me.alexng.gns.lexer.generators;
 
+import me.alexng.gns.FileIndex;
 import me.alexng.gns.Keyword;
 import me.alexng.gns.ParsingException;
 import me.alexng.gns.lexer.TokenGenerator;
@@ -19,13 +20,13 @@ public class KeywordGenerator implements TokenGenerator {
 	}
 
 	@Override
-	public Token generate(String input, int startIndex, int endIndex) throws ParsingException {
-		String key = input.substring(startIndex, endIndex);
+	public Token generate(String input, FileIndex fileIndex) throws ParsingException {
+		String key = fileIndex.substring(input);
 		for (Keyword keyword : Keyword.values()) {
 			if (keyword.getKeyword().equals(key)) {
-				return new KeywordToken(keyword, startIndex, endIndex);
+				return new KeywordToken(keyword, fileIndex);
 			}
 		}
-		throw new ParsingException(startIndex, "Keyword unrecognised");
+		throw new ParsingException(fileIndex, "Keyword unrecognised");
 	}
 }

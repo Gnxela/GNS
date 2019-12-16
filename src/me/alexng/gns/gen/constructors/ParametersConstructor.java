@@ -1,5 +1,6 @@
 package me.alexng.gns.gen.constructors;
 
+import me.alexng.gns.FileIndex;
 import me.alexng.gns.ParsingException;
 import me.alexng.gns.gen.Assembler;
 import me.alexng.gns.tokens.*;
@@ -10,13 +11,14 @@ public class ParametersConstructor {
 
 	public static ParametersToken construct(ListIterator<Token> tokens) throws ParsingException {
 		LinkedList<Token> parameterTokens = Assembler.matchTokens(tokens, BracketToken.ROUND_OPEN, BracketToken.ROUND_CLOSED);
-		BracketToken openBracket = (BracketToken) parameterTokens.removeFirst();
-		BracketToken closeBracket = (BracketToken) parameterTokens.removeLast();
+		FileIndex fileIndex = FileIndex.wrap(parameterTokens);
+		parameterTokens.removeFirst();
+		parameterTokens.removeLast();
 		checkFormat(parameterTokens);
 		IdentifierToken[] parameters = grabIdentifiers(parameterTokens);
 		checkCollision(parameters);
 
-		return new ParametersToken(parameters, openBracket.getStartIndex(), closeBracket.getEndIndex());
+		return new ParametersToken(parameters, fileIndex);
 	}
 
 	private static void checkCollision(IdentifierToken[] parameters) throws ParsingException {

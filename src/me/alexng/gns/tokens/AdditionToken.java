@@ -1,5 +1,6 @@
 package me.alexng.gns.tokens;
 
+import me.alexng.gns.FileIndex;
 import me.alexng.gns.ParsingException;
 import me.alexng.gns.RuntimeException;
 import me.alexng.gns.env.NumberValue;
@@ -8,8 +9,8 @@ import me.alexng.gns.env.Value;
 
 public class AdditionToken extends BinaryOperationToken<Token, Token> {
 
-	public AdditionToken(int startIndex, int endIndex) {
-		super(startIndex, endIndex);
+	public AdditionToken(FileIndex fileIndex) {
+		super(fileIndex);
 	}
 
 	@Override

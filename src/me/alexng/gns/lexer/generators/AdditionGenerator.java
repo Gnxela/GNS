@@ -1,5 +1,6 @@
 package me.alexng.gns.lexer.generators;
 
+import me.alexng.gns.FileIndex;
 import me.alexng.gns.lexer.TokenGenerator;
 import me.alexng.gns.tokens.AdditionToken;
 import me.alexng.gns.tokens.Token;
@@ -14,7 +15,7 @@ public class AdditionGenerator implements TokenGenerator {
 	}
 
 	@Override
-	public Token generate(String input, int startIndex, int endIndex) {
-		return new AdditionToken(startIndex, endIndex);
+	public Token generate(String input, FileIndex fileIndex) {
+		return new AdditionToken(fileIndex);
 	}
 }

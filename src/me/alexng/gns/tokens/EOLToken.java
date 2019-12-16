@@ -1,9 +1,11 @@
 package me.alexng.gns.tokens;
 
+import me.alexng.gns.FileIndex;
+
 public class EOLToken extends Token {
 
-	public EOLToken(int startIndex, int endIndex) {
-		super(startIndex, endIndex);
+	public EOLToken(FileIndex fileIndex) {
+		super(fileIndex);
 	}
 
 	@Override

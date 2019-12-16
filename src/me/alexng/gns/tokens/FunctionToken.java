@@ -1,5 +1,6 @@
 package me.alexng.gns.tokens;
 
+import me.alexng.gns.FileIndex;
 import me.alexng.gns.RuntimeException;
 import me.alexng.gns.env.Scope;
 import me.alexng.gns.env.Value;
@@ -10,8 +11,8 @@ public class FunctionToken extends IdentifiedToken {
 	private ParametersToken parameters;
 	private BlockToken block;
 
-	public FunctionToken(IdentifierToken identifier, ParametersToken parametersToken, BlockToken block, int startIndex, int endIndex) {
-		super(identifier, startIndex, endIndex);
+	public FunctionToken(IdentifierToken identifier, ParametersToken parametersToken, BlockToken block, FileIndex fileIndex) {
+		super(identifier, fileIndex);
 		this.parameters = parametersToken;
 		this.block = block;
 	}

@@ -1,5 +1,6 @@
 package me.alexng.gns.gen.constructors;
 
+import me.alexng.gns.FileIndex;
 import me.alexng.gns.ParsingException;
 import me.alexng.gns.gen.Assembler;
 import me.alexng.gns.gen.Constructor;
@@ -39,7 +40,7 @@ public class FunctionCallConstructor implements Constructor {
 		checkFormat(parameterTokens);
 		Token[] parameters = grabValues(parameterTokens);
 
-		tokens.add(new FunctionCallToken(functionIdentifier, parameters, functionIdentifier.getStartIndex(), closeBracket.getEndIndex()));
+		tokens.add(new FunctionCallToken(functionIdentifier, parameters, FileIndex.openClose(functionIdentifier, closeBracket)));
 	}
 
 	private Token[] grabValues(LinkedList<Token> parameterTokens) {

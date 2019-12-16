@@ -1,5 +1,6 @@
 package me.alexng.gns.env;
 
+import me.alexng.gns.FileIndex;
 import me.alexng.gns.GNSException;
 import me.alexng.gns.ParsingException;
 import me.alexng.gns.gen.Assembler;
@@ -38,7 +39,7 @@ public class Script {
 	 * @throws ParsingException thrown if {@link #source} is invalid.
 	 */
 	public void parse() throws GNSException {
-		LinkedList<Token> tokens = Lexer.tokenize(source);
+		LinkedList<Token> tokens = Lexer.tokenize(source, file);
 		for (Token token : tokens) {
 			System.out.println(token);
 		}
@@ -55,7 +56,7 @@ public class Script {
 	 * Runs the script. {@link #parse()} must be called before this.
 	 */
 	public void run() throws GNSException {
-		BlockToken globalBlock = new BlockToken(tokens, tokens.getFirst().getStartIndex(), tokens.getLast().getEndIndex());
+		BlockToken globalBlock = new BlockToken(tokens, FileIndex.wrap(tokens));
 		Scope globalScope = Scope.createGlobalScope();
 		globalBlock.executeBlockWithScope(globalScope);
 		System.out.println(globalScope);
