@@ -20,5 +20,5 @@ public class ParametersToken extends Token {
 	@Override
 	public String toString() {
 		return "<ParametersToken " + Arrays.toString(parameters) + ">";
-    }
+	}
 }

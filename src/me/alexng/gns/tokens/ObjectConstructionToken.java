@@ -5,11 +5,11 @@ import me.alexng.gns.RuntimeException;
 import me.alexng.gns.env.Scope;
 import me.alexng.gns.env.Value;
 
-public class FunctionCallToken extends IdentifiedToken {
+public class ObjectConstructionToken extends IdentifiedToken {
 
 	private ArgumentsToken argumentsToken;
 
-	public FunctionCallToken(IdentifierToken identifier, ArgumentsToken argumentsToken, FileIndex fileIndex) {
+	public ObjectConstructionToken(IdentifierToken identifier, ArgumentsToken argumentsToken, FileIndex fileIndex) {
 		super(identifier, fileIndex);
 		this.argumentsToken = argumentsToken;
 	}
@@ -17,11 +17,11 @@ public class FunctionCallToken extends IdentifiedToken {
 	@Override
 	public Value execute(Scope scope) throws RuntimeException {
 		Value[] values = argumentsToken.grabValues(scope);
-		return scope.getFunction(this).executeFunction(this, scope, values);
+		return Value.NULL; // TODO: Create a new object and return it.
 	}
 
 	@Override
 	public String toString() {
-		return "<FunctionCall " + getIdentifier().getName() + " " + argumentsToken.toString() + ">";
+		return "<ObjectConstruction " + getIdentifier().getName() + " " + argumentsToken.toString() + ">";
 	}
 }

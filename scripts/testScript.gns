@@ -1,12 +1,15 @@
 class TestClass {
-    var = 0
-    func work(num) {
-        var = (num + 3)
-    }
+	var = 0
+	func construct() {
+		var = 1
+	}
+	func work(num) {
+		var = (num + 3)
+	}
 }
 i = 5
 func test(j) {
-    if (j == 5) {
+	if (j == 5) {
 		i = (i + 1)
 	}
 }
@@ -16,3 +19,5 @@ func foo(i, j) {
 	test(j)
 }
 foo(i, 0)
+
+a = new TestClass()

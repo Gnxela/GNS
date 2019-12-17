@@ -17,7 +17,10 @@ public class StringUtil {
 		for (Object o : list) {
 			s.append(o.toString()).append("\n");
 		}
-		return s.deleteCharAt(s.length() - 1).toString();
+		if (list.size() > 0) {
+			s.deleteCharAt(s.length() - 1);
+		}
+		return s.toString();
 	}
 
 	public static String unrollArrayInline(Object[] array) {
@@ -25,7 +28,9 @@ public class StringUtil {
 		for (Object o : array) {
 			s.append(o.toString()).append(", ");
 		}
-		s.delete(s.length() - 2, s.length());
+		if (array.length > 0) {
+			s.delete(s.length() - 2, s.length());
+		}
 		return s.toString();
 	}
 
@@ -35,7 +40,9 @@ public class StringUtil {
 			sb.append(entry.getIdentifier().getName());
 			sb.append(", ");
 		}
-		sb.delete(sb.length() - 2, sb.length());
+		if (collection.size() > 0) {
+			sb.delete(sb.length() - 2, sb.length());
+		}
 		return sb.toString();
 	}
 

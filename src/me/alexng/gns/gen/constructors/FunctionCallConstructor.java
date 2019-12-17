@@ -2,7 +2,6 @@ package me.alexng.gns.gen.constructors;
 
 import me.alexng.gns.FileIndex;
 import me.alexng.gns.ParsingException;
-import me.alexng.gns.gen.Assembler;
 import me.alexng.gns.gen.Constructor;
 import me.alexng.gns.tokens.*;
 
@@ -33,14 +32,9 @@ public class FunctionCallConstructor implements Constructor {
 		tokens.previous(); // Go back to the identifier
 		tokens.remove(); // Remove the identifier token
 
-		LinkedList<Token> parameterTokens = Assembler.matchTokens(tokens, BracketToken.ROUND_OPEN, BracketToken.ROUND_CLOSED);
-		parameterTokens.removeFirst();
-		BracketToken closeBracket = (BracketToken) parameterTokens.removeLast();
-		Assembler.assemble(parameterTokens);
-		checkFormat(parameterTokens);
-		Token[] parameters = grabValues(parameterTokens);
+		ArgumentsToken arguments = ArgumentsConstructor.construct(tokens);
 
-		tokens.add(new FunctionCallToken(functionIdentifier, parameters, FileIndex.openClose(functionIdentifier, closeBracket)));
+		tokens.add(new FunctionCallToken(functionIdentifier, arguments, FileIndex.openClose(functionIdentifier, arguments)));
 	}
 
 	private Token[] grabValues(LinkedList<Token> parameterTokens) {
