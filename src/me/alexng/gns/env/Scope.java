@@ -5,6 +5,7 @@ import me.alexng.gns.tokens.ClassToken;
 import me.alexng.gns.tokens.FunctionToken;
 import me.alexng.gns.tokens.IdentifiedToken;
 import me.alexng.gns.tokens.IdentifierToken;
+import me.alexng.gns.util.StringUtil;
 
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -112,6 +113,6 @@ public class Scope {
 
 	@Override
 	public String toString() {
-		return variables.toString();
+		return "<Scope var=" + variables.toString() + ". func={" + StringUtil.unrollIdentifiedListInline(functions) + "}. class={" + StringUtil.unrollIdentifiedMapInline(classes) + "}>";
 	}
 }
