@@ -8,6 +8,7 @@ public enum Keyword {
 	TRUE("true"),
 	FALSE("false"),
 	FUNC("func"),
+	CLASS("class"),
 	IF("if");
 
 	private String keyword;

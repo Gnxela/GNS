@@ -20,6 +20,7 @@ public class Assembler {
 			// TODO: Maybe combine ParametersConstructor, ExpressionConstructor and FunctionCallConstructor
 			new BooleanConstantConstructor(),
 			new BlockConstructor(),
+			new ClassConstructor(),
 			new FunctionConstructor(),
 			new FunctionCallConstructor(),
 			new ExpressionConstructor(),
