@@ -1,7 +1,7 @@
 class TestClass {
 	var = 0
 	func construct(i) {
-		var = i
+		work(i)
 	}
 	func work(num) {
 		var = (num + 3)

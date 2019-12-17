@@ -18,7 +18,6 @@ public class FunctionCallToken extends IdentifiedToken {
 	public Value execute(Scope scope) throws RuntimeException {
 		Value[] values = argumentsToken.grabValues(scope);
 		// TODO: This is not correct. The scoping is wrong.
-		//
 		return scope.getFunction(this).executeFunction(this, scope.getGlobalScope(), values);
 	}
 

@@ -15,7 +15,7 @@ public class ObjectValue extends Value {
 
 	@Override
 	public Object getValue() {
-		return objectScope;
+		return classToken.getIdentifier().getName() + objectScope;
 	}
 
 	public ClassToken getObjectType() {
