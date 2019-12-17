@@ -1,6 +1,7 @@
 package me.alexng.gns.env;
 
 import me.alexng.gns.RuntimeException;
+import me.alexng.gns.tokens.ClassToken;
 import me.alexng.gns.tokens.FunctionToken;
 import me.alexng.gns.tokens.IdentifiedToken;
 import me.alexng.gns.tokens.IdentifierToken;
@@ -14,12 +15,14 @@ public class Scope {
 
 	// TODO: Think about how we're storing this data. A map is a lot of overhead
 	private Map<String, Value> variables;
+	private Map<String, ClassToken> classes;
 	private List<FunctionToken> functions;
 	private Scope parentScope;
 	private Scope globalScope;
 
 	private Scope(Scope parentScope, Scope globalScope) {
 		this.variables = new HashMap<>();
+		this.classes = new HashMap<>();
 		this.functions = new LinkedList<>();
 		this.parentScope = parentScope;
 		this.globalScope = globalScope;
@@ -36,6 +39,10 @@ public class Scope {
 
 	public Scope createChildScope() {
 		return new Scope(this, globalScope);
+	}
+
+	public void addClass(ClassToken classToken) {
+		classes.put(classToken.getIdentifier().getName(), classToken);
 	}
 
 	public void setVariable(IdentifierToken identifierToken, Value value) {
@@ -99,8 +106,8 @@ public class Scope {
 		return globalScope;
 	}
 
-	private boolean isGlobalScope() {
-		return parentScope == null;
+	public boolean isGlobalScope() {
+		return globalScope == this;
 	}
 
 	@Override
