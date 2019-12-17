@@ -2,21 +2,36 @@ package me.alexng.gns.tokens;
 
 import me.alexng.gns.FileIndex;
 
-public class IdentifiedToken extends Token {
+public class IdentifiedToken extends Token implements CharSequence {
 
-	private IdentifierToken identifier;
+    private IdentifierToken identifier;
 
-	public IdentifiedToken(IdentifierToken identifier, FileIndex fileIndex) {
-		super(fileIndex);
-		this.identifier = identifier;
-	}
+    public IdentifiedToken(IdentifierToken identifier, FileIndex fileIndex) {
+        super(fileIndex);
+        this.identifier = identifier;
+    }
 
-	@Override
-	public String toString() {
-		return "THIS SHOULD NOT HAPPEN " + identifier.toString();
-	}
+    @Override
+    public int length() {
+        return identifier.getName().length();
+    }
 
-	public IdentifierToken getIdentifier() {
-		return identifier;
-	}
+    @Override
+    public char charAt(int i) {
+        return identifier.getName().charAt(i);
+    }
+
+    @Override
+    public CharSequence subSequence(int i, int i1) {
+        return identifier.getName().subSequence(i, i1);
+    }
+
+    @Override
+    public String toString() {
+        return "THIS SHOULD NOT HAPPEN " + identifier.toString();
+    }
+
+    public IdentifierToken getIdentifier() {
+        return identifier;
+    }
 }

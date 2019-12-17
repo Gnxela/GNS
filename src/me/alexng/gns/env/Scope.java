@@ -46,6 +46,17 @@ public class Scope {
 		classes.put(classToken.getIdentifier().getName(), classToken);
 	}
 
+	public ClassToken getClass(IdentifierToken identifierToken) throws RuntimeException {
+		ClassToken classToken = classes.get(identifierToken.getName());
+		if (classToken != null) {
+			return classToken;
+		}
+		if (parentScope != null) {
+			return parentScope.getClass(identifierToken);
+		}
+		throw new RuntimeException(identifierToken, "Undefined class: " + identifierToken.getName());
+	}
+
 	public void setVariable(IdentifierToken identifierToken, Value value) {
 		Scope scope = findScopeWithVariable(identifierToken);
 		if (scope == null) {
@@ -56,13 +67,13 @@ public class Scope {
 
 	public Value getVariable(IdentifierToken identifierToken) throws RuntimeException {
 		Value value = variables.get(identifierToken.getName());
-		if (value == null) {
-			if (parentScope == null) {
-				throw new RuntimeException(identifierToken, "Undefined variable: " + identifierToken.getName());
-			}
+		if (value != null) {
+			return value;
+		}
+		if (parentScope != null) {
 			return parentScope.getVariable(identifierToken);
 		}
-		return value;
+		throw new RuntimeException(identifierToken, "Undefined variable: " + identifierToken.getName());
 	}
 
 	public void addFunction(FunctionToken functionToken) {
@@ -77,12 +88,13 @@ public class Scope {
 		if (parentScope != null) {
 			return parentScope.getFunction(identifiedToken);
 		}
-		throw new RuntimeException(identifiedToken, "Function not found: " + identifiedToken.getIdentifier().getName());
+		throw new RuntimeException(identifiedToken, "Undefined function: " + identifiedToken.getIdentifier().getName());
 	}
 
-	private FunctionToken getLocalFunction(IdentifiedToken identifierToken) {
+	// TODO: Do I want to use char sequences? If so replace all, if not think of alternative for getting constructor.
+	public FunctionToken getLocalFunction(CharSequence charSequence) {
 		for (FunctionToken functionToken : functions) {
-			if (functionToken.getName().equals(identifierToken.getIdentifier().getName())) {
+			if (functionToken.getName().contentEquals(charSequence)) {
 				return functionToken;
 			}
 		}

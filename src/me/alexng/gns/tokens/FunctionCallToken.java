@@ -17,7 +17,9 @@ public class FunctionCallToken extends IdentifiedToken {
 	@Override
 	public Value execute(Scope scope) throws RuntimeException {
 		Value[] values = argumentsToken.grabValues(scope);
-		return scope.getFunction(this).executeFunction(this, scope, values);
+		// TODO: This is not correct. The scoping is wrong.
+		//
+		return scope.getFunction(this).executeFunction(this, scope.getGlobalScope(), values);
 	}
 
 	@Override

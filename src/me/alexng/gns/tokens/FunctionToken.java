@@ -23,15 +23,13 @@ public class FunctionToken extends IdentifiedToken {
 		return Value.NULL;
 	}
 
-	public Value executeFunction(FunctionCallToken caller, Scope callerScope, Value[] values) throws RuntimeException {
+	public Value executeFunction(Token caller, Scope parentScope, Value[] values) throws RuntimeException {
 		IdentifierToken[] identifiers = parameters.getParameters();
 		if (identifiers.length != values.length) {
 			throw new RuntimeException(caller, "Invalid number of arguments. Expected: " + identifiers.length + ". Got: " + values.length);
 		}
 
-		// TODO: We need to pass the object scope here if created inside a class (which has a parent global scope).
-		Scope functionScope = callerScope.getGlobalScope().createChildScope();
-		functionScope.addFunction(this);
+		Scope functionScope = parentScope.createChildScope();
 		for (int i = 0; i < identifiers.length; i++) {
 			functionScope.setLocalVariable(identifiers[i], values[i]);
 		}
