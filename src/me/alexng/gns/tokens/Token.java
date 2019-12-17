@@ -14,7 +14,7 @@ public abstract class Token {
 	}
 
 	public Value execute(Scope scope) throws RuntimeException {
-		throw new RuntimeException(this, "This token (" + getClass().getSimpleName() + ") can not be run");
+		throw new RuntimeException(this, "This token " + toString() + " can not be run");
 	}
 
 	public boolean matches(Token token) {
