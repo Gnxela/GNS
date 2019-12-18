@@ -28,9 +28,9 @@ public class Assembler {
 			new FunctionConstructor(),
 			new FunctionCallConstructor(),
 			new ExpressionConstructor(),
-			new BinaryOperationConstructor(AdditionToken.class, true),
-			new BinaryOperationConstructor(EqualToken.class, true),
-			new BinaryOperationConstructor(AssignToken.class, false),
+			new BinaryOperationConstructor(true, AdditionToken.class),
+			new BinaryOperationConstructor(true, EqualToken.class),
+			new BinaryOperationConstructor(false, AssignToken.class),
 			new IfConstructor()
 	};
 

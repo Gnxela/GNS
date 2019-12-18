@@ -9,12 +9,12 @@ import java.util.ListIterator;
 
 public class BinaryOperationConstructor implements Constructor {
 
-	private Class<? extends BinaryOperationToken<?, ?>> clazz;
+	private Class<? extends BinaryOperationToken<?, ?>>[] operators;
 	private boolean leftToRight;
 
-	public BinaryOperationConstructor(Class<? extends BinaryOperationToken<?, ?>> clazz, boolean leftToRight) {
-		this.clazz = clazz;
+	public BinaryOperationConstructor(boolean leftToRight, Class<? extends BinaryOperationToken<?, ?>>... operators) {
 		this.leftToRight = leftToRight;
+		this.operators = operators;
 	}
 
 	@Override
@@ -24,39 +24,34 @@ public class BinaryOperationConstructor implements Constructor {
 
 	@Override
 	public boolean accepts(Token token) {
-		return clazz.isAssignableFrom(token.getClass()) && !((BinaryOperationToken<?, ?>) token).isBound();
+		for (Class<? extends BinaryOperationToken<?, ?>> clazz : operators) {
+			if (clazz.isAssignableFrom(token.getClass()) && !((BinaryOperationToken<?, ?>) token).isBound()) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	@Override
 	public void construct(ListIterator<Token> tokens) throws ParsingException {
-		if (isLeftToRight()) {
-			constructLeftToRight(tokens);
+		BinaryOperationToken binaryOperation;
+		if (leftToRight) {
+			binaryOperation = (BinaryOperationToken) tokens.next();
+			tokens.previous();
 		} else {
-			constructRightToLeft(tokens);
+			binaryOperation = (BinaryOperationToken) tokens.previous();
 		}
-	}
-
-	private void constructLeftToRight(ListIterator<Token> tokens) throws ParsingException {
-		BinaryOperationToken binaryOperation = (BinaryOperationToken) tokens.next();
-		tokens.previous();
-		Token left = tokens.previous();
-		tokens.remove();
-		tokens.next(); // Skip over the operator token
-		Token right = tokens.next();
-		tokens.remove();
-		binaryOperation.checkOperands(left, right);
-		binaryOperation.bind(left, right);
-	}
-
-	private void constructRightToLeft(ListIterator<Token> tokens) throws ParsingException {
-		BinaryOperationToken binaryOperation = (BinaryOperationToken) tokens.previous();
-		Token left = tokens.previous();
-		tokens.remove();
-		tokens.next(); // Skip over the operator token
-		Token right = tokens.next();
-		tokens.remove();
-		binaryOperation.checkOperands(left, right);
-		binaryOperation.bind(left, right);
-		System.out.println("Binding: " + left + ":" + right);
+		for (Class<? extends BinaryOperationToken<?, ?>> clazz : operators) {
+			if (clazz.isAssignableFrom(binaryOperation.getClass()) && !((BinaryOperationToken<?, ?>) binaryOperation).isBound()) {
+				Token left = tokens.previous();
+				tokens.remove();
+				tokens.next(); // Skip over the operator token
+				Token right = tokens.next();
+				tokens.remove();
+				binaryOperation.checkOperands(left, right);
+				binaryOperation.bind(left, right);
+				return;
+			}
+		}
 	}
 }
