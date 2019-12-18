@@ -1,4 +1,18 @@
 class TestClass {
+	class NestedClass {
+		tee = 0
+		hee = 0
+		func construct(i, j) {
+			foo(i)
+			bar(j)
+		}
+		func foo(i) {
+			tee = (i + 2)
+		}
+		func bar(i) {
+			hee = (i + 1)
+		}
+	}
 	var = 0
 	func construct(i) {
 		work(i)
@@ -6,6 +20,7 @@ class TestClass {
 	func work(num) {
 		var = (num + 3)
 	}
+	b = new NestedClass(var, var + 10)
 }
 i = 5
 func test(j) {
