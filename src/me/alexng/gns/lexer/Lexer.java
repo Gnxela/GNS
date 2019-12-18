@@ -16,11 +16,11 @@ public class Lexer {
 			new EOLGenerator(),
 			new CommaGenerator(),
 			new BracketGenerator(),
+			new NumberGenerator(),
 			new AdditionGenerator(),
 			new EqualGenerator(),
 			new AssignGenerator(),
 			new KeywordGenerator(),
-			new NumberGenerator(),
 			new IdentifierGenerator()
 	};
 

@@ -9,6 +9,7 @@ public class NumberGenerator implements TokenGenerator {
 	@Override
 	public int accepts(String input, int index) {
 		// TODO: Floats/doubles
+		// TODO: Negative numbers. If there's a minus with no space then a number.
 		int endIndex = index;
 		while (endIndex < input.length() && Character.isDigit(input.charAt(endIndex))) {
 			endIndex++;
