@@ -12,6 +12,11 @@ import java.util.ListIterator;
 public class ClassConstructor implements Constructor {
 
 	@Override
+	public boolean isLeftToRight() {
+		return true;
+	}
+
+	@Override
 	public boolean accepts(Token token) {
 		return token instanceof KeywordToken && ((KeywordToken) token).getKeyword() == Keyword.CLASS;
 	}

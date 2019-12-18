@@ -11,7 +11,10 @@ import java.util.ListIterator;
 // TODO: Better name
 public class ObjectConstructionConstructor implements Constructor {
 
-	// TODO: This share a lot of code with {@link FunctionCallConstructor}. Remove duplication?
+	@Override
+	public boolean isLeftToRight() {
+		return true;
+	}
 
 	@Override
 	public boolean accepts(Token token) {

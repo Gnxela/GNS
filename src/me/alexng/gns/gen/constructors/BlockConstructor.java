@@ -14,6 +14,11 @@ import java.util.ListIterator;
 public class BlockConstructor implements Constructor {
 
 	@Override
+	public boolean isLeftToRight() {
+		return true;
+	}
+
+	@Override
 	public boolean accepts(Token token) {
 		return BracketToken.CURLEY_OPEN.matches(token);
 	}

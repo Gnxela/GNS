@@ -10,9 +10,16 @@ import java.util.ListIterator;
 public class BinaryOperationConstructor implements Constructor {
 
 	private Class<? extends BinaryOperationToken<?, ?>> clazz;
+	private boolean leftToRight;
 
-	public BinaryOperationConstructor(Class<? extends BinaryOperationToken<?, ?>> clazz) {
+	public BinaryOperationConstructor(Class<? extends BinaryOperationToken<?, ?>> clazz, boolean leftToRight) {
 		this.clazz = clazz;
+		this.leftToRight = leftToRight;
+	}
+
+	@Override
+	public boolean isLeftToRight() {
+		return leftToRight;
 	}
 
 	@Override

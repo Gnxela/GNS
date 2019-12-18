@@ -14,6 +14,11 @@ import java.util.ListIterator;
 public class ExpressionConstructor implements Constructor {
 
 	@Override
+	public boolean isLeftToRight() {
+		return true;
+	}
+
+	@Override
 	public boolean accepts(Token token) {
 		return BracketToken.ROUND_OPEN.matches(token);
 	}

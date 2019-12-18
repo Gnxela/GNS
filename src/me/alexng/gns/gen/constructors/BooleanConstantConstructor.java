@@ -11,6 +11,11 @@ import java.util.ListIterator;
 public class BooleanConstantConstructor implements Constructor {
 
 	@Override
+	public boolean isLeftToRight() {
+		return true;
+	}
+
+	@Override
 	public boolean accepts(Token token) {
 		return Keyword.TRUE.matches(token) || Keyword.FALSE.matches(token);
 	}

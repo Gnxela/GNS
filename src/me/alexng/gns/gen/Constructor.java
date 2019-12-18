@@ -8,6 +8,11 @@ import java.util.ListIterator;
 public interface Constructor {
 
 	/**
+	 * @return true if the constructor should parse from left to right, false for right to left.
+	 */
+	boolean isLeftToRight();
+
+	/**
 	 * Decides whether this constructor accepts {@code token}.
 	 *
 	 * @return True if this constructor accepts.
@@ -21,5 +26,4 @@ public interface Constructor {
 	 * @throws ParsingException thrown when the input is invalid.
 	 */
 	void construct(ListIterator<Token> tokens) throws ParsingException;
-
 }
