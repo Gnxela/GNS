@@ -19,27 +19,36 @@ public class Scope {
 	private Map<String, ClassToken> classes;
 	private List<FunctionToken> functions;
 	private Scope parentScope;
+	private Scope objectScope;
 	private Scope globalScope;
 
-	private Scope(Scope parentScope, Scope globalScope) {
+	private Scope(Scope parentScope, Scope objectScope, Scope globalScope) {
 		this.variables = new HashMap<>();
 		this.classes = new HashMap<>();
 		this.functions = new LinkedList<>();
 		this.parentScope = parentScope;
+		this.objectScope = objectScope;
 		this.globalScope = globalScope;
 	}
 
-	private Scope(Scope parentScope) {
-		this(parentScope, null);
-		this.globalScope = this;
-	}
-
 	public static Scope createGlobalScope() {
-		return new Scope(null);
+		Scope globalScope = new Scope(null, null, null);
+		globalScope.setGlobalScope(globalScope);
+		return globalScope;
 	}
 
 	public Scope createChildScope() {
-		return new Scope(this, globalScope);
+		return new Scope(this, objectScope, globalScope);
+	}
+
+	public Scope createObjectScope(Scope parentScope) {
+		Scope objectScope = new Scope(parentScope, null, globalScope);
+		objectScope.setObjectScope(objectScope);
+		return objectScope;
+	}
+
+	public Scope createObjectScope() {
+		return createObjectScope(globalScope);
 	}
 
 	public void addClass(ClassToken classToken) {
@@ -115,12 +124,24 @@ public class Scope {
 		return parentScope.findScopeWithVariable(identifierToken);
 	}
 
+	public Scope getObjectScope() {
+		return objectScope;
+	}
+
+	private void setObjectScope(Scope objectScope) {
+		this.objectScope = objectScope;
+	}
+
 	public Scope getGlobalScope() {
 		return globalScope;
 	}
 
 	public boolean isGlobalScope() {
 		return globalScope == this;
+	}
+
+	private void setGlobalScope(Scope globalScope) {
+		this.globalScope = globalScope;
 	}
 
 	@Override

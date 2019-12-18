@@ -27,11 +27,11 @@ public class ClassToken extends IdentifiedToken {
 	}
 
 	public ObjectValue createInstance(ObjectConstructionToken caller, Value[] values, Scope scope) throws RuntimeException {
-		Scope objectScope = scope.getGlobalScope().createChildScope();
-		block.executeBlockWithScope(objectScope);
-		callConstructor(caller, values, objectScope);
-		return new ObjectValue(this, objectScope);
-	}
+        Scope objectScope = scope.createObjectScope();
+        block.executeBlockWithScope(objectScope);
+        callConstructor(caller, values, objectScope);
+        return new ObjectValue(this, objectScope);
+    }
 
 	private void callConstructor(ObjectConstructionToken caller, Value[] values, Scope objectScope) throws RuntimeException {
 		FunctionToken constructor = objectScope.getLocalFunction("construct");
