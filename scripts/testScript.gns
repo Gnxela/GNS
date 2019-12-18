@@ -36,3 +36,5 @@ func foo(i, j) {
 foo(i, 0)
 
 a = new TestClass(10)
+
+x = y = 0

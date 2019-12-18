@@ -18,6 +18,7 @@ public abstract class BinaryOperationToken<L extends Token, R extends Token> ext
 		super.bind();
 		this.left = left;
 		this.right = right;
+		this.setFileIndex(FileIndex.openClose(left, right));
 	}
 
 	public L getLeft() {

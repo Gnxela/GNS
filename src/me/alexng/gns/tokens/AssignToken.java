@@ -5,6 +5,7 @@ import me.alexng.gns.ParsingException;
 import me.alexng.gns.RuntimeException;
 import me.alexng.gns.env.Scope;
 import me.alexng.gns.env.Value;
+import me.alexng.gns.util.ExceptionUtil;
 
 public class AssignToken extends BinaryOperationToken<IdentifierToken, Token> {
 
@@ -15,7 +16,7 @@ public class AssignToken extends BinaryOperationToken<IdentifierToken, Token> {
 	@Override
 	public void checkOperands(Token left, Token right) throws ParsingException {
 		if (!(left instanceof IdentifierToken)) {
-			throw new ParsingException(left, "Invalid type");
+			throw ExceptionUtil.createParsingExpected("Invalid type", IdentifierToken.class, left);
 		}
 	}
 

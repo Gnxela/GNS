@@ -25,6 +25,10 @@ public abstract class Token {
 		return fileIndex;
 	}
 
+	public void setFileIndex(FileIndex fileIndex) {
+		this.fileIndex = fileIndex;
+	}
+
 	@Override
 	public abstract String toString();
 }
