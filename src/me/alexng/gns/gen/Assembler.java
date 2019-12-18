@@ -36,13 +36,32 @@ public class Assembler {
 
 	public static void assemble(LinkedList<Token> tokens) throws ParsingException {
 		for (Constructor constructor : CONSTRUCTORS) {
-			ListIterator<Token> iterator = tokens.listIterator();
-			while (iterator.hasNext()) {
-				Token token = iterator.next();
-				if (constructor.accepts(token)) {
-					iterator.previous();
-					constructor.construct(iterator);
-				}
+			if (constructor.isLeftToRight()) {
+				iterateForward(constructor, tokens);
+			} else {
+				iterateBackward(constructor, tokens);
+			}
+		}
+	}
+
+	private static void iterateForward(Constructor constructor, LinkedList<Token> tokens) throws ParsingException {
+		ListIterator<Token> iterator = tokens.listIterator();
+		while (iterator.hasNext()) {
+			Token token = iterator.next();
+			if (constructor.accepts(token)) {
+				iterator.previous();
+				constructor.construct(iterator);
+			}
+		}
+	}
+
+	private static void iterateBackward(Constructor constructor, LinkedList<Token> tokens) throws ParsingException {
+		ListIterator<Token> iterator = tokens.listIterator(tokens.size() - 1);
+		while (iterator.hasPrevious()) {
+			Token token = iterator.previous();
+			if (constructor.accepts(token)) {
+				iterator.next();
+				constructor.construct(iterator);
 			}
 		}
 	}

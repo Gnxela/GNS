@@ -29,6 +29,14 @@ public class BinaryOperationConstructor implements Constructor {
 
 	@Override
 	public void construct(ListIterator<Token> tokens) throws ParsingException {
+		if (isLeftToRight()) {
+			constructLeftToRight(tokens);
+		} else {
+			constructRightToLeft(tokens);
+		}
+	}
+
+	private void constructLeftToRight(ListIterator<Token> tokens) throws ParsingException {
 		BinaryOperationToken binaryOperation = (BinaryOperationToken) tokens.next();
 		tokens.previous();
 		Token left = tokens.previous();
@@ -38,5 +46,17 @@ public class BinaryOperationConstructor implements Constructor {
 		tokens.remove();
 		binaryOperation.checkOperands(left, right);
 		binaryOperation.bind(left, right);
+	}
+
+	private void constructRightToLeft(ListIterator<Token> tokens) throws ParsingException {
+		BinaryOperationToken binaryOperation = (BinaryOperationToken) tokens.previous();
+		Token left = tokens.previous();
+		tokens.remove();
+		tokens.next(); // Skip over the operator token
+		Token right = tokens.next();
+		tokens.remove();
+		binaryOperation.checkOperands(left, right);
+		binaryOperation.bind(left, right);
+		System.out.println("Binding: " + left + ":" + right);
 	}
 }
