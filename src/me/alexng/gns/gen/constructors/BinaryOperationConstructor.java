@@ -9,9 +9,15 @@ import java.util.ListIterator;
 
 public class BinaryOperationConstructor implements Constructor {
 
+	private Class<? extends BinaryOperationToken<?, ?>> clazz;
+
+	public BinaryOperationConstructor(Class<? extends BinaryOperationToken<?, ?>> clazz) {
+		this.clazz = clazz;
+	}
+
 	@Override
 	public boolean accepts(Token token) {
-		return token instanceof BinaryOperationToken && !((BinaryOperationToken) token).isBound();
+		return clazz.isAssignableFrom(token.getClass()) && !((BinaryOperationToken<?, ?>) token).isBound();
 	}
 
 	@Override

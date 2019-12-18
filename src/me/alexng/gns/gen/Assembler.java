@@ -2,6 +2,9 @@ package me.alexng.gns.gen;
 
 import me.alexng.gns.ParsingException;
 import me.alexng.gns.gen.constructors.*;
+import me.alexng.gns.tokens.AdditionToken;
+import me.alexng.gns.tokens.AssignToken;
+import me.alexng.gns.tokens.EqualToken;
 import me.alexng.gns.tokens.Token;
 import me.alexng.gns.util.ExceptionUtil;
 
@@ -25,7 +28,9 @@ public class Assembler {
 			new FunctionConstructor(),
 			new FunctionCallConstructor(),
 			new ExpressionConstructor(),
-			new BinaryOperationConstructor(),
+			new BinaryOperationConstructor(AdditionToken.class),
+			new BinaryOperationConstructor(EqualToken.class),
+			new BinaryOperationConstructor(AssignToken.class),
 			new IfConstructor()
 	};
 

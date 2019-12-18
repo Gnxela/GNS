@@ -7,10 +7,10 @@ class TestClass {
 			bar(j)
 		}
 		func foo(i) {
-			tee = (i + 2)
+			tee = i + 2
 		}
 		func bar(i) {
-			hee = (i + 1)
+			hee = i + 1
 		}
 	}
 	var = 0
@@ -18,14 +18,14 @@ class TestClass {
 		work(i)
 	}
 	func work(num) {
-		var = (num + 3)
+		var = num + 3
 	}
 	b = new NestedClass(var, var + 10)
 }
 i = 5
 func test(j) {
 	if (j == 5) {
-		i = (i + 1)
+		i = i + 1
 	}
 }
 func foo(i, j) {
