@@ -2,7 +2,7 @@ package me.alexng.gns.tokens;
 
 import me.alexng.gns.FileIndex;
 
-public class IdentifiedToken extends Token implements CharSequence {
+public abstract class IdentifiedToken extends Token implements CharSequence {
 
     private IdentifierToken identifier;
 
@@ -24,11 +24,6 @@ public class IdentifiedToken extends Token implements CharSequence {
     @Override
     public CharSequence subSequence(int i, int i1) {
         return identifier.getName().subSequence(i, i1);
-    }
-
-    @Override
-    public String toString() {
-        return "THIS SHOULD NOT HAPPEN " + identifier.toString();
     }
 
     public IdentifierToken getIdentifier() {
