@@ -18,7 +18,7 @@ public class FunctionConstructor implements Constructor {
 
 	@Override
 	public boolean accepts(Token token) {
-		return token instanceof KeywordToken && ((KeywordToken) token).getKeyword() == Keyword.FUNC;
+		return Keyword.FUNC.matches(token);
 	}
 
 	@Override

@@ -18,7 +18,7 @@ public class IfConstructor implements Constructor {
 
 	@Override
 	public boolean accepts(Token token) {
-		return token instanceof KeywordToken && ((KeywordToken) token).getKeyword() == Keyword.IF;
+		return Keyword.IF.matches(token);
 	}
 
 	@Override

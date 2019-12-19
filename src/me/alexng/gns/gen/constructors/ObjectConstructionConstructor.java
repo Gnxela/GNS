@@ -18,7 +18,7 @@ public class ObjectConstructionConstructor implements Constructor {
 
 	@Override
 	public boolean accepts(Token token) {
-		return token instanceof KeywordToken && ((KeywordToken) token).getKeyword() == Keyword.NEW;
+		return Keyword.NEW.matches(token);
 	}
 
 	@Override
