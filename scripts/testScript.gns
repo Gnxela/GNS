@@ -1,7 +1,6 @@
 class TestClass {
 	class NestedClass {
-		tee = 0
-		hee = 0
+		tee = hee = null
 		func construct(i, j) {
 			foo(i)
 			bar(j)
@@ -43,3 +42,4 @@ print(1)
 print(a)
 print(true)
 print(false)
+print(null)

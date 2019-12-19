@@ -5,6 +5,7 @@ import me.alexng.gns.tokens.Token;
 
 public enum Keyword {
 
+	NULL("null"),
 	TRUE("true"),
 	FALSE("false"),
 	FUNC("func"),

@@ -21,6 +21,7 @@ public class Assembler {
 			// TODO: Some operations will need to be processed right to left.
 			// TODO: Need an order in which binary operations are resolved.
 			// TODO: Maybe combine ParametersConstructor, ExpressionConstructor and FunctionCallConstructor
+			new NullConstantConstructor(),
 			new BooleanConstantConstructor(),
 			new BlockConstructor(),
 			new ClassConstructor(),
