@@ -1,4 +1,4 @@
-package me.alexng.gns.tokens;
+package me.alexng.gns.tokens.operators;
 
 import me.alexng.gns.FileIndex;
 import me.alexng.gns.ParsingException;
@@ -6,6 +6,8 @@ import me.alexng.gns.RuntimeException;
 import me.alexng.gns.env.NumberValue;
 import me.alexng.gns.env.Scope;
 import me.alexng.gns.env.Value;
+import me.alexng.gns.tokens.BinaryOperationToken;
+import me.alexng.gns.tokens.Token;
 
 public class AdditionToken extends BinaryOperationToken<Token, Token> {
 

@@ -2,10 +2,10 @@ package me.alexng.gns.gen;
 
 import me.alexng.gns.ParsingException;
 import me.alexng.gns.gen.constructors.*;
-import me.alexng.gns.tokens.AdditionToken;
-import me.alexng.gns.tokens.AssignToken;
-import me.alexng.gns.tokens.EqualToken;
 import me.alexng.gns.tokens.Token;
+import me.alexng.gns.tokens.operators.AdditionToken;
+import me.alexng.gns.tokens.operators.AssignToken;
+import me.alexng.gns.tokens.operators.EqualToken;
 import me.alexng.gns.util.ExceptionUtil;
 
 import java.util.LinkedList;

@@ -2,8 +2,8 @@ package me.alexng.gns.lexer.generators;
 
 import me.alexng.gns.FileIndex;
 import me.alexng.gns.lexer.TokenGenerator;
-import me.alexng.gns.tokens.AdditionToken;
 import me.alexng.gns.tokens.Token;
+import me.alexng.gns.tokens.operators.AdditionToken;
 
 public class AdditionGenerator implements TokenGenerator {
 

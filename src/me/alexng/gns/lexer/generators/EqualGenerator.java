@@ -2,8 +2,8 @@ package me.alexng.gns.lexer.generators;
 
 import me.alexng.gns.FileIndex;
 import me.alexng.gns.lexer.TokenGenerator;
-import me.alexng.gns.tokens.EqualToken;
 import me.alexng.gns.tokens.Token;
+import me.alexng.gns.tokens.operators.EqualToken;
 
 public class EqualGenerator implements TokenGenerator {
 
