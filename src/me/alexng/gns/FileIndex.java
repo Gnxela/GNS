@@ -7,6 +7,7 @@ import java.util.LinkedList;
 public class FileIndex {
 
 	public static final FileIndex NULL_INDEX = new FileIndex("<NULL>", 0, 0);
+	public static final FileIndex INTERNAL_INDEX = new FileIndex("<INTERNAL>", 0, 0);
 
 	private String sourceFile;
 	private int startIndex, endIndex;

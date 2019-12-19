@@ -38,3 +38,8 @@ foo(i, 0)
 a = new TestClass(10)
 x = 1
 x = y = 0
+
+print(1)
+print(a)
+print(true)
+print(false)
