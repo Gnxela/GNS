@@ -86,7 +86,7 @@ public class Script {
 		run(globalScope);
 	}
 
-	public void run(Scope globalScope) throws GNSException {
+	private void run(Scope globalScope) throws GNSException {
 		BlockToken globalBlock = new BlockToken(tokens, FileIndex.wrap(tokens));
 		addBuiltInFunctions(globalScope);
 		globalBlock.executeBlockWithScope(globalScope);
