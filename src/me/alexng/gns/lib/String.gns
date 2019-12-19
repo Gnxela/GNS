@@ -1,0 +1,12 @@
+class String {
+
+	str = null
+
+	func construct(a) {
+		str = a
+	}
+
+	func string() {
+
+	}
+}
