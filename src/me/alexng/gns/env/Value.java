@@ -32,7 +32,6 @@ public abstract class Value {
 	public enum Type {
 		NULL,
 		BOOLEAN,
-		STRING,
 		NUMBER,
 		OBJECT;
 	}

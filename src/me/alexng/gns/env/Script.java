@@ -61,7 +61,6 @@ public class Script {
 		Scope globalScope = Scope.createGlobalScope();
 		addBuiltInFunctions(globalScope);
 		globalBlock.executeBlockWithScope(globalScope);
-		System.out.println(globalScope);
 	}
 
 	private void addBuiltInFunctions(Scope globalScope) {
@@ -80,8 +79,6 @@ public class Script {
 					case BOOLEAN:
 					case NUMBER:
 						output = value.getValue().toString();
-						break;
-					case STRING:
 						break;
 					case OBJECT:
 						ObjectValue object = (ObjectValue) value;
