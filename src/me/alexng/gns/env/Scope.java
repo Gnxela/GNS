@@ -82,7 +82,7 @@ public class Scope {
 		if (parentScope != null) {
 			return parentScope.getVariable(identifierToken);
 		}
-		throw new RuntimeException(identifierToken, "Undefined variable: " + identifierToken.getName());
+		return Value.NULL;
 	}
 
 	public void addFunction(FunctionToken functionToken) {
