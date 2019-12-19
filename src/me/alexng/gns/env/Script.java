@@ -3,7 +3,6 @@ package me.alexng.gns.env;
 import me.alexng.gns.FileIndex;
 import me.alexng.gns.GNSException;
 import me.alexng.gns.ParsingException;
-import me.alexng.gns.RuntimeException;
 import me.alexng.gns.gen.Assembler;
 import me.alexng.gns.lexer.Lexer;
 import me.alexng.gns.tokens.BlockToken;
@@ -56,31 +55,9 @@ public class Script {
 	}
 
 	private void addBuiltInFunctions(Scope globalScope) {
-		globalScope.addFunction(new NativeFunction("print") {
-			@Override
-			public Value executeFunction(Token caller, Scope parentScope, Value[] values) throws RuntimeException {
-				if (values.length != 1) {
-					throw new RuntimeException(caller, "Invalid number of arguments. Expected: 1. Got: " + values.length);
-				}
-				Value value = values[0];
-				String output = null;
-				switch (value.getType()) {
-					case NULL:
-						output = "null";
-						break;
-					case BOOLEAN:
-					case NUMBER:
-						output = value.getValue().toString();
-						break;
-					case OBJECT:
-						ObjectValue object = (ObjectValue) value;
-						output = object.toString(); // TODO: Call a toString function in the object
-						break;
-				}
-				System.out.println(output);
-				return null;
-			}
-		});
+		for (NativeFunction nativeFunction : BuiltInFunctions.functions) {
+			globalScope.addFunction(nativeFunction);
+		}
 	}
 
 	public String getSource() {
