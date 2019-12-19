@@ -41,15 +41,7 @@ public class Script {
 	 */
 	public void parse() throws GNSException {
 		LinkedList<Token> tokens = Lexer.tokenize(source, file);
-		for (Token token : tokens) {
-			System.out.println(token);
-		}
 		Assembler.assemble(tokens);
-		System.out.println();
-		for (Token token : tokens) {
-			System.out.println(token);
-		}
-
 		this.tokens = tokens;
 	}
 
