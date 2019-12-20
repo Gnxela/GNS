@@ -5,19 +5,20 @@ import me.alexng.gns.tokens.Token;
 
 public enum Keyword {
 
-	NULL("null"),
-	TRUE("true"),
-	FALSE("false"),
-	FUNC("func"),
-	IF("if"),
-	CLASS("class"),
-	NEW("new");
+    NULL("null"),
+    TRUE("true"),
+    FALSE("false"),
+    FUNC("func"),
+    RETURN("return"),
+    IF("if"),
+    CLASS("class"),
+    NEW("new");
 
-	private String keyword;
+    private String keyword;
 
-	Keyword(String keyword) {
-		this.keyword = keyword;
-	}
+    Keyword(String keyword) {
+        this.keyword = keyword;
+    }
 
 	public String getKeyword() {
 		return keyword;

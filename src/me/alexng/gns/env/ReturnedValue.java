@@ -10,7 +10,7 @@ public class ReturnedValue extends Value {
     }
 
     @Override
-    public Object getJavaValue() {
+    public Value getJavaValue() {
         return returnedValue;
     }
 }

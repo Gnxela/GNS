@@ -25,6 +25,7 @@ public class Assembler {
 			new BooleanConstantConstructor(),
 			new BlockConstructor(),
 			new ClassConstructor(),
+			new ReturnConstructor(),
 			new ObjectConstructionConstructor(),
 			new FunctionConstructor(),
 			new FunctionCallConstructor(),
