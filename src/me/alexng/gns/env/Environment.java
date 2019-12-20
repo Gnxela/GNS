@@ -68,8 +68,16 @@ public class Environment {
         if (!isSetup) {
             throw new RuntimeException(FileIndex.INTERNAL_INDEX, "Environment not set up");
         }
+        addBuiltInFunctions(globalScope);
         for (Script script : loadedScripts) {
             script.run(globalScope);
+        }
+    }
+
+    // TODO: If feels weird throwing a "RuntimeException" here when we're not at runtime yet.
+    private void addBuiltInFunctions(Scope globalScope) throws RuntimeException {
+        for (NativeFunction nativeFunction : BuiltInFunctions.functions) {
+            globalScope.addFunction(nativeFunction);
         }
     }
 

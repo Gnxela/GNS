@@ -54,14 +54,7 @@ public class Script {
 			throw new RuntimeException(new FileIndex(file, 0, 0), "Script executed before parsed");
 		}
 		BlockToken globalBlock = new BlockToken(tokens, FileIndex.wrap(tokens));
-		addBuiltInFunctions(globalScope);
 		globalBlock.executeBlockWithScope(globalScope);
-	}
-
-	private void addBuiltInFunctions(Scope globalScope) {
-		for (NativeFunction nativeFunction : BuiltInFunctions.functions) {
-			globalScope.addFunction(nativeFunction);
-		}
 	}
 
 	public String getSource() {

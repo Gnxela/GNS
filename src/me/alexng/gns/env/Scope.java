@@ -51,8 +51,14 @@ public class Scope {
 		return createObjectScope(globalScope);
 	}
 
-	public void addClass(ClassToken classToken) {
-		classes.put(classToken.getIdentifier().getName(), classToken);
+	public void addClass(ClassToken classToken) throws RuntimeException {
+		try {
+			// TODO: Not sure if I like the idea of just waiting for an exception, see later
+			getClass(classToken.getIdentifier());
+			throw new RuntimeException(classToken, "Class already defined");
+		} catch (RuntimeException ignored) {
+			classes.put(classToken.getIdentifier().getName(), classToken);
+		}
 	}
 
 	public ClassToken getClass(IdentifierToken identifierToken) throws RuntimeException {
@@ -85,7 +91,12 @@ public class Scope {
 		return Value.NULL;
 	}
 
-	public void addFunction(FunctionToken functionToken) {
+	public void addFunction(FunctionToken functionToken) throws RuntimeException {
+		if (getLocalFunction(functionToken.getName()) != null) {
+			// TODO: This is only checking the local scope. We need to check up the stack.
+			//  I'm still not sure if I want to allow nested functions etc. so I'll leave it for now.
+			throw new RuntimeException(functionToken, "Function already defined");
+		}
 		functions.add(functionToken);
 	}
 
