@@ -14,8 +14,6 @@ import java.util.LinkedList;
  */
 public class Environment {
 
-    private static final FileIndex ENVIRONMENT_INDEX = FileIndex.unindexedFile("<ENV>");
-
     private final Options options;
     private Scope globalScope;
     private LinkedList<Script> loadedScripts;
@@ -53,7 +51,7 @@ public class Environment {
      */
     public void loadScript(Script script) throws ParsingException {
         if (!isSetup) {
-            throw new ParsingException(FileIndex.unindexedFile(script.getFile()), "Environment not set up");
+            throw new ParsingException(FileIndex.INTERNAL_INDEX, "Environment not set up");
         }
         if (!script.isParsed()) {
             script.parse();
@@ -68,7 +66,7 @@ public class Environment {
      */
     public void runScripts() throws RuntimeException {
         if (!isSetup) {
-            throw new RuntimeException(ENVIRONMENT_INDEX, "Environment not set up");
+            throw new RuntimeException(FileIndex.INTERNAL_INDEX, "Environment not set up");
         }
         for (Script script : loadedScripts) {
             script.run(globalScope);
