@@ -34,7 +34,7 @@ public class NumberValue extends Value {
 	}
 
 	@Override
-	public Number getValue() {
+	public Number getJavaValue() {
 		if (isInt) {
 			return intValue;
 		}

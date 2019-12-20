@@ -19,7 +19,7 @@ public class BuiltInFunctions {
                     break;
                 case BOOLEAN:
                 case NUMBER:
-                    output = value.getValue().toString();
+                    output = value.getJavaValue().toString();
                     break;
                 case OBJECT:
                     ObjectValue object = (ObjectValue) value;

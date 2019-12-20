@@ -32,6 +32,7 @@ public class ClassToken extends IdentifiedToken {
 	private void callConstructor(ObjectConstructionToken caller, Value[] values, Scope objectScope) throws RuntimeException {
 		FunctionToken constructor = objectScope.getLocalFunction("construct");
 		if (constructor != null) {
+			// TODO: Check if value was returned. If so throw an error
 			constructor.executeFunction(caller, objectScope, values);
 			return;
 		}

@@ -2,7 +2,9 @@ package me.alexng.gns.tokens;
 
 import me.alexng.gns.FileIndex;
 import me.alexng.gns.RuntimeException;
+import me.alexng.gns.env.ReturnedValue;
 import me.alexng.gns.env.Scope;
+import me.alexng.gns.env.Value;
 import me.alexng.gns.util.StringUtil;
 
 import java.util.List;
@@ -19,26 +21,29 @@ public class BlockToken extends Token {
 	/**
 	 * Executes the block.
 	 *
-	 * @return The local scope of the block after it has finished executing.
+	 * @return a returned value class, wrapping the returned value. Or {@link Value#NULL} if no value is returned.
 	 */
-	public Scope executeBlock(Scope parentScope) throws RuntimeException {
-		Scope localScope = parentScope.createChildScope();
-		executeBlockWithScope(localScope);
-		return localScope;
+	public Value executeBlock(Scope parentScope) throws RuntimeException {
+		return executeBlockWithScope(parentScope.createChildScope());
 	}
 
 	/**
 	 * Executes the block with the given local scope.
 	 *
 	 * @param localScope the local scope that the block will be executed with
+	 * @return a returned value class, wrapping the returned value. Or {@link Value#NULL} if no value is returned.
 	 */
-	public void executeBlockWithScope(Scope localScope) throws RuntimeException {
+	public Value executeBlockWithScope(Scope localScope) throws RuntimeException {
 		for (Token token : tokens) {
 			if (token instanceof EOLToken) {
 				continue;
 			}
-			token.execute(localScope);
+			Value value = token.execute(localScope);
+			if (value instanceof ReturnedValue) {
+				return value;
+			}
 		}
+		return Value.NULL;
 	}
 
 	@Override

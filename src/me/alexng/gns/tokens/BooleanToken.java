@@ -25,6 +25,6 @@ public class BooleanToken extends Token {
 
 	@Override
 	public String toString() {
-		return "<BooleanToken " + bool.getValue().toString() + ">";
-	}
+        return "<BooleanToken " + bool.getJavaValue().toString() + ">";
+    }
 }

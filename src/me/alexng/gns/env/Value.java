@@ -4,7 +4,7 @@ public abstract class Value {
 
 	public static final Value NULL = new Value(Type.NULL) {
 		@Override
-		public Object getValue() {
+		public Object getJavaValue() {
 			return null;
 		}
 
@@ -19,10 +19,10 @@ public abstract class Value {
 		this.type = type;
 	}
 
-	public abstract Object getValue();
+	public abstract Object getJavaValue();
 
 	public String toString() {
-		return getValue().toString();
+		return getJavaValue().toString();
 	}
 
 	public Type getType() {

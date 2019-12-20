@@ -45,3 +45,8 @@ print(false)
 print(null)
 a = new String(1)
 print(nilIdentifier)
+
+func retFunc() {
+	return 19
+}
+print(retFunc())

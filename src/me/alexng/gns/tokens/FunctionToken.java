@@ -34,9 +34,7 @@ public class FunctionToken extends IdentifiedToken {
 			functionScope.setLocalVariable(identifiers[i], values[i]);
 		}
 
-		block.executeBlock(functionScope);
-		// TODO: Function return values
-		return Value.NULL;
+		return block.executeBlock(functionScope);
 	}
 
 	public String getName() {

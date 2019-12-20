@@ -9,6 +9,7 @@ import me.alexng.gns.lexer.Lexer;
 import me.alexng.gns.tokens.BlockToken;
 import me.alexng.gns.tokens.Token;
 import me.alexng.gns.util.FileUtil;
+import me.alexng.gns.util.StringUtil;
 
 import java.io.File;
 import java.io.IOException;
@@ -69,6 +70,7 @@ public class Script {
 		LinkedList<Token> tokens = Lexer.tokenize(source, file);
 		Assembler.assemble(tokens);
 		this.tokens = tokens;
+		System.out.println(StringUtil.unrollList(tokens));
 	}
 
 	/**

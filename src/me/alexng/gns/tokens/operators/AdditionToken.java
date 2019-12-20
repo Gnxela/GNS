@@ -16,19 +16,19 @@ public class AdditionToken extends BinaryOperationToken<Token, Token> {
 
 	@Override
 	public Value execute(Scope scope) throws RuntimeException {
-		Value leftValue = getLeft().execute(scope);
-		Value rightValue = getRight().execute(scope);
-		if (leftValue.getType() != Value.Type.NUMBER) {
-			throw new RuntimeException(getLeft(), "Invalid type. Expected: NUMBER. Received: " + leftValue.getType());
-		}
-		if (rightValue.getType() != Value.Type.NUMBER) {
-			throw new RuntimeException(getRight(), "Invalid type. Expected: NUMBER. Received: " + rightValue.getType());
-		}
-		// TODO: Do properly, check if we need a double or not.
-		int left = (int) ((NumberValue) leftValue).getValue();
-		int right = (int) ((NumberValue) rightValue).getValue();
-		return new NumberValue(left + right);
-	}
+        Value leftValue = getLeft().execute(scope);
+        Value rightValue = getRight().execute(scope);
+        if (leftValue.getType() != Value.Type.NUMBER) {
+            throw new RuntimeException(getLeft(), "Invalid type. Expected: NUMBER. Received: " + leftValue.getType());
+        }
+        if (rightValue.getType() != Value.Type.NUMBER) {
+            throw new RuntimeException(getRight(), "Invalid type. Expected: NUMBER. Received: " + rightValue.getType());
+        }
+        // TODO: Do properly, check if we need a double or not.
+        int left = (int) ((NumberValue) leftValue).getJavaValue();
+        int right = (int) ((NumberValue) rightValue).getJavaValue();
+        return new NumberValue(left + right);
+    }
 
 	@Override
 	public void checkOperands(Token left, Token right) throws ParsingException {
