@@ -19,7 +19,9 @@ public class ArgumentsConstructor {
 		FileIndex fileIndex = FileIndex.wrap(parameterTokens);
 		parameterTokens.removeFirst();
 		parameterTokens.removeLast();
-		Assembler.assemble(parameterTokens);
+		if (parameterTokens.size() > 0) {
+			Assembler.assemble(parameterTokens);
+		}
 		checkFormat(parameterTokens);
 		Token[] arguments = grabValues(parameterTokens);
 		return new ArgumentsToken(arguments, fileIndex);
