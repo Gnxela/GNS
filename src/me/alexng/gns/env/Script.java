@@ -1,9 +1,8 @@
 package me.alexng.gns.env;
 
 import me.alexng.gns.FileIndex;
-import me.alexng.gns.GNSException;
-import me.alexng.gns.Options;
 import me.alexng.gns.ParsingException;
+import me.alexng.gns.RuntimeException;
 import me.alexng.gns.gen.Assembler;
 import me.alexng.gns.lexer.Lexer;
 import me.alexng.gns.tokens.BlockToken;
@@ -16,56 +15,32 @@ import java.util.LinkedList;
 
 public class Script {
 
-	private final Options options;
 	private String source;
 	private String file;
-
-	private LinkedList<Script> requiredScripts;
 	private LinkedList<Token> tokens;
+	private boolean isParsed = false;
 
-	private Script(String source, String file, Options options) {
+	private Script(String source, String file) {
 		this.source = source;
 		this.file = file;
-		this.options = options;
-		this.requiredScripts = new LinkedList<>();
-	}
-
-	public Script(String source, Options options) {
-		// TODO: Better name than null.
-		this(source, "<NULL>", options);
-	}
-
-	public Script(File sourceFile, Options options) throws IOException {
-		this(FileUtil.readFile(sourceFile), sourceFile.getPath(), options);
 	}
 
 	public Script(String source) {
 		// TODO: Better name than null.
-		this(source, "<NULL>", new Options());
+		this(source, "<NULL>");
 	}
 
 	public Script(File sourceFile) throws IOException {
-		this(FileUtil.readFile(sourceFile), sourceFile.getPath(), new Options());
+		this(FileUtil.readFile(sourceFile), sourceFile.getPath());
 	}
 
 	/**
-	 * Parses {@link #source}. Must be run before {@link #run()}.
+	 * Parses {@link #source}. Must be run before {@link #run}.
 	 *
 	 * @throws ParsingException thrown if {@link #source} is invalid.
 	 */
-	public void parse() throws GNSException, IOException {
-		if (options.isUsingStandardLib()) {
-			// TODO: We shouldn't need to compile the standard library every time.
-			//  We should serialize the library and just read it.
-			String path = ClassLoader.getSystemClassLoader().getResource("me/alexng/gns/lib").getFile();
-			File libPackage = new File(path);
-			Options stdLibOptions = new Options().setUsingStandardLib(false);
-			for (File file : libPackage.listFiles()) {
-				Script script = new Script(file, stdLibOptions);
-				script.parse();
-				requiredScripts.add(script);
-			}
-		}
+	public void parse() throws ParsingException {
+		isParsed = true;
 		LinkedList<Token> tokens = Lexer.tokenize(source, file);
 		Assembler.assemble(tokens);
 		this.tokens = tokens;
@@ -74,19 +49,10 @@ public class Script {
 	/**
 	 * Runs the script. {@link #parse()} must be called before this.
 	 */
-	public void run() throws GNSException {
-		Scope globalScope = Scope.createGlobalScope();
-		for (Script requiredScript : requiredScripts) {
-			// TODO: We need some kind of import statement.
-			//  Also need cyclic dependency checking.
-			//  Also need to order the execution of dependencies depending on requirements.
-			//  I remember writing a solution to this a while ago. Might dig it up.
-			requiredScript.run(globalScope);
+	public void run(Scope globalScope) throws RuntimeException {
+		if (!isParsed) {
+			throw new RuntimeException(new FileIndex(file, 0, 0), "Script executed before parsed");
 		}
-		run(globalScope);
-	}
-
-	private void run(Scope globalScope) throws GNSException {
 		BlockToken globalBlock = new BlockToken(tokens, FileIndex.wrap(tokens));
 		addBuiltInFunctions(globalScope);
 		globalBlock.executeBlockWithScope(globalScope);
@@ -100,5 +66,13 @@ public class Script {
 
 	public String getSource() {
 		return source;
+	}
+
+	public String getFile() {
+		return file;
+	}
+
+	public boolean isParsed() {
+		return isParsed;
 	}
 }

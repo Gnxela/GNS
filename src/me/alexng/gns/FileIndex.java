@@ -18,11 +18,15 @@ public class FileIndex {
 		this.endIndex = endIndex;
 	}
 
-	public static final FileIndex wrap(LinkedList<? extends Token> tokens) {
+	public static FileIndex unindexedFile(String file) {
+		return new FileIndex(file, 0, 0);
+	}
+
+	public static FileIndex wrap(LinkedList<? extends Token> tokens) {
 		return openClose(tokens.getFirst(), tokens.getLast());
 	}
 
-	public static final FileIndex openClose(Token open, Token close) {
+	public static FileIndex openClose(Token open, Token close) {
 		return new FileIndex(open.getFileIndex().getSourceFile(), open.getFileIndex().getStartIndex(), close.getFileIndex().getEndIndex());
 	}
 
