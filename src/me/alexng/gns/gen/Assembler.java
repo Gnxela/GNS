@@ -6,6 +6,7 @@ import me.alexng.gns.tokens.Token;
 import me.alexng.gns.tokens.operators.AdditionToken;
 import me.alexng.gns.tokens.operators.AssignToken;
 import me.alexng.gns.tokens.operators.EqualToken;
+import me.alexng.gns.tokens.operators.LessThanToken;
 import me.alexng.gns.util.ExceptionUtil;
 
 import java.util.LinkedList;
@@ -31,6 +32,7 @@ public class Assembler {
 			new FunctionCallConstructor(),
 			new ExpressionConstructor(),
 			new BinaryOperationConstructor(true, AdditionToken.class),
+			new BinaryOperationConstructor(true, LessThanToken.class),
 			new BinaryOperationConstructor(true, EqualToken.class),
 			new BinaryOperationConstructor(false, AssignToken.class),
 			new IfConstructor()

@@ -50,3 +50,7 @@ func retFunc() {
 	return 19
 }
 print(retFunc())
+
+print(1 < 2)
+print(2 < 2)
+print(3 < 2)

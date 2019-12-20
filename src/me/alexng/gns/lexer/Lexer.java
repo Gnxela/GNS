@@ -17,6 +17,7 @@ public class Lexer {
 			new BracketGenerator(),
 			new NumberGenerator(),
 			new AdditionGenerator(),
+			new LessThanGenerator(),
 			new EqualGenerator(),
 			new AssignGenerator(),
 			new KeywordGenerator(),
