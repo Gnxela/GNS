@@ -11,11 +11,12 @@ public class Main {
 		Environment scriptEnvironment = new Environment(new Options());
 		scriptEnvironment.setup();
 		File scriptFile = new File("scripts/testScript.gns");
+		long start = System.nanoTime();
 		scriptEnvironment.loadScript(new Script(scriptFile));
-		try {
-			scriptEnvironment.runScripts();
-		} catch (GNSException e) {
-			e.printStackTrace();
-		}
+		long endParse = System.nanoTime();
+		scriptEnvironment.runScripts();
+		long endTime = System.nanoTime();
+		System.out.println("Parse time: " + (endParse - start) / 1000000 + "ms");
+		System.out.println("Run time: " + (endTime - endParse) / 1000000 + "ms");
 	}
 }
