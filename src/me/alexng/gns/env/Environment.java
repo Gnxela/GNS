@@ -37,9 +37,7 @@ public class Environment {
             String path = ClassLoader.getSystemClassLoader().getResource("me/alexng/gns/lib").getFile();
             File libPackage = new File(path);
             for (File file : libPackage.listFiles()) {
-                Script script = new Script(file);
-                script.parse();
-                loadedScripts.add(script);
+                loadScript(new Script(file));
             }
         }
     }
