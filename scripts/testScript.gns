@@ -54,3 +54,26 @@ print(retFunc())
 print(1 < 2)
 print(2 < 2)
 print(3 < 2)
+
+// TODO: The below list
+/*
+	Comments
+	Operation functions
+	Built in object properties: objectid, type
+	Accessor (".")
+*/
+
+class HasOps {
+	i = 0
+
+	func construct(j) {
+		i = j
+	}
+
+	func +(a) {
+		if (a.type == type) {
+			return new HasOps(i + a.i)
+		}
+		return null
+	}
+}
