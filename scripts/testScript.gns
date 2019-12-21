@@ -59,9 +59,13 @@ print(3 < 2)
 /*
 	Comments DONE
 	Built in object properties: objectid, type
-	Operation functions
 	Accessor (".")
+	Operation functions
 */
+
+print(a.objectId)
+print(a.type)
+
 
 class HasOps {
 	i = 0

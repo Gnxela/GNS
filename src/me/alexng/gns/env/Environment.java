@@ -18,6 +18,7 @@ public class Environment {
     private Scope globalScope;
     private LinkedList<Script> loadedScripts;
     private boolean isSetup = false;
+    private int currentObjectId = 1;
 
     public Environment(Options options) {
         this.options = options;
@@ -79,6 +80,13 @@ public class Environment {
         for (NativeFunction nativeFunction : BuiltInFunctions.functions) {
             globalScope.addFunction(nativeFunction);
         }
+    }
+
+    /**
+     * Increments the object id counter and returns a unique object id.
+     */
+    public int incrementObjectId() {
+        return currentObjectId++;
     }
 
     public Options getOptions() {

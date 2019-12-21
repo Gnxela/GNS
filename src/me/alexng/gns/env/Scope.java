@@ -115,17 +115,21 @@ public class Scope {
 	}
 
 	// TODO: Do I want to use char sequences? If so replace all, if not think of alternative for getting constructor.
-	public FunctionToken getLocalFunction(CharSequence charSequence) {
+	public FunctionToken getLocalFunction(CharSequence identifier) {
 		for (FunctionToken functionToken : functions) {
-			if (functionToken.getName().contentEquals(charSequence)) {
+			if (functionToken.getName().contentEquals(identifier)) {
 				return functionToken;
 			}
 		}
 		return null;
 	}
 
+	public void setLocalVariable(String identifier, Value value) {
+		variables.put(identifier, value);
+	}
+
 	public void setLocalVariable(IdentifierToken identifierToken, Value value) {
-		variables.put(identifierToken.getName(), value);
+		setLocalVariable(identifierToken.getName(), value);
 	}
 
 	private Scope findScopeWithVariable(IdentifierToken identifierToken) {
