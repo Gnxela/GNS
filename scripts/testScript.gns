@@ -57,9 +57,9 @@ print(3 < 2)
 
 // TODO: The below list
 /*
-	Comments
-	Operation functions
+	Comments DONE
 	Built in object properties: objectid, type
+	Operation functions
 	Accessor (".")
 */
 

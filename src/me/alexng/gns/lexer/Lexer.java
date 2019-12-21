@@ -13,6 +13,7 @@ public class Lexer {
 	private static final Character[] WHITESPACE_CHARS = new Character[]{' ', '\t'};
 	private static final TokenGenerator[] generators = new TokenGenerator[]{
 			new InlineCommentGenerator(),
+			new MultilineCommentGenerator(),
 			new EOLGenerator(),
 			new CommaGenerator(),
 			new BracketGenerator(),
