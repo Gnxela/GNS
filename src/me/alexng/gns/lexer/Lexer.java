@@ -12,6 +12,7 @@ public class Lexer {
 
 	private static final Character[] WHITESPACE_CHARS = new Character[]{' ', '\t'};
 	private static final TokenGenerator[] generators = new TokenGenerator[]{
+			new InlineCommentGenerator(),
 			new EOLGenerator(),
 			new CommaGenerator(),
 			new BracketGenerator(),
@@ -37,11 +38,14 @@ public class Lexer {
         while (index < input.length()) {
             boolean generated = false;
             for (TokenGenerator generator : generators) {
-                int newIndex = generator.accepts(input, index);
-                if (newIndex <= index) {
-                    continue;
-                }
-                tokens.add(generator.generate(input, new FileIndex(file, index, newIndex)));
+				int newIndex = generator.accepts(input, index);
+				if (newIndex <= index) {
+					continue;
+				}
+				Token token = generator.generate(input, new FileIndex(file, index, newIndex));
+				if (token != null) {
+					tokens.add(token);
+				}
 				index = newIndex;
 				generated = true;
 				break;

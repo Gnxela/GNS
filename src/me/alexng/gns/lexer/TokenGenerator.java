@@ -18,7 +18,7 @@ public interface TokenGenerator {
 	/**
 	 * Takes the accepted string and converts it into a token.
 	 *
-	 * @return A token generated from {@code input}[{@code index}:{@code endIndex})
+	 * @return A token generated from {@code input}[{@code index}:{@code endIndex}). Or null if no token is to be added.
 	 */
 	Token generate(String input, FileIndex fileIndex) throws ParsingException;
 
