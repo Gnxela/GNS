@@ -18,31 +18,34 @@ public class Scope {
 	private Map<String, Value> variables;
 	private Map<String, ClassToken> classes;
 	private List<FunctionToken> functions;
+	private Environment environment;
 	private Scope parentScope;
-	private Scope objectScope;
 	private Scope globalScope;
+	private Scope objectScope;
 
-	private Scope(Scope parentScope, Scope objectScope, Scope globalScope) {
+	private Scope(Environment environment, Scope parentScope, Scope objectScope, Scope globalScope) {
 		this.variables = new HashMap<>();
 		this.classes = new HashMap<>();
 		this.functions = new LinkedList<>();
+		this.environment = environment;
 		this.parentScope = parentScope;
 		this.objectScope = objectScope;
 		this.globalScope = globalScope;
 	}
 
-	public static Scope createGlobalScope() {
-		Scope globalScope = new Scope(null, null, null);
+	public static Scope createGlobalScope(Environment environment) {
+		Scope globalScope = new Scope(environment, null, null, null);
 		globalScope.setGlobalScope(globalScope);
 		return globalScope;
 	}
 
 	public Scope createChildScope() {
-		return new Scope(this, objectScope, globalScope);
+		return new Scope(environment, this, objectScope, globalScope);
 	}
 
+	// TODO: May be used for nested classes, once I get around to it.
 	public Scope createObjectScope(Scope parentScope) {
-		Scope objectScope = new Scope(parentScope, null, globalScope);
+		Scope objectScope = new Scope(parentScope.getEnvironment(), parentScope, null, parentScope.getGlobalScope());
 		objectScope.setObjectScope(objectScope);
 		return objectScope;
 	}
@@ -153,6 +156,10 @@ public class Scope {
 
 	private void setGlobalScope(Scope globalScope) {
 		this.globalScope = globalScope;
+	}
+
+	public Environment getEnvironment() {
+		return environment;
 	}
 
 	@Override

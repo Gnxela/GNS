@@ -22,7 +22,7 @@ public class Environment {
     public Environment(Options options) {
         this.options = options;
         this.loadedScripts = new LinkedList<>();
-        this.globalScope = Scope.createGlobalScope();
+        this.globalScope = Scope.createGlobalScope(this);
     }
 
     public void setup() throws ParsingException, IOException {
