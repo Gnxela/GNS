@@ -58,8 +58,8 @@ print(3 < 2)
 // TODO: The below list
 /*
 	Comments DONE
-	Built in object properties: objectid, type
-	Accessor (".")
+	Built in object properties: objectid, type DONE
+	Accessor (".") DONE
 	Operation functions
 */
 
