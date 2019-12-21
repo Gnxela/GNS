@@ -43,7 +43,7 @@ print(a)
 print(true)
 print(false)
 print(null)
-a = new String(1)
+c = new String(1)
 print(nilIdentifier)
 
 func retFunc() {
@@ -64,8 +64,7 @@ print(3 < 2)
 */
 
 print(a.objectId)
-print(a.type)
-
+print(a.b.tee)
 
 class HasOps {
 	i = 0
@@ -74,7 +73,7 @@ class HasOps {
 		i = j
 	}
 
-	func +(a) {
+	func asd(a) {
 		if (a.type == type) {
 			return new HasOps(i + a.i)
 		}

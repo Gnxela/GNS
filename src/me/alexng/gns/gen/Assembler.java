@@ -2,6 +2,7 @@ package me.alexng.gns.gen;
 
 import me.alexng.gns.ParsingException;
 import me.alexng.gns.gen.constructors.*;
+import me.alexng.gns.tokens.AccessToken;
 import me.alexng.gns.tokens.Token;
 import me.alexng.gns.tokens.operators.AdditionToken;
 import me.alexng.gns.tokens.operators.AssignToken;
@@ -21,22 +22,23 @@ public class Assembler {
 	private static final Constructor[] CONSTRUCTORS = new Constructor[]{
 			// TODO: Some operations will need to be processed right to left.
 			// TODO: Need an order in which binary operations are resolved.
-			// TODO: Maybe combine ParametersConstructor, ExpressionConstructor and FunctionCallConstructor
-			new NullConstantConstructor(),
-			new BooleanConstantConstructor(),
-			new BlockConstructor(),
-			new ClassConstructor(),
-			new ReturnConstructor(),
-			new ObjectConstructionConstructor(),
-			new FunctionConstructor(),
-			new FunctionCallConstructor(),
-			new ExpressionConstructor(),
-			new BinaryOperationConstructor(true, AdditionToken.class),
-			new BinaryOperationConstructor(true, LessThanToken.class),
-			new BinaryOperationConstructor(true, EqualToken.class),
-			new BinaryOperationConstructor(false, AssignToken.class),
-			new IfConstructor()
-	};
+            // TODO: Maybe combine ParametersConstructor, ExpressionConstructor and FunctionCallConstructor
+            new NullConstantConstructor(),
+            new BooleanConstantConstructor(),
+            new BlockConstructor(),
+            new ClassConstructor(),
+            new ReturnConstructor(),
+            new ObjectConstructionConstructor(),
+            new FunctionConstructor(),
+            new FunctionCallConstructor(),
+            new ExpressionConstructor(),
+            new BinaryOperationConstructor(true, AccessToken.class),
+            new BinaryOperationConstructor(true, AdditionToken.class),
+            new BinaryOperationConstructor(true, LessThanToken.class),
+            new BinaryOperationConstructor(true, EqualToken.class),
+            new BinaryOperationConstructor(false, AssignToken.class),
+            new IfConstructor()
+    };
 
 	public static void assemble(LinkedList<Token> tokens) throws ParsingException {
 		for (Constructor constructor : CONSTRUCTORS) {

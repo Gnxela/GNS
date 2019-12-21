@@ -84,7 +84,7 @@ public class Scope {
 	}
 
 	public Value getVariable(IdentifierToken identifierToken) throws RuntimeException {
-		Value value = variables.get(identifierToken.getName());
+		Value value = getLocalVariable(identifierToken);
 		if (value != null) {
 			return value;
 		}
@@ -92,6 +92,10 @@ public class Scope {
 			return parentScope.getVariable(identifierToken);
 		}
 		return Value.NULL;
+	}
+
+	public Value getLocalVariable(IdentifierToken identifierToken) {
+		return variables.getOrDefault(identifierToken.getName(), null);
 	}
 
 	public void addFunction(FunctionToken functionToken) throws RuntimeException {
