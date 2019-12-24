@@ -73,6 +73,19 @@ public class Assembler {
 	}
 
 	/**
+	 * Casts a {@link Token} to once of its subclasses.
+	 *
+	 * @param clazz The subclass to be cast to.
+	 * @throws ParsingException if it can not be cast
+	 */
+	public static <T extends Token> T castTo(Class<T> clazz, Token token) throws ParsingException {
+		if (token.getClass().isAssignableFrom(clazz)) {
+			return (T) token;
+		}
+		throw ExceptionUtil.createParsingExpected("Invalid token", clazz, token);
+	}
+
+	/**
 	 * Collects all tokens in between two tokens, matching opening and closing tokens to each other.
 	 *
 	 * @return A list of tokens in between the matched tokens. Not including the open and close tokens (middle open and close tokens are included)
