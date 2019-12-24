@@ -30,12 +30,12 @@ public class ParametersConstructor {
 		}
 	}
 
-	private static IdentifierToken[] grabIdentifiers(LinkedList<Token> parameterTokens) {
+	private static IdentifierToken[] grabIdentifiers(LinkedList<Token> parameterTokens) throws ParsingException {
 		List<IdentifierToken> identifiers = new LinkedList<>();
 		boolean isExpectingComma = false;
 		for (Token token : parameterTokens) {
 			if (!isExpectingComma) {
-				identifiers.add((IdentifierToken) token);
+				identifiers.add(Assembler.castTo(IdentifierToken.class, token));
 			}
 			isExpectingComma = !isExpectingComma;
 		}

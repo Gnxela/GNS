@@ -1,6 +1,7 @@
 package me.alexng.gns.gen.constructors;
 
 import me.alexng.gns.ParsingException;
+import me.alexng.gns.gen.Assembler;
 import me.alexng.gns.gen.Constructor;
 import me.alexng.gns.tokens.Token;
 import me.alexng.gns.tokens.operators.BinaryOperationToken;
@@ -36,13 +37,13 @@ public class BinaryOperationConstructor implements Constructor {
 	public void construct(ListIterator<Token> tokens) throws ParsingException {
 		BinaryOperationToken binaryOperation;
 		if (leftToRight) {
-			binaryOperation = (BinaryOperationToken) tokens.next();
+			binaryOperation = Assembler.castTo(BinaryOperationToken.class, tokens.next());
 			tokens.previous();
 		} else {
-			binaryOperation = (BinaryOperationToken) tokens.previous();
+			binaryOperation = Assembler.castTo(BinaryOperationToken.class, tokens.previous());
 		}
 		for (Class<? extends BinaryOperationToken<?, ?>> clazz : operators) {
-			if (clazz.isAssignableFrom(binaryOperation.getClass()) && !((BinaryOperationToken<?, ?>) binaryOperation).isBound()) {
+			if (clazz.isAssignableFrom(binaryOperation.getClass()) && !binaryOperation.isBound()) {
 				Token left = tokens.previous();
 				tokens.remove();
 				tokens.next(); // Skip over the operator token

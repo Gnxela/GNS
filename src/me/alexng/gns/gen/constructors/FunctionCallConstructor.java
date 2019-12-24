@@ -2,6 +2,7 @@ package me.alexng.gns.gen.constructors;
 
 import me.alexng.gns.FileIndex;
 import me.alexng.gns.ParsingException;
+import me.alexng.gns.gen.Assembler;
 import me.alexng.gns.gen.Constructor;
 import me.alexng.gns.tokens.*;
 
@@ -23,7 +24,7 @@ public class FunctionCallConstructor implements Constructor {
 
 	@Override
 	public void construct(ListIterator<Token> tokens) throws ParsingException {
-		IdentifierToken functionIdentifier = (IdentifierToken) tokens.next();
+		IdentifierToken functionIdentifier = Assembler.castTo(IdentifierToken.class, tokens.next());
 
 		if (!tokens.hasNext()) {
 			return;

@@ -79,7 +79,7 @@ public class Assembler {
 	 * @throws ParsingException if it can not be cast
 	 */
 	public static <T extends Token> T castTo(Class<T> clazz, Token token) throws ParsingException {
-		if (token.getClass().isAssignableFrom(clazz)) {
+		if (clazz.isAssignableFrom(token.getClass())) {
 			return (T) token;
 		}
 		throw ExceptionUtil.createParsingExpected("Invalid token", clazz, token);
