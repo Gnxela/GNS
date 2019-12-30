@@ -8,6 +8,8 @@ import me.alexng.gns.env.Scope;
 import me.alexng.gns.env.Value;
 import me.alexng.gns.util.StringUtil;
 
+import static me.alexng.gns.env.Value.NULL;
+
 public class ClassToken extends IdentifiedToken {
 
 	private static final String OBJECT_ID_VARIABLE = "objectId";
@@ -23,7 +25,7 @@ public class ClassToken extends IdentifiedToken {
 	@Override
 	public Value execute(Scope scope) throws RuntimeException {
 		scope.addClass(this);
-		return Value.NULL;
+		return NULL;
 	}
 
 	public ObjectValue createInstance(ObjectConstructionToken caller, Value[] values, Scope scope) throws RuntimeException {
@@ -44,8 +46,10 @@ public class ClassToken extends IdentifiedToken {
 	private void callConstructor(ObjectConstructionToken caller, Value[] values, Scope objectScope) throws RuntimeException {
 		FunctionToken constructor = objectScope.getLocalFunction("construct");
 		if (constructor != null) {
-			// TODO: Check if value was returned. If so throw an error
-			constructor.executeFunction(caller, objectScope, values);
+			Value returnedValue = constructor.executeFunction(caller, objectScope, values);
+			if (returnedValue != null && returnedValue != Value.NULL) {
+				throw new RuntimeException(constructor.getFileIndex(), "Invalid value return.");
+			}
 			return;
 		}
 		if (values.length != 0) {
