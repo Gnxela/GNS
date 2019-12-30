@@ -1,9 +1,10 @@
 package me.alexng.gns.lexer.generators;
 
 import me.alexng.gns.FileIndex;
+import me.alexng.gns.env.NumberValue;
 import me.alexng.gns.lexer.TokenGenerator;
-import me.alexng.gns.tokens.NumberToken;
 import me.alexng.gns.tokens.Token;
+import me.alexng.gns.tokens.ValueToken;
 
 public class NumberGenerator implements TokenGenerator {
 	@Override
@@ -19,6 +20,6 @@ public class NumberGenerator implements TokenGenerator {
 
 	@Override
 	public Token generate(String input, FileIndex fileIndex) {
-		return new NumberToken(fileIndex.substring(input), fileIndex);
+		return new ValueToken(new NumberValue(fileIndex.substring(input)), fileIndex);
 	}
 }
