@@ -1,7 +1,7 @@
 class TestClass {
 	class NestedClass {
 		tee = hee = null
-		func construct(i, j) {
+		func init(i, j) {
 			foo(i)
 			bar(j)
 		}
@@ -13,7 +13,7 @@ class TestClass {
 		}
 	}
 	var = 0
-	func construct(i) {
+	func init(i) {
 		work(i)
 	}
 	func work(num) {
@@ -69,7 +69,7 @@ print(a.b.tee)
 class HasOps {
 	i = 0
 
-	func construct(j) {
+	func init(j) {
 		i = j
 	}
 

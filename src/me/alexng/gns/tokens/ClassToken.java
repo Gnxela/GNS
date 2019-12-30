@@ -14,6 +14,7 @@ public class ClassToken extends IdentifiedToken {
 
 	private static final String OBJECT_ID_VARIABLE = "objectId";
 	private static final String TYPE_VARIABLE = "type";
+	private static final String CONSTRUCTOR_NAME = "init";
 
 	private BlockToken block;
 
@@ -44,7 +45,7 @@ public class ClassToken extends IdentifiedToken {
 	}
 
 	private void callConstructor(ObjectConstructionToken caller, Value[] values, Scope objectScope) throws RuntimeException {
-		FunctionToken constructor = objectScope.getLocalFunction("construct");
+		FunctionToken constructor = objectScope.getLocalFunction(CONSTRUCTOR_NAME);
 		if (constructor != null) {
 			Value returnedValue = constructor.executeFunction(caller, objectScope, values);
 			if (returnedValue != null && returnedValue != Value.NULL) {

@@ -2,7 +2,7 @@ class String {
 
 	str = null
 
-	func construct(a) {
+	func init(a) {
 		str = a
 	}
 

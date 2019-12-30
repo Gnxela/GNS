@@ -9,7 +9,6 @@ import me.alexng.gns.tokens.*;
 
 import java.util.ListIterator;
 
-// TODO: Better name
 public class ObjectConstructionConstructor implements Constructor {
 
 	@Override
