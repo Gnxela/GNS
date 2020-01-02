@@ -4,26 +4,25 @@ import me.alexng.gns.RuntimeException;
 import me.alexng.gns.env.Environment;
 import me.alexng.gns.env.Value;
 import me.alexng.gns.tokens.*;
-import me.alexng.gns.util.StringUtil;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class Scope {
 
-	FunctionProvider functionProvider;
 	private Environment environment;
 	private Scope parentScope;
+	FunctionProvider functionProvider;
 	private Scope globalScope;
 
 	// TODO: Think about how we're storing this data. A map is a lot of overhead
 	private Map<String, Value> variables;
-	private Map<String, ClassToken> classes;
+	ClassProvider classProvider;
 	private Scope objectScope;
 
-	private Scope(Environment environment, Scope parentScope, Scope objectScope, Scope globalScope, FunctionProvider parentFunctionProvider) {
+	private Scope(Environment environment, Scope parentScope, Scope objectScope, Scope globalScope, FunctionProvider parentFunctionProvider, ClassProvider parentClassProvider) {
 		this.variables = new HashMap<>();
-		this.classes = new HashMap<>();
+		this.classProvider = new ClassProvider(parentClassProvider);
 		this.functionProvider = new FunctionProvider(parentFunctionProvider);
 		this.environment = environment;
 		this.parentScope = parentScope;
@@ -32,18 +31,18 @@ public class Scope {
 	}
 
 	public static Scope createGlobalScope(Environment environment) {
-		Scope globalScope = new Scope(environment, null, null, null, null);
+		Scope globalScope = new Scope(environment, null, null, null, null, null);
 		globalScope.setGlobalScope(globalScope);
 		return globalScope;
 	}
 
 	public Scope createChildScope() {
-		return new Scope(environment, this, objectScope, globalScope, functionProvider);
+		return new Scope(environment, this, objectScope, globalScope, functionProvider, classProvider);
 	}
 
 	// TODO: May be used for nested classes, once I get around to it.
 	public Scope createObjectScope(Scope parentScope) {
-		Scope objectScope = new Scope(parentScope.getEnvironment(), parentScope, null, parentScope.getGlobalScope(), parentScope.functionProvider);
+		Scope objectScope = new Scope(parentScope.getEnvironment(), parentScope, null, parentScope.getGlobalScope(), parentScope.functionProvider, parentScope.classProvider);
 		objectScope.setObjectScope(objectScope);
 		return objectScope;
 	}
@@ -53,24 +52,11 @@ public class Scope {
 	}
 
 	public void addClass(ClassToken classToken) throws RuntimeException {
-		try {
-			// TODO: Not sure if I like the idea of just waiting for an exception, see later
-			getClass(classToken.getIdentifier());
-			throw new RuntimeException(classToken, "Class already defined");
-		} catch (RuntimeException ignored) {
-			classes.put(classToken.getIdentifier().getName(), classToken);
-		}
+		classProvider.set(classToken);
 	}
 
 	public ClassToken getClass(IdentifierToken identifierToken) throws RuntimeException {
-		ClassToken classToken = classes.get(identifierToken.getName());
-		if (classToken != null) {
-			return classToken;
-		}
-		if (parentScope != null) {
-			return parentScope.getClass(identifierToken);
-		}
-		throw new RuntimeException(identifierToken, "Undefined class: " + identifierToken.getName());
+		return classProvider.get(identifierToken);
 	}
 
 	public void setVariable(IdentifierToken identifierToken, Value value) {
@@ -152,6 +138,6 @@ public class Scope {
 
 	@Override
 	public String toString() {
-		return "<Scope var=" + variables.toString() + ". func={}. class={" + StringUtil.unrollIdentifiedMapInline(classes) + "}>";
+		return "<Scope var={}. func={}. class={}>";
 	}
 }
