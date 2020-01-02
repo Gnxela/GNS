@@ -1,4 +1,6 @@
-package me.alexng.gns.env;
+package me.alexng.gns.env.value;
+
+import me.alexng.gns.env.Value;
 
 public class ReturnedValue extends Value {
 

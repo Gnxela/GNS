@@ -2,6 +2,7 @@ package me.alexng.gns.env;
 
 import me.alexng.gns.RuntimeException;
 import me.alexng.gns.env.scope.Scope;
+import me.alexng.gns.env.value.ObjectValue;
 import me.alexng.gns.tokens.Token;
 
 public class BuiltInFunctions {
