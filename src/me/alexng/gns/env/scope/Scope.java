@@ -1,12 +1,10 @@
 package me.alexng.gns.env.scope;
 
+import me.alexng.gns.FileIndex;
 import me.alexng.gns.RuntimeException;
 import me.alexng.gns.env.Environment;
 import me.alexng.gns.env.Value;
 import me.alexng.gns.tokens.*;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public class Scope {
 
@@ -16,12 +14,12 @@ public class Scope {
 	private Scope globalScope;
 
 	// TODO: Think about how we're storing this data. A map is a lot of overhead
-	private Map<String, Value> variables;
+	VariableProvider variableProvider;
 	ClassProvider classProvider;
 	private Scope objectScope;
 
-	private Scope(Environment environment, Scope parentScope, Scope objectScope, Scope globalScope, FunctionProvider parentFunctionProvider, ClassProvider parentClassProvider) {
-		this.variables = new HashMap<>();
+	private Scope(Environment environment, Scope parentScope, Scope objectScope, Scope globalScope, FunctionProvider parentFunctionProvider, ClassProvider parentClassProvider, VariableProvider parentVariableProvider) {
+		this.variableProvider = new VariableProvider(parentVariableProvider);
 		this.classProvider = new ClassProvider(parentClassProvider);
 		this.functionProvider = new FunctionProvider(parentFunctionProvider);
 		this.environment = environment;
@@ -31,18 +29,18 @@ public class Scope {
 	}
 
 	public static Scope createGlobalScope(Environment environment) {
-		Scope globalScope = new Scope(environment, null, null, null, null, null);
+		Scope globalScope = new Scope(environment, null, null, null, null, null, null);
 		globalScope.setGlobalScope(globalScope);
 		return globalScope;
 	}
 
 	public Scope createChildScope() {
-		return new Scope(environment, this, objectScope, globalScope, functionProvider, classProvider);
+		return new Scope(environment, this, objectScope, globalScope, functionProvider, classProvider, variableProvider);
 	}
 
 	// TODO: May be used for nested classes, once I get around to it.
 	public Scope createObjectScope(Scope parentScope) {
-		Scope objectScope = new Scope(parentScope.getEnvironment(), parentScope, null, parentScope.getGlobalScope(), parentScope.functionProvider, parentScope.classProvider);
+		Scope objectScope = new Scope(parentScope.getEnvironment(), parentScope, null, parentScope.getGlobalScope(), parentScope.functionProvider, parentScope.classProvider, parentScope.variableProvider);
 		objectScope.setObjectScope(objectScope);
 		return objectScope;
 	}
@@ -59,27 +57,16 @@ public class Scope {
 		return classProvider.get(identifierToken);
 	}
 
-	public void setVariable(IdentifierToken identifierToken, Value value) {
-		Scope scope = findScopeWithVariable(identifierToken);
-		if (scope == null) {
-			scope = this;
-		}
-		scope.setLocalVariable(identifierToken, value);
+	public void setVariable(IdentifierToken identifierToken, Value value) throws RuntimeException {
+		variableProvider.set(identifierToken, value);
 	}
 
 	public Value getVariable(IdentifierToken identifierToken) throws RuntimeException {
-		Value value = getLocalVariable(identifierToken);
-		if (value != null) {
-			return value;
-		}
-		if (parentScope != null) {
-			return parentScope.getVariable(identifierToken);
-		}
-		return Value.NULL;
+		return variableProvider.get(identifierToken);
 	}
 
 	public Value getLocalVariable(IdentifierToken identifierToken) {
-		return variables.getOrDefault(identifierToken.getName(), null);
+		return variableProvider.getLocal(identifierToken);
 	}
 
 	public void addFunction(FunctionToken functionToken) throws RuntimeException {
@@ -95,21 +82,11 @@ public class Scope {
 	}
 
 	public void setLocalVariable(String identifier, Value value) {
-		variables.put(identifier, value);
+		variableProvider.setLocal(new IdentifierToken(identifier, FileIndex.INTERNAL_INDEX), value);
 	}
 
 	public void setLocalVariable(IdentifierToken identifierToken, Value value) {
 		setLocalVariable(identifierToken.getName(), value);
-	}
-
-	private Scope findScopeWithVariable(IdentifierToken identifierToken) {
-		if (variables.containsKey(identifierToken.getName())) {
-			return this;
-		}
-		if (parentScope == null) {
-			return null;
-		}
-		return parentScope.findScopeWithVariable(identifierToken);
 	}
 
 	public Scope getObjectScope() {
