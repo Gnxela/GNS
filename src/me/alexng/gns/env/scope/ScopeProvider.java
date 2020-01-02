@@ -3,17 +3,17 @@ package me.alexng.gns.env.scope;
 import me.alexng.gns.RuntimeException;
 import me.alexng.gns.tokens.IdentifiedToken;
 
-public abstract class ScopeProvider<T> {
+public abstract class ScopeProvider<T, V> {
 
-	ScopeProvider<T> parent;
+	ScopeProvider<T, V> parent;
 
-	public ScopeProvider(ScopeProvider<T> parent) {
+	public ScopeProvider(ScopeProvider<T, V> parent) {
 		this.parent = parent;
 	}
 
-	public abstract T get(IdentifiedToken identifiedToken) throws RuntimeException;
+	public abstract V get(IdentifiedToken identifiedToken) throws RuntimeException;
 
-	public abstract T getLocal(IdentifiedToken identifiedToken);
+	public abstract V getLocal(IdentifiedToken identifiedToken);
 
 	public abstract void set(T t) throws RuntimeException;
 

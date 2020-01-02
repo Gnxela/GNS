@@ -7,7 +7,7 @@ import me.alexng.gns.tokens.IdentifiedToken;
 import java.util.LinkedList;
 import java.util.List;
 
-public class FunctionProvider extends ScopeProvider<FunctionToken> {
+public class FunctionProvider extends ScopeProvider<FunctionToken, FunctionToken> {
 
 	private List<FunctionToken> functions;
 

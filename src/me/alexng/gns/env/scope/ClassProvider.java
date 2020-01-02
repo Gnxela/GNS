@@ -7,7 +7,7 @@ import me.alexng.gns.tokens.IdentifiedToken;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ClassProvider extends ScopeProvider<ClassToken> {
+public class ClassProvider extends ScopeProvider<ClassToken, ClassToken> {
 
 	private Map<String, ClassToken> classes;
 
