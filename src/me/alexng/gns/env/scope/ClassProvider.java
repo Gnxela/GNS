@@ -7,7 +7,7 @@ import me.alexng.gns.tokens.IdentifiedToken;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ClassProvider extends ScopeProvider<ClassToken, ClassToken> {
+public class ClassProvider extends IdentifiedScopeProvider<ClassToken> {
 
 	private Map<String, ClassToken> classes;
 
@@ -34,18 +34,18 @@ public class ClassProvider extends ScopeProvider<ClassToken, ClassToken> {
 	}
 
 	@Override
-	public void set(ClassToken classToken) throws RuntimeException {
-		setLocal(classToken);
+	public void set(IdentifiedToken identifiedToken, ClassToken classToken) throws RuntimeException {
+		setLocal(identifiedToken, classToken);
 	}
 
 	@Override
-	public void setLocal(ClassToken classToken) {
+	public void setLocal(IdentifiedToken identifiedToken, ClassToken classToken) {
 		try {
 			// TODO: Not sure if I like the idea of just waiting for an exception, see later
-			get(classToken.getIdentifier());
+			get(identifiedToken);
 			throw new RuntimeException(classToken, "Class already defined");
 		} catch (RuntimeException ignored) {
-			classes.put(classToken.getIdentifier().getName(), classToken);
+			classes.put(identifiedToken.getIdentifier().getName(), classToken);
 		}
 	}
 }

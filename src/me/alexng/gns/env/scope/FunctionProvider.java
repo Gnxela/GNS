@@ -7,7 +7,7 @@ import me.alexng.gns.tokens.IdentifiedToken;
 import java.util.LinkedList;
 import java.util.List;
 
-public class FunctionProvider extends ScopeProvider<FunctionToken, FunctionToken> {
+public class FunctionProvider extends IdentifiedScopeProvider<FunctionToken> {
 
 	private List<FunctionToken> functions;
 
@@ -40,12 +40,12 @@ public class FunctionProvider extends ScopeProvider<FunctionToken, FunctionToken
 	}
 
 	@Override
-	public void set(FunctionToken functionToken) throws RuntimeException {
-		setLocal(functionToken);
+	public void set(IdentifiedToken identifiedToken, FunctionToken functionToken) throws RuntimeException {
+		setLocal(identifiedToken, functionToken);
 	}
 
 	@Override
-	public void setLocal(FunctionToken functionToken) {
+	public void setLocal(IdentifiedToken identifiedToken, FunctionToken functionToken) {
 		// TODO: CHeck for previous functions?
 		functions.add(functionToken);
 	}
