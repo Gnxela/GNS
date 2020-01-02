@@ -8,15 +8,13 @@ import me.alexng.gns.tokens.*;
 
 public class Scope {
 
-	private Environment environment;
-	private Scope parentScope;
-	FunctionProvider functionProvider;
-	private Scope globalScope;
-
-	// TODO: Think about how we're storing this data. A map is a lot of overhead
 	VariableProvider variableProvider;
 	ClassProvider classProvider;
+	FunctionProvider functionProvider;
+	private Environment environment;
+	private Scope parentScope;
 	private Scope objectScope;
+	private Scope globalScope;
 
 	private Scope(Environment environment, Scope parentScope, Scope objectScope, Scope globalScope, FunctionProvider parentFunctionProvider, ClassProvider parentClassProvider, VariableProvider parentVariableProvider) {
 		this.variableProvider = new VariableProvider(parentVariableProvider);
