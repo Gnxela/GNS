@@ -2,6 +2,7 @@ package me.alexng.gns.env;
 
 import me.alexng.gns.FileIndex;
 import me.alexng.gns.RuntimeException;
+import me.alexng.gns.env.scope.Scope;
 import me.alexng.gns.tokens.FunctionToken;
 import me.alexng.gns.tokens.IdentifierToken;
 import me.alexng.gns.tokens.Token;

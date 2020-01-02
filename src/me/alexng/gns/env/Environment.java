@@ -4,6 +4,7 @@ import me.alexng.gns.FileIndex;
 import me.alexng.gns.Options;
 import me.alexng.gns.ParsingException;
 import me.alexng.gns.RuntimeException;
+import me.alexng.gns.env.scope.Scope;
 
 import java.io.File;
 import java.io.IOException;

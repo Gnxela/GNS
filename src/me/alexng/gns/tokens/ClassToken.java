@@ -4,8 +4,8 @@ import me.alexng.gns.FileIndex;
 import me.alexng.gns.RuntimeException;
 import me.alexng.gns.env.NumberValue;
 import me.alexng.gns.env.ObjectValue;
-import me.alexng.gns.env.Scope;
 import me.alexng.gns.env.Value;
+import me.alexng.gns.env.scope.Scope;
 import me.alexng.gns.util.StringUtil;
 
 import static me.alexng.gns.env.Value.NULL;
@@ -45,7 +45,7 @@ public class ClassToken extends IdentifiedToken {
 	}
 
 	private void callConstructor(ObjectConstructionToken caller, Value[] values, Scope objectScope) throws RuntimeException {
-		FunctionToken constructor = objectScope.getLocalFunction(CONSTRUCTOR_NAME);
+		FunctionToken constructor = objectScope.getLocalFunction(this, CONSTRUCTOR_NAME);
 		if (constructor != null) {
 			Value returnedValue = constructor.executeFunction(caller, objectScope, values);
 			if (returnedValue != null && returnedValue != Value.NULL) {

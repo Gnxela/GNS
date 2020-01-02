@@ -1,5 +1,6 @@
 package me.alexng.gns.env;
 
+import me.alexng.gns.env.scope.Scope;
 import me.alexng.gns.tokens.ClassToken;
 
 public class ObjectValue extends Value {

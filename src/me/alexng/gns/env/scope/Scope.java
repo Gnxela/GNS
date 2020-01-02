@@ -1,32 +1,30 @@
-package me.alexng.gns.env;
+package me.alexng.gns.env.scope;
 
 import me.alexng.gns.RuntimeException;
-import me.alexng.gns.tokens.ClassToken;
-import me.alexng.gns.tokens.FunctionToken;
-import me.alexng.gns.tokens.IdentifiedToken;
-import me.alexng.gns.tokens.IdentifierToken;
+import me.alexng.gns.env.Environment;
+import me.alexng.gns.env.Value;
+import me.alexng.gns.tokens.*;
 import me.alexng.gns.util.StringUtil;
 
 import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Map;
 
 public class Scope {
 
-	// TODO: Think about how we're storing this data. A map is a lot of overhead
-	private Map<String, Value> variables;
-	private Map<String, ClassToken> classes;
-	private List<FunctionToken> functions;
+	FunctionProvider functionProvider;
 	private Environment environment;
 	private Scope parentScope;
 	private Scope globalScope;
+
+	// TODO: Think about how we're storing this data. A map is a lot of overhead
+	private Map<String, Value> variables;
+	private Map<String, ClassToken> classes;
 	private Scope objectScope;
 
-	private Scope(Environment environment, Scope parentScope, Scope objectScope, Scope globalScope) {
+	private Scope(Environment environment, Scope parentScope, Scope objectScope, Scope globalScope, FunctionProvider parentFunctionProvider) {
 		this.variables = new HashMap<>();
 		this.classes = new HashMap<>();
-		this.functions = new LinkedList<>();
+		this.functionProvider = new FunctionProvider(parentFunctionProvider);
 		this.environment = environment;
 		this.parentScope = parentScope;
 		this.objectScope = objectScope;
@@ -34,18 +32,18 @@ public class Scope {
 	}
 
 	public static Scope createGlobalScope(Environment environment) {
-		Scope globalScope = new Scope(environment, null, null, null);
+		Scope globalScope = new Scope(environment, null, null, null, null);
 		globalScope.setGlobalScope(globalScope);
 		return globalScope;
 	}
 
 	public Scope createChildScope() {
-		return new Scope(environment, this, objectScope, globalScope);
+		return new Scope(environment, this, objectScope, globalScope, functionProvider);
 	}
 
 	// TODO: May be used for nested classes, once I get around to it.
 	public Scope createObjectScope(Scope parentScope) {
-		Scope objectScope = new Scope(parentScope.getEnvironment(), parentScope, null, parentScope.getGlobalScope());
+		Scope objectScope = new Scope(parentScope.getEnvironment(), parentScope, null, parentScope.getGlobalScope(), parentScope.functionProvider);
 		objectScope.setObjectScope(objectScope);
 		return objectScope;
 	}
@@ -99,33 +97,15 @@ public class Scope {
 	}
 
 	public void addFunction(FunctionToken functionToken) throws RuntimeException {
-		if (getLocalFunction(functionToken.getName()) != null) {
-			// TODO: This is only checking the local scope. We need to check up the stack.
-			//  I'm still not sure if I want to allow nested functions etc. so I'll leave it for now.
-			throw new RuntimeException(functionToken, "Function already defined");
-		}
-		functions.add(functionToken);
+		functionProvider.setLocal(functionToken);
 	}
 
 	public FunctionToken getFunction(IdentifiedToken identifiedToken) throws RuntimeException {
-		FunctionToken function = getLocalFunction(identifiedToken);
-		if (function != null) {
-			return function;
-		}
-		if (parentScope != null) {
-			return parentScope.getFunction(identifiedToken);
-		}
-		throw new RuntimeException(identifiedToken, "Undefined function: " + identifiedToken.getIdentifier().getName());
+		return functionProvider.get(identifiedToken);
 	}
 
-	// TODO: Do I want to use char sequences? If so replace all, if not think of alternative for getting constructor.
-	public FunctionToken getLocalFunction(CharSequence identifier) {
-		for (FunctionToken functionToken : functions) {
-			if (functionToken.getName().contentEquals(identifier)) {
-				return functionToken;
-			}
-		}
-		return null;
+	public FunctionToken getLocalFunction(Token caller, CharSequence identifier) {
+		return functionProvider.getLocal(new IdentifierToken(identifier.toString(), caller.getFileIndex()));
 	}
 
 	public void setLocalVariable(String identifier, Value value) {
@@ -172,6 +152,6 @@ public class Scope {
 
 	@Override
 	public String toString() {
-		return "<Scope var=" + variables.toString() + ". func={" + StringUtil.unrollIdentifiedListInline(functions) + "}. class={" + StringUtil.unrollIdentifiedMapInline(classes) + "}>";
+		return "<Scope var=" + variables.toString() + ". func={}. class={" + StringUtil.unrollIdentifiedMapInline(classes) + "}>";
 	}
 }
