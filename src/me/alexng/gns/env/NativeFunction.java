@@ -8,9 +8,9 @@ import me.alexng.gns.tokens.Token;
 
 public abstract class NativeFunction extends FunctionToken {
 
-    public NativeFunction(String name) {
-        super(new IdentifierToken(name, FileIndex.INTERNAL_INDEX), null, null, FileIndex.INTERNAL_INDEX);
-    }
+	public NativeFunction(String name) {
+		super(new IdentifierToken(name, FileIndex.INTERNAL_INDEX), null, null, FileIndex.INTERNAL_INDEX);
+	}
 
-    public abstract Value executeFunction(Token caller, Scope parentScope, Value[] values) throws RuntimeException;
+	public abstract Value executeFunction(Token caller, Scope parentScope, Value[] values) throws RuntimeException;
 }
