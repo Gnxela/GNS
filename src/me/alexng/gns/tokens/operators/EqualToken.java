@@ -22,13 +22,13 @@ public class EqualToken extends BinaryOperationToken<Token, Token> {
 		}
 
 		switch (leftValue.getType()) {
-            case NULL:
-                return BooleanValue.TRUE;
-            case OBJECT:
-                // TODO: Check references
-            default:
-                return BooleanValue.valueOf(leftValue.getJavaValue() == rightValue.getJavaValue());
-        }
+			case NULL:
+				return BooleanValue.TRUE;
+			case OBJECT:
+				// TODO: Check references
+			default:
+				return BooleanValue.valueOf(leftValue.getJavaValue() == rightValue.getJavaValue());
+		}
 	}
 
 	@Override

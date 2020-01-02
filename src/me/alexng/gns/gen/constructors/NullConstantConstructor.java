@@ -13,21 +13,21 @@ import java.util.ListIterator;
 
 public class NullConstantConstructor implements Constructor {
 
-    @Override
-    public boolean isLeftToRight() {
-        return true;
-    }
+	@Override
+	public boolean isLeftToRight() {
+		return true;
+	}
 
-    @Override
-    public boolean accepts(Token token) {
-        return Keyword.NULL.matches(token);
-    }
+	@Override
+	public boolean accepts(Token token) {
+		return Keyword.NULL.matches(token);
+	}
 
-    @Override
-    public void construct(ListIterator<Token> tokens) throws ParsingException {
-        KeywordToken keywordToken = Assembler.castTo(KeywordToken.class, tokens.next());
-        tokens.remove();
-        tokens.add(new ValueToken(Value.NULL, keywordToken.getFileIndex()));
-    }
+	@Override
+	public void construct(ListIterator<Token> tokens) throws ParsingException {
+		KeywordToken keywordToken = Assembler.castTo(KeywordToken.class, tokens.next());
+		tokens.remove();
+		tokens.add(new ValueToken(Value.NULL, keywordToken.getFileIndex()));
+	}
 
 }

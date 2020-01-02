@@ -28,18 +28,18 @@ public class Lexer {
 	};
 
 	/**
-     * Takes an input string and returns a list of tokens that represent that string.
-     * Output from this function must be sent to {@link me.alexng.gns.gen.Assembler#assemble(LinkedList)} before being executed.
-     *
-     * @param file the file from which the input was loaded
-     * @throws ParsingException Thrown when the input is invalid.
-     */
-    public static LinkedList<Token> tokenize(String input, String file) throws ParsingException {
-        LinkedList<Token> tokens = new LinkedList<>();
-        int index = trimWhitespace(input, 0);
-        while (index < input.length()) {
-            boolean generated = false;
-            for (TokenGenerator generator : generators) {
+	 * Takes an input string and returns a list of tokens that represent that string.
+	 * Output from this function must be sent to {@link me.alexng.gns.gen.Assembler#assemble(LinkedList)} before being executed.
+	 *
+	 * @param file the file from which the input was loaded
+	 * @throws ParsingException Thrown when the input is invalid.
+	 */
+	public static LinkedList<Token> tokenize(String input, String file) throws ParsingException {
+		LinkedList<Token> tokens = new LinkedList<>();
+		int index = trimWhitespace(input, 0);
+		while (index < input.length()) {
+			boolean generated = false;
+			for (TokenGenerator generator : generators) {
 				int newIndex = generator.accepts(input, index);
 				if (newIndex <= index) {
 					continue;

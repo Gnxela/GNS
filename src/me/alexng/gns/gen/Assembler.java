@@ -20,22 +20,22 @@ import java.util.ListIterator;
 public class Assembler {
 
 	private static final Constructor[] CONSTRUCTORS = new Constructor[]{
-            new NullConstantConstructor(),
-            new BooleanConstantConstructor(),
-            new BlockConstructor(),
-            new ClassConstructor(),
-            new ReturnConstructor(),
-            new ObjectConstructionConstructor(),
-            new FunctionConstructor(),
-            new FunctionCallConstructor(),
-            new ExpressionConstructor(),
-            new BinaryOperationConstructor(true, AccessToken.class),
-            new BinaryOperationConstructor(true, AdditionToken.class),
-            new BinaryOperationConstructor(true, LessThanToken.class),
-            new BinaryOperationConstructor(true, EqualToken.class),
-            new BinaryOperationConstructor(false, AssignToken.class),
-            new IfConstructor()
-    };
+			new NullConstantConstructor(),
+			new BooleanConstantConstructor(),
+			new BlockConstructor(),
+			new ClassConstructor(),
+			new ReturnConstructor(),
+			new ObjectConstructionConstructor(),
+			new FunctionConstructor(),
+			new FunctionCallConstructor(),
+			new ExpressionConstructor(),
+			new BinaryOperationConstructor(true, AccessToken.class),
+			new BinaryOperationConstructor(true, AdditionToken.class),
+			new BinaryOperationConstructor(true, LessThanToken.class),
+			new BinaryOperationConstructor(true, EqualToken.class),
+			new BinaryOperationConstructor(false, AssignToken.class),
+			new IfConstructor()
+	};
 
 	public static void assemble(LinkedList<Token> tokens) throws ParsingException {
 		for (Constructor constructor : CONSTRUCTORS) {

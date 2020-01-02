@@ -8,20 +8,20 @@ import me.alexng.gns.env.Value;
 
 public class ReturnToken extends Token {
 
-    private Token returnedToken;
+	private Token returnedToken;
 
-    public ReturnToken(Token returnedToken, FileIndex fileIndex) {
-        super(fileIndex);
-        this.returnedToken = returnedToken;
-    }
+	public ReturnToken(Token returnedToken, FileIndex fileIndex) {
+		super(fileIndex);
+		this.returnedToken = returnedToken;
+	}
 
-    @Override
-    public Value execute(Scope scope) throws RuntimeException {
-        return new ReturnedValue(returnedToken.execute(scope));
-    }
+	@Override
+	public Value execute(Scope scope) throws RuntimeException {
+		return new ReturnedValue(returnedToken.execute(scope));
+	}
 
-    @Override
-    public String toString() {
-        return "<Return " + returnedToken.toString() + " >";
-    }
+	@Override
+	public String toString() {
+		return "<Return " + returnedToken.toString() + " >";
+	}
 }
