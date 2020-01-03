@@ -1,90 +1,59 @@
 package me.alexng.gns.env.scope;
 
-import me.alexng.gns.FileIndex;
-import me.alexng.gns.RuntimeException;
 import me.alexng.gns.env.Environment;
-import me.alexng.gns.env.Value;
-import me.alexng.gns.tokens.*;
 
 public class Scope {
 
-	VariableProvider variableProvider;
-	ClassProvider classProvider;
-	FunctionProvider functionProvider;
+	public VariableProvider variableProvider;
+	public ClassProvider classProvider;
+	public FunctionProvider functionProvider;
 	private Environment environment;
 	private Scope parentScope;
 	private Scope objectScope;
 	private Scope globalScope;
 
-	private Scope(Environment environment, Scope parentScope, Scope objectScope, Scope globalScope, FunctionProvider parentFunctionProvider, ClassProvider parentClassProvider, VariableProvider parentVariableProvider) {
-		this.variableProvider = new VariableProvider(parentVariableProvider);
-		this.classProvider = new ClassProvider(parentClassProvider);
-		this.functionProvider = new FunctionProvider(parentFunctionProvider);
+	private Scope(Environment environment, Scope parentScope, Scope objectScope, Scope globalScope, FunctionProvider functionProvider, ClassProvider classProvider, VariableProvider variableProvider) {
 		this.environment = environment;
 		this.parentScope = parentScope;
 		this.objectScope = objectScope;
 		this.globalScope = globalScope;
+		this.variableProvider = variableProvider;
+		this.classProvider = classProvider;
+		this.functionProvider = functionProvider;
 	}
 
 	public static Scope createGlobalScope(Environment environment) {
-		Scope globalScope = new Scope(environment, null, null, null, null, null, null);
+		Scope globalScope = new Scope(environment,
+				null, null, null,
+				new FunctionProvider(null),
+				new ClassProvider(null),
+				new VariableProvider(null));
 		globalScope.setGlobalScope(globalScope);
 		return globalScope;
 	}
 
 	public Scope createChildScope() {
-		return new Scope(environment, this, objectScope, globalScope, functionProvider, classProvider, variableProvider);
+		return new Scope(environment,
+				this, objectScope, globalScope,
+				new FunctionProvider(functionProvider),
+				new ClassProvider(classProvider),
+				new VariableProvider(variableProvider));
 	}
 
-	// TODO: May be used for nested classes, once I get around to it.
-	public Scope createObjectScope(Scope parentScope) {
-		Scope objectScope = new Scope(parentScope.getEnvironment(), parentScope, null, parentScope.getGlobalScope(), parentScope.functionProvider, parentScope.classProvider, parentScope.variableProvider);
+	private Scope createObjectScope(Scope parentScope) {
+		Scope objectScope = new Scope(parentScope.getEnvironment(),
+				parentScope,
+				null,
+				parentScope.getGlobalScope(),
+				new FunctionProvider(parentScope.functionProvider),
+				new ClassProvider(parentScope.classProvider),
+				new VariableProvider(parentScope.variableProvider));
 		objectScope.setObjectScope(objectScope);
 		return objectScope;
 	}
 
 	public Scope createObjectScope() {
 		return createObjectScope(globalScope);
-	}
-
-	public void addClass(ClassToken classToken) throws RuntimeException {
-		classProvider.set(classToken);
-	}
-
-	public ClassToken getClass(IdentifierToken identifierToken) throws RuntimeException {
-		return classProvider.get(identifierToken);
-	}
-
-	public void setVariable(IdentifierToken identifierToken, Value value) throws RuntimeException {
-		variableProvider.set(identifierToken, value);
-	}
-
-	public Value getVariable(IdentifierToken identifierToken) throws RuntimeException {
-		return variableProvider.get(identifierToken);
-	}
-
-	public Value getLocalVariable(IdentifierToken identifierToken) {
-		return variableProvider.getLocal(identifierToken);
-	}
-
-	public void addFunction(FunctionToken functionToken) throws RuntimeException {
-		functionProvider.setLocal(functionToken);
-	}
-
-	public FunctionToken getFunction(IdentifiedToken identifiedToken) throws RuntimeException {
-		return functionProvider.get(identifiedToken);
-	}
-
-	public FunctionToken getLocalFunction(Token caller, CharSequence identifier) {
-		return functionProvider.getLocal(new IdentifierToken(identifier.toString(), caller.getFileIndex()));
-	}
-
-	public void setLocalVariable(String identifier, Value value) {
-		variableProvider.setLocal(new IdentifierToken(identifier, FileIndex.INTERNAL_INDEX), value);
-	}
-
-	public void setLocalVariable(IdentifierToken identifierToken, Value value) {
-		setLocalVariable(identifierToken.getName(), value);
 	}
 
 	public Scope getObjectScope() {

@@ -23,7 +23,7 @@ public class AccessToken extends BinaryOperatorToken<Token, IdentifierToken> {
 		Value leftValue = getLeft().execute(scope);
 		if (leftValue instanceof ObjectValue) {
 			ObjectValue objectValue = (ObjectValue) leftValue;
-			return objectValue.getObjectScope().getLocalVariable(getRight());
+			return objectValue.getObjectScope().variableProvider.getLocal(getRight());
 		}
 		throw new RuntimeException(getLeft(), "Invalid access. Must be of type OBJECT");
 	}

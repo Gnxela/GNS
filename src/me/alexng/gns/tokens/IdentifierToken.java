@@ -16,7 +16,7 @@ public class IdentifierToken extends IdentifiedToken {
 
 	@Override
 	public Value execute(Scope scope) throws RuntimeException {
-		return scope.getVariable(this);
+		return scope.variableProvider.get(this);
 	}
 
 	@Override

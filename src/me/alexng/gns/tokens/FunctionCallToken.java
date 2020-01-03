@@ -19,7 +19,7 @@ public class FunctionCallToken extends IdentifiedToken {
 	public Value execute(Scope scope) throws RuntimeException {
 		Value[] values = argumentsToken.grabValues(scope);
 		Scope callingScope = scope.getObjectScope() != null ? scope.getObjectScope() : scope.getGlobalScope();
-		Value returnedValue = scope.getFunction(this).executeFunction(this, callingScope, values);
+		Value returnedValue = scope.functionProvider.get(this).executeFunction(this, callingScope, values);
 		if (returnedValue instanceof ReturnedValue) {
 			return ((ReturnedValue) returnedValue).getJavaValue();
 		}

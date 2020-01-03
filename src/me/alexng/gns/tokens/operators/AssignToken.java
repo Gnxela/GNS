@@ -27,7 +27,7 @@ public class AssignToken extends BinaryOperatorToken<IdentifierToken, Token> {
 	@Override
 	public Value execute(Scope scope) throws RuntimeException {
 		Value returnedValue = getRight().execute(scope);
-		scope.setVariable(getLeft(), returnedValue);
+		scope.variableProvider.set(getLeft(), returnedValue);
 		return returnedValue;
 	}
 

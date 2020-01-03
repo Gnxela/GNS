@@ -19,7 +19,7 @@ public class FunctionToken extends IdentifiedToken {
 
 	@Override
 	public Value execute(Scope scope) throws RuntimeException {
-		scope.addFunction(this);
+		scope.functionProvider.set(this);
 		return Value.NULL;
 	}
 
@@ -31,7 +31,7 @@ public class FunctionToken extends IdentifiedToken {
 
 		Scope functionScope = parentScope.createChildScope();
 		for (int i = 0; i < identifiers.length; i++) {
-			functionScope.setLocalVariable(identifiers[i], values[i]);
+			functionScope.variableProvider.setLocal(identifiers[i], values[i]);
 		}
 
 		return block.executeBlock(functionScope);

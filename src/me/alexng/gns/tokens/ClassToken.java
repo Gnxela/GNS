@@ -12,9 +12,9 @@ import static me.alexng.gns.env.Value.NULL;
 
 public class ClassToken extends IdentifiedToken {
 
-	private static final String OBJECT_ID_VARIABLE = "objectId";
-	private static final String TYPE_VARIABLE = "type";
-	private static final String CONSTRUCTOR_NAME = "init";
+	private static final IdentifierToken OBJECT_ID_VARIABLE = new IdentifierToken("objectId", FileIndex.INTERNAL_INDEX);
+	private static final IdentifierToken TYPE_VARIABLE = new IdentifierToken("type", FileIndex.INTERNAL_INDEX);
+	private static final IdentifierToken CONSTRUCTOR_NAME = new IdentifierToken("init", FileIndex.INTERNAL_INDEX);
 
 	private BlockToken block;
 
@@ -25,7 +25,7 @@ public class ClassToken extends IdentifiedToken {
 
 	@Override
 	public Value execute(Scope scope) throws RuntimeException {
-		scope.addClass(this);
+		scope.classProvider.set(this);
 		return NULL;
 	}
 
@@ -39,13 +39,13 @@ public class ClassToken extends IdentifiedToken {
 
 	private void setObjectProperties(Scope objectScope) {
 		// TODO: Set these values as immutable.
-		objectScope.setLocalVariable(OBJECT_ID_VARIABLE, new NumberValue(objectScope.getEnvironment().incrementObjectId()));
+		objectScope.variableProvider.setLocal(OBJECT_ID_VARIABLE, new NumberValue(objectScope.getEnvironment().incrementObjectId()));
 		// TODO: We want to use something other than the Java object hash code.
-		objectScope.setLocalVariable(TYPE_VARIABLE, new NumberValue(this.hashCode()));
+		objectScope.variableProvider.setLocal(TYPE_VARIABLE, new NumberValue(this.hashCode()));
 	}
 
 	private void callConstructor(ObjectConstructionToken caller, Value[] values, Scope objectScope) throws RuntimeException {
-		FunctionToken constructor = objectScope.getLocalFunction(this, CONSTRUCTOR_NAME);
+		FunctionToken constructor = objectScope.functionProvider.getLocal(CONSTRUCTOR_NAME);
 		if (constructor != null) {
 			Value returnedValue = constructor.executeFunction(caller, objectScope, values);
 			if (returnedValue != null && returnedValue != Value.NULL) {
