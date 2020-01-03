@@ -2,6 +2,9 @@ package me.alexng.gns.tokens.operators;
 
 import me.alexng.gns.FileIndex;
 import me.alexng.gns.ParsingException;
+import me.alexng.gns.RuntimeException;
+import me.alexng.gns.env.Value;
+import me.alexng.gns.env.scope.Scope;
 import me.alexng.gns.tokens.Token;
 
 public abstract class BinaryOperatorToken<L extends Token, R extends Token> extends OperatorToken {
@@ -31,7 +34,7 @@ public abstract class BinaryOperatorToken<L extends Token, R extends Token> exte
 	}
 
 	@Override
-	public Token[] getOperands() {
-		return new Token[]{left, right};
+	public Value[] getOperands(Scope scope) throws RuntimeException {
+		return new Value[]{left.execute(scope), right.execute(scope)};
 	}
 }
