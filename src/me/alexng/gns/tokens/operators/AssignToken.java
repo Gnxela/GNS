@@ -9,7 +9,7 @@ import me.alexng.gns.tokens.IdentifierToken;
 import me.alexng.gns.tokens.Token;
 import me.alexng.gns.util.ExceptionUtil;
 
-public class AssignToken extends BinaryOperationToken<IdentifierToken, Token> {
+public class AssignToken extends BinaryOperatorToken<IdentifierToken, Token> {
 
 	public AssignToken(FileIndex fileIndex) {
 		super(fileIndex);

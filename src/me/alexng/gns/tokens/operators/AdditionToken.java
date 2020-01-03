@@ -8,7 +8,7 @@ import me.alexng.gns.env.scope.Scope;
 import me.alexng.gns.env.value.NumberValue;
 import me.alexng.gns.tokens.Token;
 
-public class AdditionToken extends BinaryOperationToken<Token, Token> {
+public class AdditionToken extends BinaryOperatorToken<Token, Token> {
 
 	public AdditionToken(FileIndex fileIndex) {
 		super(fileIndex);

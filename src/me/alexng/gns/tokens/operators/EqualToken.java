@@ -7,7 +7,7 @@ import me.alexng.gns.env.scope.Scope;
 import me.alexng.gns.env.value.BooleanValue;
 import me.alexng.gns.tokens.Token;
 
-public class EqualToken extends BinaryOperationToken<Token, Token> {
+public class EqualToken extends BinaryOperatorToken<Token, Token> {
 
 	public EqualToken(FileIndex fileIndex) {
 		super(fileIndex);

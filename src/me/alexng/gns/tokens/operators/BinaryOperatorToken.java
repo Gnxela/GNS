@@ -2,15 +2,14 @@ package me.alexng.gns.tokens.operators;
 
 import me.alexng.gns.FileIndex;
 import me.alexng.gns.ParsingException;
-import me.alexng.gns.tokens.BindableToken;
 import me.alexng.gns.tokens.Token;
 
-public abstract class BinaryOperationToken<L extends Token, R extends Token> extends BindableToken {
+public abstract class BinaryOperatorToken<L extends Token, R extends Token> extends OperatorToken {
 
 	private L left;
 	private R right;
 
-	protected BinaryOperationToken(FileIndex fileIndex) {
+	protected BinaryOperatorToken(FileIndex fileIndex) {
 		super(fileIndex);
 	}
 

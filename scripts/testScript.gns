@@ -73,7 +73,7 @@ class HasOps {
 		i = j
 	}
 
-	func asde(a) {
+	func +(a) {
 		if (a.type == type) {
 			return new HasOps(i + a.i)
 		}

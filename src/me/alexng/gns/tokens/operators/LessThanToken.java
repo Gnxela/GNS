@@ -9,7 +9,7 @@ import me.alexng.gns.env.value.BooleanValue;
 import me.alexng.gns.env.value.NumberValue;
 import me.alexng.gns.tokens.Token;
 
-public class LessThanToken extends BinaryOperationToken<Token, Token> {
+public class LessThanToken extends BinaryOperatorToken<Token, Token> {
 
 	public LessThanToken(FileIndex fileIndex) {
 		super(fileIndex);

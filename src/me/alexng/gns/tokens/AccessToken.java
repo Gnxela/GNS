@@ -6,10 +6,10 @@ import me.alexng.gns.RuntimeException;
 import me.alexng.gns.env.Value;
 import me.alexng.gns.env.scope.Scope;
 import me.alexng.gns.env.value.ObjectValue;
-import me.alexng.gns.tokens.operators.BinaryOperationToken;
+import me.alexng.gns.tokens.operators.BinaryOperatorToken;
 import me.alexng.gns.util.ExceptionUtil;
 
-public class AccessToken extends BinaryOperationToken<Token, IdentifierToken> {
+public class AccessToken extends BinaryOperatorToken<Token, IdentifierToken> {
 
 	public AccessToken(FileIndex fileIndex) {
 		super(fileIndex);
