@@ -18,6 +18,11 @@ public class AdditionToken extends BinaryOperatorToken<Token, Token> {
 
 	@Override
 	public Value execute(Scope scope) throws RuntimeException {
+		Value objectValue = tryObjectOperation(scope);
+		if (objectValue != null) {
+			return objectValue;
+		}
+
 		Value leftValue = getLeft().execute(scope);
 		Value rightValue = getRight().execute(scope);
 		if (leftValue.getType() != Value.Type.NUMBER) {

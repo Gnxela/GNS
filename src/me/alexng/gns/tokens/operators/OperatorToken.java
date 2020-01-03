@@ -16,19 +16,19 @@ public abstract class OperatorToken extends BindableToken {
 	// TODO: Better name
 
 	/**
-	 * @return true if the execution was forwarded to an object. False otherwise.
+	 * @return a value if the operation was forwarded to an object. Otherwise null.
 	 */
-	public boolean checkObjectOperation(Scope scope) throws RuntimeException {
+	public Value tryObjectOperation(Scope scope) throws RuntimeException {
 		Value[] operands = getOperands(scope);
 		if (operands.length == 0) {
-			return false;
+			return null;
 		}
-		if (operands[0] instanceof ObjectValue) {
-			ObjectValue object = (ObjectValue) operands[0];
-			// TODO: Call operator function
-			return true;
+		if (!(operands[0] instanceof ObjectValue)) {
+			return null;
 		}
-		return false;
+		ObjectValue object = (ObjectValue) operands[0];
+		// TODO: Call operator function
+		return null;
 	}
 
 	/**
