@@ -80,3 +80,8 @@ class HasOps {
 		return null
 	}
 }
+
+hasA = new HasOps(7)
+hasB = new HasOps(13)
+hasResult = hasA + hasB
+print(hasResult)
