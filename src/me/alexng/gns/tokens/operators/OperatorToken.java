@@ -13,6 +13,10 @@ public abstract class OperatorToken extends BindableToken {
 		super(fileIndex);
 	}
 
+	// TODO: Combine BindableToken and OperatorToken
+	// TODO: Make this a identified token.
+	// TODO: Add a method to get the operatorString
+
 	// TODO: Better name
 
 	/**
