@@ -29,4 +29,9 @@ public abstract class BinaryOperatorToken<L extends Token, R extends Token> exte
 	public R getRight() {
 		return right;
 	}
+
+	@Override
+	public Token[] getOperands() {
+		return new Token[]{left, right};
+	}
 }

@@ -2,16 +2,14 @@ package me.alexng.gns.lexer.generators;
 
 import me.alexng.gns.FileIndex;
 import me.alexng.gns.lexer.TokenGenerator;
-import me.alexng.gns.tokens.AccessToken;
 import me.alexng.gns.tokens.Token;
+import me.alexng.gns.tokens.operators.AccessToken;
 
 public class AccessGenerator implements TokenGenerator {
 
-	private final char CHAR = '.';
-
 	@Override
 	public int accepts(String input, int index) {
-		return index + (input.charAt(index) == CHAR ? 1 : 0);
+		return index + (input.substring(index).startsWith(AccessToken.OPERATOR_STRING) ? AccessToken.OPERATOR_STRING.length() : 0);
 	}
 
 	@Override

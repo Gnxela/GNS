@@ -11,6 +11,8 @@ import me.alexng.gns.tokens.Token;
 
 public class LessThanToken extends BinaryOperatorToken<Token, Token> {
 
+	public static final String OPERATOR_STRING = "<";
+
 	public LessThanToken(FileIndex fileIndex) {
 		super(fileIndex);
 	}
@@ -34,6 +36,11 @@ public class LessThanToken extends BinaryOperatorToken<Token, Token> {
 	@Override
 	public void checkOperands(Token left, Token right) throws ParsingException {
 		// TODO: Implement
+	}
+
+	@Override
+	public String getOperatorString() {
+		return OPERATOR_STRING;
 	}
 
 	@Override

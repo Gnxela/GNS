@@ -7,11 +7,11 @@ import me.alexng.gns.tokens.operators.AdditionToken;
 
 public class AdditionGenerator implements TokenGenerator {
 
-	private final char CHAR = '+';
+	// TODO: All the BinaryOperatorGenerators are the exact same. Look into combining them again.
 
 	@Override
 	public int accepts(String input, int index) {
-		return index + (input.charAt(index) == CHAR ? 1 : 0);
+		return index + (input.substring(index).startsWith(AdditionToken.OPERATOR_STRING) ? AdditionToken.OPERATOR_STRING.length() : 0);
 	}
 
 	@Override
