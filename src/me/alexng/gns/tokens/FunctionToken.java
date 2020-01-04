@@ -4,6 +4,7 @@ import me.alexng.gns.FileIndex;
 import me.alexng.gns.RuntimeException;
 import me.alexng.gns.env.Value;
 import me.alexng.gns.env.scope.Scope;
+import me.alexng.gns.env.value.ReturnedValue;
 import me.alexng.gns.util.StringUtil;
 
 public class FunctionToken extends IdentifiedToken {
@@ -20,6 +21,14 @@ public class FunctionToken extends IdentifiedToken {
 	@Override
 	public Value execute(Scope scope) throws RuntimeException {
 		scope.functionProvider.set(this);
+		return Value.NULL;
+	}
+
+	public Value unwrapAndExecuteFunction(Token caller, Scope parentScope, Value[] values) throws RuntimeException {
+		Value returnedValue = executeFunction(this, parentScope, values);
+		if (returnedValue instanceof ReturnedValue) {
+			return ((ReturnedValue) returnedValue).getJavaValue();
+		}
 		return Value.NULL;
 	}
 

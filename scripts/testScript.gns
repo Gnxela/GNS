@@ -12,14 +12,14 @@ class TestClass {
 			hee = i + 1
 		}
 	}
-	var = 0
+	var = b = null
 	func init(i) {
 		work(i)
+		b = new NestedClass(var, var + 10)
 	}
 	func work(num) {
 		var = num + 3
 	}
-	b = new NestedClass(var, var + 10)
 }
 i = 5
 func test(j) {
@@ -44,7 +44,6 @@ print(true)
 print(false)
 print(null)
 c = new String(1)
-print(nilIdentifier)
 
 func retFunc() {
 	return 19
@@ -57,5 +56,6 @@ print(3 < 2)
 
 print(a.objectId)
 print(a)
-print(a.b)
+print(a.var)
 print(a.b.tee)
+print(a.b.hee)

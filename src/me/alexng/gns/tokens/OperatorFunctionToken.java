@@ -8,18 +8,13 @@ import me.alexng.gns.tokens.operators.OperatorToken;
 
 public class OperatorFunctionToken extends FunctionToken {
 
-	private OperatorToken operatorToken;
-
 	public OperatorFunctionToken(OperatorToken operatorToken, ParametersToken parametersToken, BlockToken block, FileIndex fileIndex) {
-		// TODO: Replace NULL with operator string
-		super(new IdentifierToken("NULL", operatorToken.getFileIndex()), parametersToken, block, fileIndex);
-		this.operatorToken = operatorToken;
+		super(operatorToken.getIdentifier(), parametersToken, block, fileIndex);
 	}
 
 	@Override
 	public Value execute(Scope scope) throws RuntimeException {
-		// TODO: Need a special place for these
-		// scope.addFunction(this);
+		scope.operatorFunctionProvider.set(this);
 		return Value.NULL;
 	}
 }

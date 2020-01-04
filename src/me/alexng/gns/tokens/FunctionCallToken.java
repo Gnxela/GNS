@@ -4,7 +4,6 @@ import me.alexng.gns.FileIndex;
 import me.alexng.gns.RuntimeException;
 import me.alexng.gns.env.Value;
 import me.alexng.gns.env.scope.Scope;
-import me.alexng.gns.env.value.ReturnedValue;
 
 public class FunctionCallToken extends IdentifiedToken {
 
@@ -19,11 +18,8 @@ public class FunctionCallToken extends IdentifiedToken {
 	public Value execute(Scope scope) throws RuntimeException {
 		Value[] values = argumentsToken.grabValues(scope);
 		Scope callingScope = scope.getObjectScope() != null ? scope.getObjectScope() : scope.getGlobalScope();
-		Value returnedValue = scope.functionProvider.get(this).executeFunction(this, callingScope, values);
-		if (returnedValue instanceof ReturnedValue) {
-			return ((ReturnedValue) returnedValue).getJavaValue();
-		}
-		return Value.NULL;
+		FunctionToken function = scope.functionProvider.get(this);
+		return function.unwrapAndExecuteFunction(this, callingScope, values);
 	}
 
 	@Override
