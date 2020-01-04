@@ -25,7 +25,7 @@ public class VariableProvider extends ScopeProvider<IdentifiedToken, Value> {
 		if (parent != null) {
 			return parent.get(identifiedToken);
 		}
-		throw new RuntimeException(identifiedToken, "Undefined variable");
+		throw new RuntimeException(identifiedToken, "Undefined variable: " + identifiedToken.getIdentifier().getName());
 	}
 
 	@Override
