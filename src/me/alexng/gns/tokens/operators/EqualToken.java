@@ -29,7 +29,7 @@ public class EqualToken extends BinaryOperatorToken<Token, Token> {
 			case OBJECT:
 				// TODO: Check references
 			default:
-				return BooleanValue.valueOf(leftValue.getJavaValue() == rightValue.getJavaValue());
+				return BooleanValue.valueOf(leftValue.getJavaValue().equals(rightValue.getJavaValue()));
 		}
 	}
 

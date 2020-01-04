@@ -9,11 +9,11 @@ class HasOps {
 		if (a.type == type) {
 			return new HasOps(i + a.i)
 		}
-		return new HasOps(i + a.i)
+		return null
 	}
 }
 
 hasA = new HasOps(7)
 hasB = new HasOps(13)
 hasResult = hasA + hasB
-print(hasResult)
+print(hasResult.i)
