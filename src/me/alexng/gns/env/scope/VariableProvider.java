@@ -19,7 +19,7 @@ public class VariableProvider extends ScopeProvider<IdentifiedToken, Value> {
 	@Override
 	public Value get(IdentifiedToken identifiedToken) throws RuntimeException {
 		Value value = getLocal(identifiedToken);
-		if (value != null) {
+		if (value != Value.NULL) {
 			return value;
 		}
 		if (parent != null) {
@@ -49,7 +49,7 @@ public class VariableProvider extends ScopeProvider<IdentifiedToken, Value> {
 
 	private VariableProvider findProviderWithVariable(IdentifiedToken identifiedToken) {
 		VariableProvider variableProvider = this;
-		while (variableProvider != null && variableProvider.getLocal(identifiedToken) == null) {
+		while (variableProvider != null && variableProvider.getLocal(identifiedToken) == Value.NULL) {
 			variableProvider = (VariableProvider) variableProvider.parent;
 		}
 		return variableProvider;
