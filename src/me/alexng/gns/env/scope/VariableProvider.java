@@ -30,7 +30,7 @@ public class VariableProvider extends ScopeProvider<IdentifiedToken, Value> {
 
 	@Override
 	public Value getLocal(IdentifiedToken identifiedToken) {
-		return variables.get(identifiedToken.getIdentifier().getName());
+		return variables.getOrDefault(identifiedToken.getIdentifier().getName(), Value.NULL);
 	}
 
 	@Override
