@@ -12,8 +12,8 @@ public abstract class BinaryOperatorToken<L extends Token, R extends Token> exte
 	private L left;
 	private R right;
 
-	protected BinaryOperatorToken(FileIndex fileIndex) {
-		super(fileIndex);
+	protected BinaryOperatorToken(String operatorString, FileIndex fileIndex) {
+		super(operatorString, fileIndex);
 	}
 
 	public abstract void checkOperands(Token left, Token right) throws ParsingException;

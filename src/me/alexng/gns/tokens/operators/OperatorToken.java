@@ -5,19 +5,16 @@ import me.alexng.gns.RuntimeException;
 import me.alexng.gns.env.Value;
 import me.alexng.gns.env.scope.Scope;
 import me.alexng.gns.env.value.ObjectValue;
-import me.alexng.gns.tokens.BindableToken;
+import me.alexng.gns.tokens.IdentifiedToken;
+import me.alexng.gns.tokens.IdentifierToken;
 
-public abstract class OperatorToken extends BindableToken {
+public abstract class OperatorToken extends IdentifiedToken {
 
-	public OperatorToken(FileIndex fileIndex) {
-		super(fileIndex);
+	private boolean bound = false;
+
+	public OperatorToken(String operatorString, FileIndex fileIndex) {
+		super(new IdentifierToken(operatorString, fileIndex), fileIndex);
 	}
-
-	// TODO: Combine BindableToken and OperatorToken
-	// TODO: Make this a identified token.
-	// TODO: Add a method to get the operatorString
-
-	// TODO: Better name
 
 	/**
 	 * @return a value if the operation was forwarded to an object. Otherwise null.
@@ -36,15 +33,21 @@ public abstract class OperatorToken extends BindableToken {
 	}
 
 	/**
-	 * Returns a string representing the operator, does not include operands.
-	 * For example: Plus -> "+"
-	 */
-	public abstract String getOperatorString();
-
-	/**
 	 * Returns an array of operands.
 	 * For example, a binary operation will return {left, right}.
 	 * This array will be supplied to {@link me.alexng.gns.tokens.OperatorFunctionToken} to evaluate Object operations.
 	 */
 	public abstract Value[] getOperands(Scope scope) throws RuntimeException;
+
+	/**
+	 * Must be called when an operator binds t
+	 */
+	public void bind() {
+		this.bound = true;
+	}
+
+	public boolean isBound() {
+		return bound;
+	}
+
 }

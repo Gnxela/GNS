@@ -14,7 +14,7 @@ public class AssignToken extends BinaryOperatorToken<IdentifierToken, Token> {
 	public static final String OPERATOR_STRING = "=";
 
 	public AssignToken(FileIndex fileIndex) {
-		super(fileIndex);
+		super(OPERATOR_STRING, fileIndex);
 	}
 
 	@Override
@@ -29,11 +29,6 @@ public class AssignToken extends BinaryOperatorToken<IdentifierToken, Token> {
 		Value returnedValue = getRight().execute(scope);
 		scope.variableProvider.set(getLeft(), returnedValue);
 		return returnedValue;
-	}
-
-	@Override
-	public String getOperatorString() {
-		return OPERATOR_STRING;
 	}
 
 	@Override

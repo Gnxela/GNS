@@ -15,7 +15,7 @@ public class AccessToken extends BinaryOperatorToken<Token, IdentifierToken> {
 	public static final String OPERATOR_STRING = ".";
 
 	public AccessToken(FileIndex fileIndex) {
-		super(fileIndex);
+		super(OPERATOR_STRING, fileIndex);
 	}
 
 	@Override
@@ -34,11 +34,6 @@ public class AccessToken extends BinaryOperatorToken<Token, IdentifierToken> {
 		if (!(right instanceof IdentifierToken)) {
 			throw ExceptionUtil.createParsingExpected("Invalid access operand", IdentifierToken.class, right);
 		}
-	}
-
-	@Override
-	public String getOperatorString() {
-		return OPERATOR_STRING;
 	}
 
 	@Override

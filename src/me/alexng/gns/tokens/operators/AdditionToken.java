@@ -13,7 +13,7 @@ public class AdditionToken extends BinaryOperatorToken<Token, Token> {
 	public static final String OPERATOR_STRING = "+";
 
 	public AdditionToken(FileIndex fileIndex) {
-		super(fileIndex);
+		super(OPERATOR_STRING, fileIndex);
 	}
 
 	@Override
@@ -40,11 +40,6 @@ public class AdditionToken extends BinaryOperatorToken<Token, Token> {
 	@Override
 	public void checkOperands(Token left, Token right) throws ParsingException {
 		// TODO: Implement
-	}
-
-	@Override
-	public String getOperatorString() {
-		return OPERATOR_STRING;
 	}
 
 	@Override
