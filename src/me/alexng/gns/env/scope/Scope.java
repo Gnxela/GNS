@@ -7,12 +7,20 @@ public class Scope {
 	public VariableProvider variableProvider;
 	public ClassProvider classProvider;
 	public FunctionProvider functionProvider;
+	public OperatorFunctionProvider operatorFunctionProvider;
 	private Environment environment;
 	private Scope parentScope;
 	private Scope objectScope;
 	private Scope globalScope;
 
-	private Scope(Environment environment, Scope parentScope, Scope objectScope, Scope globalScope, FunctionProvider functionProvider, ClassProvider classProvider, VariableProvider variableProvider) {
+	private Scope(Environment environment,
+				  Scope parentScope,
+				  Scope objectScope,
+				  Scope globalScope,
+				  FunctionProvider functionProvider,
+				  ClassProvider classProvider,
+				  VariableProvider variableProvider,
+				  OperatorFunctionProvider operatorFunctionProvider) {
 		this.environment = environment;
 		this.parentScope = parentScope;
 		this.objectScope = objectScope;
@@ -20,6 +28,7 @@ public class Scope {
 		this.variableProvider = variableProvider;
 		this.classProvider = classProvider;
 		this.functionProvider = functionProvider;
+		this.operatorFunctionProvider = operatorFunctionProvider;
 	}
 
 	public static Scope createGlobalScope(Environment environment) {
@@ -27,7 +36,8 @@ public class Scope {
 				null, null, null,
 				new FunctionProvider(null),
 				new ClassProvider(null),
-				new VariableProvider(null));
+				new VariableProvider(null),
+				new OperatorFunctionProvider(null));
 		globalScope.setGlobalScope(globalScope);
 		return globalScope;
 	}
@@ -37,7 +47,8 @@ public class Scope {
 				this, objectScope, globalScope,
 				new FunctionProvider(functionProvider),
 				new ClassProvider(classProvider),
-				new VariableProvider(variableProvider));
+				new VariableProvider(variableProvider),
+				new OperatorFunctionProvider(operatorFunctionProvider));
 	}
 
 	private Scope createObjectScope(Scope parentScope) {
@@ -47,7 +58,8 @@ public class Scope {
 				parentScope.getGlobalScope(),
 				new FunctionProvider(parentScope.functionProvider),
 				new ClassProvider(parentScope.classProvider),
-				new VariableProvider(parentScope.variableProvider));
+				new VariableProvider(parentScope.variableProvider),
+				new OperatorFunctionProvider(parentScope.operatorFunctionProvider));
 		objectScope.setObjectScope(objectScope);
 		return objectScope;
 	}
