@@ -4,7 +4,7 @@ import me.alexng.gns.FileIndex;
 
 public abstract class IdentifiedToken extends Token implements CharSequence {
 
-	protected IdentifierToken identifier;
+	private IdentifierToken identifier;
 
 	public IdentifiedToken(IdentifierToken identifier, FileIndex fileIndex) {
 		super(fileIndex);
