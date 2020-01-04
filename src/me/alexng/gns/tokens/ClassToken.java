@@ -30,6 +30,8 @@ public class ClassToken extends IdentifiedToken {
 	}
 
 	public ObjectValue createInstance(ObjectConstructionToken caller, Value[] values, Scope scope) throws RuntimeException {
+		// TODO: Check for nested class, if it's nested we need to have the parent object scope set as the parent of the nested scope.
+		// Nested Object Scope -> Parent Object Scope -> Global Scope
 		Scope objectScope = scope.createObjectScope();
 		setObjectProperties(objectScope);
 		block.executeBlockWithScope(objectScope);
