@@ -41,7 +41,7 @@ public class ClassToken extends IdentifiedToken {
 		// TODO: Set these values as immutable.
 		objectScope.variableProvider.setLocal(OBJECT_ID_VARIABLE, new NumberValue(objectScope.getEnvironment().incrementObjectId()));
 		// TODO: We want to use something other than the Java object hash code.
-		objectScope.variableProvider.setLocal(TYPE_VARIABLE, new NumberValue(this.hashCode()));
+		objectScope.variableProvider.setLocal(TYPE_VARIABLE, new NumberValue(getClass().hashCode()));
 	}
 
 	private void callConstructor(ObjectConstructionToken caller, Value[] values, Scope objectScope) throws RuntimeException {
