@@ -49,4 +49,10 @@ public class OperatorFunctionProvider extends IdentifiedScopeProvider<OperatorFu
 		// TODO: CHeck for previous functions?
 		functions.add(functionToken);
 	}
+
+
+	@Override
+	public String toString() {
+		return functions.toString();
+	}
 }

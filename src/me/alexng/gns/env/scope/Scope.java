@@ -94,6 +94,6 @@ public class Scope {
 
 	@Override
 	public String toString() {
-		return "<Scope var={}. func={}. class={}>";
+		return "<Scope \n\tvar=" + variableProvider + ".\n\tfunc=" + functionProvider.toString() + ".\n\topFunc=" + operatorFunctionProvider.toString() + ".\n\tclass=" + classProvider.toString() + ">";
 	}
 }

@@ -6,6 +6,7 @@ import me.alexng.gns.tokens.IdentifiedToken;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class FunctionProvider extends IdentifiedScopeProvider<FunctionToken> {
 
@@ -48,5 +49,11 @@ public class FunctionProvider extends IdentifiedScopeProvider<FunctionToken> {
 	public void setLocal(IdentifiedToken identifiedToken, FunctionToken functionToken) {
 		// TODO: CHeck for previous functions?
 		functions.add(functionToken);
+	}
+
+
+	@Override
+	public String toString() {
+		return functions.stream().map(f -> f.getIdentifier().getName()).collect(Collectors.toList()).toString();
 	}
 }
