@@ -16,4 +16,5 @@ class HasOps {
 hasA = new HasOps(7)
 hasB = new HasOps(13)
 hasResult = hasA + hasB
-print(hasResult.i)
+result = hasResult + 1
+print(result)
