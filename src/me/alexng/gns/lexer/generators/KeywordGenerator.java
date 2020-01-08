@@ -19,6 +19,8 @@ public class KeywordGenerator implements TokenGenerator {
 		return 0;
 	}
 
+	// TODO: Must have whitespace after.
+
 	@Override
 	public Token generate(String input, FileIndex fileIndex) throws ParsingException {
 		String key = fileIndex.substring(input);
