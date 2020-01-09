@@ -1,4 +1,4 @@
-package me.alexng.gns.env;
+package me.alexng.gns.env.value;
 
 public abstract class Value {
 
