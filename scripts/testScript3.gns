@@ -1,0 +1,4 @@
+str = "Hello World!"
+print(str)
+print("Woah!")
+print(str + " :)")
