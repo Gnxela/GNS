@@ -8,6 +8,8 @@ import java.io.File;
 public class Main {
 
 	public static void main(String[] args) throws Exception {
+		// TODO: Remove most of the util classes.
+
 		Environment scriptEnvironment = new Environment(new Options());
 		scriptEnvironment.setup();
 		File scriptFile = new File("scripts/testScript3.gns");
