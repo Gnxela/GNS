@@ -30,7 +30,11 @@ public class ClassProvider extends IdentifiedScopeProvider<ClassToken> {
 
 	@Override
 	public ClassToken getLocal(IdentifiedToken identifiedToken) {
-		return classes.get(identifiedToken.getIdentifier().getName());
+		return getLocal(identifiedToken.getIdentifier().getName());
+	}
+
+	public ClassToken getLocal(String name) {
+		return classes.get(name);
 	}
 
 	@Override
