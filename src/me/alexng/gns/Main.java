@@ -10,7 +10,7 @@ public class Main {
 	public static void main(String[] args) throws Exception {
 		Environment scriptEnvironment = new Environment(new Options());
 		scriptEnvironment.setup();
-		File scriptFile = new File("scripts/testScript2.gns");
+		File scriptFile = new File("scripts/testScript3.gns");
 		long start = System.nanoTime();
 		scriptEnvironment.loadScript(new Script(scriptFile));
 		long endParse = System.nanoTime();
