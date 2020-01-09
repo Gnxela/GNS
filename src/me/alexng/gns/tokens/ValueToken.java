@@ -1,8 +1,8 @@
 package me.alexng.gns.tokens;
 
 import me.alexng.gns.FileIndex;
-import me.alexng.gns.env.Value;
 import me.alexng.gns.env.scope.Scope;
+import me.alexng.gns.env.value.Value;
 
 public class ValueToken extends Token {
 

@@ -2,7 +2,7 @@ package me.alexng.gns.gen.constructors;
 
 import me.alexng.gns.Keyword;
 import me.alexng.gns.ParsingException;
-import me.alexng.gns.env.Value;
+import me.alexng.gns.env.value.Value;
 import me.alexng.gns.gen.Assembler;
 import me.alexng.gns.gen.Constructor;
 import me.alexng.gns.tokens.KeywordToken;

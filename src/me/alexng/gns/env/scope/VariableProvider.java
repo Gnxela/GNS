@@ -1,7 +1,7 @@
 package me.alexng.gns.env.scope;
 
 import me.alexng.gns.RuntimeException;
-import me.alexng.gns.env.Value;
+import me.alexng.gns.env.value.Value;
 import me.alexng.gns.tokens.IdentifiedToken;
 
 import java.util.HashMap;

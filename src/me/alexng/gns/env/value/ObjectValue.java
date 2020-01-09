@@ -1,6 +1,5 @@
 package me.alexng.gns.env.value;
 
-import me.alexng.gns.env.Value;
 import me.alexng.gns.env.scope.Scope;
 import me.alexng.gns.tokens.ClassToken;
 

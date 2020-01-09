@@ -1,7 +1,5 @@
 package me.alexng.gns.env.value;
 
-import me.alexng.gns.env.Value;
-
 public class NumberValue extends Value {
 
 	private boolean isInt;

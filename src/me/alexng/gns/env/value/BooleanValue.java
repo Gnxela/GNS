@@ -1,7 +1,5 @@
 package me.alexng.gns.env.value;
 
-import me.alexng.gns.env.Value;
-
 public class BooleanValue extends Value {
 
 	public static final BooleanValue TRUE = new BooleanValue(true);
