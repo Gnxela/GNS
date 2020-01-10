@@ -2,16 +2,27 @@ package me.alexng.gns;
 
 public class Options {
 
-	// TODO: Make Options buildable, and as such immutable once built.
+	private final boolean usingStandardLib;
 
-	private boolean usingStandardLib = true;
+	private Options(boolean usingStandardLib) {
+		this.usingStandardLib = usingStandardLib;
+	}
 
 	public boolean isUsingStandardLib() {
 		return usingStandardLib;
 	}
 
-	public Options setUsingStandardLib(boolean usingStandardLib) {
-		this.usingStandardLib = usingStandardLib;
-		return this;
+	static class Builder {
+
+		private boolean usingStandardLib = true;
+
+		public Builder setUsingStandardLib(boolean usingStandardLib) {
+			this.usingStandardLib = usingStandardLib;
+			return this;
+		}
+
+		public Options build() {
+			return new Options(usingStandardLib);
+		}
 	}
 }
