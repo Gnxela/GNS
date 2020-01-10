@@ -8,8 +8,6 @@ import me.alexng.gns.env.value.ObjectValue;
 import me.alexng.gns.env.value.Value;
 import me.alexng.gns.util.StringUtil;
 
-import static me.alexng.gns.env.value.Value.NULL;
-
 public class ClassToken extends IdentifiedToken {
 
 	private static final IdentifierToken OBJECT_ID_VARIABLE = new IdentifierToken("objectId", FileIndex.INTERNAL_INDEX);
@@ -26,7 +24,7 @@ public class ClassToken extends IdentifiedToken {
 	@Override
 	public Value execute(Scope scope) throws RuntimeException {
 		scope.classProvider.set(this);
-		return NULL;
+		return Value.NULL;
 	}
 
 	public ObjectValue createInstance(ObjectConstructionToken caller, Value[] values, Scope scope) throws RuntimeException {
