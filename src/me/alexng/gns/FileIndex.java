@@ -34,6 +34,10 @@ public class FileIndex {
 		return source.substring(startIndex, endIndex);
 	}
 
+	public FileIndex morph(int startDelta, int endDelta) {
+		return new FileIndex(sourceFile, startIndex + startDelta, endIndex + endDelta);
+	}
+
 	public int getStartIndex() {
 		return startIndex;
 	}

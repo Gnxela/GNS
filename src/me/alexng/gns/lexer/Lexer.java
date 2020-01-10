@@ -15,6 +15,7 @@ public class Lexer {
 			new InlineCommentGenerator(),
 			new MultilineCommentGenerator(),
 			new EOLGenerator(),
+			new StringLiteralGenerator(),
 			new CommaGenerator(),
 			new BracketGenerator(),
 			new NumberGenerator(),
