@@ -8,6 +8,7 @@ import me.alexng.gns.env.scope.Scope;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import java.util.LinkedList;
 
 /**
@@ -35,10 +36,13 @@ public class Environment {
 		if (options.isUsingStandardLib()) {
 			// TODO: We shouldn't need to compile the standard library every time.
 			//  We should serialize the library and just read it.
-			String path = ClassLoader.getSystemClassLoader().getResource("me/alexng/gns/lib").getFile();
-			File libPackage = new File(path);
-			for (File file : libPackage.listFiles()) {
-				loadScript(new Script(file));
+			URL url = ClassLoader.getSystemClassLoader().getResource("me/alexng/gns/lib");
+			if (url != null) {
+				String path = url.getFile();
+				File libPackage = new File(path);
+				for (File file : libPackage.listFiles()) {
+					loadScript(new Script(file));
+				}
 			}
 		}
 	}

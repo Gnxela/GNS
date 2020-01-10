@@ -43,7 +43,6 @@ print(a)
 print(true)
 print(false)
 print(null)
-c = new String(1)
 
 func retFunc() {
 	return 19
