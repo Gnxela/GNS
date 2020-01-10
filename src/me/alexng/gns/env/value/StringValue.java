@@ -3,6 +3,7 @@ package me.alexng.gns.env.value;
 import me.alexng.gns.FileIndex;
 import me.alexng.gns.RuntimeException;
 import me.alexng.gns.env.NativeFunction;
+import me.alexng.gns.env.NativeFunctionObjectWrapper;
 import me.alexng.gns.env.scope.Scope;
 import me.alexng.gns.tokens.IdentifierToken;
 import me.alexng.gns.tokens.Token;
@@ -15,15 +16,14 @@ public class StringValue extends ObjectValue {
 		@Override
 		public Value executeFunction(Token caller, Scope parentScope, Value[] values) throws RuntimeException {
 			// TODO: Use the ExceptionUtil class to make this easier. See BuiltInFunctions for more examples.
-			if (values.length != 1) {
-				throw new RuntimeException(caller, "Invalid number of arguments. Expected: 1. Got: " + values.length);
+			if (values.length != 2) {
+				throw new RuntimeException(caller, "Invalid number of arguments. Expected: 2. Got: " + values.length);
 			}
-			// TODO: Add a way to access the calling object from native function.
-			//  Or change how operator functions work.
-			Value value = values[0];
-			if (value instanceof StringValue) {
-				StringValue stringValue = (StringValue) value;
-				return new ReturnedValue(new StringValue(stringValue.value + "ASD", parentScope));
+			StringValue stringValueA = (StringValue) values[0];
+			Value valueB = values[1];
+			if (valueB instanceof StringValue) {
+				StringValue stringValueB = (StringValue) valueB;
+				return new ReturnedValue(new StringValue(stringValueA.value + stringValueB.value, parentScope));
 			} else {
 				// TODO: Add toString function
 				return null;
@@ -42,7 +42,7 @@ public class StringValue extends ObjectValue {
 	private void addBuiltIns() throws RuntimeException {
 		// TODO: Make immutable
 		getObjectScope().variableProvider.setLocal(LENGTH_ID, new NumberValue(value.length()));
-		getObjectScope().operatorFunctionProvider.set(OP_ADD_FUNC);
+		getObjectScope().operatorFunctionProvider.set(new NativeFunctionObjectWrapper<>(this, OP_ADD_FUNC));
 	}
 
 	@Override
