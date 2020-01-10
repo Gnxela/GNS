@@ -1,15 +1,15 @@
 package me.alexng.gns.env.scope;
 
 import me.alexng.gns.RuntimeException;
+import me.alexng.gns.tokens.FunctionToken;
 import me.alexng.gns.tokens.IdentifiedToken;
-import me.alexng.gns.tokens.OperatorFunctionToken;
 
 import java.util.LinkedList;
 import java.util.List;
 
-public class OperatorFunctionProvider extends IdentifiedScopeProvider<OperatorFunctionToken> {
+public class OperatorFunctionProvider extends IdentifiedScopeProvider<FunctionToken> {
 
-	private List<OperatorFunctionToken> functions;
+	private List<FunctionToken> functions;
 
 	public OperatorFunctionProvider(OperatorFunctionProvider parent) {
 		super(parent);
@@ -17,8 +17,8 @@ public class OperatorFunctionProvider extends IdentifiedScopeProvider<OperatorFu
 	}
 
 	@Override
-	public OperatorFunctionToken get(IdentifiedToken identifiedToken) throws RuntimeException {
-		OperatorFunctionToken functionToken = getLocal(identifiedToken);
+	public FunctionToken get(IdentifiedToken identifiedToken) throws RuntimeException {
+		FunctionToken functionToken = getLocal(identifiedToken);
 		if (functionToken != null) {
 			return functionToken;
 		}
@@ -29,9 +29,9 @@ public class OperatorFunctionProvider extends IdentifiedScopeProvider<OperatorFu
 	}
 
 	@Override
-	public OperatorFunctionToken getLocal(IdentifiedToken identifiedToken) {
+	public FunctionToken getLocal(IdentifiedToken identifiedToken) {
 		String identifier = identifiedToken.getIdentifier().getName();
-		for (OperatorFunctionToken functionToken : functions) {
+		for (FunctionToken functionToken : functions) {
 			if (functionToken.getName().contentEquals(identifier)) {
 				return functionToken;
 			}
@@ -40,12 +40,12 @@ public class OperatorFunctionProvider extends IdentifiedScopeProvider<OperatorFu
 	}
 
 	@Override
-	public void set(IdentifiedToken identifiedToken, OperatorFunctionToken functionToken) throws RuntimeException {
+	public void set(IdentifiedToken identifiedToken, FunctionToken functionToken) throws RuntimeException {
 		setLocal(identifiedToken, functionToken);
 	}
 
 	@Override
-	public void setLocal(IdentifiedToken identifiedToken, OperatorFunctionToken functionToken) {
+	public void setLocal(IdentifiedToken identifiedToken, FunctionToken functionToken) {
 		// TODO: CHeck for previous functions?
 		functions.add(functionToken);
 	}

@@ -5,9 +5,9 @@ import me.alexng.gns.RuntimeException;
 import me.alexng.gns.env.scope.Scope;
 import me.alexng.gns.env.value.ObjectValue;
 import me.alexng.gns.env.value.Value;
+import me.alexng.gns.tokens.FunctionToken;
 import me.alexng.gns.tokens.IdentifiedToken;
 import me.alexng.gns.tokens.IdentifierToken;
-import me.alexng.gns.tokens.OperatorFunctionToken;
 
 public abstract class OperatorToken extends IdentifiedToken {
 
@@ -29,7 +29,7 @@ public abstract class OperatorToken extends IdentifiedToken {
 			return null;
 		}
 		ObjectValue object = (ObjectValue) operands[0];
-		OperatorFunctionToken operatorFunction = object.getObjectScope().operatorFunctionProvider.get(getIdentifier());
+		FunctionToken operatorFunction = object.getObjectScope().operatorFunctionProvider.get(getIdentifier());
 		if (operatorFunction == null) {
 			throw new RuntimeException(this, "Operation not defined for object");
 		}
