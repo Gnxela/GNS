@@ -15,4 +15,9 @@ public class StringValue extends ObjectValue {
 		}
 		this.value = value;
 	}
+
+	@Override
+	public Object getJavaValue() {
+		return value;
+	}
 }
