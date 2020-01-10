@@ -7,7 +7,7 @@ public class Scope {
 	public VariableProvider variableProvider;
 	public ClassProvider classProvider;
 	public FunctionProvider functionProvider;
-	public OperatorFunctionProvider operatorFunctionProvider;
+	public FunctionProvider operatorFunctionProvider;
 	private Environment environment;
 	private Scope parentScope;
 	private Scope objectScope;
@@ -20,7 +20,7 @@ public class Scope {
 				  FunctionProvider functionProvider,
 				  ClassProvider classProvider,
 				  VariableProvider variableProvider,
-				  OperatorFunctionProvider operatorFunctionProvider) {
+				  FunctionProvider operatorFunctionProvider) {
 		this.environment = environment;
 		this.parentScope = parentScope;
 		this.objectScope = objectScope;
@@ -37,7 +37,7 @@ public class Scope {
 				new FunctionProvider(null),
 				new ClassProvider(null),
 				new VariableProvider(null),
-				new OperatorFunctionProvider(null));
+				new FunctionProvider(null));
 		globalScope.setGlobalScope(globalScope);
 		return globalScope;
 	}
@@ -48,7 +48,7 @@ public class Scope {
 				new FunctionProvider(functionProvider),
 				new ClassProvider(classProvider),
 				new VariableProvider(variableProvider),
-				new OperatorFunctionProvider(operatorFunctionProvider));
+				new FunctionProvider(operatorFunctionProvider));
 	}
 
 	private Scope createObjectScope(Scope parentScope) {
@@ -59,7 +59,7 @@ public class Scope {
 				new FunctionProvider(parentScope.functionProvider),
 				new ClassProvider(parentScope.classProvider),
 				new VariableProvider(parentScope.variableProvider),
-				new OperatorFunctionProvider(parentScope.operatorFunctionProvider));
+				new FunctionProvider(parentScope.operatorFunctionProvider));
 		objectScope.setObjectScope(objectScope);
 		return objectScope;
 	}
