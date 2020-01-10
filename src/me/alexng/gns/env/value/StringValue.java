@@ -1,13 +1,17 @@
 package me.alexng.gns.env.value;
 
+import me.alexng.gns.FileIndex;
 import me.alexng.gns.RuntimeException;
 import me.alexng.gns.env.NativeFunction;
 import me.alexng.gns.env.scope.Scope;
+import me.alexng.gns.tokens.IdentifierToken;
 import me.alexng.gns.tokens.Token;
 
 public class StringValue extends ObjectValue {
 
-	private static final NativeFunction ADD_FUNC = new NativeFunction("+") {
+	private static final IdentifierToken LENGTH_ID = new IdentifierToken("length", FileIndex.INTERNAL_INDEX);
+
+	private static final NativeFunction OP_ADD_FUNC = new NativeFunction("+") {
 		@Override
 		public Value executeFunction(Token caller, Scope parentScope, Value[] values) throws RuntimeException {
 			// TODO: Use the ExceptionUtil class to make this easier. See BuiltInFunctions for more examples.
@@ -36,7 +40,9 @@ public class StringValue extends ObjectValue {
 	}
 
 	private void addBuiltIns() throws RuntimeException {
-		getObjectScope().operatorFunctionProvider.set(ADD_FUNC);
+		// TODO: Make immutable
+		getObjectScope().variableProvider.setLocal(LENGTH_ID, new NumberValue(value.length()));
+		getObjectScope().operatorFunctionProvider.set(OP_ADD_FUNC);
 	}
 
 	@Override
