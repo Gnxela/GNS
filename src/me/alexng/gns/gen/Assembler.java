@@ -84,7 +84,6 @@ public class Assembler {
 	 * @return A list of tokens in between the matched tokens. Not including the open and close tokens (middle open and close tokens are included)
 	 * @throws ParsingException Thrown when a matching end close token is not met.
 	 */
-	// TODO: Maybe make a util class.
 	public static LinkedList<Token> matchTokens(ListIterator<Token> tokens, Token open, Token close) throws ParsingException {
 		int depth = 1;
 		LinkedList<Token> bucket = new LinkedList<>();

@@ -5,6 +5,7 @@ import me.alexng.gns.env.scope.Scope;
 import me.alexng.gns.env.value.ObjectValue;
 import me.alexng.gns.env.value.Value;
 import me.alexng.gns.tokens.Token;
+import me.alexng.gns.util.ExceptionUtil;
 
 public class BuiltInFunctions {
 
@@ -12,7 +13,7 @@ public class BuiltInFunctions {
 		@Override
 		public Value executeFunction(Token caller, Scope parentScope, Value[] values) throws RuntimeException {
 			if (values.length != 1) {
-				throw new RuntimeException(caller, "Invalid number of arguments. Expected: 1. Got: " + values.length);
+				throw ExceptionUtil.createRuntimeExpected("Invalid number of arguments", caller, 1, values.length);
 			}
 			Value value = values[0];
 			String output = null;

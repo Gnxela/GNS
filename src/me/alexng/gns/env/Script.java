@@ -27,7 +27,6 @@ public class Script {
 	}
 
 	public Script(String source) {
-		// TODO: Better name than null.
 		this(source, "<NULL>");
 	}
 

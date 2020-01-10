@@ -16,7 +16,7 @@ public abstract class IdentifiedScopeProvider<T extends IdentifiedToken> extends
 		set(t.getIdentifier(), t);
 	}
 
-	public void setLocal(T t) {
+	public void setLocal(T t) throws RuntimeException {
 		setLocal(t.getIdentifier(), t);
 	}
 }

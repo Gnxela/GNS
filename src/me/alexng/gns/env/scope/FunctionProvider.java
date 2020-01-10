@@ -46,8 +46,10 @@ public class FunctionProvider extends IdentifiedScopeProvider<FunctionToken> {
 	}
 
 	@Override
-	public void setLocal(IdentifiedToken identifiedToken, FunctionToken functionToken) {
-		// TODO: CHeck for previous functions?
+	public void setLocal(IdentifiedToken identifiedToken, FunctionToken functionToken) throws RuntimeException {
+		if (getLocal(identifiedToken) != null) {
+			throw new RuntimeException(functionToken.getFileIndex(), "Function name already defined");
+		}
 		functions.add(functionToken);
 	}
 

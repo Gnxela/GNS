@@ -27,7 +27,7 @@ public class EqualToken extends BinaryOperatorToken<Token, Token> {
 			case NULL:
 				return BooleanValue.TRUE;
 			case OBJECT:
-				// TODO: Check references
+				return BooleanValue.valueOf(leftValue == rightValue);
 			default:
 				return BooleanValue.valueOf(leftValue.getJavaValue().equals(rightValue.getJavaValue()));
 		}

@@ -45,7 +45,6 @@ public class ClassProvider extends IdentifiedScopeProvider<ClassToken> {
 	@Override
 	public void setLocal(IdentifiedToken identifiedToken, ClassToken classToken) {
 		try {
-			// TODO: Not sure if I like the idea of just waiting for an exception, see later
 			get(identifiedToken);
 			throw new RuntimeException(classToken, "Class already defined");
 		} catch (RuntimeException ignored) {

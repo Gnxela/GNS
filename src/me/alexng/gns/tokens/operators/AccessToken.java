@@ -30,7 +30,6 @@ public class AccessToken extends BinaryOperatorToken<Token, IdentifierToken> {
 
 	@Override
 	public void checkOperands(Token left, Token right) throws ParsingException {
-		// TODO: Check left types? It'll throw at runtime anyway
 		if (!(right instanceof IdentifierToken)) {
 			throw ExceptionUtil.createParsingExpected("Invalid access operand", IdentifierToken.class, right);
 		}

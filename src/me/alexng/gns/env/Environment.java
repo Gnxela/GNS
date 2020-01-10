@@ -74,7 +74,6 @@ public class Environment {
 		}
 	}
 
-	// TODO: If feels weird throwing a "RuntimeException" here when we're not at runtime yet.
 	private void addBuiltInFunctions(Scope globalScope) throws RuntimeException {
 		for (NativeFunction nativeFunction : BuiltInFunctions.functions) {
 			globalScope.functionProvider.set(nativeFunction);

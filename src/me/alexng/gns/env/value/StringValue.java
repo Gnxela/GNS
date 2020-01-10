@@ -7,6 +7,7 @@ import me.alexng.gns.env.NativeFunctionObjectWrapper;
 import me.alexng.gns.env.scope.Scope;
 import me.alexng.gns.tokens.IdentifierToken;
 import me.alexng.gns.tokens.Token;
+import me.alexng.gns.util.ExceptionUtil;
 
 public class StringValue extends ObjectValue {
 
@@ -15,9 +16,8 @@ public class StringValue extends ObjectValue {
 	private static final NativeFunction OP_ADD_FUNC = new NativeFunction("+") {
 		@Override
 		public Value executeFunction(Token caller, Scope parentScope, Value[] values) throws RuntimeException {
-			// TODO: Use the ExceptionUtil class to make this easier. See BuiltInFunctions for more examples.
 			if (values.length != 2) {
-				throw new RuntimeException(caller, "Invalid number of arguments. Expected: 2. Got: " + values.length);
+				throw ExceptionUtil.createRuntimeExpected("Invalid number of arguments", caller, 2, values.length);
 			}
 			StringValue stringValueA = (StringValue) values[0];
 			Value valueB = values[1];

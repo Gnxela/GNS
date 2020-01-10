@@ -16,9 +16,9 @@ public abstract class ScopeProvider<T, V> {
 
 	public abstract V get(T t) throws RuntimeException;
 
-	public abstract V getLocal(T t);
+	public abstract V getLocal(T t) throws RuntimeException;
 
 	public abstract void set(T t, V v) throws RuntimeException;
 
-	public abstract void setLocal(T t, V v);
+	public abstract void setLocal(T t, V v) throws RuntimeException;
 }
