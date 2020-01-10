@@ -1,0 +1,28 @@
+class TestClass {
+
+	class NestedClass {
+
+		k = 5
+
+		func init(j) {
+			k = j + 5
+		}
+
+		func foo() {
+			i = i + 10
+		}
+	}
+
+	i = j = null
+
+	func init(k) {
+		i = k
+		j = new NestedClass(k)
+	}
+}
+
+a = new TestClass(1)
+print(a.i)
+print(a.j.k)
+a.j.foo()
+print(a.i)

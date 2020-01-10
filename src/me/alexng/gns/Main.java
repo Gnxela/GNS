@@ -12,7 +12,7 @@ public class Main {
 
 		Environment scriptEnvironment = new Environment(new Options.Builder().build());
 		scriptEnvironment.setup();
-		File scriptFile = new File("scripts/testScript.gns");
+		File scriptFile = new File("scripts/testScript4.gns");
 		long start = System.nanoTime();
 		scriptEnvironment.loadScript(new Script(scriptFile));
 		long endParse = System.nanoTime();
