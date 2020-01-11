@@ -3,3 +3,6 @@ print(str)
 print("Woah!")
 print(str + " :)")
 print(str.length)
+
+class boolean {
+}
