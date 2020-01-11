@@ -4,6 +4,7 @@ import me.alexng.gns.env.Environment;
 
 public class Scope {
 
+	public NameProvider nameProvider;
 	public VariableProvider variableProvider;
 	public ClassProvider classProvider;
 	public FunctionProvider functionProvider;
@@ -17,6 +18,7 @@ public class Scope {
 				  Scope parentScope,
 				  Scope objectScope,
 				  Scope globalScope,
+				  NameProvider nameProvider,
 				  FunctionProvider functionProvider,
 				  ClassProvider classProvider,
 				  VariableProvider variableProvider,
@@ -25,6 +27,7 @@ public class Scope {
 		this.parentScope = parentScope;
 		this.objectScope = objectScope;
 		this.globalScope = globalScope;
+		this.nameProvider = nameProvider;
 		this.variableProvider = variableProvider;
 		this.classProvider = classProvider;
 		this.functionProvider = functionProvider;
@@ -34,6 +37,7 @@ public class Scope {
 	public static Scope createGlobalScope(Environment environment) {
 		Scope globalScope = new Scope(environment,
 				null, null, null,
+				new NameProvider(""),
 				new FunctionProvider(null),
 				new ClassProvider(null),
 				new VariableProvider(null),
@@ -45,17 +49,19 @@ public class Scope {
 	public Scope createChildScope() {
 		return new Scope(environment,
 				this, objectScope, globalScope,
+				nameProvider,
 				new FunctionProvider(functionProvider),
 				new ClassProvider(classProvider),
 				new VariableProvider(variableProvider),
 				new FunctionProvider(operatorFunctionProvider));
 	}
 
-	public Scope createObjectScope(Scope parentScope) {
+	public Scope createObjectScope(String name, Scope parentScope) {
 		Scope objectScope = new Scope(parentScope.getEnvironment(),
 				parentScope,
 				null,
 				parentScope.getGlobalScope(),
+				nameProvider.extend(name, "."),
 				new FunctionProvider(parentScope.functionProvider),
 				new ClassProvider(parentScope.classProvider),
 				new VariableProvider(parentScope.variableProvider),
@@ -64,8 +70,8 @@ public class Scope {
 		return objectScope;
 	}
 
-	public Scope createObjectScope() {
-		return createObjectScope(globalScope);
+	public Scope createObjectScope(String name) {
+		return createObjectScope(name, globalScope);
 	}
 
 	public Scope getObjectScope() {

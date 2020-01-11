@@ -34,7 +34,7 @@ public class StringValue extends ObjectValue {
 	private String value;
 
 	public StringValue(String value, Scope callingScope) throws RuntimeException {
-		super(null, callingScope.createObjectScope());
+		super(null, callingScope.createObjectScope("String"));
 		this.value = value;
 		addBuiltIns();
 	}

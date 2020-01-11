@@ -5,6 +5,7 @@ import me.alexng.gns.RuntimeException;
 import me.alexng.gns.env.scope.Scope;
 import me.alexng.gns.env.value.NumberValue;
 import me.alexng.gns.env.value.ObjectValue;
+import me.alexng.gns.env.value.StringValue;
 import me.alexng.gns.env.value.Value;
 import me.alexng.gns.util.StringUtil;
 
@@ -30,9 +31,9 @@ public class ClassToken extends IdentifiedToken {
 	public ObjectValue createInstance(ObjectConstructionToken caller, Value[] values, Scope callingScope) throws RuntimeException {
 		Scope objectScope;
 		if (callingScope.getObjectScope() != null && callingScope.getObjectScope().classProvider.getLocal(getIdentifier()) != null) {
-			objectScope = callingScope.createObjectScope(callingScope.getObjectScope());
+			objectScope = callingScope.createObjectScope(getIdentifier().getName(), callingScope.getObjectScope());
 		} else {
-			objectScope = callingScope.createObjectScope();
+			objectScope = callingScope.createObjectScope(getIdentifier().getName());
 		}
 		setObjectProperties(objectScope);
 		block.executeBlockWithScope(objectScope);
@@ -40,11 +41,10 @@ public class ClassToken extends IdentifiedToken {
 		return new ObjectValue(this, objectScope);
 	}
 
-	private void setObjectProperties(Scope objectScope) {
+	private void setObjectProperties(Scope objectScope) throws RuntimeException {
 		// TODO: Set these values as immutable.
 		objectScope.variableProvider.setLocal(OBJECT_ID_VARIABLE, new NumberValue(objectScope.getEnvironment().incrementObjectId()));
-		// TODO: We want to use something other than the Java object hash code.
-		objectScope.variableProvider.setLocal(TYPE_VARIABLE, new NumberValue(hashCode()));
+		objectScope.variableProvider.setLocal(TYPE_VARIABLE, new StringValue(objectScope.nameProvider.getName(), objectScope));
 	}
 
 	private void callConstructor(ObjectConstructionToken caller, Value[] values, Scope objectScope) throws RuntimeException {
