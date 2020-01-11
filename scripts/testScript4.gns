@@ -11,6 +11,10 @@ class TestClass {
 		func foo() {
 			i = i + 10
 		}
+
+		func bar() {
+			test()
+		}
 	}
 
 	i = j = null
@@ -19,10 +23,16 @@ class TestClass {
 		i = k
 		j = new NestedClass(k)
 	}
+
+	func test() {
+		i = 0
+	}
 }
 
 a = new TestClass(1)
 print(a.i)
 print(a.j.k)
 a.j.foo()
+print(a.i)
+a.j.bar()
 print(a.i)
