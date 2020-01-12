@@ -2,6 +2,18 @@ package me.alexng.gns.env.value;
 
 public class NumberValue extends Value {
 
+	private final ValueDescriptor<NumberValue> DESCRIPTOR = new ValueDescriptor<NumberValue>() {
+		@Override
+		public String getTypeString() {
+			return "number";
+		}
+
+		@Override
+		public NumberValue castTo(Value value) throws RuntimeException {
+			return (NumberValue) value;
+		}
+	};
+
 	private boolean isInt;
 	private int intValue;
 	private double doubleValue;
@@ -39,6 +51,11 @@ public class NumberValue extends Value {
 			return intValue;
 		}
 		return doubleValue;
+	}
+
+	@Override
+	public ValueDescriptor<NumberValue> getValueDescriptor() {
+		return DESCRIPTOR;
 	}
 
 	public boolean isInt() {

@@ -42,16 +42,17 @@ public class ClassToken extends IdentifiedToken {
 		} else {
 			objectScope = callingScope.createObjectScope(getIdentifier().getName());
 		}
-		setObjectProperties(objectScope);
+		int objectId = objectScope.getEnvironment().incrementObjectId();
+		setObjectProperties(objectId, objectScope);
 		block.executeBlockWithScope(objectScope);
 		callConstructor(caller, values, objectScope);
-		return new ObjectValue(this, objectScope);
+		return new ObjectValue(objectId, this, objectScope);
 	}
 
-	private void setObjectProperties(Scope objectScope) throws RuntimeException {
+	private void setObjectProperties(int objectId, Scope objectScope) throws RuntimeException {
 		// TODO: Set these values as immutable.
-		objectScope.variableProvider.setLocal(OBJECT_ID_VARIABLE, new NumberValue(objectScope.getEnvironment().incrementObjectId()));
-		objectScope.variableProvider.setLocal(TYPE_VARIABLE, new StringValue(objectScope.nameProvider.getName(), objectScope));
+		objectScope.variableProvider.setLocal(OBJECT_ID_VARIABLE, new NumberValue(objectId));
+		objectScope.variableProvider.setLocal(TYPE_VARIABLE, StringValue.createString(objectScope.nameProvider.getName(), objectScope));
 	}
 
 	private void callConstructor(ObjectConstructionToken caller, Value[] values, Scope objectScope) throws RuntimeException {

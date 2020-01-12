@@ -3,28 +3,26 @@ package me.alexng.gns.env.value;
 import me.alexng.gns.env.scope.Scope;
 import me.alexng.gns.tokens.ClassToken;
 
-public class ObjectValue extends Value {
+public class ObjectValue extends RawObjectValue {
 
-	private ClassToken classToken;
-	private Scope objectScope;
+	private final ValueDescriptor<ObjectValue> DESCRIPTOR = new ValueDescriptor<ObjectValue>() {
+		@Override
+		public String getTypeString() {
+			return "object";
+		}
 
-	public ObjectValue(ClassToken classToken, Scope objectScope) {
-		super(Type.OBJECT);
-		this.classToken = classToken;
-		this.objectScope = objectScope;
+		@Override
+		public ObjectValue castTo(Value value) throws RuntimeException {
+			return (ObjectValue) value;
+		}
+	};
+
+	public ObjectValue(int objectId, ClassToken classToken, Scope objectScope) {
+		super(objectId, classToken, objectScope);
 	}
 
 	@Override
-	public Object getJavaValue() {
-		// TODO: Not really sure what to return here.
-		return objectScope;
-	}
-
-	public Scope getObjectScope() {
-		return objectScope;
-	}
-
-	public ClassToken getObjectType() {
-		return classToken;
+	public ValueDescriptor<ObjectValue> getValueDescriptor() {
+		return DESCRIPTOR;
 	}
 }

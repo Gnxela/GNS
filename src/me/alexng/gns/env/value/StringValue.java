@@ -9,7 +9,7 @@ import me.alexng.gns.tokens.IdentifierToken;
 import me.alexng.gns.tokens.Token;
 import me.alexng.gns.util.ExceptionUtil;
 
-public class StringValue extends ObjectValue {
+public class StringValue extends RawObjectValue {
 
 	private static final IdentifierToken LENGTH_ID = new IdentifierToken("length", FileIndex.INTERNAL_INDEX);
 
@@ -23,20 +23,35 @@ public class StringValue extends ObjectValue {
 			Value valueB = values[1];
 			if (valueB instanceof StringValue) {
 				StringValue stringValueB = (StringValue) valueB;
-				return new ReturnedValue(new StringValue(stringValueA.value + stringValueB.value, parentScope));
+				return new ReturnedValue(StringValue.createString(stringValueA.value + stringValueB.value, parentScope));
 			} else {
 				// TODO: Add toString function
 				return null;
 			}
 		}
 	};
+	private final ValueDescriptor<StringValue> DESCRIPTOR = new ValueDescriptor<StringValue>() {
+		@Override
+		public String getTypeString() {
+			return "string";
+		}
+
+		@Override
+		public StringValue castTo(Value value) throws java.lang.RuntimeException {
+			return (StringValue) value;
+		}
+	};
 
 	private String value;
 
-	public StringValue(String value, Scope callingScope) throws RuntimeException {
-		super(null, callingScope.createObjectScope("String"));
+	public StringValue(int objectId, String value, Scope callingScope) throws RuntimeException {
+		super(objectId, null, callingScope.createObjectScope("String"));
 		this.value = value;
 		addBuiltIns();
+	}
+
+	public static StringValue createString(String string, Scope callingScope) throws RuntimeException {
+		return new StringValue(callingScope.getEnvironment().incrementObjectId(), string, callingScope);
 	}
 
 	private void addBuiltIns() throws RuntimeException {
@@ -48,5 +63,10 @@ public class StringValue extends ObjectValue {
 	@Override
 	public Object getJavaValue() {
 		return value;
+	}
+
+	@Override
+	public ValueDescriptor<StringValue> getValueDescriptor() {
+		return DESCRIPTOR;
 	}
 }

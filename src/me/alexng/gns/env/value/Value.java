@@ -2,17 +2,7 @@ package me.alexng.gns.env.value;
 
 public abstract class Value {
 
-	public static final Value NULL = new Value(Type.NULL) {
-		@Override
-		public Object getJavaValue() {
-			return null;
-		}
-
-		@Override
-		public String toString() {
-			return "<NullValue >";
-		}
-	};
+	public static final NullValue NULL = new NullValue();
 	private Type type;
 
 	public Value(Type type) {
@@ -20,6 +10,8 @@ public abstract class Value {
 	}
 
 	public abstract Object getJavaValue();
+
+	public abstract ValueDescriptor getValueDescriptor();
 
 	public String toString() {
 		return getJavaValue().toString();

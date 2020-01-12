@@ -17,7 +17,7 @@ public class StringLiteralToken extends Token {
 
 	@Override
 	public Value execute(Scope scope) throws RuntimeException {
-		return new StringValue(value, scope);
+		return StringValue.createString(value, scope);
 	}
 
 	@Override
