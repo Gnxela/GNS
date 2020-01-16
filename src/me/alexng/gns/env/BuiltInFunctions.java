@@ -3,7 +3,9 @@ package me.alexng.gns.env;
 import me.alexng.gns.RuntimeException;
 import me.alexng.gns.env.scope.Scope;
 import me.alexng.gns.env.value.RawObjectValue;
+import me.alexng.gns.env.value.StringValue;
 import me.alexng.gns.env.value.Value;
+import me.alexng.gns.tokens.ClassToken;
 import me.alexng.gns.tokens.Token;
 import me.alexng.gns.util.ExceptionUtil;
 
@@ -27,8 +29,12 @@ public class BuiltInFunctions {
 					break;
 				case OBJECT:
 					RawObjectValue rawObject = (RawObjectValue) value;
-					output = rawObject.getValueDescriptor().getTypeString() + "#" + rawObject.getObjectId();
-					// TODO: Call a toString function in the object
+					if (rawObject instanceof StringValue) {
+						output = ((StringValue) rawObject).getJavaValue();
+					} else {
+						output = rawObject.getObjectScope().variableProvider.getLocal(ClassToken.TYPE_VARIABLE).getJavaValue() + "#" + rawObject.getObjectId();
+						// TODO: Call a toString function in the object
+					}
 					break;
 			}
 			System.out.println(output);

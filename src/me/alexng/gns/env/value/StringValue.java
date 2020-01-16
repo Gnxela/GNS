@@ -61,7 +61,7 @@ public class StringValue extends RawObjectValue {
 	}
 
 	@Override
-	public Object getJavaValue() {
+	public String getJavaValue() {
 		return value;
 	}
 

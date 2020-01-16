@@ -20,6 +20,12 @@ public class ObjectValue extends RawObjectValue {
 	public ObjectValue(int objectId, ClassToken classToken, Scope objectScope) {
 		super(objectId, classToken, objectScope);
 	}
+	
+	@Override
+	public Scope getJavaValue() {
+		// TODO: Not really sure what to return here.
+		return (Scope) super.getJavaValue();
+	}
 
 	@Override
 	public ValueDescriptor<ObjectValue> getValueDescriptor() {
