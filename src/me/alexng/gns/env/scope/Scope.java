@@ -61,7 +61,7 @@ public class Scope {
 				parentScope,
 				null,
 				parentScope.getGlobalScope(),
-				nameProvider.extend(name, "."),
+				parentScope.nameProvider.extend(name, "."),
 				new FunctionProvider(parentScope.functionProvider),
 				new ClassProvider(parentScope.classProvider),
 				new VariableProvider(parentScope.variableProvider),
