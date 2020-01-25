@@ -15,6 +15,12 @@ public class ObjectValue extends Value {
 		this.classToken = classToken;
 		this.objectScope = objectScope;
 	}
+	
+	@Override
+	public Scope getJavaValue() {
+		// TODO: Not really sure what to return here.
+		return (Scope) super.getJavaValue();
+	}
 
 	@Override
 	public Object getJavaValue() {

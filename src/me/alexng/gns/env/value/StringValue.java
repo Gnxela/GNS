@@ -28,7 +28,7 @@ public class StringValue extends ObjectValue {
 	}
 
 	@Override
-	public Object getJavaValue() {
+	public String getJavaValue() {
 		return value;
 	}
 }

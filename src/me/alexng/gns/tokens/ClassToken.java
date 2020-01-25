@@ -16,8 +16,8 @@ public class ClassToken extends IdentifiedToken {
 	// TODO: When we add modular values, load them here
 	private static final String[] RESTRICTED_NAMES = new String[]{"number", "string", "boolean"};
 	private static final IdentifierToken OBJECT_ID_VARIABLE = new IdentifierToken("objectId", FileIndex.INTERNAL_INDEX);
-	private static final IdentifierToken TYPE_VARIABLE = new IdentifierToken("type", FileIndex.INTERNAL_INDEX);
 	private static final IdentifierToken CONSTRUCTOR_NAME = new IdentifierToken("init", FileIndex.INTERNAL_INDEX);
+	public static final IdentifierToken TYPE_VARIABLE = new IdentifierToken("type", FileIndex.INTERNAL_INDEX);
 
 	private BlockToken block;
 
