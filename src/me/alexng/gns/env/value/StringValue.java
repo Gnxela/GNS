@@ -30,7 +30,6 @@ public class StringValue extends RawObjectValue {
 			}
 		}
 	};
-	private final ValueDescriptor<StringValue> DESCRIPTOR = new StringValueDescriptor();
 
 	private String value;
 
@@ -53,22 +52,5 @@ public class StringValue extends RawObjectValue {
 	@Override
 	public Object getJavaValue() {
 		return value;
-	}
-
-	@Override
-	public ValueDescriptor<StringValue> getValueDescriptor() {
-		return DESCRIPTOR;
-	}
-
-	private static class StringValueDescriptor implements ValueDescriptor<StringValue> {
-		@Override
-		public String getTypeString() {
-			return "string";
-		}
-
-		@Override
-		public StringValue castTo(Value value) throws java.lang.RuntimeException {
-			return (StringValue) value;
-		}
 	}
 }

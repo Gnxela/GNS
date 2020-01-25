@@ -11,8 +11,6 @@ public abstract class Value {
 
 	public abstract Object getJavaValue();
 
-	public abstract ValueDescriptor getValueDescriptor();
-
 	public String toString() {
 		return getJavaValue().toString();
 	}

@@ -3,10 +3,6 @@ package me.alexng.gns.env.value;
 import me.alexng.gns.env.scope.Scope;
 import me.alexng.gns.tokens.ClassToken;
 
-/**
- * Provides a superclass that does not define {@link Value#getValueDescriptor()},
- * allowing proper subclassing of ObjectValue.
- */
 public abstract class RawObjectValue extends Value {
 
 	private int objectId;
