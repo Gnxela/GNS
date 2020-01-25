@@ -11,6 +11,7 @@ import me.alexng.gns.util.ExceptionUtil;
 
 public class StringValue extends RawObjectValue {
 
+	private static final String STRING_NAME = "String";
 	private static final IdentifierToken LENGTH_ID = new IdentifierToken("length", FileIndex.INTERNAL_INDEX);
 
 	private static final NativeFunction OP_ADD_FUNC = new NativeFunction("+") {
@@ -34,7 +35,7 @@ public class StringValue extends RawObjectValue {
 	private String value;
 
 	public StringValue(int objectId, String value, Scope callingScope) throws RuntimeException {
-		super(objectId, null, callingScope.createObjectScope("String"));
+		super(objectId, null, callingScope.createObjectScope(STRING_NAME));
 		this.value = value;
 		addBuiltIns();
 	}

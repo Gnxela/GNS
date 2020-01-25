@@ -27,7 +27,7 @@ public class BuiltInFunctions {
 					break;
 				case OBJECT:
 					RawObjectValue rawObject = (RawObjectValue) value;
-					output = rawObject.getObjectType().getIdentifier().getName() + "#" + rawObject.getObjectId();
+					output = rawObject.getObjectScope().nameProvider.getName() + "#" + rawObject.getObjectId();
 					// TODO: Call a toString function in the object
 					break;
 			}
