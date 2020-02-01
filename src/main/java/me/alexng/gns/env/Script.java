@@ -19,6 +19,7 @@ public class Script {
 	private String source;
 	private String file;
 	private LinkedList<Token> tokens;
+	private FileIndex fileIndex;
 	private boolean isParsed = false;
 
 	private Script(String source, String file) {
@@ -44,6 +45,7 @@ public class Script {
 		LinkedList<Token> tokens = Lexer.tokenize(source, file);
 		Assembler.assemble(tokens);
 		this.tokens = tokens;
+		this.fileIndex = FileIndex.wrap(tokens);
 	}
 
 	/**
@@ -53,7 +55,7 @@ public class Script {
 		if (!isParsed) {
 			throw new RuntimeException(new FileIndex(file, 0, 0), "Script executed before parsed");
 		}
-		BlockToken globalBlock = new BlockToken(tokens, FileIndex.wrap(tokens));
+		BlockToken globalBlock = new BlockToken(tokens, fileIndex);
 		globalBlock.executeBlockWithScope(globalScope);
 	}
 

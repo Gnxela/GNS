@@ -18,7 +18,7 @@ public abstract class BinaryOperatorToken<L extends Token, R extends Token> exte
 
 	public abstract void checkOperands(Token left, Token right) throws ParsingException;
 
-	public void bind(L left, R right) {
+	public void bind(L left, R right) throws ParsingException {
 		super.bind();
 		this.left = left;
 		this.right = right;

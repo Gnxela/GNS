@@ -22,11 +22,14 @@ public class FileIndex {
 		return new FileIndex(file, 0, 0);
 	}
 
-	public static FileIndex wrap(LinkedList<? extends Token> tokens) {
+	public static FileIndex wrap(LinkedList<? extends Token> tokens) throws ParsingException {
 		return openClose(tokens.getFirst(), tokens.getLast());
 	}
 
-	public static FileIndex openClose(Token open, Token close) {
+	public static FileIndex openClose(Token open, Token close) throws ParsingException {
+		if (!open.getFileIndex().getSourceFile().equals(close.getFileIndex().getSourceFile())) {
+			throw new ParsingException(open, "Can not merge FileIndex's from different files");
+		}
 		return new FileIndex(open.getFileIndex().getSourceFile(), open.getFileIndex().getStartIndex(), close.getFileIndex().getEndIndex());
 	}
 
