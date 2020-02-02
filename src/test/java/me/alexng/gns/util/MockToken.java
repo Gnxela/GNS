@@ -1,5 +1,9 @@
-package me.alexng.gns;
+package me.alexng.gns.util;
 
+import me.alexng.gns.FileIndex;
+import me.alexng.gns.RuntimeException;
+import me.alexng.gns.env.scope.Scope;
+import me.alexng.gns.env.value.Value;
 import me.alexng.gns.tokens.Token;
 
 public class MockToken extends Token {
@@ -14,6 +18,11 @@ public class MockToken extends Token {
 
 	public MockToken() {
 		this(null);
+	}
+
+	@Override
+	public Value execute(Scope scope) throws RuntimeException {
+		return super.execute(scope);
 	}
 
 	@Override

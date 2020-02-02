@@ -1,6 +1,7 @@
 package me.alexng.gns;
 
 import me.alexng.gns.tokens.Token;
+import me.alexng.gns.util.MockToken;
 import org.junit.jupiter.api.Test;
 
 import java.util.LinkedList;
