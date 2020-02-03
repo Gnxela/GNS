@@ -1,0 +1,53 @@
+package me.alexng.gns.tokens;
+
+import me.alexng.gns.FileIndex;
+import me.alexng.gns.RuntimeException;
+import me.alexng.gns.env.scope.Scope;
+import me.alexng.gns.env.value.NumberValue;
+import me.alexng.gns.util.ReturningMockToken;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+
+public class ArgumentsTokenTest {
+
+	@Test
+	public void testGrabValues() throws RuntimeException {
+		NumberValue[] numberValues = new NumberValue[]{
+				new NumberValue(0),
+				new NumberValue(1),
+				new NumberValue(2),
+				new NumberValue(3),
+		};
+		Token[] arguments = new Token[]{
+				new ReturningMockToken(numberValues[0]),
+				new ReturningMockToken(numberValues[1]),
+				new ReturningMockToken(numberValues[2]),
+				new ReturningMockToken(numberValues[3]),
+		};
+		ArgumentsToken argumentsToken = new ArgumentsToken(arguments, FileIndex.NULL_INDEX);
+		assertArrayEquals(numberValues, argumentsToken.grabValues(Scope.createGlobalScope(null)));
+	}
+
+	@Test
+	public void testGrabValues_usingScope() throws RuntimeException {
+		NumberValue[] numberValues = new NumberValue[]{
+				new NumberValue(0),
+				new NumberValue(1),
+				new NumberValue(2),
+				new NumberValue(3),
+		};
+		IdentifierToken[] arguments = new IdentifierToken[]{
+				new IdentifierToken("a", FileIndex.NULL_INDEX),
+				new IdentifierToken("b", FileIndex.NULL_INDEX),
+				new IdentifierToken("c", FileIndex.NULL_INDEX),
+				new IdentifierToken("d", FileIndex.NULL_INDEX),
+		};
+		ArgumentsToken argumentsToken = new ArgumentsToken(arguments, FileIndex.NULL_INDEX);
+		Scope scope = Scope.createGlobalScope(null);
+		for (int i = 0; i < numberValues.length; i++) {
+			scope.variableProvider.setLocal(arguments[i], numberValues[i]);
+		}
+		assertArrayEquals(numberValues, argumentsToken.grabValues(scope));
+	}
+}
