@@ -49,7 +49,6 @@ public class FileIndexTest {
 	public void testWrap_throws() {
 		LinkedList<Token> linkedList = new LinkedList<>();
 		linkedList.add(new MockToken("file1", 1, 2));
-		// TODO: Currently only the start and end file are checked if they are the same.
 		linkedList.add(new MockToken("file1", 10, 12));
 		linkedList.add(new MockToken("file2", 15, 20));
 		assertThrows(ParsingException.class, () -> {
