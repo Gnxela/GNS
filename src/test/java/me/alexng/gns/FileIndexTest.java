@@ -55,6 +55,11 @@ public class FileIndexTest {
 		assertThrows(ParsingException.class, () -> {
 			FileIndex.wrap(linkedList);
 		});
+
+		linkedList.add(new MockToken("file1", 15, 20));
+		assertThrows(ParsingException.class, () -> {
+			FileIndex.wrap(linkedList);
+		});
 	}
 
 	@Test

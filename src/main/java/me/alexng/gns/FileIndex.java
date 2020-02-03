@@ -23,6 +23,10 @@ public class FileIndex {
 	}
 
 	public static FileIndex wrap(LinkedList<? extends Token> tokens) throws ParsingException {
+		String sourceFile = tokens.getFirst().getFileIndex().sourceFile;
+		if (tokens.stream().anyMatch(token -> !token.getFileIndex().getSourceFile().equals(sourceFile))) {
+			throw new ParsingException(tokens.getFirst(), "Can not merge FileIndex's from different files");
+		}
 		return openClose(tokens.getFirst(), tokens.getLast());
 	}
 
