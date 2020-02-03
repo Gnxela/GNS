@@ -12,7 +12,7 @@ public class Options {
 		return usingStandardLib;
 	}
 
-	static class Builder {
+	public static class Builder {
 
 		private boolean usingStandardLib = true;
 
