@@ -1,6 +1,7 @@
-package me.alexng.gns;
+package me.alexng.gns.tokens;
 
-import me.alexng.gns.tokens.KeywordToken;
+import me.alexng.gns.FileIndex;
+import me.alexng.gns.Keyword;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
