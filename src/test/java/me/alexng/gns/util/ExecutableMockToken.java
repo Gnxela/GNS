@@ -17,7 +17,7 @@ public class ExecutableMockToken extends MockToken {
 		return executor.execute();
 	}
 
-	public abstract static class Executor {
+	public interface Executor {
 		public abstract Value execute();
 	}
 }

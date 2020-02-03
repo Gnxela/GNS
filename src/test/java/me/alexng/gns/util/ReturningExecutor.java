@@ -2,7 +2,7 @@ package me.alexng.gns.util;
 
 import me.alexng.gns.env.value.Value;
 
-public class ReturningExecutor extends ExecutableMockToken.Executor {
+public class ReturningExecutor implements ExecutableMockToken.Executor {
 
 	private Value value;
 

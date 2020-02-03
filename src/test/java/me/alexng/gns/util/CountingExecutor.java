@@ -4,7 +4,7 @@ import me.alexng.gns.env.value.Value;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class CountingExecutor extends ExecutableMockToken.Executor {
+public class CountingExecutor implements ExecutableMockToken.Executor {
 
 	private int count = 0;
 
