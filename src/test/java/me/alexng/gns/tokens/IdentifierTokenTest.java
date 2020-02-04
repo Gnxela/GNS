@@ -30,7 +30,7 @@ public class IdentifierTokenTest {
 	}
 
 	@Test
-	public void testExecute_functionDefined() throws RuntimeException, ParsingException {
+	public void testExecute_functionDefined() throws RuntimeException {
 		IdentifierToken identifierToken = new IdentifierToken("foo", FileIndex.NULL_INDEX);
 		Scope scope = Scope.createGlobalScope(null);
 		scope.functionProvider.setLocal(identifierToken, new FunctionToken(identifierToken, null, null, FileIndex.NULL_INDEX));
@@ -39,11 +39,9 @@ public class IdentifierTokenTest {
 	}
 
 	@Test
-	public void testExecute_undefined() throws RuntimeException, ParsingException {
+	public void testExecute_undefined() {
 		IdentifierToken identifierToken = new IdentifierToken("foo", FileIndex.NULL_INDEX);
 		Scope scope = Scope.createGlobalScope(null);
-		assertThrows(RuntimeException.class, () -> {
-			identifierToken.execute(scope);
-		});
+		assertThrows(RuntimeException.class, () -> identifierToken.execute(scope));
 	}
 }
