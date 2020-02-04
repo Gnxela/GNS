@@ -17,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public class IfTokenTest {
 
 	@Test
-	public void testExecute() throws RuntimeException {
+	public void testExecute_true() throws RuntimeException {
 		ReturningExecutor returningExecutor = new ReturningExecutor(BooleanValue.TRUE);
 		ExpressionToken expressionToken = new ExpressionToken(new ExecutableMockToken(returningExecutor), FileIndex.NULL_INDEX);
 		CountingExecutor countingExecutor = new CountingExecutor();
@@ -30,10 +30,22 @@ public class IfTokenTest {
 
 		ifToken.execute(Scope.createGlobalScope(null));
 		countingExecutor.assertCount(3);
+	}
 
-		returningExecutor.setValue(BooleanValue.FALSE);
+	@Test
+	public void testExecute_false() throws RuntimeException {
+		ReturningExecutor returningExecutor = new ReturningExecutor(BooleanValue.FALSE);
+		ExpressionToken expressionToken = new ExpressionToken(new ExecutableMockToken(returningExecutor), FileIndex.NULL_INDEX);
+		CountingExecutor countingExecutor = new CountingExecutor();
+		LinkedList<Token> tokens = new LinkedList<>();
+		tokens.add(new ExecutableMockToken(countingExecutor));
+		tokens.add(new ExecutableMockToken(countingExecutor));
+		tokens.add(new ExecutableMockToken(countingExecutor));
+		BlockToken blockToken = new BlockToken(tokens, FileIndex.NULL_INDEX);
+		IfToken ifToken = new IfToken(expressionToken, blockToken, FileIndex.NULL_INDEX);
+
 		ifToken.execute(Scope.createGlobalScope(null));
-		countingExecutor.assertCount(3);
+		countingExecutor.assertCount(0);
 	}
 
 	@Test
