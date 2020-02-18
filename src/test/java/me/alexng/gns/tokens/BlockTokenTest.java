@@ -66,22 +66,17 @@ public class BlockTokenTest {
 	@Test
 	public void testExecute_returnValue() throws RuntimeException, ParsingException {
 		CountingExecutor countingExecutor = new CountingExecutor();
-		IdentifierToken identifier = new IdentifierToken("test", FileIndex.NULL_INDEX);
-		AssignToken assignToken = new AssignToken(FileIndex.NULL_INDEX);
-		assignToken.bind(identifier, new ValueToken(new NumberValue(13), FileIndex.NULL_INDEX));
 		LinkedList<Token> tokens = new LinkedList<>();
 		tokens.add(new ExecutableMockToken(countingExecutor));
 		tokens.add(new ExecutableMockToken(countingExecutor));
 		tokens.add(new ReturningMockToken(new ReturnedValue(new NumberValue(1))));
 		tokens.add(new ExecutableMockToken(countingExecutor)); // This token is not executed.
-		tokens.add(assignToken); // This will not increment countingExecutor
 		BlockToken blockToken = new BlockToken(tokens, FileIndex.NULL_INDEX);
 		Scope globalScope = Scope.createGlobalScope(null);
 		Value value = blockToken.executeBlock(globalScope);
 		countingExecutor.assertCount(2);
 		assertTrue(value instanceof ReturnedValue);
 		assertEquals(1, ((ReturnedValue) value).getJavaValue().getJavaValue());
-		assertThrows(RuntimeException.class, () -> globalScope.variableProvider.get(identifier));
 	}
 
 	@Test
