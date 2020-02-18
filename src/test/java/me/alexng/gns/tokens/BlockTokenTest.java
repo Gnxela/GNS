@@ -85,6 +85,17 @@ public class BlockTokenTest {
 	}
 
 	@Test
+	public void testExecute_eolToken() throws RuntimeException, ParsingException {
+		LinkedList<Token> tokens = new LinkedList<>();
+		MockEOLToken mockEOLToken = new MockEOLToken();
+		tokens.add(mockEOLToken);
+		BlockToken blockToken = new BlockToken(tokens, FileIndex.NULL_INDEX);
+		Scope globalScope = Scope.createGlobalScope(null);
+		blockToken.executeBlock(globalScope);
+		assertFalse(mockEOLToken.executed);
+	}
+
+	@Test
 	public void testExecute_modifyParentVariable() throws RuntimeException, ParsingException {
 		IdentifierToken identifier = new IdentifierToken("test", FileIndex.NULL_INDEX);
 		AssignToken assignToken = new AssignToken(FileIndex.NULL_INDEX);
@@ -96,5 +107,20 @@ public class BlockTokenTest {
 		globalScope.variableProvider.setLocal(identifier, new NumberValue(13));
 		blockToken.executeBlock(globalScope);
 		assertEquals(17, globalScope.variableProvider.get(identifier).getJavaValue());
+	}
+
+	private static class MockEOLToken extends EOLToken {
+
+		public boolean executed = false;
+
+		public MockEOLToken() {
+			super(FileIndex.NULL_INDEX);
+		}
+
+		@Override
+		public Value execute(Scope scope) throws RuntimeException {
+			executed = true;
+			return super.execute(scope);
+		}
 	}
 }
