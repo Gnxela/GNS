@@ -1,6 +1,7 @@
 package me.alexng.gns.env;
 
 import me.alexng.gns.bridge.Expose;
+import me.alexng.gns.env.value.NumberValue;
 import me.alexng.gns.env.value.ObjectValue;
 import me.alexng.gns.env.value.Value;
 
@@ -10,6 +11,9 @@ import java.io.OutputStream;
 public class Sys {
 
 	private static final String NEW_LINE = "\n";
+
+	@Expose
+	public NumberValue version = new NumberValue(3.2);
 
 	@Expose
 	public void print(Environment environment, Value value) {

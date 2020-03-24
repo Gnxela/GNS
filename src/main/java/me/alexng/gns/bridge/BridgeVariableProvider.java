@@ -12,8 +12,8 @@ public class BridgeVariableProvider extends VariableProvider {
 	private Object bridgeInstance;
 	private Map<String, Field> variables;
 
-	public BridgeVariableProvider(Object bridgeInstance, Map<String, Field> variables) {
-		super(null);
+	public BridgeVariableProvider(Object bridgeInstance, Map<String, Field> variables, VariableProvider parent) {
+		super(parent);
 		this.bridgeInstance = bridgeInstance;
 		this.variables = variables;
 	}
@@ -21,7 +21,11 @@ public class BridgeVariableProvider extends VariableProvider {
 	@Override
 	public Value getLocal(IdentifiedToken identifiedToken) {
 		try {
-			return (Value) variables.get(identifiedToken.getIdentifier().getName()).get(bridgeInstance);
+			Field field = variables.get(identifiedToken.getIdentifier().getName());
+			if (field == null) {
+				return null;
+			}
+			return (Value) field.get(bridgeInstance);
 		} catch (IllegalAccessException e) {
 			// TODO: This is very bad. We want to throw an exception here. Silently failing is terrible.
 			return null;

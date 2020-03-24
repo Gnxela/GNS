@@ -14,8 +14,8 @@ public class BridgeFunctionProvider extends FunctionProvider {
 	private Object bridgeInstance;
 	private List<NativeFunction> functions;
 
-	public BridgeFunctionProvider(Object bridgeInstance, List<Method> functions) {
-		super(null);
+	public BridgeFunctionProvider(Object bridgeInstance, List<Method> functions, FunctionProvider parent) {
+		super(parent);
 		this.bridgeInstance = bridgeInstance;
 		this.functions = functions.stream().map(method -> new NativeFunction(bridgeInstance, method)).collect(Collectors.toList());
 	}
