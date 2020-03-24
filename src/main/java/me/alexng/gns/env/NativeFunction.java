@@ -8,11 +8,25 @@ import me.alexng.gns.tokens.FunctionToken;
 import me.alexng.gns.tokens.IdentifierToken;
 import me.alexng.gns.tokens.Token;
 
-public abstract class NativeFunction extends FunctionToken {
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 
-	public NativeFunction(String name) {
-		super(new IdentifierToken(name, FileIndex.INTERNAL_INDEX), null, null, FileIndex.INTERNAL_INDEX);
+public class NativeFunction extends FunctionToken {
+
+	private Object bridgeInstance;
+	private Method method;
+
+	public NativeFunction(Object bridgeIntance, Method method) {
+		super(new IdentifierToken(method.getName(), FileIndex.INTERNAL_INDEX), null, null, FileIndex.INTERNAL_INDEX);
+		this.bridgeInstance = bridgeIntance;
+		this.method = method;
 	}
 
-	public abstract Value executeFunction(Token caller, Scope parentScope, Value[] values) throws RuntimeException;
+	public Value executeFunction(Token caller, Scope parentScope, Value[] values) throws RuntimeException {
+		try {
+			return (Value) method.invoke(bridgeInstance, (Object[]) values);
+		} catch (IllegalAccessException | InvocationTargetException e) {
+			throw new RuntimeException(FileIndex.INTERNAL_INDEX, "Failed to invoke bridge method:" + e.getClass() + " " + e.getMessage());
+		}
+	}
 }

@@ -1,2 +1,2 @@
 bridge = new TestBridge(5)
-print(bridge.id)
+bridge.getId()

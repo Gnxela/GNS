@@ -65,16 +65,8 @@ public class Environment {
 	 * TODO: We need to change above, should be executed in order added unless dependency requires otherwise
 	 */
 	public void runScripts() throws RuntimeException {
-		// TODO: This should be done only once when we create the global scope.
-		addBuiltInFunctions(globalScope);
 		for (Script script : loadedScripts) {
 			script.run(globalScope);
-		}
-	}
-
-	private void addBuiltInFunctions(Scope globalScope) throws RuntimeException {
-		for (NativeFunction nativeFunction : BuiltInFunctions.functions) {
-			globalScope.functionProvider.set(nativeFunction);
 		}
 	}
 

@@ -13,12 +13,16 @@ import me.alexng.gns.tokens.ObjectConstructionToken;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 
 public class BridgeClassToken extends ClassToken {
 
 	private Class<?> bridgeClass;
 	private Map<String, Field> variables;
+	private List<Method> functions;
 
 	public BridgeClassToken(Class<?> bridgeClass) throws ParsingException {
 		super(new IdentifierToken(bridgeClass.getSimpleName(), FileIndex.INTERNAL_INDEX), null, FileIndex.INTERNAL_INDEX);
@@ -29,12 +33,17 @@ public class BridgeClassToken extends ClassToken {
 		this.variables = variables;
 	}
 
+	public void setFunctions(LinkedList<Method> functions) {
+		this.functions = functions;
+	}
+
 	@Override
 	public ObjectValue createInstance(ObjectConstructionToken caller, Value[] values, Scope callingScope) throws RuntimeException {
 		Object bridgeInstance = createBridgeInstance(values);
 		int objectId = callingScope.getEnvironment().incrementObjectId();
 		Scope objectScope = Scope.createObjectScope(getIdentifier().getName(), callingScope.getGlobalScope());
 		objectScope.variableProvider = new BridgeVariableProvider(bridgeInstance, variables);
+		objectScope.functionProvider = new BridgeFunctionProvider(bridgeInstance, functions);
 		ObjectValue objectValue = new ObjectValue(objectId, this, objectScope);
 		return objectValue;
 	}

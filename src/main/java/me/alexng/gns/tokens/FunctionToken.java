@@ -25,7 +25,7 @@ public class FunctionToken extends IdentifiedToken {
 	}
 
 	public Value unwrapAndExecuteFunction(Token caller, Scope parentScope, Value[] values) throws RuntimeException {
-		Value returnedValue = executeFunction(this, parentScope, values);
+		Value returnedValue = executeFunction(caller, parentScope, values);
 		if (returnedValue instanceof ReturnedValue) {
 			return ((ReturnedValue) returnedValue).getJavaValue();
 		}

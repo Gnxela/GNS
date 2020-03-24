@@ -16,4 +16,10 @@ public class TestBridge {
 	public TestBridge(NumberValue numberValue) {
 		this.id = numberValue;
 	}
+
+	@Expose
+	public NumberValue getId() {
+		System.out.println("called");
+		return id;
+	}
 }
