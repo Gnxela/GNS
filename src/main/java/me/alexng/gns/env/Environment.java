@@ -5,6 +5,8 @@ import me.alexng.gns.ParsingException;
 import me.alexng.gns.RuntimeException;
 import me.alexng.gns.env.scope.Scope;
 
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.LinkedList;
 
 /**
@@ -13,12 +15,16 @@ import java.util.LinkedList;
 public class Environment {
 
 	private final Options options;
+	public final OutputStream stdout;
+	public final InputStream stdin;
 	private Scope globalScope;
 	private LinkedList<Script> loadedScripts;
 	private int currentObjectId = 1;
 
 	public Environment(Options options) {
 		this.options = options;
+		this.stdout = options.getStdout();
+		this.stdin = options.getStdin();
 		this.loadedScripts = new LinkedList<>();
 		this.globalScope = Scope.createGlobalScope(this);
 	}
@@ -59,14 +65,8 @@ public class Environment {
 	 * Increments the object id counter and returns a unique object id.
 	 */
 	public int incrementObjectId() {
-		return currentObjectId++;
-	}
-
-	public Options getOptions() {
-		return options;
-	}
-
-	public Scope getGlobalScope() {
-		return globalScope;
+		synchronized (this) {
+			return currentObjectId++;
+		}
 	}
 }

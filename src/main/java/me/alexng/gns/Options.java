@@ -1,28 +1,41 @@
 package me.alexng.gns;
 
+import java.io.InputStream;
+import java.io.OutputStream;
+
 public class Options {
 
-	private final boolean usingStandardLib;
+	private final OutputStream stdout;
+	private final InputStream stdin;
 
-	private Options(boolean usingStandardLib) {
-		this.usingStandardLib = usingStandardLib;
+	public Options(OutputStream stdout, InputStream stdin) {
+		this.stdout = stdout;
+		this.stdin = stdin;
 	}
 
-	public boolean isUsingStandardLib() {
-		return usingStandardLib;
+	public OutputStream getStdout() {
+		return stdout;
+	}
+
+	public InputStream getStdin() {
+		return stdin;
 	}
 
 	public static class Builder {
 
-		private boolean usingStandardLib = true;
+		private OutputStream stdout = System.out;
+		private InputStream stdin = System.in;
 
-		public Builder setUsingStandardLib(boolean usingStandardLib) {
-			this.usingStandardLib = usingStandardLib;
-			return this;
+		public void setStdout(OutputStream stdout) {
+			this.stdout = stdout;
+		}
+
+		public void setStdin(InputStream stdin) {
+			this.stdin = stdin;
 		}
 
 		public Options build() {
-			return new Options(usingStandardLib);
+			return new Options(stdout, stdin);
 		}
 	}
 }

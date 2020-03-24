@@ -31,7 +31,8 @@ public class BuiltInFunctions {
 					// TODO: Call a toString function in the object
 					break;
 			}
-			System.out.println(output);
+			// TODO: Fix this
+			// parentScope.getEnvironment().stdout.write(output.getBytes());
 			return null;
 		}
 	};
