@@ -16,15 +16,18 @@ public class NativeFunction extends FunctionToken {
 	private Object bridgeInstance;
 	private Method method;
 
-	public NativeFunction(Object bridgeIntance, Method method) {
+	public NativeFunction(Object bridgeInstance, Method method) {
 		super(new IdentifierToken(method.getName(), FileIndex.INTERNAL_INDEX), null, null, FileIndex.INTERNAL_INDEX);
-		this.bridgeInstance = bridgeIntance;
+		this.bridgeInstance = bridgeInstance;
 		this.method = method;
 	}
 
 	public Value executeFunction(Token caller, Scope parentScope, Value[] values) throws RuntimeException {
 		try {
-			return (Value) method.invoke(bridgeInstance, (Object[]) values);
+			Object[] arguments = new Object[values.length + 1];
+			arguments[0] = parentScope.getEnvironment();
+			System.arraycopy(values, 0, arguments, 1, values.length);
+			return (Value) method.invoke(bridgeInstance, arguments);
 		} catch (IllegalAccessException | InvocationTargetException e) {
 			throw new RuntimeException(FileIndex.INTERNAL_INDEX, "Failed to invoke bridge method:" + e.getClass() + " " + e.getMessage());
 		}

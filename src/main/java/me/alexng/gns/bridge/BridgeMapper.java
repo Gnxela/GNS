@@ -2,6 +2,7 @@ package me.alexng.gns.bridge;
 
 import me.alexng.gns.FileIndex;
 import me.alexng.gns.ParsingException;
+import me.alexng.gns.env.Environment;
 import me.alexng.gns.env.value.Value;
 import me.alexng.gns.tokens.ClassToken;
 
@@ -46,12 +47,20 @@ public class BridgeMapper {
 	}
 
 	private static void checkMethodTypes(Method method) throws ParsingException {
-		if (!Value.class.isAssignableFrom(method.getReturnType())) {
-			throw new ParsingException(FileIndex.INTERNAL_INDEX, "Only methods with return type " + BASE_TYPE_STRING + " can be exposed");
+		if (method.getReturnType() != Void.TYPE && !Value.class.isAssignableFrom(method.getReturnType())) {
+			throw new ParsingException(FileIndex.INTERNAL_INDEX, "Only methods with return type " + BASE_TYPE_STRING + " can be exposed: " + method.getName());
 		}
-		for (Class<?> type : method.getParameterTypes()) {
-			if (!Value.class.isAssignableFrom(type)) {
-				throw new ParsingException(FileIndex.INTERNAL_INDEX, "Only methods with return type " + BASE_TYPE_STRING + " can be exposed");
+		Class<?>[] types = method.getParameterTypes();
+		for (int i = 0; i < types.length; i++) {
+			Class<?> type = types[i];
+			if (i == 0) {
+				if (!Environment.class.isAssignableFrom(type)) {
+					throw new ParsingException(FileIndex.INTERNAL_INDEX, "Only methods with return type " + BASE_TYPE_STRING + " can be exposed: " + method.getName());
+				}
+			} else {
+				if (!Value.class.isAssignableFrom(type)) {
+					throw new ParsingException(FileIndex.INTERNAL_INDEX, "Only methods with return type " + BASE_TYPE_STRING + " can be exposed: " + method.getName());
+				}
 			}
 		}
 	}

@@ -29,6 +29,18 @@ public class Environment {
 		this.stdin = options.getStdin();
 		this.loadedScripts = new LinkedList<>();
 		this.globalScope = Scope.createGlobalScope(this);
+		setup();
+	}
+
+	private void setup() {
+		if (options.isUsingSys()) {
+			try {
+				addBridge(Sys.class);
+			} catch (ParsingException e) {
+				e.printStackTrace();
+				System.exit(1);
+			}
+		}
 	}
 
 	/**

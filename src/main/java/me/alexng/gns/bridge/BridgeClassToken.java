@@ -55,7 +55,7 @@ public class BridgeClassToken extends ClassToken {
 		}
 		try {
 			Constructor<?> constructor = bridgeClass.getConstructor(valueTypes);
-			if (!constructor.isAnnotationPresent(Expose.class)) {
+			if (values.length > 0 && !constructor.isAnnotationPresent(Expose.class)) {
 				throw new RuntimeException(FileIndex.INTERNAL_INDEX, "Constructor is not exposed.");
 			}
 			return constructor.newInstance((Object[]) values);

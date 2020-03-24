@@ -7,10 +7,12 @@ public class Options {
 
 	private final OutputStream stdout;
 	private final InputStream stdin;
+	private final boolean usingSys;
 
-	public Options(OutputStream stdout, InputStream stdin) {
+	public Options(OutputStream stdout, InputStream stdin, boolean usingSys) {
 		this.stdout = stdout;
 		this.stdin = stdin;
+		this.usingSys = usingSys;
 	}
 
 	public OutputStream getStdout() {
@@ -21,10 +23,15 @@ public class Options {
 		return stdin;
 	}
 
+	public boolean isUsingSys() {
+		return usingSys;
+	}
+
 	public static class Builder {
 
 		private OutputStream stdout = System.out;
 		private InputStream stdin = System.in;
+		private boolean usingSys = true;
 
 		public void setStdout(OutputStream stdout) {
 			this.stdout = stdout;
@@ -34,8 +41,12 @@ public class Options {
 			this.stdin = stdin;
 		}
 
+		public void setUsingSys(boolean usingSys) {
+			this.usingSys = usingSys;
+		}
+
 		public Options build() {
-			return new Options(stdout, stdin);
+			return new Options(stdout, stdin, usingSys);
 		}
 	}
 }
