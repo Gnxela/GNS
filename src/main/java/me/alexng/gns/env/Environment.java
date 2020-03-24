@@ -1,14 +1,10 @@
 package me.alexng.gns.env;
 
-import me.alexng.gns.FileIndex;
 import me.alexng.gns.Options;
 import me.alexng.gns.ParsingException;
 import me.alexng.gns.RuntimeException;
 import me.alexng.gns.env.scope.Scope;
 
-import java.io.File;
-import java.io.IOException;
-import java.net.URL;
 import java.util.LinkedList;
 
 /**
@@ -19,32 +15,12 @@ public class Environment {
 	private final Options options;
 	private Scope globalScope;
 	private LinkedList<Script> loadedScripts;
-	private boolean isSetup = false;
 	private int currentObjectId = 1;
 
 	public Environment(Options options) {
 		this.options = options;
 		this.loadedScripts = new LinkedList<>();
 		this.globalScope = Scope.createGlobalScope(this);
-	}
-
-	public void setup() throws ParsingException, IOException {
-		if (isSetup) {
-			return;
-		}
-		isSetup = true;
-		if (options.isUsingStandardLib()) {
-			// TODO: We shouldn't need to compile the standard library every time.
-			//  We should serialize the library and just read it.
-			URL url = ClassLoader.getSystemClassLoader().getResource("me/alexng/gns/lib");
-			if (url != null) {
-				String path = url.getFile();
-				File libPackage = new File(path);
-				for (File file : libPackage.listFiles()) {
-					loadScript(new Script(file));
-				}
-			}
-		}
 	}
 
 	/**
@@ -54,9 +30,6 @@ public class Environment {
 	 * @throws ParsingException
 	 */
 	public void loadScript(Script script) throws ParsingException {
-		if (!isSetup) {
-			throw new ParsingException(FileIndex.INTERNAL_INDEX, "Environment not set up");
-		}
 		if (!script.isParsed()) {
 			script.parse();
 		}
@@ -69,9 +42,7 @@ public class Environment {
 	 * TODO: We need to change above, should be executed in order added unless dependency requires otherwise
 	 */
 	public void runScripts() throws RuntimeException {
-		if (!isSetup) {
-			throw new RuntimeException(FileIndex.INTERNAL_INDEX, "Environment not set up");
-		}
+		// TODO: This should be done only once when we create the global scope.
 		addBuiltInFunctions(globalScope);
 		for (Script script : loadedScripts) {
 			script.run(globalScope);

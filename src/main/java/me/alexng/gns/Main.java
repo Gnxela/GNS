@@ -11,7 +11,6 @@ public class Main {
 		// TODO: Remove most of the util classes.
 
 		Environment scriptEnvironment = new Environment(new Options.Builder().build());
-		scriptEnvironment.setup();
 		File scriptFile = new File("scripts/testScript3.gns");
 		long start = System.nanoTime();
 		scriptEnvironment.loadScript(new Script(scriptFile));
