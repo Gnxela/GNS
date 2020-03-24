@@ -3,7 +3,9 @@ package me.alexng.gns.env;
 import me.alexng.gns.Options;
 import me.alexng.gns.ParsingException;
 import me.alexng.gns.RuntimeException;
+import me.alexng.gns.bridge.BridgeMapper;
 import me.alexng.gns.env.scope.Scope;
+import me.alexng.gns.tokens.ClassToken;
 
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -27,6 +29,21 @@ public class Environment {
 		this.stdin = options.getStdin();
 		this.loadedScripts = new LinkedList<>();
 		this.globalScope = Scope.createGlobalScope(this);
+	}
+
+	/**
+	 * Creates a bridge, using {@code bridgeClass} as the mapping.
+	 *
+	 * @param bridgeClass The class to be mapped as a bridge.
+	 */
+	public void addBridge(Class<?> bridgeClass) throws ParsingException {
+		ClassToken bridgedClass = BridgeMapper.mapBridge(bridgeClass);
+		try {
+			globalScope.classProvider.setLocal(bridgedClass);
+		} catch (RuntimeException e) {
+			// Our class provider will never throw this exception.
+			e.printStackTrace();
+		}
 	}
 
 	/**

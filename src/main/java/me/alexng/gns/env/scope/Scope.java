@@ -56,7 +56,7 @@ public class Scope {
 				new FunctionProvider(operatorFunctionProvider));
 	}
 
-	public Scope createObjectScope(String name, Scope parentScope) {
+	public static Scope createObjectScope(String name, Scope parentScope) {
 		Scope objectScope = new Scope(parentScope.getEnvironment(),
 				parentScope,
 				null,

@@ -1,0 +1,2 @@
+bridge = new TestBridge()
+print(bridge.id)
