@@ -1,2 +1,4 @@
-bridge = new TestBridge(5)
-bridge.getId()
+sys = new Sys()
+sys.println("Hello world!")
+sys.print("Line2:")
+sys.println("continued!")
