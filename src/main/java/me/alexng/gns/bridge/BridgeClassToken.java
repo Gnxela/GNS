@@ -10,7 +10,9 @@ import me.alexng.gns.tokens.ClassToken;
 import me.alexng.gns.tokens.IdentifierToken;
 import me.alexng.gns.tokens.ObjectConstructionToken;
 
+import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
 import java.util.Map;
 
 public class BridgeClassToken extends ClassToken {
@@ -29,7 +31,7 @@ public class BridgeClassToken extends ClassToken {
 
 	@Override
 	public ObjectValue createInstance(ObjectConstructionToken caller, Value[] values, Scope callingScope) throws RuntimeException {
-		Object bridgeInstance = createBridgeInstance();
+		Object bridgeInstance = createBridgeInstance(values);
 		int objectId = callingScope.getEnvironment().incrementObjectId();
 		Scope objectScope = Scope.createObjectScope(getIdentifier().getName(), callingScope.getGlobalScope());
 		objectScope.variableProvider = new BridgeVariableProvider(bridgeInstance, variables);
@@ -37,10 +39,18 @@ public class BridgeClassToken extends ClassToken {
 		return objectValue;
 	}
 
-	private Object createBridgeInstance() throws RuntimeException {
+	private Object createBridgeInstance(Value[] values) throws RuntimeException {
+		Class<?>[] valueTypes = new Class<?>[values.length];
+		for (int i = 0; i < values.length; i++) {
+			valueTypes[i] = values[i].getClass();
+		}
 		try {
-			return bridgeClass.newInstance();
-		} catch (InstantiationException | IllegalAccessException e) {
+			Constructor<?> constructor = bridgeClass.getConstructor(valueTypes);
+			if (!constructor.isAnnotationPresent(Expose.class)) {
+				throw new RuntimeException(FileIndex.INTERNAL_INDEX, "Constructor is not exposed.");
+			}
+			return constructor.newInstance((Object[]) values);
+		} catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
 			throw new RuntimeException(FileIndex.INTERNAL_INDEX, "Failed to create bridge instance:" + e.getClass() + ": " + e.getMessage());
 		}
 	}

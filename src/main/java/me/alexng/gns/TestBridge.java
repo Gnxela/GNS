@@ -8,11 +8,6 @@ public class TestBridge {
 	@Expose
 	public NumberValue id;
 
-	// TODO: This is temporary!
-	public TestBridge() {
-		this.id = new NumberValue(5);
-	}
-
 	public TestBridge(int id) {
 		this.id = new NumberValue(id);
 	}
