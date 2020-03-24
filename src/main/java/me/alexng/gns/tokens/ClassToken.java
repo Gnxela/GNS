@@ -37,6 +37,7 @@ public class ClassToken extends IdentifiedToken {
 
 	public ObjectValue createInstance(ObjectConstructionToken caller, Value[] values, Scope callingScope) throws RuntimeException {
 		Scope objectScope;
+		// TODO: This is hard to understand. Also only allows for direct parents.
 		if (callingScope.getObjectScope() != null && callingScope.getObjectScope().classProvider.getLocal(getIdentifier()) != null) {
 			objectScope = callingScope.createObjectScope(getIdentifier().getName(), callingScope.getObjectScope());
 		} else {
