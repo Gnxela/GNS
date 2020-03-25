@@ -4,10 +4,10 @@ import me.alexng.gns.FileIndex;
 import me.alexng.gns.ParsingException;
 import me.alexng.gns.env.Environment;
 import me.alexng.gns.env.value.Value;
-import me.alexng.gns.tokens.ClassToken;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
@@ -16,7 +16,7 @@ public class BridgeMapper {
 
 	private static final String BASE_TYPE_STRING = "me.alexng.gns.env.value.Value";
 
-	public static ClassToken mapBridge(Class<?> bridgeClass) throws ParsingException {
+	public static BridgeClassToken mapBridge(Class<?> bridgeClass) throws ParsingException {
 		// TODO: Allow for bridges to define a name different from class name
 		BridgeClassToken bridgeClassToken = new BridgeClassToken(bridgeClass);
 		bridgeVariables(bridgeClassToken);
@@ -39,7 +39,7 @@ public class BridgeMapper {
 		Map<String, Field> fields = new HashMap<>();
 		for (Field field : bridgeClassToken.getBridgeClass().getFields()) {
 			if (field.isAnnotationPresent(Expose.class)) {
-				checkFieldType(field);
+				checkField(field);
 				fields.put(field.getName(), field);
 			}
 		}
@@ -65,11 +65,14 @@ public class BridgeMapper {
 		}
 	}
 
-	private static void checkFieldType(Field field) throws ParsingException {
-		if (Value.class.isAssignableFrom(field.getType())) {
-			return;
+	private static void checkField(Field field) throws ParsingException {
+		int modifiers = field.getModifiers();
+		if (!Modifier.isPublic(modifiers) && !field.isAccessible()) {
+			throw new ParsingException(FileIndex.INTERNAL_INDEX, "Only accessible variables can be exposed: " + field.getName());
 		}
-		// TODO: Make it clear where this is being thrown.
-		throw new ParsingException(FileIndex.INTERNAL_INDEX, "Only variables with superclass " + BASE_TYPE_STRING + " can be exposed");
+		if (!Value.class.isAssignableFrom(field.getType())) {
+			// TODO: Make it clear where this is being thrown.
+			throw new ParsingException(FileIndex.INTERNAL_INDEX, "Only variables with superclass " + BASE_TYPE_STRING + " can be exposed: " + field.getName());
+		}
 	}
 }

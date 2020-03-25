@@ -21,8 +21,8 @@ import java.util.Map;
 public class BridgeClassToken extends ClassToken {
 
 	private Class<?> bridgeClass;
-	private Map<String, Field> variables;
-	private List<Method> functions;
+	Map<String, Field> variables;
+	List<Method> functions;
 
 	public BridgeClassToken(Class<?> bridgeClass) throws ParsingException {
 		super(new IdentifierToken(bridgeClass.getSimpleName(), FileIndex.INTERNAL_INDEX), null, FileIndex.INTERNAL_INDEX);
