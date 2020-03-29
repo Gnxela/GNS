@@ -24,7 +24,6 @@ public class Lexer {
 			new LessThanGenerator(),
 			new EqualGenerator(),
 			new AssignGenerator(),
-			new KeywordGenerator(),
 			new IdentifierGenerator()
 	};
 

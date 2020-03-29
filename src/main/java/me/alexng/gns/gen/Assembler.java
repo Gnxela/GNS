@@ -16,6 +16,7 @@ import java.util.ListIterator;
 public class Assembler {
 
 	private static final Constructor[] CONSTRUCTORS = new Constructor[]{
+			new KeywordConstructor(),
 			new NullConstantConstructor(),
 			new BooleanConstantConstructor(),
 			new BlockConstructor(),
