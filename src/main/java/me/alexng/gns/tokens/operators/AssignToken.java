@@ -19,7 +19,7 @@ public class AssignToken extends BinaryOperatorToken<IdentifierToken, Token> {
 
 	@Override
 	public void checkOperands(Token left, Token right) throws ParsingException {
-		if (!(left instanceof IdentifierToken)) {
+		if (!(left instanceof IdentifierToken || left instanceof AccessToken)) {
 			throw ExceptionUtil.createParsingExpected("Invalid type", IdentifierToken.class, left);
 		}
 	}
