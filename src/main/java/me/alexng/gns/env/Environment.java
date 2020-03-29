@@ -90,4 +90,8 @@ public class Environment {
 			return currentObjectId++;
 		}
 	}
+
+	public Scope getGlobalScope() {
+		return globalScope;
+	}
 }
