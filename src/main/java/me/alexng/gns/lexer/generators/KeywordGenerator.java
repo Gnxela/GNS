@@ -12,6 +12,8 @@ public class KeywordGenerator implements TokenGenerator {
 	public int accepts(String input, int index) {
 		String trimmedInput = input.substring(index);
 		for (Keyword keyword : Keyword.values()) {
+			// TODO: Given our 'func' keyword. If we have an identifier called 'function', this doesn't work.
+			//  Maybe we should just create identifiers and then create keywords from them.
 			if (trimmedInput.startsWith(keyword.getKeyword())) {
 				return index + keyword.getKeyword().length();
 			}
