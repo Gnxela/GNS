@@ -29,6 +29,17 @@ public class BridgeMapperTest {
 		assertEquals(functionName, method.getName());
 	}
 
+	/*@Test
+	public void testMapBridge_privateField() throws NoSuchFieldException, RuntimeException, ParsingException{
+		final String source = "bridge = new MockBridge()\nbridge.variable = 1\nbridge.function(2)";
+		final String variableName = "variable";
+		//MockBridge.class.getField(variableName).setAccessible(false);
+		Environment environment = new Environment(new Options.Builder().build());
+		environment.addBridge(MockBridge.class);
+		environment.loadScript(new Script(source));
+		environment.runScripts();
+	}*/
+
 	@Test
 	public void testMapBridge_functionParameters() throws RuntimeException, ParsingException {
 		final String source = "bridge = new MockBridge()\nbridge.function(7)";
@@ -38,5 +49,16 @@ public class BridgeMapperTest {
 		environment.runScripts();
 		assertEquals(7, MockBridge.lastNumberValue.getJavaValue());
 		assertEquals(environment, MockBridge.lastEnvironment);
+	}
+
+	@Test
+	public void testMapBridge_setVariable() throws RuntimeException, ParsingException {
+		final String source = "bridge = new MockBridge()\nbridge.variable = 5\nbridge.function(7)";
+		Environment environment = new Environment(new Options.Builder().build());
+		environment.addBridge(MockBridge.class);
+		environment.loadScript(new Script(source));
+		environment.runScripts();
+		assertNotNull(MockBridge.lastVariableValue.getJavaValue());
+		assertEquals(5, MockBridge.lastVariableValue.getJavaValue());
 	}
 }

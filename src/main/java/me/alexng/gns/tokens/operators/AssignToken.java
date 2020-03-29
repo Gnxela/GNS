@@ -9,7 +9,7 @@ import me.alexng.gns.tokens.IdentifierToken;
 import me.alexng.gns.tokens.Token;
 import me.alexng.gns.util.ExceptionUtil;
 
-public class AssignToken extends BinaryOperatorToken<IdentifierToken, Token> {
+public class AssignToken extends BinaryOperatorToken<Token, Token> {
 
 	public static final String OPERATOR_STRING = "=";
 
@@ -26,8 +26,14 @@ public class AssignToken extends BinaryOperatorToken<IdentifierToken, Token> {
 
 	@Override
 	public Value execute(Scope scope) throws RuntimeException {
-		Value returnedValue = getRight().execute(scope);
-		scope.variableProvider.set(getLeft(), returnedValue);
+		Value returnedValue;
+		if (getLeft() instanceof AccessToken) {
+			returnedValue = getRight().execute(scope);
+			((AccessToken) getLeft()).setValue(scope, returnedValue);
+		} else {
+			returnedValue = getRight().execute(scope);
+			scope.variableProvider.set((IdentifierToken) getLeft(), returnedValue);
+		}
 		return returnedValue;
 	}
 

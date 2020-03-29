@@ -43,7 +43,7 @@ public class VariableProvider extends ScopeProvider<IdentifiedToken, Value> {
 	}
 
 	@Override
-	public void setLocal(IdentifiedToken identifiedToken, Value value) {
+	public void setLocal(IdentifiedToken identifiedToken, Value value) throws RuntimeException {
 		variables.put(identifiedToken.getIdentifier().getName(), value);
 	}
 

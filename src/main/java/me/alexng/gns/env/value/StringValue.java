@@ -12,7 +12,7 @@ public class StringValue extends ObjectValue {
 
 	private String value;
 
-	public StringValue(int objectId, String value, Scope callingScope) {
+	public StringValue(int objectId, String value, Scope callingScope) throws RuntimeException {
 		super(objectId, null, callingScope.createObjectScope(STRING_NAME));
 		this.value = value;
 		addBuiltIns();
@@ -22,7 +22,7 @@ public class StringValue extends ObjectValue {
 		return new StringValue(callingScope.getEnvironment().incrementObjectId(), string, callingScope);
 	}
 
-	private void addBuiltIns() {
+	private void addBuiltIns() throws RuntimeException {
 		// TODO: Make immutable
 		getObjectScope().variableProvider.setLocal(LENGTH_ID, new NumberValue(value.length()));
 	}

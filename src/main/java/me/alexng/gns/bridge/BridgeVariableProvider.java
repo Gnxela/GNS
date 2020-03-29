@@ -1,5 +1,6 @@
 package me.alexng.gns.bridge;
 
+import me.alexng.gns.RuntimeException;
 import me.alexng.gns.env.scope.VariableProvider;
 import me.alexng.gns.env.value.Value;
 import me.alexng.gns.tokens.IdentifiedToken;
@@ -33,7 +34,14 @@ public class BridgeVariableProvider extends VariableProvider {
 	}
 
 	@Override
-	public void setLocal(IdentifiedToken identifiedToken, Value value) {
-		super.setLocal(identifiedToken, value);
+	public void setLocal(IdentifiedToken identifiedToken, Value value) throws RuntimeException {
+		Field field = variables.get(identifiedToken.getIdentifier().getName());
+		try {
+			field.set(bridgeInstance, value);
+		} catch (IllegalAccessException e) {
+			throw new RuntimeException(identifiedToken, "Illegal bridge access");
+		} catch (IllegalArgumentException e) {
+			throw new RuntimeException(identifiedToken, "Invalid bridge type");
+		}
 	}
 }

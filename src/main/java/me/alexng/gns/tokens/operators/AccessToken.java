@@ -21,6 +21,20 @@ public class AccessToken extends BinaryOperatorToken<Token, IdentifiedToken> {
 
 	@Override
 	public Value execute(Scope scope) throws RuntimeException {
+		return getValue(scope);
+	}
+
+	public void setValue(Scope scope, Value value) throws RuntimeException {
+		Value leftValue = getLeft().execute(scope);
+		if (leftValue instanceof ObjectValue) {
+			ObjectValue objectValue = (ObjectValue) leftValue;
+			objectValue.getObjectScope().variableProvider.set(getRight(), value);
+			return;
+		}
+		throw ExceptionUtil.createRuntimeExpected("Invalid access", getLeft(), Value.Type.OBJECT, leftValue.getType());
+	}
+
+	public Value getValue(Scope scope) throws RuntimeException {
 		Value leftValue = getLeft().execute(scope);
 		if (leftValue instanceof ObjectValue) {
 			ObjectValue objectValue = (ObjectValue) leftValue;
