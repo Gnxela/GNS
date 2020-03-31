@@ -36,8 +36,7 @@ public class BridgeClassToken<T> extends ClassToken {
 		Scope objectScope = Scope.createObjectScope(getIdentifier().getName(), callingScope.getGlobalScope());
 		objectScope.variableProvider = new BridgeVariableProvider(bridgeInstance, variables, objectScope.variableProvider);
 		objectScope.functionProvider = new BridgeFunctionProvider(bridgeInstance, functions, objectScope.functionProvider);
-		ObjectValue objectValue = new ObjectValue(objectId, this, objectScope);
-		return objectValue;
+		return new ObjectValue(objectId, this, objectScope);
 	}
 
 	/**

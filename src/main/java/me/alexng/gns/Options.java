@@ -15,6 +15,10 @@ public class Options {
 		this.usingSys = usingSys;
 	}
 
+	public static final Options createDefault() {
+		return new Options.Builder().build();
+	}
+
 	public OutputStream getStdout() {
 		return stdout;
 	}

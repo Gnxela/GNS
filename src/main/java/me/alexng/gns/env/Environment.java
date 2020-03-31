@@ -91,6 +91,13 @@ public class Environment {
 		}
 	}
 
+	/**
+	 * @return the next object id, but does not increment
+	 */
+	public int getCurrentObjectId() {
+		return currentObjectId;
+	}
+
 	public Scope getGlobalScope() {
 		return globalScope;
 	}
