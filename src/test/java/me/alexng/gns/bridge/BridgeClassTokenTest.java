@@ -20,7 +20,7 @@ public class BridgeClassTokenTest {
 	public void createInstanceTest() throws ParsingException, RuntimeException {
 		Environment environment = new Environment(Options.createDefault());
 		assertEquals(1, environment.getCurrentObjectId());
-		BridgeClassToken<MockBridge> bridgeBridgeClassToken = new BridgeClassToken<>(MockBridge.class);
+		BridgeClassToken<MockBridge> bridgeBridgeClassToken = BridgeMapper.mapBridge(MockBridge.class);
 		ObjectValue bridge = bridgeBridgeClassToken.createInstance(null, new Value[]{}, environment.getGlobalScope());
 		assertEquals(2, environment.getCurrentObjectId());
 		Scope objectScope = bridge.getObjectScope();
