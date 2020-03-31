@@ -16,9 +16,9 @@ public class BridgeMapper {
 
 	private static final String BASE_TYPE_STRING = "me.alexng.gns.env.value.Value";
 
-	public static BridgeClassToken mapBridge(Class<?> bridgeClass) throws ParsingException {
+	public static <T> BridgeClassToken<T> mapBridge(Class<T> bridgeClass) throws ParsingException {
 		// TODO: Allow for bridges to define a name different from class name
-		BridgeClassToken bridgeClassToken = new BridgeClassToken(bridgeClass);
+		BridgeClassToken<T> bridgeClassToken = new BridgeClassToken<T>(bridgeClass);
 		bridgeVariables(bridgeClassToken);
 		bridgeFunctions(bridgeClassToken);
 		return bridgeClassToken;

@@ -18,23 +18,15 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-public class BridgeClassToken extends ClassToken {
+public class BridgeClassToken<T> extends ClassToken {
 
-	private Class<?> bridgeClass;
+	private Class<T> bridgeClass;
 	Map<String, Field> variables;
 	List<Method> functions;
 
-	public BridgeClassToken(Class<?> bridgeClass) throws ParsingException {
+	public BridgeClassToken(Class<T> bridgeClass) throws ParsingException {
 		super(new IdentifierToken(bridgeClass.getSimpleName(), FileIndex.INTERNAL_INDEX), null, FileIndex.INTERNAL_INDEX);
 		this.bridgeClass = bridgeClass;
-	}
-
-	public void setVariables(Map<String, Field> variables) {
-		this.variables = variables;
-	}
-
-	public void setFunctions(LinkedList<Method> functions) {
-		this.functions = functions;
 	}
 
 	@Override
@@ -48,13 +40,19 @@ public class BridgeClassToken extends ClassToken {
 		return objectValue;
 	}
 
-	private Object createBridgeInstance(Value[] values) throws RuntimeException {
+	/**
+	 * Creates a Java Object of the {@link #bridgeClass}.
+	 *
+	 * @param values constructor values
+	 * @return the created object
+	 */
+	T createBridgeInstance(Value[] values) throws RuntimeException {
 		Class<?>[] valueTypes = new Class<?>[values.length];
 		for (int i = 0; i < values.length; i++) {
 			valueTypes[i] = values[i].getClass();
 		}
 		try {
-			Constructor<?> constructor = bridgeClass.getConstructor(valueTypes);
+			Constructor<T> constructor = bridgeClass.getConstructor(valueTypes);
 			if (values.length > 0 && !constructor.isAnnotationPresent(Expose.class)) {
 				throw new RuntimeException(FileIndex.INTERNAL_INDEX, "Constructor is not exposed.");
 			}
@@ -62,6 +60,14 @@ public class BridgeClassToken extends ClassToken {
 		} catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
 			throw new RuntimeException(FileIndex.INTERNAL_INDEX, "Failed to create bridge instance:" + e.getClass() + ": " + e.getMessage());
 		}
+	}
+
+	public void setVariables(Map<String, Field> variables) {
+		this.variables = variables;
+	}
+
+	public void setFunctions(LinkedList<Method> functions) {
+		this.functions = functions;
 	}
 
 	public Class<?> getBridgeClass() {
