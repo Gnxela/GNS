@@ -6,7 +6,6 @@ A scripting language written in Java.
 
 ```Java
 Environment scriptEnvironment = new Environment(new Options.Builder().build());
-scriptEnvironment.setup();
 File scriptFile = new File(FILE_PATH);
 scriptEnvironment.loadScript(new Script(scriptFile));
 // Multiple scripts can be loaded, and are run in order.

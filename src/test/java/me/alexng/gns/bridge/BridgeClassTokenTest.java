@@ -18,7 +18,6 @@ public class BridgeClassTokenTest {
 
 	@Test
 	public void createInstanceTest() throws ParsingException, RuntimeException {
-		final String source = "bridge = new MockBridge()";
 		Environment environment = new Environment(Options.createDefault());
 		assertEquals(1, environment.getCurrentObjectId());
 		BridgeClassToken<MockBridge> bridgeBridgeClassToken = new BridgeClassToken<>(MockBridge.class);
