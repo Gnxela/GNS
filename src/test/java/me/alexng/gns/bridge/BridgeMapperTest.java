@@ -5,6 +5,8 @@ import me.alexng.gns.ParsingException;
 import me.alexng.gns.RuntimeException;
 import me.alexng.gns.env.Environment;
 import me.alexng.gns.env.Script;
+import me.alexng.gns.env.value.NumberValue;
+import me.alexng.gns.env.value.StringValue;
 import org.junit.jupiter.api.Test;
 
 import java.lang.reflect.Field;
@@ -29,16 +31,14 @@ public class BridgeMapperTest {
 		assertEquals(functionName, method.getName());
 	}
 
-	/*@Test
-	public void testMapBridge_privateField() throws NoSuchFieldException, RuntimeException, ParsingException{
-		final String source = "bridge = new MockBridge()\nbridge.variable = 1\nbridge.function(2)";
+	@Test
+	public void testMapBridge_privateMembers() throws NoSuchFieldException, RuntimeException, ParsingException {
 		final String variableName = "variable";
-		//MockBridge.class.getField(variableName).setAccessible(false);
-		Environment environment = new Environment(new Options.Builder().build());
-		environment.addBridge(MockBridge.class);
-		environment.loadScript(new Script(source));
-		environment.runScripts();
-	}*/
+		BridgeClassToken bridgeClassToken = BridgeMapper.mapBridge(MockBridgePrivateMembers.class);
+		Field variable = bridgeClassToken.variables.get(variableName);
+		assertNull(variable);
+		assertEquals(0, bridgeClassToken.functions.size());
+	}
 
 	@Test
 	public void testMapBridge_functionParameters() throws RuntimeException, ParsingException {
@@ -60,5 +60,15 @@ public class BridgeMapperTest {
 		environment.runScripts();
 		assertNotNull(MockBridge.lastVariableValue.getJavaValue());
 		assertEquals(5, MockBridge.lastVariableValue.getJavaValue());
+	}
+
+	public static class MockBridgePrivateMembers {
+		@Expose
+		private NumberValue variable;
+
+		@Expose
+		private void function(Environment environment, StringValue stringValue) {
+
+		}
 	}
 }
