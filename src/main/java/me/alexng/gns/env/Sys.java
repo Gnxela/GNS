@@ -3,6 +3,7 @@ package me.alexng.gns.env;
 import me.alexng.gns.bridge.Expose;
 import me.alexng.gns.env.value.NumberValue;
 import me.alexng.gns.env.value.ObjectValue;
+import me.alexng.gns.env.value.StringValue;
 import me.alexng.gns.env.value.Value;
 
 import java.io.IOException;
@@ -23,9 +24,13 @@ public class Sys {
 				output = "null";
 				break;
 			case OBJECT:
-				ObjectValue rawObject = (ObjectValue) value;
-				output = rawObject.getObjectScope().nameProvider.getName() + "#" + rawObject.getObjectId();
-				// TODO: Call a toString function in the object
+				if (value instanceof StringValue) {
+					output = ((StringValue) value).getJavaValue();
+				} else {
+					ObjectValue rawObject = (ObjectValue) value;
+					output = rawObject.getObjectScope().nameProvider.getName() + "#" + rawObject.getObjectId();
+					// TODO: Call a toString function in the object
+				}
 				break;
 			default:
 				output = value.getJavaValue().toString();
