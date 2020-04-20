@@ -1,0 +1,9 @@
+sys = new Sys()
+count = 0
+for (i = 0; i < 5; i++) {
+	count++
+}
+while (count < 10) {
+	count++
+}
+sys.println(count)
