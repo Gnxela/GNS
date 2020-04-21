@@ -17,6 +17,11 @@ public class LessThanToken extends BinaryOperatorToken<Token, Token> {
 		super(OPERATOR_STRING, fileIndex);
 	}
 
+	public LessThanToken(Token left, Token right, FileIndex fileIndex) throws ParsingException {
+		super(OPERATOR_STRING, fileIndex);
+		bind(left, right);
+	}
+
 	@Override
 	public Value execute(Scope scope) throws RuntimeException {
 		Value leftValue = getLeft().execute(scope);

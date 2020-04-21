@@ -17,6 +17,11 @@ public class AssignToken extends BinaryOperatorToken<Token, Token> {
 		super(OPERATOR_STRING, fileIndex);
 	}
 
+	public AssignToken(Token left, Token right, FileIndex fileIndex) throws ParsingException {
+		super(OPERATOR_STRING, fileIndex);
+		bind(left, right);
+	}
+
 	@Override
 	public void checkOperands(Token left, Token right) throws ParsingException {
 		if (!(left instanceof IdentifierToken || left instanceof AccessToken)) {
