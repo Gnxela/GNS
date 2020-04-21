@@ -20,6 +20,7 @@ public class Assembler {
 			new NullConstantConstructor(),
 			new BooleanConstantConstructor(),
 			new BlockConstructor(),
+			new ForConstructor(),
 			new ClassConstructor(),
 			new ObjectConstructionConstructor(),
 			new ReturnConstructor(),

@@ -12,7 +12,8 @@ public enum Keyword {
 	RETURN("return"),
 	IF("if"),
 	CLASS("class"),
-	NEW("new");
+	NEW("new"),
+	FOR("for");
 
 	private String keyword;
 
