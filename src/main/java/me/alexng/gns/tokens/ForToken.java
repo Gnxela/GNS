@@ -32,6 +32,6 @@ public class ForToken extends Token {
 
 	@Override
 	public String toString() {
-		return "<For >";
+		return "<For " + argumentsToken.toString() + ">";
 	}
 }
