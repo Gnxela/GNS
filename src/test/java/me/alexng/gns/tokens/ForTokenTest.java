@@ -28,9 +28,9 @@ public class ForTokenTest {
 		tokens.add(mockToken);
 		BlockToken blockToken = new BlockToken(tokens, FileIndex.INTERNAL_INDEX);
 
-		AssignToken assignToken = new AssignToken(identifierToken, new ValueToken(new NumberValue(0), FileIndex.INTERNAL_INDEX), FileIndex.INTERNAL_INDEX);
-		LessThanToken lessThanToken = new LessThanToken(identifierToken, new ValueToken(new NumberValue(ITERATIONS), FileIndex.INTERNAL_INDEX), FileIndex.INTERNAL_INDEX);
-		AssignToken incrementToken = new AssignToken(identifierToken, new AdditionToken(identifierToken, new ValueToken(new NumberValue(1), FileIndex.INTERNAL_INDEX), FileIndex.INTERNAL_INDEX), FileIndex.INTERNAL_INDEX);
+		AssignToken assignToken = new AssignToken(identifierToken, new ValueToken(new NumberValue(0), FileIndex.INTERNAL_INDEX));
+		LessThanToken lessThanToken = new LessThanToken(identifierToken, new ValueToken(new NumberValue(ITERATIONS), FileIndex.INTERNAL_INDEX));
+		AssignToken incrementToken = new AssignToken(identifierToken, new AdditionToken(identifierToken, new ValueToken(new NumberValue(1), FileIndex.INTERNAL_INDEX)));
 		Token[] arguments = new Token[]{
 				assignToken,
 				lessThanToken,

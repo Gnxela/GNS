@@ -17,8 +17,8 @@ public class LessThanToken extends BinaryOperatorToken<Token, Token> {
 		super(OPERATOR_STRING, fileIndex);
 	}
 
-	public LessThanToken(Token left, Token right, FileIndex fileIndex) throws ParsingException {
-		super(OPERATOR_STRING, fileIndex);
+	public LessThanToken(Token left, Token right) throws ParsingException {
+		super(OPERATOR_STRING, null);
 		bind(left, right);
 	}
 
