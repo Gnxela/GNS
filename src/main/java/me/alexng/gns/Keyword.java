@@ -13,7 +13,8 @@ public enum Keyword {
 	IF("if"),
 	CLASS("class"),
 	NEW("new"),
-	FOR("for");
+	FOR("for"),
+	WHILE("while");
 
 	private String keyword;
 

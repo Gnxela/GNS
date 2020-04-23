@@ -23,8 +23,7 @@ public class ExpressionConstructor implements Constructor {
 		return BracketToken.ROUND_OPEN.matches(token);
 	}
 
-	@Override
-	public void construct(ListIterator<Token> tokens) throws ParsingException {
+	public static ExpressionToken constructExpression(ListIterator<Token> tokens) throws ParsingException {
 		LinkedList<Token> expressionTokens = Assembler.matchTokens(tokens, BracketToken.ROUND_OPEN, BracketToken.ROUND_CLOSED);
 		FileIndex fileIndex = FileIndex.wrap(expressionTokens);
 		expressionTokens.removeFirst();
@@ -37,6 +36,12 @@ public class ExpressionConstructor implements Constructor {
 		if (expressionTokens.size() != 1) {
 			throw new ParsingException(fileIndex, "Invalid syntax");
 		}
-		tokens.add(new ExpressionToken(expressionTokens.getFirst(), fileIndex));
+		return new ExpressionToken(expressionTokens.getFirst(), fileIndex);
 	}
+
+	@Override
+	public void construct(ListIterator<Token> tokens) throws ParsingException {
+		tokens.add(constructExpression(tokens));
+	}
+
 }
