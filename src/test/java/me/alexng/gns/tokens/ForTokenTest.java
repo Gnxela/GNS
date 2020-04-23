@@ -13,24 +13,63 @@ import me.alexng.gns.util.ExecutableMockToken;
 import org.junit.jupiter.api.Test;
 
 import java.util.LinkedList;
+import java.util.List;
 
 public class ForTokenTest {
 
 	@Test
 	public void testExecute() throws RuntimeException, ParsingException {
-		final String VARIABLE_NAME = "i";
-		final int ITERATIONS = 7;
-		final IdentifierToken identifierToken = new IdentifierToken(VARIABLE_NAME, FileIndex.INTERNAL_INDEX);
-
 		CountingExecutor countingExecutor = new CountingExecutor();
 		ExecutableMockToken mockToken = new ExecutableMockToken(countingExecutor);
 		LinkedList<Token> tokens = new LinkedList<>();
 		tokens.add(mockToken);
+		ForToken forToken = createForToken(0, 7, 1, tokens);
+		forToken.execute(Scope.createGlobalScope(null));
+		countingExecutor.assertCount(7);
+	}
+
+	@Test
+	public void testExecute_conditionFalse() throws RuntimeException, ParsingException {
+		CountingExecutor countingExecutor = new CountingExecutor();
+		ExecutableMockToken mockToken = new ExecutableMockToken(countingExecutor);
+		LinkedList<Token> tokens = new LinkedList<>();
+		tokens.add(mockToken);
+		ForToken forToken = createForToken(1, 0, 1, tokens);
+		forToken.execute(Scope.createGlobalScope(null));
+		countingExecutor.assertCount(0);
+	}
+
+	@Test
+	public void testExecute_negativeStart() throws RuntimeException, ParsingException {
+		CountingExecutor countingExecutor = new CountingExecutor();
+		ExecutableMockToken mockToken = new ExecutableMockToken(countingExecutor);
+		LinkedList<Token> tokens = new LinkedList<>();
+		tokens.add(mockToken);
+		ForToken forToken = createForToken(-2, 1, 1, tokens);
+		forToken.execute(Scope.createGlobalScope(null));
+		countingExecutor.assertCount(3);
+	}
+
+	@Test
+	public void testExecute_negativeStartAndEnd() throws RuntimeException, ParsingException {
+		CountingExecutor countingExecutor = new CountingExecutor();
+		ExecutableMockToken mockToken = new ExecutableMockToken(countingExecutor);
+		LinkedList<Token> tokens = new LinkedList<>();
+		tokens.add(mockToken);
+		ForToken forToken = createForToken(-5, -3, 1, tokens);
+		forToken.execute(Scope.createGlobalScope(null));
+		countingExecutor.assertCount(2);
+	}
+
+	private ForToken createForToken(int start, int end, int delta, List<Token> tokens) throws ParsingException {
+		final String VARIABLE_NAME = "i";
+		final IdentifierToken identifierToken = new IdentifierToken(VARIABLE_NAME, FileIndex.INTERNAL_INDEX);
+
 		BlockToken blockToken = new BlockToken(tokens, FileIndex.INTERNAL_INDEX);
 
-		AssignToken assignToken = new AssignToken(identifierToken, new ValueToken(new NumberValue(0), FileIndex.INTERNAL_INDEX));
-		LessThanToken lessThanToken = new LessThanToken(identifierToken, new ValueToken(new NumberValue(ITERATIONS), FileIndex.INTERNAL_INDEX));
-		AssignToken incrementToken = new AssignToken(identifierToken, new AdditionToken(identifierToken, new ValueToken(new NumberValue(1), FileIndex.INTERNAL_INDEX)));
+		AssignToken assignToken = new AssignToken(identifierToken, new ValueToken(new NumberValue(start), FileIndex.INTERNAL_INDEX));
+		LessThanToken lessThanToken = new LessThanToken(identifierToken, new ValueToken(new NumberValue(end), FileIndex.INTERNAL_INDEX));
+		AssignToken incrementToken = new AssignToken(identifierToken, new AdditionToken(identifierToken, new ValueToken(new NumberValue(delta), FileIndex.INTERNAL_INDEX)));
 		Token[] arguments = new Token[]{
 				assignToken,
 				lessThanToken,
@@ -38,9 +77,6 @@ public class ForTokenTest {
 		};
 		ArgumentsToken argumentsToken = new ArgumentsToken(arguments, FileIndex.INTERNAL_INDEX);
 
-		ForToken forToken = new ForToken(argumentsToken, blockToken, FileIndex.INTERNAL_INDEX);
-		forToken.execute(Scope.createGlobalScope(null));
-
-		countingExecutor.assertCount(ITERATIONS);
+		return new ForToken(argumentsToken, blockToken, FileIndex.INTERNAL_INDEX);
 	}
 }
