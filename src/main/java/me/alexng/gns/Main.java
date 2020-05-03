@@ -10,7 +10,7 @@ public class Main {
 	public static void main(String[] args) throws Exception {
 		// TODO: Remove most of the util classes.
 
-		Environment scriptEnvironment = new Environment(new Options.Builder().build());
+		Environment scriptEnvironment = new Environment(new Options.Builder().setUsingSys(false).build());
 		File scriptFile = new File("scripts/testScript6.gns");
 		long start = System.nanoTime();
 		scriptEnvironment.loadScript(new Script(scriptFile));
@@ -19,5 +19,6 @@ public class Main {
 		long endTime = System.nanoTime();
 		System.out.println("Parse time: " + (endParse - start) / 1000000 + "ms");
 		System.out.println("Run time: " + (endTime - endParse) / 1000000 + "ms");
+		System.out.println(scriptEnvironment.getGlobalScope());
 	}
 }

@@ -45,8 +45,9 @@ public class Options {
 			this.stdin = stdin;
 		}
 
-		public void setUsingSys(boolean usingSys) {
+		public Builder setUsingSys(boolean usingSys) {
 			this.usingSys = usingSys;
+			return this;
 		}
 
 		public Options build() {

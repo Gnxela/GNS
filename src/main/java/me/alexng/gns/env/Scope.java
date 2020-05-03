@@ -14,7 +14,7 @@ public class Scope {
 	private Environment environment;
 	private Scope parentScope;
 	private boolean globalScope, objectScope;
-	private Map<IdentifierToken, Token> values;
+	private Map<String, Token> values;
 
 	private Scope(Environment environment, Scope parentScope, boolean globalScope, boolean objectScope) {
 		this.environment = environment;
@@ -37,7 +37,7 @@ public class Scope {
 	}
 
 	private Token get(IdentifierToken identifier) {
-		Token value = values.get(identifier);
+		Token value = values.get(identifier.getName());
 		if (value != null) {
 			return value;
 		}
@@ -48,7 +48,7 @@ public class Scope {
 	}
 
 	private Scope findValue(IdentifierToken identifier) {
-		Token value = values.get(identifier);
+		Token value = values.get(identifier.getName());
 		if (value != null) {
 			return this;
 		}
@@ -95,7 +95,7 @@ public class Scope {
 	}
 
 	private void setLocal(IdentifiedToken identifiedToken, Token value) {
-		values.put(identifiedToken.getIdentifier(), value);
+		values.put(identifiedToken.getIdentifier().getName(), value);
 	}
 
 	public Scope getGlobalScope() throws RuntimeException {
@@ -134,6 +134,6 @@ public class Scope {
 
 	@Override
 	public String toString() {
-		return "<Scope global=" + globalScope + " object=" + objectScope + "\tvar=" + values.toString() + ">";
+		return "<Scope global=" + globalScope + " object=" + objectScope + " var=" + values.toString() + ">";
 	}
 }

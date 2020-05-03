@@ -22,7 +22,9 @@ public class ForToken extends Token {
 		Scope loopScope = scope.createChildScope();
 		Token[] arguments = argumentsToken.getArguments();
 		Token initialize = arguments[0], condition = arguments[1], increment = arguments[2];
+		System.out.println(loopScope);
 		initialize.execute(loopScope);
+		System.out.println(loopScope);
 		while (condition.execute(loopScope) == BooleanValue.TRUE) {
 			blockToken.executeBlock(loopScope);
 			increment.execute(loopScope);
