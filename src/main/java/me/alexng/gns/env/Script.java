@@ -3,7 +3,6 @@ package me.alexng.gns.env;
 import me.alexng.gns.FileIndex;
 import me.alexng.gns.ParsingException;
 import me.alexng.gns.RuntimeException;
-import me.alexng.gns.env.scope.Scope;
 import me.alexng.gns.gen.Assembler;
 import me.alexng.gns.lexer.Lexer;
 import me.alexng.gns.tokens.BlockToken;

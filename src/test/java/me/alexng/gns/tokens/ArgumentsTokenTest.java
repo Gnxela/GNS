@@ -2,7 +2,7 @@ package me.alexng.gns.tokens;
 
 import me.alexng.gns.FileIndex;
 import me.alexng.gns.RuntimeException;
-import me.alexng.gns.env.scope.Scope;
+import me.alexng.gns.env.Scope;
 import me.alexng.gns.env.value.NumberValue;
 import me.alexng.gns.util.ReturningMockToken;
 import org.junit.jupiter.api.Test;
@@ -46,7 +46,8 @@ public class ArgumentsTokenTest {
 		ArgumentsToken argumentsToken = new ArgumentsToken(arguments, FileIndex.NULL_INDEX);
 		Scope scope = Scope.createGlobalScope(null);
 		for (int i = 0; i < numberValues.length; i++) {
-			scope.variableProvider.setLocal(arguments[i], numberValues[i]);
+			// TODO: Same as parameters
+			scope.set(arguments[i], numberValues[i].wrap());
 		}
 		assertArrayEquals(numberValues, argumentsToken.grabValues(scope));
 	}

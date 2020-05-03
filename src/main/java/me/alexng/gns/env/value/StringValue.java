@@ -2,7 +2,7 @@ package me.alexng.gns.env.value;
 
 import me.alexng.gns.FileIndex;
 import me.alexng.gns.RuntimeException;
-import me.alexng.gns.env.scope.Scope;
+import me.alexng.gns.env.Scope;
 import me.alexng.gns.tokens.IdentifierToken;
 
 public class StringValue extends ObjectValue {
@@ -12,19 +12,19 @@ public class StringValue extends ObjectValue {
 
 	private String value;
 
-	public StringValue(int objectId, String value, Scope callingScope) throws RuntimeException {
-		super(objectId, null, callingScope.createObjectScope(STRING_NAME));
+	public StringValue(String value, Scope callingScope) throws RuntimeException {
+		super(null, Scope.createObjectScope(callingScope.getGlobalScope()));
 		this.value = value;
 		addBuiltIns();
 	}
 
 	public static StringValue createString(String string, Scope callingScope) throws RuntimeException {
-		return new StringValue(callingScope.getEnvironment().incrementObjectId(), string, callingScope);
+		return new StringValue(string, callingScope);
 	}
 
-	private void addBuiltIns() throws RuntimeException {
+	private void addBuiltIns() {
 		// TODO: Make immutable
-		getObjectScope().variableProvider.setLocal(LENGTH_ID, new NumberValue(value.length()));
+		getObjectScope().set(LENGTH_ID, new NumberValue(value.length()).wrap());
 	}
 
 	@Override

@@ -3,7 +3,7 @@ package me.alexng.gns.tokens;
 import me.alexng.gns.FileIndex;
 import me.alexng.gns.ParsingException;
 import me.alexng.gns.RuntimeException;
-import me.alexng.gns.env.scope.Scope;
+import me.alexng.gns.env.Scope;
 import me.alexng.gns.env.value.NumberValue;
 import me.alexng.gns.tokens.operators.AdditionToken;
 import me.alexng.gns.tokens.operators.AssignToken;
@@ -30,7 +30,7 @@ public class WhileTokenTest {
 		LessThanToken lessThanToken = new LessThanToken(identifierToken, new ValueToken(new NumberValue(9), FileIndex.INTERNAL_INDEX));
 		WhileToken whileToken = new WhileToken(new ExpressionToken(lessThanToken, FileIndex.INTERNAL_INDEX), blockToken, FileIndex.INTERNAL_INDEX);
 		Scope scope = Scope.createGlobalScope(null);
-		scope.variableProvider.set(identifierToken, new NumberValue(0));
+		scope.set(identifierToken, new NumberValue(0).wrap());
 		whileToken.execute(scope);
 		countingExecutor.assertCount(9);
 	}

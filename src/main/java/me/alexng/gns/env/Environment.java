@@ -4,7 +4,6 @@ import me.alexng.gns.Options;
 import me.alexng.gns.ParsingException;
 import me.alexng.gns.RuntimeException;
 import me.alexng.gns.bridge.BridgeMapper;
-import me.alexng.gns.env.scope.Scope;
 import me.alexng.gns.tokens.ClassToken;
 
 import java.io.InputStream;
@@ -21,7 +20,6 @@ public class Environment {
 	public final InputStream stdin;
 	private Scope globalScope;
 	private LinkedList<Script> loadedScripts;
-	private int currentObjectId = 1;
 
 	public Environment(Options options) {
 		this.options = options;
@@ -50,12 +48,7 @@ public class Environment {
 	 */
 	public void addBridge(Class<?> bridgeClass) throws ParsingException {
 		ClassToken bridgedClass = BridgeMapper.mapBridge(bridgeClass);
-		try {
-			globalScope.classProvider.setLocal(bridgedClass);
-		} catch (RuntimeException e) {
-			// Our class provider will never throw this exception.
-			e.printStackTrace();
-		}
+		globalScope.set(bridgedClass, bridgedClass);
 	}
 
 	/**
@@ -80,22 +73,6 @@ public class Environment {
 		for (Script script : loadedScripts) {
 			script.run(globalScope);
 		}
-	}
-
-	/**
-	 * Increments the object id counter and returns a unique object id.
-	 */
-	public int incrementObjectId() {
-		synchronized (this) {
-			return currentObjectId++;
-		}
-	}
-
-	/**
-	 * @return the next object id, but does not increment
-	 */
-	public int getCurrentObjectId() {
-		return currentObjectId;
 	}
 
 	public Scope getGlobalScope() {

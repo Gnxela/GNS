@@ -3,7 +3,7 @@ package me.alexng.gns.bridge;
 import me.alexng.gns.FileIndex;
 import me.alexng.gns.ParsingException;
 import me.alexng.gns.RuntimeException;
-import me.alexng.gns.env.scope.Scope;
+import me.alexng.gns.env.Scope;
 import me.alexng.gns.env.value.ObjectValue;
 import me.alexng.gns.env.value.Value;
 import me.alexng.gns.tokens.ClassToken;
@@ -32,11 +32,9 @@ public class BridgeClassToken<T> extends ClassToken {
 	@Override
 	public ObjectValue createInstance(ObjectConstructionToken caller, Value[] values, Scope callingScope) throws RuntimeException {
 		Object bridgeInstance = createBridgeInstance(values);
-		int objectId = callingScope.getEnvironment().incrementObjectId();
-		Scope objectScope = Scope.createObjectScope(getIdentifier().getName(), callingScope.getGlobalScope());
-		objectScope.variableProvider = new BridgeVariableProvider(bridgeInstance, variables, objectScope.variableProvider);
-		objectScope.functionProvider = new BridgeFunctionProvider(bridgeInstance, functions, objectScope.functionProvider);
-		return new ObjectValue(objectId, this, objectScope);
+		Scope objectScope = Scope.createObjectScope(callingScope.getGlobalScope());
+		// TODO: We need to create a subclass of Scope that allows us to inject {@link #variables} and {@link #functions}
+		return new ObjectValue(this, objectScope);
 	}
 
 	/**

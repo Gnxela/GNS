@@ -1,7 +1,7 @@
 package me.alexng.gns.util;
 
 import me.alexng.gns.RuntimeException;
-import me.alexng.gns.env.scope.Scope;
+import me.alexng.gns.env.Scope;
 import me.alexng.gns.env.value.Value;
 
 public class ExecutableMockToken extends MockToken {

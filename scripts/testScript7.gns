@@ -1,0 +1,20 @@
+template test {
+	i = 0
+	func init(a) {
+		i = a
+	}
+}
+
+
+o = new Test(1)
+
+{
+ 	value: 1 * 2 + 6,
+ 	a: [1, 2, 3],
+ 	b: {
+ 		test: 1
+ 	},
+ 	f: func() {
+
+ 	}
+ }
