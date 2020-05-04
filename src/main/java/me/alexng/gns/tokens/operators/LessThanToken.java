@@ -4,10 +4,10 @@ import me.alexng.gns.FileIndex;
 import me.alexng.gns.ParsingException;
 import me.alexng.gns.RuntimeException;
 import me.alexng.gns.env.Scope;
-import me.alexng.gns.env.value.BooleanValue;
-import me.alexng.gns.env.value.NumberValue;
-import me.alexng.gns.env.value.Value;
 import me.alexng.gns.tokens.Token;
+import me.alexng.gns.tokens.value.BooleanValue;
+import me.alexng.gns.tokens.value.NumberValue;
+import me.alexng.gns.tokens.value.Value;
 
 public class LessThanToken extends BinaryOperatorToken<Token, Token> {
 

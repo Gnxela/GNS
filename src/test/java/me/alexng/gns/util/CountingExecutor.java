@@ -1,6 +1,6 @@
 package me.alexng.gns.util;
 
-import me.alexng.gns.env.value.Value;
+import me.alexng.gns.tokens.value.Value;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

@@ -5,8 +5,8 @@ import me.alexng.gns.Options;
 import me.alexng.gns.RuntimeException;
 import me.alexng.gns.env.Environment;
 import me.alexng.gns.env.Scope;
-import me.alexng.gns.env.value.StringValue;
-import me.alexng.gns.env.value.Value;
+import me.alexng.gns.tokens.value.StringValue;
+import me.alexng.gns.tokens.value.Value;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

@@ -5,11 +5,11 @@ import me.alexng.gns.RuntimeException;
 import me.alexng.gns.env.Environment;
 import me.alexng.gns.env.NativeFunction;
 import me.alexng.gns.env.Scope;
-import me.alexng.gns.env.value.Value;
 import me.alexng.gns.tokens.IdentifiedToken;
 import me.alexng.gns.tokens.IdentifierToken;
 import me.alexng.gns.tokens.Token;
 import me.alexng.gns.tokens.ValueToken;
+import me.alexng.gns.tokens.value.Value;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;

@@ -1,10 +1,10 @@
 package me.alexng.gns.env;
 
 import me.alexng.gns.bridge.Expose;
-import me.alexng.gns.env.value.NumberValue;
-import me.alexng.gns.env.value.ObjectValue;
-import me.alexng.gns.env.value.StringValue;
-import me.alexng.gns.env.value.Value;
+import me.alexng.gns.tokens.value.NumberValue;
+import me.alexng.gns.tokens.value.ObjectValue;
+import me.alexng.gns.tokens.value.StringValue;
+import me.alexng.gns.tokens.value.Value;
 
 import java.io.IOException;
 import java.io.OutputStream;

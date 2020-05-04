@@ -3,8 +3,8 @@ package me.alexng.gns.util;
 import me.alexng.gns.FileIndex;
 import me.alexng.gns.RuntimeException;
 import me.alexng.gns.env.Scope;
-import me.alexng.gns.env.value.Value;
 import me.alexng.gns.tokens.Token;
+import me.alexng.gns.tokens.value.Value;
 
 public class MockToken extends Token {
 

@@ -2,7 +2,7 @@ package me.alexng.gns.tokens;
 
 import me.alexng.gns.FileIndex;
 import me.alexng.gns.env.Scope;
-import me.alexng.gns.env.value.Value;
+import me.alexng.gns.tokens.value.Value;
 
 public class ValueToken extends Token {
 

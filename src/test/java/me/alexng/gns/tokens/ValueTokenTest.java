@@ -1,7 +1,7 @@
 package me.alexng.gns.tokens;
 
 import me.alexng.gns.FileIndex;
-import me.alexng.gns.env.value.NumberValue;
+import me.alexng.gns.tokens.value.NumberValue;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

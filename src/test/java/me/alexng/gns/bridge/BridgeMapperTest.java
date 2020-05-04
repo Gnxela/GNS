@@ -5,8 +5,8 @@ import me.alexng.gns.ParsingException;
 import me.alexng.gns.RuntimeException;
 import me.alexng.gns.env.Environment;
 import me.alexng.gns.env.Script;
-import me.alexng.gns.env.value.NumberValue;
-import me.alexng.gns.env.value.StringValue;
+import me.alexng.gns.tokens.value.NumberValue;
+import me.alexng.gns.tokens.value.StringValue;
 import org.junit.jupiter.api.Test;
 
 import java.lang.reflect.Field;

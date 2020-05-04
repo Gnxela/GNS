@@ -2,10 +2,10 @@ package me.alexng.gns.env;
 
 import me.alexng.gns.FileIndex;
 import me.alexng.gns.RuntimeException;
-import me.alexng.gns.env.value.Value;
 import me.alexng.gns.tokens.FunctionToken;
 import me.alexng.gns.tokens.IdentifierToken;
 import me.alexng.gns.tokens.Token;
+import me.alexng.gns.tokens.value.Value;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;

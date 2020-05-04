@@ -5,10 +5,10 @@ import me.alexng.gns.ParsingException;
 import me.alexng.gns.RuntimeException;
 import me.alexng.gns.env.Environment;
 import me.alexng.gns.env.Scope;
-import me.alexng.gns.env.value.BooleanValue;
-import me.alexng.gns.env.value.NumberValue;
-import me.alexng.gns.env.value.ObjectValue;
-import me.alexng.gns.env.value.Value;
+import me.alexng.gns.tokens.value.BooleanValue;
+import me.alexng.gns.tokens.value.NumberValue;
+import me.alexng.gns.tokens.value.ObjectValue;
+import me.alexng.gns.tokens.value.Value;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

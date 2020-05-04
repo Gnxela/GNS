@@ -4,8 +4,8 @@ import me.alexng.gns.FileIndex;
 import me.alexng.gns.ParsingException;
 import me.alexng.gns.RuntimeException;
 import me.alexng.gns.env.Scope;
-import me.alexng.gns.env.value.ObjectValue;
-import me.alexng.gns.env.value.Value;
+import me.alexng.gns.tokens.value.ObjectValue;
+import me.alexng.gns.tokens.value.Value;
 import me.alexng.gns.util.ArrayUtil;
 import me.alexng.gns.util.StringUtil;
 

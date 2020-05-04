@@ -2,12 +2,12 @@ package me.alexng.gns.gen.constructors;
 
 import me.alexng.gns.Keyword;
 import me.alexng.gns.ParsingException;
-import me.alexng.gns.env.value.BooleanValue;
 import me.alexng.gns.gen.Assembler;
 import me.alexng.gns.gen.Constructor;
 import me.alexng.gns.tokens.KeywordToken;
 import me.alexng.gns.tokens.Token;
 import me.alexng.gns.tokens.ValueToken;
+import me.alexng.gns.tokens.value.BooleanValue;
 
 import java.util.ListIterator;
 

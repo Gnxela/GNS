@@ -1,4 +1,4 @@
-package me.alexng.gns.env.value;
+package me.alexng.gns.tokens.value;
 
 public class ReturnedValue extends Value {
 

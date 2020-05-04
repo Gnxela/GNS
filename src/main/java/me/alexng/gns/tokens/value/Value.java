@@ -1,4 +1,4 @@
-package me.alexng.gns.env.value;
+package me.alexng.gns.tokens.value;
 
 import me.alexng.gns.FileIndex;
 import me.alexng.gns.tokens.ValueToken;

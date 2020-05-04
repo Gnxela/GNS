@@ -3,7 +3,7 @@ package me.alexng.gns.bridge;
 import me.alexng.gns.FileIndex;
 import me.alexng.gns.ParsingException;
 import me.alexng.gns.env.Environment;
-import me.alexng.gns.env.value.Value;
+import me.alexng.gns.tokens.value.Value;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -12,7 +12,7 @@ import java.util.*;
 
 public class BridgeMapper {
 
-	private static final String BASE_TYPE_STRING = "me.alexng.gns.env.value.Value";
+	private static final String BASE_TYPE_STRING = "me.alexng.gns.tokens.value.Value";
 
 	public static <T> BridgeClassToken<T> mapBridge(Class<T> bridgeClass) throws ParsingException {
 		// TODO: Allow for bridges to define a name different from class name
