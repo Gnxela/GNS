@@ -22,7 +22,7 @@ public class StringValue extends ObjectValue {
 		return new StringValue(string, callingScope);
 	}
 
-	private void addBuiltIns() {
+	private void addBuiltIns() throws RuntimeException {
 		// TODO: Make immutable
 		getObjectScope().set(LENGTH_ID, new NumberValue(value.length()).wrap());
 	}

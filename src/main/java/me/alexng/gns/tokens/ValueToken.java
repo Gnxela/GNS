@@ -20,6 +20,10 @@ public class ValueToken extends Token {
 		return value;
 	}
 
+	public Value getValue() {
+		return value;
+	}
+
 	@Override
 	public String toString() {
 		return "<Value " + value.toString() + " >";

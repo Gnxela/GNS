@@ -16,7 +16,7 @@ public class Scope {
 	private boolean globalScope, objectScope;
 	private Map<String, Token> values;
 
-	private Scope(Environment environment, Scope parentScope, boolean globalScope, boolean objectScope) {
+	public Scope(Environment environment, Scope parentScope, boolean globalScope, boolean objectScope) {
 		this.environment = environment;
 		this.parentScope = parentScope;
 		this.globalScope = globalScope;
@@ -36,8 +36,12 @@ public class Scope {
 		return new Scope(environment, this, false, false);
 	}
 
-	private Token get(IdentifierToken identifier) {
-		Token value = values.get(identifier.getName());
+	public Token getLocal(IdentifierToken identifier) throws RuntimeException {
+		return values.get(identifier.getName());
+	}
+
+	private Token get(IdentifierToken identifier) throws RuntimeException {
+		Token value = getLocal(identifier);
 		if (value != null) {
 			return value;
 		}
@@ -47,8 +51,8 @@ public class Scope {
 		return ValueToken.NULL;
 	}
 
-	private Scope findValue(IdentifierToken identifier) {
-		Token value = values.get(identifier.getName());
+	private Scope findValue(IdentifierToken identifier) throws RuntimeException {
+		Token value = getLocal(identifier);
 		if (value != null) {
 			return this;
 		}
@@ -85,7 +89,7 @@ public class Scope {
 		}
 	}
 
-	public void set(IdentifiedToken identifiedToken, Token value) {
+	public void set(IdentifiedToken identifiedToken, Token value) throws RuntimeException {
 		Scope scope = findValue(identifiedToken.getIdentifier());
 		if (scope != null) {
 			scope.setLocal(identifiedToken, value);
@@ -94,7 +98,7 @@ public class Scope {
 		}
 	}
 
-	private void setLocal(IdentifiedToken identifiedToken, Token value) {
+	public void setLocal(IdentifiedToken identifiedToken, Token value) throws RuntimeException {
 		values.put(identifiedToken.getIdentifier().getName(), value);
 	}
 

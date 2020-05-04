@@ -34,7 +34,7 @@ public class Environment {
 		if (options.isUsingSys()) {
 			try {
 				addBridge(Sys.class);
-			} catch (ParsingException e) {
+			} catch (RuntimeException | ParsingException e) {
 				e.printStackTrace();
 				System.exit(1);
 			}
@@ -46,7 +46,7 @@ public class Environment {
 	 *
 	 * @param bridgeClass The class to be mapped as a bridge.
 	 */
-	public void addBridge(Class<?> bridgeClass) throws ParsingException {
+	public void addBridge(Class<?> bridgeClass) throws RuntimeException, ParsingException {
 		ClassToken bridgedClass = BridgeMapper.mapBridge(bridgeClass);
 		globalScope.set(bridgedClass, bridgedClass);
 	}

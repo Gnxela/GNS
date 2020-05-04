@@ -31,8 +31,7 @@ public class BridgeClassToken<T> extends ClassToken {
 	@Override
 	public ObjectValue createInstance(ObjectConstructionToken caller, Value[] values, Scope callingScope) throws RuntimeException {
 		Object bridgeInstance = createBridgeInstance(values);
-		Scope objectScope = Scope.createObjectScope(callingScope.getGlobalScope());
-		// TODO: We need to create a subclass of Scope that allows us to inject {@link #variables} and {@link #functions}
+		Scope objectScope = BridgeScope.create(callingScope.getGlobalScope(), bridgeInstance, variables, functions);
 		return new ObjectValue(this, objectScope);
 	}
 
