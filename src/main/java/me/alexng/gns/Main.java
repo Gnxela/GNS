@@ -10,7 +10,7 @@ public class Main {
 	public static void main(String[] args) throws Exception {
 		// TODO: Remove most of the util classes.
 
-		Environment scriptEnvironment = new Environment(new Options.Builder().setUsingSys(false).build());
+		Environment scriptEnvironment = new Environment(new Options.Builder().setUsingSys(true).build());
 		File scriptFile = new File("scripts/testScript6.gns");
 		long start = System.nanoTime();
 		scriptEnvironment.loadScript(new Script(scriptFile));

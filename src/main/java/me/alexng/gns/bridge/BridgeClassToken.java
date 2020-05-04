@@ -60,4 +60,10 @@ public class BridgeClassToken<T> extends ClassToken {
 	public Class<?> getBridgeClass() {
 		return bridgeClass;
 	}
+
+
+	@Override
+	public String toString() {
+		return "<BridgeClass " + getIdentifier().getName() + ">";
+	}
 }
