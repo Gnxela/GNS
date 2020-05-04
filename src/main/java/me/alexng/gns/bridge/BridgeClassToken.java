@@ -14,7 +14,6 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -57,14 +56,6 @@ public class BridgeClassToken<T> extends ClassToken {
 		} catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
 			throw new RuntimeException(FileIndex.INTERNAL_INDEX, "Failed to create bridge instance:" + e.getClass() + ": " + e.getMessage());
 		}
-	}
-
-	public void setVariables(Map<String, Field> variables) {
-		this.variables = variables;
-	}
-
-	public void setFunctions(LinkedList<Method> functions) {
-		this.functions = functions;
 	}
 
 	public Class<?> getBridgeClass() {

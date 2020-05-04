@@ -8,9 +8,7 @@ import me.alexng.gns.env.value.Value;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.Map;
+import java.util.*;
 
 public class BridgeMapper {
 
@@ -21,10 +19,11 @@ public class BridgeMapper {
 		BridgeClassToken<T> bridgeClassToken = new BridgeClassToken<T>(bridgeClass);
 		bridgeVariables(bridgeClassToken);
 		bridgeFunctions(bridgeClassToken);
+		checkNames(bridgeClassToken);
 		return bridgeClassToken;
 	}
 
-	private static void bridgeFunctions(BridgeClassToken bridgeClassToken) throws ParsingException {
+	private static void bridgeFunctions(BridgeClassToken<?> bridgeClassToken) throws ParsingException {
 		LinkedList<Method> functions = new LinkedList<>();
 		for (Method method : bridgeClassToken.getBridgeClass().getMethods()) {
 			if (method.isAnnotationPresent(Expose.class)) {
@@ -32,10 +31,10 @@ public class BridgeMapper {
 				functions.add(method);
 			}
 		}
-		bridgeClassToken.setFunctions(functions);
+		bridgeClassToken.functions = functions;
 	}
 
-	private static void bridgeVariables(BridgeClassToken bridgeClassToken) throws ParsingException {
+	private static void bridgeVariables(BridgeClassToken<?> bridgeClassToken) throws ParsingException {
 		Map<String, Field> fields = new HashMap<>();
 		for (Field field : bridgeClassToken.getBridgeClass().getFields()) {
 			if (field.isAnnotationPresent(Expose.class)) {
@@ -43,7 +42,23 @@ public class BridgeMapper {
 				fields.put(field.getName(), field);
 			}
 		}
-		bridgeClassToken.setVariables(fields);
+		bridgeClassToken.variables = fields;
+	}
+
+	private static void checkNames(BridgeClassToken<?> bridgeClassToken) throws ParsingException {
+		Set<String> names = new HashSet<>();
+		for (String fieldName : bridgeClassToken.variables.keySet()) {
+			boolean unique = names.add(fieldName);
+			if (!unique) {
+				throw new ParsingException(bridgeClassToken, "Field/Function name is not unique: '" + fieldName + "'");
+			}
+		}
+		for (Method method : bridgeClassToken.functions) {
+			boolean unique = names.add(method.getName());
+			if (!unique) {
+				throw new ParsingException(bridgeClassToken, "Field/Function name is not unique: '" + method.getName() + "'");
+			}
+		}
 	}
 
 	private static void checkMethodTypes(Method method) throws ParsingException {
