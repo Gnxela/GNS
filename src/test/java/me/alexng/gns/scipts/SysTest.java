@@ -31,7 +31,7 @@ public class SysTest {
 		final String source = "sys = new Sys()\nsys.print(sys)";
 		environment.loadScript(new Script(source));
 		environment.runScripts();
-		assertEquals("Sys#1", outputStream.toString());
+		assertEquals("Object", outputStream.toString());
 	}
 
 	@Test
