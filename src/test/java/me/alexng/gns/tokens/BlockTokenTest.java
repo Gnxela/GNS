@@ -3,7 +3,7 @@ package me.alexng.gns.tokens;
 import me.alexng.gns.FileIndex;
 import me.alexng.gns.ParsingException;
 import me.alexng.gns.RuntimeException;
-import me.alexng.gns.env.scope.Scope;
+import me.alexng.gns.env.Scope;
 import me.alexng.gns.env.value.NumberValue;
 import me.alexng.gns.env.value.ReturnedValue;
 import me.alexng.gns.env.value.Value;
@@ -41,8 +41,8 @@ public class BlockTokenTest {
 		BlockToken blockToken = new BlockToken(tokens, FileIndex.NULL_INDEX);
 		Scope globalScope = Scope.createGlobalScope(null);
 		blockToken.executeBlockWithScope(globalScope);
-		assertEquals(13, globalScope.variableProvider.get(identifier).getJavaValue());
-		assertEquals(13, globalScope.variableProvider.getLocal(identifier).getJavaValue());
+		assertEquals(13, globalScope.getValue(identifier).getJavaValue());
+		assertEquals(13, globalScope.getValue(identifier).getJavaValue());
 	}
 
 	@Test
@@ -60,7 +60,7 @@ public class BlockTokenTest {
 		Scope globalScope = Scope.createGlobalScope(null);
 		blockToken.executeBlock(globalScope);
 		countingExecutor.assertCount(3);
-		assertThrows(RuntimeException.class, () -> globalScope.variableProvider.get(identifier));
+		assertNull(globalScope.getValue(identifier).getJavaValue());
 	}
 
 	@Test
@@ -99,9 +99,9 @@ public class BlockTokenTest {
 		tokens.add(assignToken);
 		BlockToken blockToken = new BlockToken(tokens, FileIndex.NULL_INDEX);
 		Scope globalScope = Scope.createGlobalScope(null);
-		globalScope.variableProvider.setLocal(identifier, new NumberValue(13));
+		globalScope.set(identifier, new NumberValue(13).wrap());
 		blockToken.executeBlock(globalScope);
-		assertEquals(17, globalScope.variableProvider.get(identifier).getJavaValue());
+		assertEquals(17, globalScope.getValue(identifier).getJavaValue());
 	}
 
 	private static class MockEOLToken extends EOLToken {

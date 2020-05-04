@@ -1,5 +1,8 @@
 package me.alexng.gns.env.value;
 
+import me.alexng.gns.FileIndex;
+import me.alexng.gns.tokens.ValueToken;
+
 public abstract class Value {
 
 	public static final NullValue NULL = new NullValue();
@@ -7,6 +10,10 @@ public abstract class Value {
 
 	public Value(Type type) {
 		this.type = type;
+	}
+
+	public ValueToken wrap() {
+		return new ValueToken(this, FileIndex.INTERNAL_INDEX);
 	}
 
 	public abstract Object getJavaValue();

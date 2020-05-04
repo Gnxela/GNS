@@ -2,7 +2,7 @@ package me.alexng.gns.tokens;
 
 import me.alexng.gns.FileIndex;
 import me.alexng.gns.RuntimeException;
-import me.alexng.gns.env.scope.Scope;
+import me.alexng.gns.env.Scope;
 import me.alexng.gns.env.value.Value;
 
 public class FunctionCallToken extends IdentifiedToken {
@@ -18,7 +18,7 @@ public class FunctionCallToken extends IdentifiedToken {
 	public Value execute(Scope scope) throws RuntimeException {
 		Value[] values = argumentsToken.grabValues(scope);
 		Scope callingScope = scope.getObjectScope() != null ? scope.getObjectScope() : scope.getGlobalScope();
-		FunctionToken function = scope.functionProvider.get(this);
+		FunctionToken function = scope.getFunction(this);
 		return function.unwrapAndExecuteFunction(this, callingScope, values);
 	}
 

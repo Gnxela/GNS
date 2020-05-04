@@ -62,12 +62,45 @@ public class BridgeMapperTest {
 		assertEquals(5, MockBridge.lastVariableValue.getJavaValue());
 	}
 
+	@Test
+	public void testMapBridge_nonUniqueName() throws ParsingException {
+		assertThrows(ParsingException.class, () -> BridgeMapper.mapBridge(MockBridgeNonUnique.class));
+		assertThrows(ParsingException.class, () -> BridgeMapper.mapBridge(MockBridgeNonUnique2.class));
+	}
+
 	public static class MockBridgePrivateMembers {
 		@Expose
 		private NumberValue variable;
 
 		@Expose
 		private void function(Environment environment, StringValue stringValue) {
+
+		}
+	}
+
+	public static class MockBridgeNonUnique {
+		@Expose
+		public NumberValue uniqueName;
+		@Expose
+		public NumberValue nonUniqueName;
+
+		@Expose
+		public void nonUniqueName(Environment environment, StringValue stringValue) {
+
+		}
+	}
+
+	public static class MockBridgeNonUnique2 {
+		@Expose
+		public NumberValue uniqueName;
+
+		@Expose
+		public void uniqueName(Environment environment, StringValue stringValue) {
+
+		}
+
+		@Expose
+		public void uniqueName(Environment environment) {
 
 		}
 	}

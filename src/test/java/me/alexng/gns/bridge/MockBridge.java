@@ -37,6 +37,6 @@ public class MockBridge {
 		lastNumberValue = numberValue;
 		lastVariableValue = variable;
 		// TODO: It's not exactly clear why we must pass a calling scope here.
-		return new StringValue(environment.incrementObjectId(), "Hello world!", environment.getGlobalScope());
+		return new StringValue("Hello world!", environment.getGlobalScope());
 	}
 }

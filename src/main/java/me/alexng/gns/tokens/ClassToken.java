@@ -3,10 +3,8 @@ package me.alexng.gns.tokens;
 import me.alexng.gns.FileIndex;
 import me.alexng.gns.ParsingException;
 import me.alexng.gns.RuntimeException;
-import me.alexng.gns.env.scope.Scope;
-import me.alexng.gns.env.value.NumberValue;
+import me.alexng.gns.env.Scope;
 import me.alexng.gns.env.value.ObjectValue;
-import me.alexng.gns.env.value.StringValue;
 import me.alexng.gns.env.value.Value;
 import me.alexng.gns.util.ArrayUtil;
 import me.alexng.gns.util.StringUtil;
@@ -31,33 +29,26 @@ public class ClassToken extends IdentifiedToken {
 
 	@Override
 	public Value execute(Scope scope) throws RuntimeException {
-		scope.classProvider.set(this);
+		scope.set(this, this);
 		return Value.NULL;
 	}
 
 	public ObjectValue createInstance(ObjectConstructionToken caller, Value[] values, Scope callingScope) throws RuntimeException {
-		Scope objectScope;
-		// TODO: This is hard to understand. Also only allows for direct parents.
-		if (callingScope.getObjectScope() != null && callingScope.getObjectScope().classProvider.getLocal(getIdentifier()) != null) {
-			objectScope = callingScope.createObjectScope(getIdentifier().getName(), callingScope.getObjectScope());
-		} else {
-			objectScope = callingScope.createObjectScope(getIdentifier().getName());
+		Scope objectScope, parentScope;
+		try {
+			parentScope = callingScope.getObjectScope();
+		} catch (RuntimeException ignored) {
+			// Thrown when no object scope if found
+			parentScope = callingScope.getGlobalScope();
 		}
-		int objectId = objectScope.getEnvironment().incrementObjectId();
-		setObjectProperties(objectId, objectScope);
+		objectScope = Scope.createObjectScope(parentScope);
 		block.executeBlockWithScope(objectScope);
 		callConstructor(caller, values, objectScope);
-		return new ObjectValue(objectId, this, objectScope);
-	}
-
-	private void setObjectProperties(int objectId, Scope objectScope) throws RuntimeException {
-		// TODO: Set these values as immutable.
-		objectScope.variableProvider.setLocal(OBJECT_ID_VARIABLE, new NumberValue(objectId));
-		objectScope.variableProvider.setLocal(TYPE_VARIABLE, StringValue.createString(objectScope.nameProvider.getName(), objectScope));
+		return new ObjectValue(this, objectScope);
 	}
 
 	private void callConstructor(ObjectConstructionToken caller, Value[] values, Scope objectScope) throws RuntimeException {
-		FunctionToken constructor = objectScope.functionProvider.getLocal(CONSTRUCTOR_NAME);
+		FunctionToken constructor = objectScope.getFunction(CONSTRUCTOR_NAME);
 		if (constructor != null) {
 			Value returnedValue = constructor.executeFunction(caller, objectScope, values);
 			if (returnedValue != null && returnedValue != Value.NULL) {

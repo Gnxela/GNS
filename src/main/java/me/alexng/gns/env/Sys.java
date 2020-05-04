@@ -28,7 +28,7 @@ public class Sys {
 					output = ((StringValue) value).getJavaValue();
 				} else {
 					ObjectValue rawObject = (ObjectValue) value;
-					output = rawObject.getObjectScope().nameProvider.getName() + "#" + rawObject.getObjectId();
+					output = "Object";
 					// TODO: Call a toString function in the object
 				}
 				break;

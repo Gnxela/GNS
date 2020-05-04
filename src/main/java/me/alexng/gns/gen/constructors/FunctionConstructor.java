@@ -6,7 +6,6 @@ import me.alexng.gns.ParsingException;
 import me.alexng.gns.gen.Assembler;
 import me.alexng.gns.gen.Constructor;
 import me.alexng.gns.tokens.*;
-import me.alexng.gns.tokens.operators.OperatorToken;
 
 import java.util.ListIterator;
 
@@ -28,26 +27,13 @@ public class FunctionConstructor implements Constructor {
 		tokens.remove();
 
 		Token uncheckedIdentifier = tokens.next();
-		boolean isOperator = false;
-		IdentifierToken identifier = null;
-		OperatorToken operator = null;
-		if (uncheckedIdentifier instanceof OperatorToken) {
-			operator = Assembler.castTo(OperatorToken.class, uncheckedIdentifier);
-			isOperator = true;
-		} else {
-			identifier = Assembler.castTo(IdentifierToken.class, uncheckedIdentifier);
-		}
+		IdentifierToken identifier = Assembler.castTo(IdentifierToken.class, uncheckedIdentifier);
 		tokens.remove();
 
 		ParametersToken parameters = ParametersConstructor.construct(tokens);
 
 		BlockToken block = Assembler.castTo(BlockToken.class, tokens.next());
 		tokens.remove();
-
-		if (isOperator) {
-			tokens.add(new OperatorFunctionToken(operator, parameters, block, FileIndex.openClose(keyword, block)));
-		} else {
-			tokens.add(new FunctionToken(identifier, parameters, block, FileIndex.openClose(keyword, block)));
-		}
+		tokens.add(new FunctionToken(identifier, parameters, block, FileIndex.openClose(keyword, block)));
 	}
 }

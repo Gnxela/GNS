@@ -2,7 +2,7 @@ package me.alexng.gns.tokens;
 
 import me.alexng.gns.FileIndex;
 import me.alexng.gns.RuntimeException;
-import me.alexng.gns.env.scope.Scope;
+import me.alexng.gns.env.Scope;
 import me.alexng.gns.env.value.Value;
 
 public class ObjectConstructionToken extends IdentifiedToken {
@@ -17,7 +17,7 @@ public class ObjectConstructionToken extends IdentifiedToken {
 	@Override
 	public Value execute(Scope scope) throws RuntimeException {
 		Value[] values = argumentsToken.grabValues(scope);
-		ClassToken classToken = scope.classProvider.get(getIdentifier());
+		ClassToken classToken = scope.getTemplate(getIdentifier());
 		return classToken.createInstance(this, values, scope);
 	}
 

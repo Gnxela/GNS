@@ -1,10 +1,12 @@
 package me.alexng.gns.tokens;
 
 import me.alexng.gns.FileIndex;
-import me.alexng.gns.env.scope.Scope;
+import me.alexng.gns.env.Scope;
 import me.alexng.gns.env.value.Value;
 
 public class ValueToken extends Token {
+
+	public static final ValueToken NULL = new ValueToken(Value.NULL, FileIndex.INTERNAL_INDEX);
 
 	private Value value;
 
@@ -15,6 +17,10 @@ public class ValueToken extends Token {
 
 	@Override
 	public Value execute(Scope scope) {
+		return value;
+	}
+
+	public Value getValue() {
 		return value;
 	}
 

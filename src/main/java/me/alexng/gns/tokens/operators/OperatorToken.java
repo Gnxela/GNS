@@ -2,10 +2,8 @@ package me.alexng.gns.tokens.operators;
 
 import me.alexng.gns.FileIndex;
 import me.alexng.gns.RuntimeException;
-import me.alexng.gns.env.scope.Scope;
-import me.alexng.gns.env.value.ObjectValue;
+import me.alexng.gns.env.Scope;
 import me.alexng.gns.env.value.Value;
-import me.alexng.gns.tokens.FunctionToken;
 import me.alexng.gns.tokens.IdentifiedToken;
 import me.alexng.gns.tokens.IdentifierToken;
 
@@ -15,29 +13,6 @@ public abstract class OperatorToken extends IdentifiedToken {
 
 	public OperatorToken(String operatorString, FileIndex fileIndex) {
 		super(new IdentifierToken(operatorString, fileIndex), fileIndex);
-	}
-
-	/**
-	 * @return a value if the operation was forwarded to an object. Otherwise null.
-	 */
-	public Value tryObjectOperation(Scope scope) throws RuntimeException {
-		Value[] operands = getOperands(scope);
-		if (operands.length == 0) {
-			return null;
-		}
-		if (!(operands[0] instanceof ObjectValue)) {
-			return null;
-		}
-		ObjectValue object = (ObjectValue) operands[0];
-		FunctionToken operatorFunction;
-		try {
-			operatorFunction = object.getObjectScope().operatorFunctionProvider.get(getIdentifier());
-		} catch (Exception e) {
-			throw new RuntimeException(this, "Operation '" + getIdentifier().getName() + "' not defined for object");
-		}
-		Value[] values = new Value[operands.length - 1];
-		System.arraycopy(operands, 1, values, 0, values.length);
-		return operatorFunction.unwrapAndExecuteFunction(this, object.getObjectScope(), values);
 	}
 
 	/**

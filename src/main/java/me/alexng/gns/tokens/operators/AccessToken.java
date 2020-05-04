@@ -1,9 +1,10 @@
 package me.alexng.gns.tokens.operators;
 
 import me.alexng.gns.FileIndex;
+import me.alexng.gns.InvalidTypeException;
 import me.alexng.gns.ParsingException;
 import me.alexng.gns.RuntimeException;
-import me.alexng.gns.env.scope.Scope;
+import me.alexng.gns.env.Scope;
 import me.alexng.gns.env.value.ObjectValue;
 import me.alexng.gns.env.value.Value;
 import me.alexng.gns.tokens.IdentifiedToken;
@@ -28,10 +29,10 @@ public class AccessToken extends BinaryOperatorToken<Token, IdentifiedToken> {
 		Value leftValue = getLeft().execute(scope);
 		if (leftValue instanceof ObjectValue) {
 			ObjectValue objectValue = (ObjectValue) leftValue;
-			objectValue.getObjectScope().variableProvider.set(getRight(), value);
+			objectValue.getObjectScope().set(getRight(), value.wrap());
 			return;
 		}
-		throw ExceptionUtil.createRuntimeExpected("Invalid access", getLeft(), Value.Type.OBJECT, leftValue.getType());
+		throw new InvalidTypeException(getLeft(), Value.Type.OBJECT, leftValue.getType());
 	}
 
 	public Value getValue(Scope scope) throws RuntimeException {
@@ -40,7 +41,7 @@ public class AccessToken extends BinaryOperatorToken<Token, IdentifiedToken> {
 			ObjectValue objectValue = (ObjectValue) leftValue;
 			return getRight().execute(objectValue.getObjectScope());
 		}
-		throw ExceptionUtil.createRuntimeExpected("Invalid access", getLeft(), Value.Type.OBJECT, leftValue.getType());
+		throw new InvalidTypeException(getLeft(), Value.Type.OBJECT, leftValue.getType());
 	}
 
 	@Override
