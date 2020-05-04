@@ -20,12 +20,12 @@ public class EqualToken extends BinaryOperatorToken<Token, Token> {
 		Value leftValue = getLeft().execute(scope);
 		Value rightValue = getRight().execute(scope);
 		if (leftValue.getType() != rightValue.getType()) {
-			return BooleanValue.FALSE;
+			return BooleanValue.INTERNAL_FALSE;
 		}
 
 		switch (leftValue.getType()) {
 			case NULL:
-				return BooleanValue.TRUE;
+				return BooleanValue.INTERNAL_TRUE;
 			case OBJECT:
 				return BooleanValue.valueOf(leftValue == rightValue);
 			default:

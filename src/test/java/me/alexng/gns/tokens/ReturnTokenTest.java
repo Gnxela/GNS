@@ -14,7 +14,7 @@ public class ReturnTokenTest {
 
 	@Test
 	public void testExecute() throws RuntimeException {
-		ReturnToken returnToken = new ReturnToken(new ValueToken(new NumberValue(13), FileIndex.NULL_INDEX), FileIndex.NULL_INDEX);
+		ReturnToken returnToken = new ReturnToken(new NumberValue(13, FileIndex.INTERNAL_INDEX), FileIndex.INTERNAL_INDEX);
 		Value receivedValue = returnToken.execute(null);
 		assertTrue(receivedValue instanceof ReturnedValue);
 		ReturnedValue returnedValue = (ReturnedValue) receivedValue;

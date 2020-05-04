@@ -35,7 +35,7 @@ public class BlockTokenTest {
 	public void testExecuteBlockWithScope_modifyScope() throws RuntimeException, ParsingException {
 		IdentifierToken identifier = new IdentifierToken("test", FileIndex.NULL_INDEX);
 		AssignToken assignToken = new AssignToken(FileIndex.NULL_INDEX);
-		assignToken.bind(identifier, new ValueToken(new NumberValue(13), FileIndex.NULL_INDEX));
+		assignToken.bind(identifier, new NumberValue(13, FileIndex.NULL_INDEX));
 		LinkedList<Token> tokens = new LinkedList<>();
 		tokens.add(assignToken);
 		BlockToken blockToken = new BlockToken(tokens, FileIndex.NULL_INDEX);
@@ -50,7 +50,7 @@ public class BlockTokenTest {
 		CountingExecutor countingExecutor = new CountingExecutor();
 		IdentifierToken identifier = new IdentifierToken("test", FileIndex.NULL_INDEX);
 		AssignToken assignToken = new AssignToken(FileIndex.NULL_INDEX);
-		assignToken.bind(identifier, new ValueToken(new NumberValue(13), FileIndex.NULL_INDEX));
+		assignToken.bind(identifier, new NumberValue(13, FileIndex.NULL_INDEX));
 		LinkedList<Token> tokens = new LinkedList<>();
 		tokens.add(new ExecutableMockToken(countingExecutor));
 		tokens.add(new ExecutableMockToken(countingExecutor));
@@ -69,7 +69,7 @@ public class BlockTokenTest {
 		LinkedList<Token> tokens = new LinkedList<>();
 		tokens.add(new ExecutableMockToken(countingExecutor));
 		tokens.add(new ExecutableMockToken(countingExecutor));
-		tokens.add(new ReturningMockToken(new ReturnedValue(new NumberValue(1))));
+		tokens.add(new ReturningMockToken(new ReturnedValue(new NumberValue(1, FileIndex.INTERNAL_INDEX))));
 		tokens.add(new ExecutableMockToken(countingExecutor)); // This token is not executed.
 		BlockToken blockToken = new BlockToken(tokens, FileIndex.NULL_INDEX);
 		Scope globalScope = Scope.createGlobalScope(null);
@@ -94,12 +94,12 @@ public class BlockTokenTest {
 	public void testExecute_modifyParentVariable() throws RuntimeException, ParsingException {
 		IdentifierToken identifier = new IdentifierToken("test", FileIndex.NULL_INDEX);
 		AssignToken assignToken = new AssignToken(FileIndex.NULL_INDEX);
-		assignToken.bind(identifier, new ValueToken(new NumberValue(17), FileIndex.NULL_INDEX));
+		assignToken.bind(identifier, new NumberValue(17, FileIndex.NULL_INDEX));
 		LinkedList<Token> tokens = new LinkedList<>();
 		tokens.add(assignToken);
 		BlockToken blockToken = new BlockToken(tokens, FileIndex.NULL_INDEX);
 		Scope globalScope = Scope.createGlobalScope(null);
-		globalScope.set(identifier, new NumberValue(13).wrap());
+		globalScope.set(identifier, new NumberValue(13, FileIndex.NULL_INDEX));
 		blockToken.executeBlock(globalScope);
 		assertEquals(17, globalScope.getValue(identifier).getJavaValue());
 	}

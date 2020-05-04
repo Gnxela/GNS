@@ -14,10 +14,10 @@ public class ArgumentsTokenTest {
 	@Test
 	public void testGrabValues() throws RuntimeException {
 		NumberValue[] numberValues = new NumberValue[]{
-				new NumberValue(0),
-				new NumberValue(1),
-				new NumberValue(2),
-				new NumberValue(3),
+				new NumberValue(0, FileIndex.INTERNAL_INDEX),
+				new NumberValue(1, FileIndex.INTERNAL_INDEX),
+				new NumberValue(2, FileIndex.INTERNAL_INDEX),
+				new NumberValue(3, FileIndex.INTERNAL_INDEX),
 		};
 		Token[] arguments = new Token[]{
 				new ReturningMockToken(numberValues[0]),
@@ -32,10 +32,10 @@ public class ArgumentsTokenTest {
 	@Test
 	public void testGrabValues_usingScope() throws RuntimeException {
 		NumberValue[] numberValues = new NumberValue[]{
-				new NumberValue(0),
-				new NumberValue(1),
-				new NumberValue(2),
-				new NumberValue(3),
+				new NumberValue(0, FileIndex.INTERNAL_INDEX),
+				new NumberValue(1, FileIndex.INTERNAL_INDEX),
+				new NumberValue(2, FileIndex.INTERNAL_INDEX),
+				new NumberValue(3, FileIndex.INTERNAL_INDEX),
 		};
 		IdentifierToken[] arguments = new IdentifierToken[]{
 				new IdentifierToken("a", FileIndex.NULL_INDEX),
@@ -47,7 +47,7 @@ public class ArgumentsTokenTest {
 		Scope scope = Scope.createGlobalScope(null);
 		for (int i = 0; i < numberValues.length; i++) {
 			// TODO: Same as parameters
-			scope.set(arguments[i], numberValues[i].wrap());
+			scope.set(arguments[i], numberValues[i]);
 		}
 		assertArrayEquals(numberValues, argumentsToken.grabValues(scope));
 	}

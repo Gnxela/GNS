@@ -6,7 +6,6 @@ import me.alexng.gns.gen.Assembler;
 import me.alexng.gns.gen.Constructor;
 import me.alexng.gns.tokens.KeywordToken;
 import me.alexng.gns.tokens.Token;
-import me.alexng.gns.tokens.ValueToken;
 import me.alexng.gns.tokens.value.BooleanValue;
 
 import java.util.ListIterator;
@@ -27,6 +26,6 @@ public class BooleanConstantConstructor implements Constructor {
 	public void construct(ListIterator<Token> tokens) throws ParsingException {
 		KeywordToken keywordToken = Assembler.castTo(KeywordToken.class, tokens.next());
 		tokens.remove();
-		tokens.add(new ValueToken(keywordToken.getKeyword() == Keyword.TRUE ? BooleanValue.TRUE : BooleanValue.FALSE, keywordToken.getFileIndex()));
+		tokens.add(new BooleanValue(keywordToken.getKeyword() == Keyword.TRUE, keywordToken.getFileIndex()));
 	}
 }

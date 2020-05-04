@@ -67,9 +67,9 @@ public class ForTokenTest {
 
 		BlockToken blockToken = new BlockToken(tokens, FileIndex.INTERNAL_INDEX);
 
-		AssignToken assignToken = new AssignToken(identifierToken, new ValueToken(new NumberValue(start), FileIndex.INTERNAL_INDEX));
-		LessThanToken lessThanToken = new LessThanToken(identifierToken, new ValueToken(new NumberValue(end), FileIndex.INTERNAL_INDEX));
-		AssignToken incrementToken = new AssignToken(identifierToken, new AdditionToken(identifierToken, new ValueToken(new NumberValue(delta), FileIndex.INTERNAL_INDEX)));
+		AssignToken assignToken = new AssignToken(identifierToken, new NumberValue(start, FileIndex.INTERNAL_INDEX));
+		LessThanToken lessThanToken = new LessThanToken(identifierToken, new NumberValue(end, FileIndex.INTERNAL_INDEX));
+		AssignToken incrementToken = new AssignToken(identifierToken, new AdditionToken(identifierToken, new NumberValue(delta, FileIndex.INTERNAL_INDEX)));
 		Token[] arguments = new Token[]{
 				assignToken,
 				lessThanToken,

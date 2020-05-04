@@ -1,5 +1,6 @@
 package me.alexng.gns.bridge;
 
+import me.alexng.gns.FileIndex;
 import me.alexng.gns.RuntimeException;
 import me.alexng.gns.env.Environment;
 import me.alexng.gns.tokens.value.BooleanValue;
@@ -37,6 +38,6 @@ public class MockBridge {
 		lastNumberValue = numberValue;
 		lastVariableValue = variable;
 		// TODO: It's not exactly clear why we must pass a calling scope here.
-		return new StringValue("Hello world!", environment.getGlobalScope());
+		return new StringValue("Hello world!", environment.getGlobalScope(), FileIndex.INTERNAL_INDEX);
 	}
 }

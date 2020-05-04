@@ -34,7 +34,7 @@ public class AdditionToken extends BinaryOperatorToken<Token, Token> {
 		// TODO: Do properly, check if we need a double or not.
 		int left = (int) ((NumberValue) leftValue).getJavaValue();
 		int right = (int) ((NumberValue) rightValue).getJavaValue();
-		return new NumberValue(left + right);
+		return new NumberValue(left + right, getFileIndex());
 	}
 
 	@Override

@@ -1,9 +1,13 @@
 package me.alexng.gns.tokens.value;
 
+import me.alexng.gns.FileIndex;
+
 public class NullValue extends Value {
 
-	NullValue() {
-		super(Type.NULL);
+	public static final NullValue INTERNAL = new NullValue(FileIndex.INTERNAL_INDEX);
+
+	public NullValue(FileIndex fileIndex) {
+		super(Type.NULL, fileIndex);
 	}
 
 	@Override

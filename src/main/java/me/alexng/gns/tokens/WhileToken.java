@@ -3,7 +3,7 @@ package me.alexng.gns.tokens;
 import me.alexng.gns.FileIndex;
 import me.alexng.gns.RuntimeException;
 import me.alexng.gns.env.Scope;
-import me.alexng.gns.tokens.value.BooleanValue;
+import me.alexng.gns.tokens.value.NullValue;
 import me.alexng.gns.tokens.value.Value;
 
 public class WhileToken extends Token {
@@ -20,10 +20,12 @@ public class WhileToken extends Token {
 	@Override
 	public Value execute(Scope scope) throws RuntimeException {
 		Scope loopScope = scope.createChildScope();
-		while (conditionToken.execute(loopScope) == BooleanValue.TRUE) {
+		Value condition = conditionToken.execute(loopScope);
+		while (condition.getType() == Value.Type.BOOLEAN && (Boolean) condition.getJavaValue()) {
 			blockToken.executeBlock(loopScope);
+			condition = conditionToken.execute(loopScope);
 		}
-		return Value.NULL;
+		return NullValue.INTERNAL;
 	}
 
 	@Override

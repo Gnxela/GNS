@@ -1,6 +1,7 @@
 package me.alexng.gns.bridge;
 
 import me.alexng.gns.FileIndex;
+import me.alexng.gns.InvalidTypeException;
 import me.alexng.gns.RuntimeException;
 import me.alexng.gns.env.Environment;
 import me.alexng.gns.env.NativeFunction;
@@ -8,7 +9,7 @@ import me.alexng.gns.env.Scope;
 import me.alexng.gns.tokens.IdentifiedToken;
 import me.alexng.gns.tokens.IdentifierToken;
 import me.alexng.gns.tokens.Token;
-import me.alexng.gns.tokens.ValueToken;
+import me.alexng.gns.tokens.value.NullValue;
 import me.alexng.gns.tokens.value.Value;
 
 import java.lang.reflect.Field;
@@ -42,9 +43,9 @@ public class BridgeScope extends Scope {
 			try {
 				Value value = (Value) field.get(bridgeInstance);
 				if (value != null) {
-					return value.wrap();
+					return value;
 				} else {
-					return ValueToken.NULL;
+					return NullValue.INTERNAL;
 				}
 			} catch (IllegalAccessException e) {
 				throw new RuntimeException(FileIndex.INTERNAL_INDEX, "Failed to access bridge variable: " + name + " " + e.getMessage());
@@ -64,8 +65,11 @@ public class BridgeScope extends Scope {
 		Field field = variables.get(name);
 		if (field != null) {
 			try {
-				ValueToken valueToken = (ValueToken) value;
-				field.set(bridgeInstance, valueToken.getValue());
+				if (!(value instanceof Value)) {
+					// Maybe a type exception isn't correct here
+					throw new InvalidTypeException(value, Value.class, value);
+				}
+				field.set(bridgeInstance, value);
 				return;
 			} catch (IllegalAccessException e) {
 				throw new RuntimeException(FileIndex.INTERNAL_INDEX, "Failed to access bridge variable: " + name + " " + e.getMessage());

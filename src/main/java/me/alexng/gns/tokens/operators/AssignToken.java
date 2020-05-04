@@ -37,7 +37,7 @@ public class AssignToken extends BinaryOperatorToken<Token, Token> {
 			((AccessToken) getLeft()).setValue(scope, returnedValue);
 		} else {
 			returnedValue = getRight().execute(scope);
-			scope.set((IdentifierToken) getLeft(), returnedValue.wrap());
+			scope.set((IdentifierToken) getLeft(), returnedValue);
 		}
 		return returnedValue;
 	}

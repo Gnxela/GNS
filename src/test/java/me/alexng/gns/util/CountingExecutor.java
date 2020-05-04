@@ -1,5 +1,6 @@
 package me.alexng.gns.util;
 
+import me.alexng.gns.tokens.value.NullValue;
 import me.alexng.gns.tokens.value.Value;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -11,7 +12,7 @@ public class CountingExecutor implements ExecutableMockToken.Executor {
 	@Override
 	public Value execute() {
 		count++;
-		return Value.NULL;
+		return NullValue.INTERNAL;
 	}
 
 	public void assertCount(int expectedCount) {

@@ -4,6 +4,7 @@ import me.alexng.gns.FileIndex;
 import me.alexng.gns.InvalidTypeException;
 import me.alexng.gns.RuntimeException;
 import me.alexng.gns.tokens.*;
+import me.alexng.gns.tokens.value.NullValue;
 import me.alexng.gns.tokens.value.Value;
 
 import java.util.HashMap;
@@ -48,7 +49,7 @@ public class Scope {
 		if (parentScope != null) {
 			return parentScope.get(identifier);
 		}
-		return ValueToken.NULL;
+		return NullValue.INTERNAL;
 	}
 
 	private Scope findValue(IdentifierToken identifier) throws RuntimeException {
@@ -64,10 +65,10 @@ public class Scope {
 
 	public Value getValue(IdentifiedToken identifiedToken) throws RuntimeException {
 		Token token = get(identifiedToken.getIdentifier());
-		if (token instanceof ValueToken) {
+		if (token instanceof Value) {
 			return token.execute(this);
 		} else {
-			throw new InvalidTypeException(identifiedToken, ValueToken.class, token);
+			throw new InvalidTypeException(identifiedToken, Value.class, token);
 		}
 	}
 

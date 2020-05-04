@@ -3,6 +3,7 @@ package me.alexng.gns.tokens;
 import me.alexng.gns.FileIndex;
 import me.alexng.gns.RuntimeException;
 import me.alexng.gns.env.Scope;
+import me.alexng.gns.tokens.value.NullValue;
 import me.alexng.gns.tokens.value.ReturnedValue;
 import me.alexng.gns.tokens.value.Value;
 import me.alexng.gns.util.StringUtil;
@@ -43,7 +44,7 @@ public class BlockToken extends Token {
 				return value;
 			}
 		}
-		return Value.NULL;
+		return NullValue.INTERNAL;
 	}
 
 	@Override

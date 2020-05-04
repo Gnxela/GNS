@@ -1,5 +1,6 @@
 package me.alexng.gns.env;
 
+import me.alexng.gns.FileIndex;
 import me.alexng.gns.bridge.Expose;
 import me.alexng.gns.tokens.value.NumberValue;
 import me.alexng.gns.tokens.value.ObjectValue;
@@ -14,7 +15,7 @@ public class Sys {
 	private static final String NEW_LINE = "\n";
 
 	@Expose
-	public NumberValue version = new NumberValue(3.2);
+	public NumberValue version = new NumberValue(3.2, FileIndex.INTERNAL_INDEX);
 
 	@Expose
 	public void print(Environment environment, Value value) {

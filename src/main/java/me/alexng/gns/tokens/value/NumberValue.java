@@ -1,24 +1,26 @@
 package me.alexng.gns.tokens.value;
 
+import me.alexng.gns.FileIndex;
+
 public class NumberValue extends Value {
 
 	private boolean isInt;
 	private int intValue;
 	private double doubleValue;
 
-	public NumberValue(String value) {
-		super(Type.NUMBER);
+	public NumberValue(String value, FileIndex fileIndex) {
+		super(Type.NUMBER, fileIndex);
 		parseValue(value);
 	}
 
-	public NumberValue(int value) {
-		super(Type.NUMBER);
+	public NumberValue(int value, FileIndex fileIndex) {
+		super(Type.NUMBER, fileIndex);
 		this.isInt = true;
 		this.intValue = value;
 	}
 
-	public NumberValue(double value) {
-		super(Type.NUMBER);
+	public NumberValue(double value, FileIndex fileIndex) {
+		super(Type.NUMBER, fileIndex);
 		this.isInt = false;
 		this.doubleValue = value;
 	}

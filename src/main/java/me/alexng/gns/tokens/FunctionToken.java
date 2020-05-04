@@ -3,6 +3,7 @@ package me.alexng.gns.tokens;
 import me.alexng.gns.FileIndex;
 import me.alexng.gns.RuntimeException;
 import me.alexng.gns.env.Scope;
+import me.alexng.gns.tokens.value.NullValue;
 import me.alexng.gns.tokens.value.ReturnedValue;
 import me.alexng.gns.tokens.value.Value;
 import me.alexng.gns.util.StringUtil;
@@ -21,7 +22,7 @@ public class FunctionToken extends IdentifiedToken {
 	@Override
 	public Value execute(Scope scope) throws RuntimeException {
 		scope.set(this, this);
-		return Value.NULL;
+		return NullValue.INTERNAL;
 	}
 
 	public Value unwrapAndExecuteFunction(Token caller, Scope parentScope, Value[] values) throws RuntimeException {
@@ -29,7 +30,7 @@ public class FunctionToken extends IdentifiedToken {
 		if (returnedValue instanceof ReturnedValue) {
 			return ((ReturnedValue) returnedValue).getJavaValue();
 		}
-		return Value.NULL;
+		return NullValue.INTERNAL;
 	}
 
 	public Value executeFunction(Token caller, Scope parentScope, Value[] values) throws RuntimeException {
@@ -41,7 +42,7 @@ public class FunctionToken extends IdentifiedToken {
 		Scope functionScope = parentScope.createChildScope();
 		for (int i = 0; i < identifiers.length; i++) {
 			// TODO: This will create new object for EVERY scope, the values in the objects will never change and so we should just create one and reuse it to save memory.
-			functionScope.set(identifiers[i], values[i].wrap());
+			functionScope.set(identifiers[i], values[i]);
 		}
 
 		return block.executeBlock(functionScope);

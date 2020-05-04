@@ -12,19 +12,19 @@ public class StringValue extends ObjectValue {
 
 	private String value;
 
-	public StringValue(String value, Scope callingScope) throws RuntimeException {
-		super(null, Scope.createObjectScope(callingScope.getGlobalScope()));
+	public StringValue(String value, Scope callingScope, FileIndex fileIndex) throws RuntimeException {
+		super(null, Scope.createObjectScope(callingScope.getGlobalScope()), fileIndex);
 		this.value = value;
 		addBuiltIns();
 	}
 
 	public static StringValue createString(String string, Scope callingScope) throws RuntimeException {
-		return new StringValue(string, callingScope);
+		return new StringValue(string, callingScope, FileIndex.INTERNAL_INDEX);
 	}
 
 	private void addBuiltIns() throws RuntimeException {
 		// TODO: Make immutable
-		getObjectScope().set(LENGTH_ID, new NumberValue(value.length()).wrap());
+		getObjectScope().set(LENGTH_ID, new NumberValue(value.length(), FileIndex.INTERNAL_INDEX));
 	}
 
 	@Override

@@ -22,15 +22,15 @@ public class WhileTokenTest {
 		final IdentifierToken identifierToken = new IdentifierToken(VARIABLE_NAME, FileIndex.INTERNAL_INDEX);
 		CountingExecutor countingExecutor = new CountingExecutor();
 		ExecutableMockToken mockToken = new ExecutableMockToken(countingExecutor);
-		AssignToken incrementToken = new AssignToken(identifierToken, new AdditionToken(identifierToken, new ValueToken(new NumberValue(1), FileIndex.INTERNAL_INDEX)));
+		AssignToken incrementToken = new AssignToken(identifierToken, new AdditionToken(identifierToken, new NumberValue(1, FileIndex.INTERNAL_INDEX)));
 		LinkedList<Token> tokens = new LinkedList<>();
 		tokens.add(mockToken);
 		tokens.add(incrementToken);
 		BlockToken blockToken = new BlockToken(tokens, FileIndex.INTERNAL_INDEX);
-		LessThanToken lessThanToken = new LessThanToken(identifierToken, new ValueToken(new NumberValue(9), FileIndex.INTERNAL_INDEX));
+		LessThanToken lessThanToken = new LessThanToken(identifierToken, new NumberValue(9, FileIndex.INTERNAL_INDEX));
 		WhileToken whileToken = new WhileToken(new ExpressionToken(lessThanToken, FileIndex.INTERNAL_INDEX), blockToken, FileIndex.INTERNAL_INDEX);
 		Scope scope = Scope.createGlobalScope(null);
-		scope.set(identifierToken, new NumberValue(0).wrap());
+		scope.set(identifierToken, new NumberValue(0, FileIndex.INTERNAL_INDEX));
 		whileToken.execute(scope);
 		countingExecutor.assertCount(9);
 	}

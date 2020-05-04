@@ -4,7 +4,7 @@ import me.alexng.gns.FileIndex;
 import me.alexng.gns.RuntimeException;
 import me.alexng.gns.env.Scope;
 import me.alexng.gns.tokens.value.BooleanValue;
-import me.alexng.gns.tokens.value.Value;
+import me.alexng.gns.tokens.value.NullValue;
 import me.alexng.gns.util.CountingExecutor;
 import me.alexng.gns.util.ExecutableMockToken;
 import me.alexng.gns.util.ReturningExecutor;
@@ -18,7 +18,7 @@ public class IfTokenTest {
 
 	@Test
 	public void testExecute_true() throws RuntimeException {
-		ReturningExecutor returningExecutor = new ReturningExecutor(BooleanValue.TRUE);
+		ReturningExecutor returningExecutor = new ReturningExecutor(BooleanValue.INTERNAL_TRUE);
 		ExpressionToken expressionToken = new ExpressionToken(new ExecutableMockToken(returningExecutor), FileIndex.NULL_INDEX);
 		CountingExecutor countingExecutor = new CountingExecutor();
 		LinkedList<Token> tokens = new LinkedList<>();
@@ -34,7 +34,7 @@ public class IfTokenTest {
 
 	@Test
 	public void testExecute_false() throws RuntimeException {
-		ReturningExecutor returningExecutor = new ReturningExecutor(BooleanValue.FALSE);
+		ReturningExecutor returningExecutor = new ReturningExecutor(BooleanValue.INTERNAL_FALSE);
 		ExpressionToken expressionToken = new ExpressionToken(new ExecutableMockToken(returningExecutor), FileIndex.NULL_INDEX);
 		CountingExecutor countingExecutor = new CountingExecutor();
 		LinkedList<Token> tokens = new LinkedList<>();
@@ -50,7 +50,7 @@ public class IfTokenTest {
 
 	@Test
 	public void testExecute_throws() throws RuntimeException {
-		ExpressionToken expressionToken = new ExpressionToken(new ExecutableMockToken(new ReturningExecutor(Value.NULL)), FileIndex.NULL_INDEX);
+		ExpressionToken expressionToken = new ExpressionToken(new ExecutableMockToken(new ReturningExecutor(NullValue.INTERNAL)), FileIndex.NULL_INDEX);
 		BlockToken blockToken = new BlockToken(new LinkedList<>(), FileIndex.NULL_INDEX);
 		IfToken ifToken = new IfToken(expressionToken, blockToken, FileIndex.NULL_INDEX);
 		assertThrows(RuntimeException.class, () -> ifToken.execute(Scope.createGlobalScope(null)));
