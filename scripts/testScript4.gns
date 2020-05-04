@@ -29,13 +29,14 @@ class TestClass {
 	}
 }
 
+sys = new Sys()
 a = new TestClass(1)
-print(a.i)
-print(a.j.k)
+sys.println(a.i)
+sys.println(a.j.k)
 a.j.foo()
-print(a.i)
+sys.println(a.i)
 a.j.bar()
-print(a.i)
-print(a.type)
-print(a.j.type)
-print(a)
+sys.println(a.i)
+sys.println(a.type)
+sys.println(a.j.type)
+sys.println(a)
