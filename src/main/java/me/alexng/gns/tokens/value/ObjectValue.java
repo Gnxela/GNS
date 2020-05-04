@@ -16,6 +16,15 @@ public class ObjectValue extends Value {
 	}
 
 	@Override
+	public boolean equals(Object o) {
+		if (o instanceof ObjectValue) {
+			// TODO: Implement
+			return false;
+		}
+		return false;
+	}
+
+	@Override
 	public Object getJavaValue() {
 		// TODO: Not really sure what to return here.
 		return objectScope;

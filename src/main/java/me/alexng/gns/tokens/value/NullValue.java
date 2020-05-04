@@ -11,6 +11,14 @@ public class NullValue extends Value {
 	}
 
 	@Override
+	public boolean equals(Object o) {
+		if (o instanceof NullValue) {
+			return true;
+		}
+		return false;
+	}
+
+	@Override
 	public Object getJavaValue() {
 		return null;
 	}

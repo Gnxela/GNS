@@ -19,6 +19,14 @@ public class BooleanValue extends Value {
 	}
 
 	@Override
+	public boolean equals(Object o) {
+		if (o instanceof BooleanValue) {
+			return getJavaValue().equals(((BooleanValue) o).getJavaValue());
+		}
+		return false;
+	}
+
+	@Override
 	public Boolean getJavaValue() {
 		return value;
 	}

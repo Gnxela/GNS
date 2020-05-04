@@ -12,6 +12,14 @@ public class ReturnedValue extends Value {
 	}
 
 	@Override
+	public boolean equals(Object o) {
+		if (o instanceof ReturnedValue) {
+			return returnedValue.equals(((ReturnedValue) o).returnedValue);
+		}
+		return false;
+	}
+
+	@Override
 	public Value getJavaValue() {
 		return returnedValue;
 	}

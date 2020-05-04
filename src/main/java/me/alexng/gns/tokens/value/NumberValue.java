@@ -36,6 +36,14 @@ public class NumberValue extends Value {
 	}
 
 	@Override
+	public boolean equals(Object o) {
+		if (o instanceof NumberValue) {
+			return getJavaValue().equals(((NumberValue) o).getJavaValue());
+		}
+		return false;
+	}
+
+	@Override
 	public Number getJavaValue() {
 		if (isInt) {
 			return intValue;

@@ -8,11 +8,6 @@ public abstract class Value extends Token {
 
 	private Type type;
 
-//	public Value(Type type) {
-//		super(FileIndex.INTERNAL_INDEX);
-//		this.type = type;
-//	}
-
 	public Value(Type type, FileIndex fileIndex) {
 		super(fileIndex);
 		this.type = type;
@@ -20,11 +15,11 @@ public abstract class Value extends Token {
 
 	public abstract Object getJavaValue();
 
-//	/**
-//	 * Returns true if the values are of the same type and have the same value. NOT if they are the same instance.
-//	 */
-//	@Override
-//	public abstract boolean equals(Object o);
+	/**
+	 * Returns true if the values are of the same type and have the same value. NOT if they are the same instance.
+	 */
+	@Override
+	public abstract boolean equals(Object o);
 
 	@Override
 	public int hashCode() {
