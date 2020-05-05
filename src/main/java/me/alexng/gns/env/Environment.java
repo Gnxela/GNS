@@ -4,7 +4,7 @@ import me.alexng.gns.Options;
 import me.alexng.gns.ParsingException;
 import me.alexng.gns.RuntimeException;
 import me.alexng.gns.bridge.BridgeMapper;
-import me.alexng.gns.tokens.ClassToken;
+import me.alexng.gns.tokens.TemplateToken;
 
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -47,7 +47,7 @@ public class Environment {
 	 * @param bridgeClass The class to be mapped as a bridge.
 	 */
 	public void addBridge(Class<?> bridgeClass) throws RuntimeException, ParsingException {
-		ClassToken bridgedClass = BridgeMapper.mapBridge(bridgeClass);
+		TemplateToken bridgedClass = BridgeMapper.mapBridge(bridgeClass);
 		globalScope.set(bridgedClass, bridgedClass);
 	}
 

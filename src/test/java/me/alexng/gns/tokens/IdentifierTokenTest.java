@@ -24,7 +24,7 @@ public class IdentifierTokenTest {
 	public void testExecute_classDefined() throws RuntimeException, ParsingException {
 		IdentifierToken identifierToken = new IdentifierToken("foo", FileIndex.NULL_INDEX);
 		Scope scope = Scope.createGlobalScope(null);
-		scope.set(identifierToken, new ClassToken(identifierToken, null, FileIndex.NULL_INDEX));
+		scope.set(identifierToken, new TemplateToken(identifierToken, null, FileIndex.NULL_INDEX));
 		scope.set(identifierToken, new NumberValue(13, FileIndex.INTERNAL_INDEX));
 		assertEquals(13, identifierToken.execute(scope).getJavaValue());
 	}

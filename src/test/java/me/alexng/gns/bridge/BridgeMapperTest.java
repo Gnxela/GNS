@@ -21,7 +21,7 @@ public class BridgeMapperTest {
 		// TODO: We need to test field accessibility / visibility.
 		final String variableName = "variable";
 		final String functionName = "function";
-		BridgeClassToken<MockBridge> bridgeClassToken = BridgeMapper.mapBridge(MockBridge.class);
+		BridgeTemplateToken<MockBridge> bridgeClassToken = BridgeMapper.mapBridge(MockBridge.class);
 		assertNotNull(bridgeClassToken.variables.get(variableName));
 		Field variable = bridgeClassToken.variables.get(variableName);
 		assertEquals(variableName, variable.getName());
@@ -34,7 +34,7 @@ public class BridgeMapperTest {
 	@Test
 	public void testMapBridge_privateMembers() throws NoSuchFieldException, RuntimeException, ParsingException {
 		final String variableName = "variable";
-		BridgeClassToken<MockBridgePrivateMembers> bridgeClassToken = BridgeMapper.mapBridge(MockBridgePrivateMembers.class);
+		BridgeTemplateToken<MockBridgePrivateMembers> bridgeClassToken = BridgeMapper.mapBridge(MockBridgePrivateMembers.class);
 		Field variable = bridgeClassToken.variables.get(variableName);
 		assertNull(variable);
 		assertEquals(0, bridgeClassToken.functions.size());

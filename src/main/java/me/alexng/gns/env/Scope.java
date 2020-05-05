@@ -81,12 +81,12 @@ public class Scope {
 		}
 	}
 
-	public ClassToken getTemplate(IdentifiedToken identifiedToken) throws RuntimeException {
+	public TemplateToken getTemplate(IdentifiedToken identifiedToken) throws RuntimeException {
 		Token token = get(identifiedToken.getIdentifier());
-		if (token instanceof ClassToken) {
-			return (ClassToken) token;
+		if (token instanceof TemplateToken) {
+			return (TemplateToken) token;
 		} else {
-			throw new InvalidTypeException(identifiedToken, ClassToken.class, token);
+			throw new InvalidTypeException(identifiedToken, TemplateToken.class, token);
 		}
 	}
 

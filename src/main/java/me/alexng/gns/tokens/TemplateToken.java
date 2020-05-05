@@ -10,7 +10,7 @@ import me.alexng.gns.tokens.value.Value;
 import me.alexng.gns.util.ArrayUtil;
 import me.alexng.gns.util.StringUtil;
 
-public class ClassToken extends IdentifiedToken {
+public class TemplateToken extends IdentifiedToken {
 
 	// TODO: When we add modular values, load them here
 	private static final String[] RESTRICTED_NAMES = new String[]{"number", "string", "boolean"};
@@ -20,7 +20,7 @@ public class ClassToken extends IdentifiedToken {
 
 	private BlockToken block;
 
-	public ClassToken(IdentifierToken identifier, BlockToken block, FileIndex fileIndex) throws ParsingException {
+	public TemplateToken(IdentifierToken identifier, BlockToken block, FileIndex fileIndex) throws ParsingException {
 		super(identifier, fileIndex);
 		if (ArrayUtil.arrayContains(RESTRICTED_NAMES, identifier.getName())) {
 			throw new ParsingException(this, "Restricted class name");

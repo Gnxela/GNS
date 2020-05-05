@@ -9,7 +9,7 @@ import me.alexng.gns.tokens.*;
 
 import java.util.ListIterator;
 
-public class ClassConstructor implements Constructor {
+public class TemplateConstructor implements Constructor {
 
 	@Override
 	public boolean isLeftToRight() {
@@ -18,7 +18,7 @@ public class ClassConstructor implements Constructor {
 
 	@Override
 	public boolean accepts(Token token) {
-		return Keyword.CLASS.matches(token);
+		return Keyword.TEMPLATE.matches(token);
 	}
 
 	@Override
@@ -32,6 +32,6 @@ public class ClassConstructor implements Constructor {
 		BlockToken block = Assembler.castTo(BlockToken.class, tokens.next());
 		tokens.remove();
 
-		tokens.add(new ClassToken(identifier, block, FileIndex.openClose(keyword, block)));
+		tokens.add(new TemplateToken(identifier, block, FileIndex.openClose(keyword, block)));
 	}
 }

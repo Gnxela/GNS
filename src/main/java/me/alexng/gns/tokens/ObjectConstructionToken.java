@@ -17,8 +17,8 @@ public class ObjectConstructionToken extends IdentifiedToken {
 	@Override
 	public Value execute(Scope scope) throws RuntimeException {
 		Value[] values = argumentsToken.grabValues(scope);
-		ClassToken classToken = scope.getTemplate(getIdentifier());
-		return classToken.createInstance(this, values, scope);
+		TemplateToken templateToken = scope.getTemplate(getIdentifier());
+		return templateToken.createInstance(this, values, scope);
 	}
 
 	@Override

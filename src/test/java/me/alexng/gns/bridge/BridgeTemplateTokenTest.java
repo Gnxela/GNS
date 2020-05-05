@@ -15,12 +15,12 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class BridgeClassTokenTest {
+public class BridgeTemplateTokenTest {
 
 	@Test
 	public void createInstanceTest() throws ParsingException, RuntimeException {
 		Environment environment = new Environment(Options.createDefault());
-		BridgeClassToken<MockBridge> bridgeBridgeClassToken = BridgeMapper.mapBridge(MockBridge.class);
+		BridgeTemplateToken<MockBridge> bridgeBridgeClassToken = BridgeMapper.mapBridge(MockBridge.class);
 		ObjectValue bridge = bridgeBridgeClassToken.createInstance(new ObjectConstructionToken(null, null, FileIndex.INTERNAL_INDEX), new Value[]{}, environment.getGlobalScope());
 		Scope objectScope = bridge.getObjectScope();
 		// TODO: Implement
@@ -28,21 +28,21 @@ public class BridgeClassTokenTest {
 
 	@Test
 	public void createBridgeInstanceTest() throws ParsingException, RuntimeException {
-		BridgeClassToken<MockBridge> bridgeClassToken = new BridgeClassToken<>(MockBridge.class);
+		BridgeTemplateToken<MockBridge> bridgeClassToken = new BridgeTemplateToken<>(MockBridge.class);
 		MockBridge mockBridge = bridgeClassToken.createBridgeInstance(new Value[]{});
 		assertEquals(mockBridge.constructorCalled, 1);
 	}
 
 	@Test
 	public void createBridgeInstanceTest_secondConstructor() throws ParsingException, RuntimeException {
-		BridgeClassToken<MockBridge> bridgeClassToken = new BridgeClassToken<>(MockBridge.class);
+		BridgeTemplateToken<MockBridge> bridgeClassToken = new BridgeTemplateToken<>(MockBridge.class);
 		MockBridge mockBridge = bridgeClassToken.createBridgeInstance(new Value[]{new NumberValue(1, FileIndex.INTERNAL_INDEX)});
 		assertEquals(mockBridge.constructorCalled, 2);
 	}
 
 	@Test
 	public void createBridgeInstanceTest_thirdConstructor() throws ParsingException, RuntimeException {
-		BridgeClassToken<MockBridge> bridgeClassToken = new BridgeClassToken<>(MockBridge.class);
+		BridgeTemplateToken<MockBridge> bridgeClassToken = new BridgeTemplateToken<>(MockBridge.class);
 		MockBridge mockBridge = bridgeClassToken.createBridgeInstance(new Value[]{new NumberValue(1, FileIndex.INTERNAL_INDEX), BooleanValue.INTERNAL_FALSE});
 		assertEquals(mockBridge.constructorCalled, 3);
 	}

@@ -11,7 +11,7 @@ public enum Keyword {
 	FUNC("func"),
 	RETURN("return"),
 	IF("if"),
-	CLASS("class"),
+	TEMPLATE("template"),
 	NEW("new"),
 	FOR("for"),
 	WHILE("while");

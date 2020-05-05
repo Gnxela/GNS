@@ -14,16 +14,16 @@ public class BridgeMapper {
 
 	private static final String BASE_TYPE_STRING = "me.alexng.gns.tokens.value.Value";
 
-	public static <T> BridgeClassToken<T> mapBridge(Class<T> bridgeClass) throws ParsingException {
+	public static <T> BridgeTemplateToken<T> mapBridge(Class<T> bridgeClass) throws ParsingException {
 		// TODO: Allow for bridges to define a name different from class name
-		BridgeClassToken<T> bridgeClassToken = new BridgeClassToken<T>(bridgeClass);
+		BridgeTemplateToken<T> bridgeClassToken = new BridgeTemplateToken<T>(bridgeClass);
 		bridgeVariables(bridgeClassToken);
 		bridgeFunctions(bridgeClassToken);
 		checkNames(bridgeClassToken);
 		return bridgeClassToken;
 	}
 
-	private static void bridgeFunctions(BridgeClassToken<?> bridgeClassToken) throws ParsingException {
+	private static void bridgeFunctions(BridgeTemplateToken<?> bridgeClassToken) throws ParsingException {
 		LinkedList<Method> functions = new LinkedList<>();
 		for (Method method : bridgeClassToken.getBridgeClass().getMethods()) {
 			if (method.isAnnotationPresent(Expose.class)) {
@@ -34,7 +34,7 @@ public class BridgeMapper {
 		bridgeClassToken.functions = functions;
 	}
 
-	private static void bridgeVariables(BridgeClassToken<?> bridgeClassToken) throws ParsingException {
+	private static void bridgeVariables(BridgeTemplateToken<?> bridgeClassToken) throws ParsingException {
 		Map<String, Field> fields = new HashMap<>();
 		for (Field field : bridgeClassToken.getBridgeClass().getFields()) {
 			if (field.isAnnotationPresent(Expose.class)) {
@@ -45,7 +45,7 @@ public class BridgeMapper {
 		bridgeClassToken.variables = fields;
 	}
 
-	private static void checkNames(BridgeClassToken<?> bridgeClassToken) throws ParsingException {
+	private static void checkNames(BridgeTemplateToken<?> bridgeClassToken) throws ParsingException {
 		Set<String> names = new HashSet<>();
 		for (String fieldName : bridgeClassToken.variables.keySet()) {
 			boolean unique = names.add(fieldName);

@@ -4,9 +4,9 @@ import me.alexng.gns.FileIndex;
 import me.alexng.gns.ParsingException;
 import me.alexng.gns.RuntimeException;
 import me.alexng.gns.env.Scope;
-import me.alexng.gns.tokens.ClassToken;
 import me.alexng.gns.tokens.IdentifierToken;
 import me.alexng.gns.tokens.ObjectConstructionToken;
+import me.alexng.gns.tokens.TemplateToken;
 import me.alexng.gns.tokens.value.ObjectValue;
 import me.alexng.gns.tokens.value.Value;
 
@@ -17,13 +17,13 @@ import java.lang.reflect.Method;
 import java.util.List;
 import java.util.Map;
 
-public class BridgeClassToken<T> extends ClassToken {
+public class BridgeTemplateToken<T> extends TemplateToken {
 
 	private Class<T> bridgeClass;
 	Map<String, Field> variables;
 	List<Method> functions;
 
-	public BridgeClassToken(Class<T> bridgeClass) throws ParsingException {
+	public BridgeTemplateToken(Class<T> bridgeClass) throws ParsingException {
 		super(new IdentifierToken(bridgeClass.getSimpleName(), FileIndex.INTERNAL_INDEX), null, FileIndex.INTERNAL_INDEX);
 		this.bridgeClass = bridgeClass;
 	}
