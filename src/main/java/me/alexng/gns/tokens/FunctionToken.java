@@ -62,6 +62,6 @@ public class FunctionToken extends IdentifiedToken {
 	public String toString() {
 		return "<Function " + getIdentifier().getName()
 				+ StringUtil.indent(block.toString())
-				+ ">" + isAnonymous();
+				+ ">";
 	}
 }
