@@ -1,4 +1,4 @@
-template test {
+temp test {
 	i = 0
 	func init(a) {
 		i = a

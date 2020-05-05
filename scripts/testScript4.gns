@@ -1,6 +1,6 @@
-class TestClass {
+temp TestClass {
 
-	class NestedClass {
+	temp NestedClass {
 
 		k = 5
 
