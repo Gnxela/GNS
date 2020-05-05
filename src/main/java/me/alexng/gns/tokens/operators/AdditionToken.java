@@ -1,6 +1,7 @@
 package me.alexng.gns.tokens.operators;
 
 import me.alexng.gns.FileIndex;
+import me.alexng.gns.InvalidTypeException;
 import me.alexng.gns.ParsingException;
 import me.alexng.gns.RuntimeException;
 import me.alexng.gns.env.Scope;
@@ -26,10 +27,10 @@ public class AdditionToken extends BinaryOperatorToken<Token, Token> {
 		Value leftValue = getLeft().execute(scope);
 		Value rightValue = getRight().execute(scope);
 		if (leftValue.getType() != Value.Type.NUMBER) {
-			throw new RuntimeException(getLeft(), "Invalid type. Expected: NUMBER. Received: " + leftValue.getType());
+			throw new InvalidTypeException(getRight(), Value.Type.NUMBER, rightValue.getType());
 		}
 		if (rightValue.getType() != Value.Type.NUMBER) {
-			throw new RuntimeException(getRight(), "Invalid type. Expected: NUMBER. Received: " + rightValue.getType());
+			throw new InvalidTypeException(getRight(), Value.Type.NUMBER, rightValue.getType());
 		}
 		// TODO: Do properly, check if we need a double or not.
 		int left = (int) ((NumberValue) leftValue).getJavaValue();
