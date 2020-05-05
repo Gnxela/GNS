@@ -10,6 +10,8 @@ import me.alexng.gns.util.StringUtil;
 
 public class FunctionToken extends IdentifiedToken {
 
+	public static final IdentifierToken ANONYMOUS_IDENTIFIER = new IdentifierToken("<ANONYMOUS>", FileIndex.INTERNAL_INDEX);
+
 	private ParametersToken parameters;
 	private BlockToken block;
 
@@ -48,6 +50,10 @@ public class FunctionToken extends IdentifiedToken {
 		return block.executeBlock(functionScope);
 	}
 
+	public boolean isAnonymous() {
+		return getIdentifier().equals(ANONYMOUS_IDENTIFIER);
+	}
+
 	public String getName() {
 		return getIdentifier().getName();
 	}
@@ -56,6 +62,6 @@ public class FunctionToken extends IdentifiedToken {
 	public String toString() {
 		return "<Function " + getIdentifier().getName()
 				+ StringUtil.indent(block.toString())
-				+ ">";
+				+ ">" + isAnonymous();
 	}
 }

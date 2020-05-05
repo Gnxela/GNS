@@ -26,9 +26,14 @@ public class FunctionConstructor implements Constructor {
 		KeywordToken keyword = Assembler.castTo(KeywordToken.class, tokens.next());
 		tokens.remove();
 
-		Token uncheckedIdentifier = tokens.next();
-		IdentifierToken identifier = Assembler.castTo(IdentifierToken.class, uncheckedIdentifier);
-		tokens.remove();
+		Token uncheckedToken = tokens.next();
+		IdentifierToken identifier = FunctionToken.ANONYMOUS_IDENTIFIER;
+		if (uncheckedToken instanceof IdentifierToken) {
+			tokens.remove();
+			identifier = (IdentifierToken) uncheckedToken;
+		} else {
+			tokens.previous(); // uncheckedToken must be an open bracket, bo back and allow ParameterToken to parse it.
+		}
 
 		ParametersToken parameters = ParametersConstructor.construct(tokens);
 
