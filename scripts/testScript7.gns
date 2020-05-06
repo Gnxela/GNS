@@ -21,6 +21,11 @@ o3 = {
 		test: 1
 	},
 	f: func() {
-
+		return 7
 	}
 }
+
+sys = new Sys()
+sys.println(o3.value)
+sys.println(o3.f())
+sys.println(o3.b.test)

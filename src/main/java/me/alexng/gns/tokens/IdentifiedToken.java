@@ -14,4 +14,8 @@ public abstract class IdentifiedToken extends Token {
 	public IdentifierToken getIdentifier() {
 		return identifier;
 	}
+
+	public void setIdentifier(IdentifierToken identifier) {
+		this.identifier = identifier;
+	}
 }

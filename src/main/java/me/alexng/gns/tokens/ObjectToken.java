@@ -22,7 +22,11 @@ public class ObjectToken extends Token {
 		// TODO: We need to find either the lowest global or object scope and set it as a parent
 		Scope objectScope = Scope.createObjectScope(scope.getGlobalScope());
 		for (ObjectEntry entry : entries) {
-			objectScope.set(entry.identifier, entry.value);
+			if (entry.value instanceof FunctionToken) {
+				objectScope.set(entry.identifier, entry.value);
+			} else {
+				objectScope.set(entry.identifier, entry.value.execute(objectScope));
+			}
 		}
 		return new ObjectValue(objectScope, getFileIndex());
 	}
