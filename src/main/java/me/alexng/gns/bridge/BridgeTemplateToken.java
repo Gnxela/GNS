@@ -32,7 +32,7 @@ public class BridgeTemplateToken<T> extends TemplateToken {
 	public ObjectValue createInstance(ObjectConstructionToken caller, Value[] values, Scope callingScope) throws RuntimeException {
 		Object bridgeInstance = createBridgeInstance(values);
 		Scope objectScope = BridgeScope.create(callingScope.getGlobalScope(), bridgeInstance, variables, functions);
-		return new ObjectValue(this, objectScope, caller.getFileIndex());
+		return new ObjectValue(objectScope, caller.getFileIndex());
 	}
 
 	/**

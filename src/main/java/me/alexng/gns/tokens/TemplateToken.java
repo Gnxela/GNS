@@ -45,7 +45,7 @@ public class TemplateToken extends IdentifiedToken {
 		objectScope = Scope.createObjectScope(parentScope);
 		block.executeBlockWithScope(objectScope);
 		callConstructor(caller, values, objectScope);
-		return new ObjectValue(this, objectScope, caller.getFileIndex());
+		return new ObjectValue(objectScope, caller.getFileIndex());
 	}
 
 	private void callConstructor(ObjectConstructionToken caller, Value[] values, Scope objectScope) throws RuntimeException {

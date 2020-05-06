@@ -13,7 +13,7 @@ public class StringValue extends ObjectValue {
 	private String value;
 
 	public StringValue(String value, Scope callingScope, FileIndex fileIndex) throws RuntimeException {
-		super(null, Scope.createObjectScope(callingScope.getGlobalScope()), fileIndex);
+		super(Scope.createObjectScope(callingScope.getGlobalScope()), fileIndex);
 		this.value = value;
 		addBuiltIns();
 	}

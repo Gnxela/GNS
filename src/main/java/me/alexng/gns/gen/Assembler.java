@@ -26,6 +26,7 @@ public class Assembler {
 			new ObjectConstructionConstructor(),
 			new ReturnConstructor(),
 			new FunctionConstructor(),
+			new ObjectConstructor(),
 			new FunctionCallConstructor(),
 			new ExpressionConstructor(),
 			new BinaryOperationConstructor(true, AccessToken.class),
@@ -80,6 +81,25 @@ public class Assembler {
 			return (T) token;
 		}
 		throw ExceptionUtil.createParsingExpected("Invalid token", clazz, token);
+	}
+
+	/**
+	 * Counts and consumes the tokens matching {@code clazz}.
+	 *
+	 * @param clazz The subclass to be counted.
+	 */
+	public static <T extends Token> int consumeAndCount(ListIterator<Token> tokens, Class<T> clazz) throws ParsingException {
+		int count = 0;
+		while (tokens.hasNext()) {
+			Token token = tokens.next();
+			if (clazz.isAssignableFrom(token.getClass())) {
+				count++;
+			} else {
+				tokens.previous();
+				break;
+			}
+		}
+		return count;
 	}
 
 	/**

@@ -23,6 +23,9 @@ public class FunctionToken extends IdentifiedToken {
 
 	@Override
 	public Value execute(Scope scope) throws RuntimeException {
+		if (getIdentifier().equals(ANONYMOUS_IDENTIFIER)) {
+			throw new RuntimeException(this, "Anonymous function can not be added to the scope");
+		}
 		scope.set(this, this);
 		return NullValue.INTERNAL;
 	}

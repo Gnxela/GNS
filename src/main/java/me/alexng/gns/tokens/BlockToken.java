@@ -47,6 +47,10 @@ public class BlockToken extends Token {
 		return NullValue.INTERNAL;
 	}
 
+	public List<Token> getTokens() {
+		return tokens;
+	}
+
 	@Override
 	public String toString() {
 		return "<Block \n" + StringUtil.indent(StringUtil.unrollList(tokens)) + ">";

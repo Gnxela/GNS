@@ -2,16 +2,13 @@ package me.alexng.gns.tokens.value;
 
 import me.alexng.gns.FileIndex;
 import me.alexng.gns.env.Scope;
-import me.alexng.gns.tokens.TemplateToken;
 
 public class ObjectValue extends Value {
 
-	private TemplateToken templateToken;
 	private Scope objectScope;
 
-	public ObjectValue(TemplateToken templateToken, Scope objectScope, FileIndex fileIndex) {
+	public ObjectValue(Scope objectScope, FileIndex fileIndex) {
 		super(Type.OBJECT, fileIndex);
-		this.templateToken = templateToken;
 		this.objectScope = objectScope;
 	}
 
@@ -32,9 +29,5 @@ public class ObjectValue extends Value {
 
 	public Scope getObjectScope() {
 		return objectScope;
-	}
-
-	public TemplateToken getObjectType() {
-		return templateToken;
 	}
 }
