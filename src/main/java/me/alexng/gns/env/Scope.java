@@ -6,6 +6,7 @@ import me.alexng.gns.RuntimeException;
 import me.alexng.gns.tokens.*;
 import me.alexng.gns.tokens.value.NullValue;
 import me.alexng.gns.tokens.value.Value;
+import me.alexng.gns.util.Crawler;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -35,6 +36,12 @@ public class Scope {
 
 	public Scope createChildScope() {
 		return new Scope(environment, this, false, false);
+	}
+
+	public void crawl(Crawler<?> crawler) {
+		for (Map.Entry<String, Token> entry : values.entrySet()) {
+			crawler.crawl(entry.getKey(), entry.getValue());
+		}
 	}
 
 	public Token getLocal(IdentifierToken identifier) throws RuntimeException {

@@ -1,7 +1,10 @@
 package me.alexng.gns;
 
 import me.alexng.gns.env.Environment;
+import me.alexng.gns.env.Scope;
 import me.alexng.gns.env.Script;
+import me.alexng.gns.tokens.IdentifierToken;
+import me.alexng.gns.util.ObjectToStringCrawler;
 
 import java.io.File;
 
@@ -19,6 +22,9 @@ public class Main {
 		long endTime = System.nanoTime();
 		System.out.println("Parse time: " + (endParse - start) / 1000000 + "ms");
 		System.out.println("Run time: " + (endTime - endParse) / 1000000 + "ms");
-		System.out.println(scriptEnvironment.getGlobalScope());
+		Scope scope = (Scope) scriptEnvironment.getGlobalScope().getValue(new IdentifierToken("o3", FileIndex.INTERNAL_INDEX)).getJavaValue();
+		ObjectToStringCrawler crawler = new ObjectToStringCrawler();
+		scope.crawl(crawler);
+		System.out.println(crawler.destroy());
 	}
 }
