@@ -5,8 +5,6 @@ import me.alexng.gns.RuntimeException;
 import me.alexng.gns.env.Scope;
 import me.alexng.gns.tokens.value.Value;
 
-// TODO: Do we need this class? This is used to help reduce mainly maths expressions "x * (y + x)  / 2"
-//   Why noy just store {@code #expression}?
 public class ExpressionToken extends Token {
 
 	private Token expression;

@@ -15,7 +15,6 @@ public class BridgeMapper {
 	private static final String BASE_TYPE_STRING = "me.alexng.gns.tokens.value.Value";
 
 	public static <T> BridgeTemplateToken<T> mapBridge(Class<T> bridgeClass) throws ParsingException {
-		// TODO: Allow for bridges to define a name different from class name
 		BridgeTemplateToken<T> bridgeClassToken = new BridgeTemplateToken<T>(bridgeClass);
 		bridgeVariables(bridgeClassToken);
 		bridgeFunctions(bridgeClassToken);
@@ -86,8 +85,7 @@ public class BridgeMapper {
 			throw new ParsingException(FileIndex.INTERNAL_INDEX, "Only accessible variables can be exposed: " + field.getName());
 		}
 		if (!Value.class.isAssignableFrom(field.getType())) {
-			// TODO: Make it clear where this is being thrown.
-			throw new ParsingException(FileIndex.INTERNAL_INDEX, "Only variables with superclass " + BASE_TYPE_STRING + " can be exposed: " + field.getName());
+			throw new ParsingException(FileIndex.INTERNAL_INDEX, "Invalid field type: " + field.getType().getSimpleName() + " " + field.getName() + ". Only variables with superclass " + BASE_TYPE_STRING + " can be exposed: " + field.getName());
 		}
 	}
 }

@@ -12,14 +12,14 @@ public class StringValue extends ObjectValue {
 
 	private String value;
 
-	public StringValue(String value, Scope callingScope, FileIndex fileIndex) throws RuntimeException {
-		super(Scope.createObjectScope(callingScope.getGlobalScope()), fileIndex);
+	public StringValue(String value, Scope globalScope, FileIndex fileIndex) throws RuntimeException {
+		super(Scope.createObjectScope(globalScope), fileIndex);
 		this.value = value;
 		addBuiltIns();
 	}
 
-	public static StringValue createString(String string, Scope callingScope) throws RuntimeException {
-		return new StringValue(string, callingScope, FileIndex.INTERNAL_INDEX);
+	public static StringValue createString(String string, Scope globalScope) throws RuntimeException {
+		return new StringValue(string, globalScope, FileIndex.INTERNAL_INDEX);
 	}
 
 	private void addBuiltIns() throws RuntimeException {

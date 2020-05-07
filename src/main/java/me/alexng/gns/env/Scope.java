@@ -103,6 +103,20 @@ public class Scope {
 		values.put(identifiedToken.getIdentifier().getName(), value);
 	}
 
+	/**
+	 * @return the lowest object or global scope.
+	 */
+	public Scope getObjectOrGlobalScope() throws RuntimeException {
+		if (isGlobalScope() || isObjectScope()) {
+			return this;
+		}
+		if (parentScope == null) {
+			// This should only occur in the event of an error, as if the parent scope is null by definition it is a global scope.
+			throw new RuntimeException(FileIndex.NULL_INDEX, "Global scope not found");
+		}
+		return parentScope.getObjectOrGlobalScope();
+	}
+
 	public Scope getGlobalScope() throws RuntimeException {
 		if (isGlobalScope()) {
 			return this;

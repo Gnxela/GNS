@@ -46,7 +46,6 @@ public class ArgumentsTokenTest {
 		ArgumentsToken argumentsToken = new ArgumentsToken(arguments, FileIndex.NULL_INDEX);
 		Scope scope = Scope.createGlobalScope(null);
 		for (int i = 0; i < numberValues.length; i++) {
-			// TODO: Same as parameters
 			scope.set(arguments[i], numberValues[i]);
 		}
 		assertArrayEquals(numberValues, argumentsToken.grabValues(scope));

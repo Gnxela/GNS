@@ -19,8 +19,7 @@ public class ObjectToken extends Token {
 
 	@Override
 	public Value execute(Scope scope) throws RuntimeException {
-		// TODO: We need to find either the lowest global or object scope and set it as a parent
-		Scope objectScope = Scope.createObjectScope(scope.getGlobalScope());
+		Scope objectScope = Scope.createObjectScope(scope.getObjectOrGlobalScope());
 		for (ObjectEntry entry : entries) {
 			if (entry.value instanceof FunctionToken) {
 				objectScope.set(entry.identifier, entry.value);

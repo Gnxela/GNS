@@ -18,7 +18,6 @@ public class BridgeMapperTest {
 
 	@Test
 	public void testMapBridge() throws ParsingException {
-		// TODO: We need to test field accessibility / visibility.
 		final String variableName = "variable";
 		final String functionName = "function";
 		BridgeTemplateToken<MockBridge> bridgeClassToken = BridgeMapper.mapBridge(MockBridge.class);

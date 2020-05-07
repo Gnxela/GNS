@@ -46,7 +46,6 @@ public class FunctionToken extends IdentifiedToken {
 
 		Scope functionScope = parentScope.createChildScope();
 		for (int i = 0; i < identifiers.length; i++) {
-			// TODO: This will create new object for EVERY scope, the values in the objects will never change and so we should just create one and reuse it to save memory.
 			functionScope.set(identifiers[i], values[i]);
 		}
 
