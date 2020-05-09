@@ -26,6 +26,8 @@ o3 = {
 }
 
 sys = new Sys()
+sys.println(o1)
+sys.println(o2)
 sys.println(o3.value)
 sys.println(o3.f())
 sys.println(o3.b.test)
