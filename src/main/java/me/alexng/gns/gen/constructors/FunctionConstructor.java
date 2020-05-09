@@ -32,7 +32,7 @@ public class FunctionConstructor implements Constructor {
 			tokens.remove();
 			identifier = (IdentifierToken) uncheckedToken;
 		} else {
-			tokens.previous(); // uncheckedToken must be an open bracket, bo back and allow ParameterToken to parse it.
+			tokens.previous(); // uncheckedToken must be an open bracket, go back and allow ParameterToken to parse it.
 		}
 
 		ParametersToken parameters = ParametersConstructor.construct(tokens);

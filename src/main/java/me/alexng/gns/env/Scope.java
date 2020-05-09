@@ -39,9 +39,7 @@ public class Scope {
 	}
 
 	public void crawl(Crawler<?> crawler) {
-		for (Map.Entry<String, Token> entry : values.entrySet()) {
-			crawler.crawl(entry.getKey(), entry.getValue());
-		}
+		crawler.crawl(values.entrySet());
 	}
 
 	public Token getLocal(IdentifierToken identifier) throws RuntimeException {

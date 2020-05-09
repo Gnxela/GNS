@@ -1,8 +1,13 @@
 package me.alexng.gns.util;
 
+import me.alexng.gns.tokens.FunctionToken;
 import me.alexng.gns.tokens.Token;
 import me.alexng.gns.tokens.value.ObjectValue;
 import me.alexng.gns.tokens.value.Value;
+
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.Map;
 
 public class ObjectToStringCrawler implements Crawler<String> {
 
@@ -19,33 +24,44 @@ public class ObjectToStringCrawler implements Crawler<String> {
 	}
 
 	@Override
-	public void crawl(String key, Token value) {
-		stringBuilder.append(indentation);
-		stringBuilder.append(key);
-		stringBuilder.append(COLON);
-		stringBuilder.append(SPACE);
-		if (value instanceof Value) {
-			if (value instanceof ObjectValue) {
-				ObjectValue objectValue = (ObjectValue) value;
-				stringBuilder.append("{\n");
-				indentation = indentation + "\t";
-				objectValue.getObjectScope().crawl(this);
-				indentation = indentation.substring(0, indentation.length() - 1);
-				stringBuilder.append(indentation);
-				stringBuilder.append("}");
-			} else {
-				stringBuilder.append(((Value) value).getJavaValue().toString());
+	public void crawl(Collection<Map.Entry<String, Token>> entries) {
+		Iterator<Map.Entry<String, Token>> entryIterator = entries.iterator();
+		while (entryIterator.hasNext()) {
+			Map.Entry<String, Token> entry = entryIterator.next();
+			String key = entry.getKey();
+			Token value = entry.getValue();
+			stringBuilder.append(indentation);
+			stringBuilder.append(key);
+			stringBuilder.append(COLON);
+			stringBuilder.append(SPACE);
+			if (value instanceof Value) {
+				if (value instanceof ObjectValue) {
+					ObjectValue objectValue = (ObjectValue) value;
+					stringBuilder.append("{\n");
+					indentation = indentation + "\t";
+					objectValue.getObjectScope().crawl(this);
+					indentation = indentation.substring(0, indentation.length() - 1);
+					stringBuilder.append(indentation);
+					stringBuilder.append("}");
+				} else {
+					stringBuilder.append(((Value) value).getJavaValue().toString());
+				}
+			} else if (value instanceof FunctionToken) {
+				FunctionToken functionToken = (FunctionToken) value;
+				stringBuilder.append("func(");
+				stringBuilder.append(functionToken.getParameterNamesCommaSeparated());
+				stringBuilder.append(")");
 			}
-		} else {
-			stringBuilder.append("Unknown");
+			if (entryIterator.hasNext()) {
+				stringBuilder.append(COMMA);
+			}
+			stringBuilder.append(NEWLINE);
 		}
-		stringBuilder.append(COMMA);
-		stringBuilder.append(NEWLINE);
 	}
 
 	@Override
 	public String destroy() {
-		stringBuilder.append("}\n");
+		stringBuilder.append("}");
 		return stringBuilder.toString();
 	}
 }

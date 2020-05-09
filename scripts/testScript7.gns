@@ -31,3 +31,5 @@ sys.println(o3.f())
 sys.println(o3.b.test)
 o3.value = 11
 sys.println(o3.value)
+sys.println(o3.b)
+sys.println(o3)
