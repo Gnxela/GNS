@@ -14,39 +14,38 @@ import java.io.OutputStream;
 public class Sys {
 
 	private static final String NEW_LINE = "\n";
+	private static final String NULL_STRING = "null";
 
 	@Expose
 	public NumberValue version = new NumberValue(3.2, FileIndex.INTERNAL_INDEX);
 
-	@Expose
-	public void print(Environment environment, Value value) {
-		String output = null;
+	private String valueToString(Value value) {
 		switch (value.getType()) {
 			case NULL:
-				output = "null";
-				break;
+				return NULL_STRING;
 			case OBJECT:
 				if (value instanceof StringValue) {
-					output = ((StringValue) value).getJavaValue();
+					return ((StringValue) value).getJavaValue();
 				} else {
 					// TODO: Optimize this; it slows down runtime considerably.
 					ObjectValue rawObject = (ObjectValue) value;
 					ObjectToStringCrawler crawler = new ObjectToStringCrawler();
 					rawObject.getObjectScope().crawl(crawler);
-					output = crawler.destroy();
+					return crawler.destroy();
 				}
-				break;
 			default:
-				output = value.getJavaValue().toString();
-				break;
+				return value.getJavaValue().toString();
 		}
-		rawPrint(environment.stdout, output.getBytes());
+	}
+
+	@Expose
+	public void print(Environment environment, Value value) {
+		rawPrint(environment.stdout, valueToString(value).getBytes());
 	}
 
 	@Expose
 	public void println(Environment environment, Value value) {
-		print(environment, value);
-		rawPrint(environment.stdout, NEW_LINE.getBytes());
+		rawPrint(environment.stdout, (valueToString(value) + NEW_LINE).getBytes());
 	}
 
 	private void rawPrint(OutputStream stdout, byte[] bytes) {
