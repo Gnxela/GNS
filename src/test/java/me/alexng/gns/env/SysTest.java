@@ -1,10 +1,13 @@
-package me.alexng.gns.scipts;
+package me.alexng.gns.env;
 
+import me.alexng.gns.FileIndex;
 import me.alexng.gns.Options;
 import me.alexng.gns.ParsingException;
 import me.alexng.gns.RuntimeException;
-import me.alexng.gns.env.Environment;
-import me.alexng.gns.env.Script;
+import me.alexng.gns.tokens.value.BooleanValue;
+import me.alexng.gns.tokens.value.NullValue;
+import me.alexng.gns.tokens.value.NumberValue;
+import me.alexng.gns.tokens.value.StringValue;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -24,6 +27,19 @@ public class SysTest {
 		optionsBuilder.setStdout(outputStream);
 		optionsBuilder.setUsingSys(true);
 		environment = new Environment(optionsBuilder.build());
+	}
+
+	@Test
+	public void testValueToString() throws RuntimeException {
+		final FileIndex internal = FileIndex.INTERNAL_INDEX;
+		assertEquals("null", Sys.valueToString(new NullValue(internal)));
+		assertEquals("7", Sys.valueToString(new NumberValue(7, internal)));
+		assertEquals("7.9", Sys.valueToString(new NumberValue(7.9, internal)));
+		assertEquals("-7.9", Sys.valueToString(new NumberValue(-7.9, internal)));
+		assertEquals("-7.9", Sys.valueToString(new NumberValue("-7.9", internal)));
+		assertEquals("true", Sys.valueToString(new BooleanValue(true, internal)));
+		assertEquals("false", Sys.valueToString(new BooleanValue(false, internal)));
+		assertEquals("hey", Sys.valueToString(new StringValue("hey", Scope.createGlobalScope(null), internal)));
 	}
 
 	@Test
