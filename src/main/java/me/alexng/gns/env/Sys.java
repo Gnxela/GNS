@@ -17,9 +17,9 @@ public class Sys {
 	private static final String NULL_STRING = "null";
 
 	@Expose
-	public NumberValue version = new NumberValue(3.2, FileIndex.INTERNAL_INDEX);
+	public static final NumberValue version = new NumberValue(3.2, FileIndex.INTERNAL_INDEX);
 
-	private String valueToString(Value value) {
+	static String valueToString(Value value) {
 		switch (value.getType()) {
 			case NULL:
 				return NULL_STRING;
@@ -39,16 +39,16 @@ public class Sys {
 	}
 
 	@Expose
-	public void print(Environment environment, Value value) {
+	public static void print(Environment environment, Value value) {
 		rawPrint(environment.stdout, valueToString(value).getBytes());
 	}
 
 	@Expose
-	public void println(Environment environment, Value value) {
+	public static void println(Environment environment, Value value) {
 		rawPrint(environment.stdout, (valueToString(value) + NEW_LINE).getBytes());
 	}
 
-	private void rawPrint(OutputStream stdout, byte[] bytes) {
+	private static void rawPrint(OutputStream stdout, byte[] bytes) {
 		try {
 			stdout.write(bytes);
 		} catch (IOException e) {
