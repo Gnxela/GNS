@@ -27,7 +27,7 @@ public class MultiplicationToken extends BinaryOperatorToken<Token, Token> {
 		Value leftValue = getLeft().execute(scope);
 		Value rightValue = getRight().execute(scope);
 		if (leftValue.getType() != Value.Type.NUMBER) {
-			throw new InvalidTypeException(getRight(), Value.Type.NUMBER, rightValue.getType());
+			throw new InvalidTypeException(getRight(), Value.Type.NUMBER, leftValue.getType());
 		}
 		if (rightValue.getType() != Value.Type.NUMBER) {
 			throw new InvalidTypeException(getRight(), Value.Type.NUMBER, rightValue.getType());
