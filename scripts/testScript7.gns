@@ -35,3 +35,17 @@ o3.value = 11
 sys.println(o3.value)
 sys.println(o3.b)
 sys.println(o3)
+
+for (i = 0, i < 10, i = i + 1) {
+	sys.println(i)
+	o3 = {
+		value: i * 2 + 6,
+		b: {
+			test: i
+		},
+		f: func() {
+			return 7
+		}
+	}
+	sys.println(o3.value)
+}

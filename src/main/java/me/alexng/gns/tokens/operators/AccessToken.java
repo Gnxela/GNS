@@ -5,6 +5,7 @@ import me.alexng.gns.InvalidTypeException;
 import me.alexng.gns.ParsingException;
 import me.alexng.gns.RuntimeException;
 import me.alexng.gns.env.Scope;
+import me.alexng.gns.tokens.FunctionCallToken;
 import me.alexng.gns.tokens.IdentifiedToken;
 import me.alexng.gns.tokens.IdentifierToken;
 import me.alexng.gns.tokens.Token;
@@ -39,6 +40,11 @@ public class AccessToken extends BinaryOperatorToken<Token, IdentifiedToken> {
 		Value leftValue = getLeft().execute(scope);
 		if (leftValue instanceof ObjectValue) {
 			ObjectValue objectValue = (ObjectValue) leftValue;
+			if (getRight() instanceof FunctionCallToken) {
+				FunctionCallToken functionCallToken = (FunctionCallToken) getRight();
+				Value[] arguments = functionCallToken.getArgumentsToken().grabValues(scope);
+				return functionCallToken.callFunction(objectValue.getObjectScope(), arguments);
+			}
 			return getRight().execute(objectValue.getObjectScope());
 		}
 		throw new InvalidTypeException(getLeft(), Value.Type.OBJECT, leftValue.getType());

@@ -16,10 +16,17 @@ public class FunctionCallToken extends IdentifiedToken {
 
 	@Override
 	public Value execute(Scope scope) throws RuntimeException {
-		Value[] values = argumentsToken.grabValues(scope);
+		return callFunction(scope, argumentsToken.grabValues(scope));
+	}
+
+	public Value callFunction(Scope scope, Value[] arguments) throws RuntimeException {
 		Scope callingScope = scope.getObjectScope() != null ? scope.getObjectScope() : scope.getGlobalScope();
 		FunctionToken function = scope.getFunction(this);
-		return function.unwrapAndExecuteFunction(this, callingScope, values);
+		return function.unwrapAndExecuteFunction(this, callingScope, arguments);
+	}
+
+	public ArgumentsToken getArgumentsToken() {
+		return argumentsToken;
 	}
 
 	@Override

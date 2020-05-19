@@ -1,9 +1,11 @@
 sys = new Sys()
 count = 0
 for (i = 0, i < 5, i = i + 1) {
+	sys.println(i)
 	count = count + 1
 }
 while (count < 10) {
+	sys.println(count)
 	count = count + 1
 }
 sys.println(count)
