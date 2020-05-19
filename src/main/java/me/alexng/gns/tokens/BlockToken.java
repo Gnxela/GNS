@@ -22,7 +22,7 @@ public class BlockToken extends Token {
 	/**
 	 * Executes the block.
 	 *
-	 * @return a returned value class, wrapping the returned value. Or {@link Value#NULL} if no value is returned.
+	 * @return a returned value class, wrapping the returned value. Or {@link NullValue#INTERNAL} if no value is returned.
 	 */
 	public Value executeBlock(Scope parentScope) throws RuntimeException {
 		return executeBlockWithScope(parentScope.createChildScope());
@@ -32,7 +32,7 @@ public class BlockToken extends Token {
 	 * Executes the block with the given local scope.
 	 *
 	 * @param localScope the local scope that the block will be executed with
-	 * @return a returned value class, wrapping the returned value. Or {@link Value#NULL} if no value is returned.
+	 * @return a returned value class, wrapping the returned value. Or {@link NullValue#INTERNAL} if no value is returned.
 	 */
 	public Value executeBlockWithScope(Scope localScope) throws RuntimeException {
 		for (Token token : tokens) {
