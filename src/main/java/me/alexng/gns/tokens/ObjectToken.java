@@ -24,7 +24,7 @@ public class ObjectToken extends Token {
 			if (entry.value instanceof FunctionToken) {
 				objectScope.set(entry.identifier, entry.value);
 			} else {
-				objectScope.set(entry.identifier, entry.value.execute(objectScope));
+				objectScope.set(entry.identifier, entry.value.execute(scope));
 			}
 		}
 		return new ObjectValue(objectScope, getFileIndex());
