@@ -38,7 +38,8 @@ public class ObjectToStringCrawler implements Crawler<String> {
 			if (value instanceof Value) {
 				if (value instanceof ObjectValue) {
 					ObjectValue objectValue = (ObjectValue) value;
-					stringBuilder.append("{\n");
+					stringBuilder.append("{");
+					stringBuilder.append(NEWLINE);
 					currentIndentation++;
 					objectValue.getObjectScope().crawl(this);
 					currentIndentation--;
