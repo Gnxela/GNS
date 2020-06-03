@@ -7,7 +7,7 @@ import me.alexng.gns.RuntimeException;
 import me.alexng.gns.env.Environment;
 import me.alexng.gns.env.Scope;
 import me.alexng.gns.tokens.IdentifierToken;
-import me.alexng.gns.tokens.ObjectConstructionToken;
+import me.alexng.gns.tokens.TemplateConstructionToken;
 import me.alexng.gns.tokens.value.BooleanValue;
 import me.alexng.gns.tokens.value.NumberValue;
 import me.alexng.gns.tokens.value.ObjectValue;
@@ -22,7 +22,7 @@ public class BridgeTemplateTokenTest {
 	public void createInstanceTest() throws ParsingException, RuntimeException {
 		Environment environment = new Environment(Options.createDefault());
 		BridgeTemplateToken<MockBridge> bridgeBridgeClassToken = BridgeMapper.mapBridge(MockBridge.class);
-		ObjectValue bridge = bridgeBridgeClassToken.createInstance(new ObjectConstructionToken(null, null, FileIndex.INTERNAL_INDEX), new Value[]{}, environment.getGlobalScope());
+		ObjectValue bridge = bridgeBridgeClassToken.createInstance(new TemplateConstructionToken(null, null, FileIndex.INTERNAL_INDEX), new Value[]{}, environment.getGlobalScope());
 		Scope objectScope = bridge.getObjectScope();
 		// The below statements will throw errors if values are not mapped to those identifiers.
 		objectScope.getValue(new IdentifierToken("variable", FileIndex.INTERNAL_INDEX));

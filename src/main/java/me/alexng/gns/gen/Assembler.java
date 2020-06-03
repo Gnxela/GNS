@@ -23,7 +23,7 @@ public class Assembler {
 			new ForConstructor(),
 			new WhileConstructor(),
 			new TemplateConstructor(),
-			new ObjectConstructionConstructor(),
+			new TemplateConstructionConstructor(),
 			new ReturnConstructor(),
 			new FunctionConstructor(),
 			new ObjectConstructor(),

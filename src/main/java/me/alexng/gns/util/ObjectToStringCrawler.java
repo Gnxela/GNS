@@ -15,9 +15,10 @@ public class ObjectToStringCrawler implements Crawler<String> {
 	private static final char COLON = ':';
 	private static final char NEWLINE = '\n';
 	private static final char COMMA = ',';
+	private static final char INDENT = '\t';
 
 	private StringBuilder stringBuilder = new StringBuilder();
-	private String indentation = "\t";
+	private int currentIndentation = 1;
 
 	public ObjectToStringCrawler() {
 		stringBuilder.append("{\n");
@@ -30,7 +31,7 @@ public class ObjectToStringCrawler implements Crawler<String> {
 			Map.Entry<String, Token> entry = entryIterator.next();
 			String key = entry.getKey();
 			Token value = entry.getValue();
-			stringBuilder.append(indentation);
+			indent(stringBuilder);
 			stringBuilder.append(key);
 			stringBuilder.append(COLON);
 			stringBuilder.append(SPACE);
@@ -38,10 +39,10 @@ public class ObjectToStringCrawler implements Crawler<String> {
 				if (value instanceof ObjectValue) {
 					ObjectValue objectValue = (ObjectValue) value;
 					stringBuilder.append("{\n");
-					indentation = indentation + "\t";
+					currentIndentation++;
 					objectValue.getObjectScope().crawl(this);
-					indentation = indentation.substring(0, indentation.length() - 1);
-					stringBuilder.append(indentation);
+					currentIndentation--;
+					indent(stringBuilder);
 					stringBuilder.append("}");
 				} else {
 					stringBuilder.append(((Value) value).getJavaValue().toString());
@@ -56,6 +57,12 @@ public class ObjectToStringCrawler implements Crawler<String> {
 				stringBuilder.append(COMMA);
 			}
 			stringBuilder.append(NEWLINE);
+		}
+	}
+
+	private void indent(StringBuilder stringBuilder) {
+		for (int i = 0; i < currentIndentation; i++) {
+			stringBuilder.append(INDENT);
 		}
 	}
 

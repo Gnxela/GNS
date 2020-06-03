@@ -5,7 +5,7 @@ import me.alexng.gns.ParsingException;
 import me.alexng.gns.RuntimeException;
 import me.alexng.gns.env.Scope;
 import me.alexng.gns.tokens.IdentifierToken;
-import me.alexng.gns.tokens.ObjectConstructionToken;
+import me.alexng.gns.tokens.TemplateConstructionToken;
 import me.alexng.gns.tokens.TemplateToken;
 import me.alexng.gns.tokens.value.ObjectValue;
 import me.alexng.gns.tokens.value.Value;
@@ -29,7 +29,7 @@ public class BridgeTemplateToken<T> extends TemplateToken {
 	}
 
 	@Override
-	public ObjectValue createInstance(ObjectConstructionToken caller, Value[] values, Scope callingScope) throws RuntimeException {
+	public ObjectValue createInstance(TemplateConstructionToken caller, Value[] values, Scope callingScope) throws RuntimeException {
 		Object bridgeInstance = createBridgeInstance(values);
 		Scope objectScope = BridgeScope.create(callingScope.getGlobalScope(), bridgeInstance, variables, functions);
 		return new ObjectValue(objectScope, caller.getFileIndex());
