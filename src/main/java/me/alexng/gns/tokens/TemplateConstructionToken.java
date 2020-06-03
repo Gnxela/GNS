@@ -5,11 +5,11 @@ import me.alexng.gns.RuntimeException;
 import me.alexng.gns.env.Scope;
 import me.alexng.gns.tokens.value.Value;
 
-public class ObjectConstructionToken extends IdentifiedToken {
+public class TemplateConstructionToken extends IdentifiedToken {
 
 	private ArgumentsToken argumentsToken;
 
-	public ObjectConstructionToken(IdentifierToken identifier, ArgumentsToken argumentsToken, FileIndex fileIndex) {
+	public TemplateConstructionToken(IdentifierToken identifier, ArgumentsToken argumentsToken, FileIndex fileIndex) {
 		super(identifier, fileIndex);
 		this.argumentsToken = argumentsToken;
 	}

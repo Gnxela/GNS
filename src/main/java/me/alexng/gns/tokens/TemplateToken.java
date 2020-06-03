@@ -25,7 +25,7 @@ public class TemplateToken extends IdentifiedToken {
 		return NullValue.INTERNAL;
 	}
 
-	public ObjectValue createInstance(ObjectConstructionToken caller, Value[] values, Scope callingScope) throws RuntimeException {
+	public ObjectValue createInstance(TemplateConstructionToken caller, Value[] values, Scope callingScope) throws RuntimeException {
 		Scope objectScope, parentScope;
 		try {
 			parentScope = callingScope.getObjectScope();
@@ -39,7 +39,7 @@ public class TemplateToken extends IdentifiedToken {
 		return new ObjectValue(objectScope, caller.getFileIndex());
 	}
 
-	private void callConstructor(ObjectConstructionToken caller, Value[] values, Scope objectScope) throws RuntimeException {
+	private void callConstructor(TemplateConstructionToken caller, Value[] values, Scope objectScope) throws RuntimeException {
 		FunctionToken constructor = objectScope.getFunction(CONSTRUCTOR_NAME);
 		if (constructor != null) {
 			Value returnedValue = constructor.executeFunction(caller, objectScope, values);
