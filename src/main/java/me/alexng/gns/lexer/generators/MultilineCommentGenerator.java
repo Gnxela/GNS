@@ -10,6 +10,7 @@ public class MultilineCommentGenerator implements TokenGenerator {
 
 	@Override
 	public int accepts(String input, int index) {
+		// TODO: make string literals final static variables.
 		if (input.substring(index).startsWith("/*")) {
 			index += 3;
 			while (index < input.length() && !(input.charAt(index - 1) == '*' && input.charAt(index) == '/')) {

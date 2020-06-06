@@ -7,7 +7,7 @@ import me.alexng.gns.tokens.Token;
 
 public class StringLiteralGenerator implements TokenGenerator {
 
-	private final char CHAR = '"';
+	private static final char CHAR = '"';
 
 	@Override
 	public int accepts(String input, int index) {

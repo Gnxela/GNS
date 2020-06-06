@@ -27,7 +27,6 @@ public class Sys {
 				if (value instanceof StringValue) {
 					return ((StringValue) value).getJavaValue();
 				} else {
-					// TODO: Optimize this; it slows down runtime considerably.
 					ObjectValue rawObject = (ObjectValue) value;
 					ObjectToStringCrawler crawler = new ObjectToStringCrawler();
 					rawObject.getObjectScope().crawl(crawler);
