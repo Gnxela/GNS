@@ -19,12 +19,16 @@ public class ObjectToken extends Token {
 
 	@Override
 	public Value execute(Scope scope) throws RuntimeException {
-		Scope objectScope = Scope.createObjectScope(scope.getObjectOrGlobalScope());
+		return create(scope);
+	}
+
+	public ObjectValue create(Scope localScope) throws RuntimeException {
+		Scope objectScope = Scope.createObjectScope(localScope.getObjectOrGlobalScope());
 		for (ObjectEntry entry : entries) {
 			if (entry.value instanceof FunctionToken) {
 				objectScope.set(entry.identifier, entry.value);
 			} else {
-				objectScope.set(entry.identifier, entry.value.execute(scope));
+				objectScope.set(entry.identifier, entry.value.execute(localScope));
 			}
 		}
 		return new ObjectValue(objectScope, getFileIndex());
