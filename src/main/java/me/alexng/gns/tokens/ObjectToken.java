@@ -25,6 +25,7 @@ public class ObjectToken extends Token {
 	public ObjectValue create(Scope localScope) throws RuntimeException {
 		Scope objectScope = Scope.createObjectScope(localScope.getObjectOrGlobalScope());
 		for (ObjectEntry entry : entries) {
+			// TODO: Check this once when ObjectEntry is initialised.
 			if (entry.value instanceof FunctionToken) {
 				objectScope.set(entry.identifier, entry.value);
 			} else {
@@ -41,6 +42,7 @@ public class ObjectToken extends Token {
 
 	public static class ObjectEntry {
 
+		// TODO: Make these final
 		private IdentifierToken identifier;
 		private Token value;
 
